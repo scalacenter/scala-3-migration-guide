@@ -12,7 +12,7 @@ All information you may want to know before starting the migration of your codeb
 
 ### What is Scala 3?
 
-Dotty is the project name of the new compiler and improved language that will become Scala 3. 
+Dotty is the project name of the new compiler and improved language that will become Scala 3.
 
 The compiler has been completely redesigned, which means that the typechecker and type inferencer are totally new. In the corner cases they may not behave as in the scala 2 compiler. The implicit resolution rules have been cleaned up as well.
 
@@ -31,6 +31,19 @@ There are reasons to say that Scala 3 is just another Scala version:
 - A large subset of the Scala 2 language still compiles to Scala 3.
 - The standard library api and implementation are unchanged.
 - The ABI (Application Binary Interface) is unchanged. The bytecode and the IR of scala-js and scala-native, produced by the Scala 2 and Dotty compilers are the same. It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
+
+### Scala 2 Forwards Compatability
+Because of the shared ABI of both Scala 2.13 and Scala 3.0, code produced by each may be interchanged at runtime. Additionally, Scala 2 will also be able to read backwards-compatible signatures of libraries published for Scala 3.0, just like it does currently for other 2.13 libraries. This means that a Scala 3 library does not need to cross-build for Scala 2.13 if it exports a backwards compatible API but uses features only available to Scala 3. Libraries with macro code still need to be [cross published](docs/cross-build.md) in order to share a common API.
+Forwards compatible features of Scala 3 that can be read from Scala 2 include:
+  - Enums
+  - Intersection types
+  - Higher Kinded type lambdas without curried type application.
+  - Opaque type aliases, but opacity is lost.
+  - Calling Scala 3 extension methods as an ordinary method.
+  - New syntax for implicits.
+  - Inheritance of `open` classes.
+  - `inline` val with literal types
+  - Exported definitions
 
 ## A Tour of the Migration Tools
 

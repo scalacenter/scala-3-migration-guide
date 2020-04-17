@@ -6,7 +6,7 @@ Library authors are likely to want their library compatible with Scala 3 and Sca
 
 [Contributors Welcome!](CONTRIBUTING.md)
 
-## Aditionnal Resources
+## Additional Resources
 
 - [Sbt Reference Manual](https://www.scala-sbt.org/1.x/docs/Cross-Build.html)
 - [Dotty Getting Started](https://dotty.epfl.ch/docs/usage/getting-started.html)
