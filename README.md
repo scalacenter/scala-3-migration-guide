@@ -34,7 +34,7 @@ There are reasons to say that Scala 3 is just another Scala version:
 
 ### ABI Compatibility
 
-The bytecode and the IR of scala-js and scala-native, produced by the Scala 2 and Dotty compilers are the same.
+The bytecode and the IR of scala-js, produced by the Scala 2 and Dotty compilers are the same.
 It means Scala 2 libraries can be used by Scala 3, as long as the library does not contain macros.
 It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
 
