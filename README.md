@@ -44,7 +44,7 @@ need to be [cross published](docs/cross-build.md) in order to share a common API
 
 ### Forwards Compatibility
 Scala 2 can actually understand many of the new features of Scala 3 as equivalent Scala 2 code.
-This means that using these new features in an API do not require cross publishing, such as:
+This means that using these new features in an API does not require cross publishing, such as:
   - Enums
   - Intersection types
   - Higher Kinded type lambdas.
