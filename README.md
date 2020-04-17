@@ -29,18 +29,29 @@ For a complete overview of the changes in Dotty compared to Scala 2, please visi
 
 There are reasons to say that Scala 3 is just another Scala version:
 - A large subset of the Scala 2 language still compiles to Scala 3.
-- The standard library api and implementation are unchanged.
-- The ABI (Application Binary Interface) is unchanged. The bytecode and the IR of scala-js and scala-native, produced by the Scala 2 and Dotty compilers are the same. It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
-- Scala 2 can actually understand many of the new features of Scala 3 from a library as equivalent Scala 2 code. Meaning that often, only one version of a library needs to be published. Libraries with macro code still need to be [cross published](docs/cross-build.md) in order to share a common API.
-- Some of the new Scala 3 features that can be used from Scala 2 include:
+- The standard library API and implementation are unchanged.
+- The ABI (Application Binary Interface) is unchanged, Scala 2 libraries can be used by Scala 3, and the other way around.
+
+### ABI Compatibility
+
+The bytecode and the IR of scala-js, produced by the Scala 2 and Dotty compilers are the same.
+It means libraries published for either version can be used on the same classpath.
+It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
+
+### Metaprogramming
+Compiletime and runtime reflection of programs is incompatible between Scala 2 and Scala 3, so any library that provides macros will
+need to be [cross published](docs/cross-build.md) in order to share a common API.
+
+### Forwards Compatibility
+Scala 2 can actually understand many of the new features of Scala 3 from a library as equivalent Scala 2 code.
+This means that using these new features in an API do not require cross publishing, such as:
   - Enums
   - Intersection types
-  - Higher Kinded type lambdas without curried type application.
-  - Opaque type aliases, but opacity is lost.
-  - Calling Scala 3 extension methods as an ordinary method.
+  - Higher Kinded type lambdas.
+  - Opaque type aliases.
+  - Scala 3 extension methods.
   - New syntax for implicits.
   - Inheritance of `open` classes.
-  - `inline` val with literal types
   - Exported definitions
 
 ## A Tour of the Migration Tools
