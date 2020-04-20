@@ -39,8 +39,7 @@ It means libraries published for either version can be used on the same classpat
 It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
 
 ### Metaprogramming
-Compiletime and runtime reflection of programs is incompatible between Scala 2 and Scala 3, so any library that provides macros will
-need to be [cross published](docs/cross-build.md) in order to share a common API.
+Compiletime and runtime reflection of programs is incompatible between Scala 2 and Scala 3, so any library that provides macros will need to be [cross published](docs/cross-build.md) in order to share a common API.
 
 ### Forwards Compatibility
 Scala 2 can actually understand many of the new features of Scala 3 as equivalent Scala 2 code.
