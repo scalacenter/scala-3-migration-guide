@@ -12,7 +12,7 @@ All information you may want to know before starting the migration of your codeb
 
 ### What is Scala 3?
 
-Dotty is the project name of the new compiler and improved language that will become Scala 3. 
+Dotty is the project name of the new compiler and improved language that will become Scala 3.
 
 The compiler has been completely redesigned, which means that the typechecker and type inferencer are totally new. In the corner cases they may not behave as in the scala 2 compiler. The implicit resolution rules have been cleaned up as well.
 
@@ -30,13 +30,28 @@ For a complete overview of the changes in Dotty compared to Scala 2, please visi
 There are reasons to say that Scala 3 is just another Scala version:
 - A large subset of the Scala 2 language still compiles to Scala 3.
 - The standard library API and implementation are unchanged.
-- The ABI (Application Binary Interface) is unchanged, Scala 2 libraries can be used by Scala 3. 
+- The ABI (Application Binary Interface) is unchanged, Scala 2 libraries can be used by Scala 3, and the other way around.
 
 ### ABI Compatibility
 
 The bytecode and the IR of scala-js, produced by the Scala 2 and Dotty compilers are the same.
-It means Scala 2 libraries can be used by Scala 3, as long as the library does not contain macros.
+It means libraries published for either version can be used on the same classpath.
 It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
+
+### Metaprogramming
+Compiletime and runtime reflection of programs is incompatible between Scala 2 and Scala 3, so any library that provides macros will need to be [cross published](docs/cross-build.md) in order to share a common API.
+
+### Forwards Compatibility
+Scala 2 can actually understand many of the new features of Scala 3 as equivalent Scala 2 code.
+This means that using these new features in an API does not require cross publishing, such as:
+  - Enums
+  - Intersection types
+  - Higher Kinded type lambdas.
+  - Opaque type aliases.
+  - Scala 3 extension methods.
+  - New syntax for implicits.
+  - Inheritance of `open` classes.
+  - Exported definitions
 
 ## A Tour of the Migration Tools
 
