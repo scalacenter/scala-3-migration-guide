@@ -52,6 +52,71 @@ implicit val locationWrites: Writes[Location] = (
 )(location => (location.lat, location.long)) // Compiles with both Scala 2 and Scala 3
 ~~~
 
+### Unreducible application of higher-kinded type to wildcard arguments
+
+This error happens when you apply the “wildcard” type to a higher-kinded type.
+
+Consider the following example:
+
+~~~ scala
+trait Example {
+
+  type Foo[A]
+
+  def f(foo: Foo[_]): Unit // Error with Scala 3
+
+  def g(foos: Seq[Foo[_]]): Unit // Error with Scala 3
+
+}
+~~~
+
+It compiles with Scala 2, but Scala 3 produces the following errors:
+
+~~~
+[error] -- [E043] Type Error:
+[error] 5 |  def f(foo: Foo[_]): Unit // Warning with Scala 3
+[error]   |             ^^^^^^
+[error]   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
+[error] -- [E043] Type Error:
+[error] 6 |  def g(foos: Seq[Foo[_]]): Unit // Warning with Scala 3
+[error]   |                  ^^^^^^
+[error]   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
+~~~
+
+The reason for this error is that the type `Foo[_]` involves existential type quantification and this feature [has been removed from Scala 3](https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html).
+
+Two solutions can be considered for cross-compiling.
+
+In the case of the function `f`, we can change its signature to take a type parameter:
+
+~~~ scala
+  def f[A](foo: Foo[A]): Unit // Compiles with both Scala 2 and Scala 3
+~~~
+
+The second function, `g`, requires more work. We want to accept collections containing
+values of type `Foo[A]` with possibly different types for the parameter `A`. To achieve
+this, we create a wrapper type that models the type parameter as a type member instead:
+
+~~~ scala
+  // Wrapper type
+  trait SomeFoo {
+    type T
+    def value: Foo[T]
+  }
+
+  // Construct a value of type `SomeFoo`
+  def SomeFoo[A](foo: Foo[A]): SomeFoo =
+    new SomeFoo {
+      type T = A
+      def value = foo
+    }
+
+  def g(foos: Seq[SomeFoo]): Unit // Compiles with both Scala 2 and Scala 3
+~~~
+
+Users will have to explicitly wrap their `Foo` values into `SomeFoo` by calling the
+corresponding constructor.
+
 ### Other incompatibilities
 
 [Contributors Welcome!](CONTRIBUTING.md)
