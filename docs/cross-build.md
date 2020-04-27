@@ -54,7 +54,7 @@ implicit val locationWrites: Writes[Location] = (
 
 ### Unreducible application of higher-kinded type to wildcard arguments
 
-This warning happens when you apply the “wildcard” type to a higher-kinded type.
+This error happens when you apply the “wildcard” type to a higher-kinded type.
 
 Consider the following example:
 
@@ -63,26 +63,27 @@ trait Example {
 
   type Foo[A]
 
-  def f(foo: Foo[_]): Unit // Warning with Scala 3
+  def f(foo: Foo[_]): Unit // Error with Scala 3
 
-  def g(foos: Seq[Foo[_]]): Unit // Warning with Scala 3
+  def g(foos: Seq[Foo[_]]): Unit // Error with Scala 3
 
 }
 ~~~
 
-It compiles with Scala 2, but Scala 3 produces the following warnings:
+It compiles with Scala 2, but Scala 3 produces the following errors:
 
 ~~~
-[warn] -- Migration Warning:
-[warn] 132 |  def f(foo: Foo[_]): Unit
-[warn]     |             ^^^^^^
-[warn]     |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
-[warn] -- Migration Warning:
-[warn] 134 |  def g(foos: Seq[Foo[_]]): Unit
-[warn]     |                  ^^^^^^
-[warn]     |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
-[warn] two warnings found
+[error] -- [E043] Type Error:
+[error] 5 |  def f(foo: Foo[_]): Unit // Warning with Scala 3
+[error]   |             ^^^^^^
+[error]   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
+[error] -- [E043] Type Error:
+[error] 6 |  def g(foos: Seq[Foo[_]]): Unit // Warning with Scala 3
+[error]   |                  ^^^^^^
+[error]   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
 ~~~
+
+The reason for this error is that the type `Foo[_]` involves existential type quantification and this feature [has been removed from Scala 3](https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html).
 
 Two solutions can be considered for cross-compiling.
 
