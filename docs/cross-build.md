@@ -52,6 +52,70 @@ implicit val locationWrites: Writes[Location] = (
 )(location => (location.lat, location.long)) // Compiles with both Scala 2 and Scala 3
 ~~~
 
+### Unreducible application of higher-kinded type to wildcard arguments
+
+This warning happens when you apply the “wildcard” type to a higher-kinded type.
+
+Consider the following example:
+
+~~~ scala
+trait Example {
+
+  type Foo[A]
+
+  def f(foo: Foo[_]): Unit // Warning with Scala 3
+
+  def g(foos: Seq[Foo[_]]): Unit // Warning with Scala 3
+
+}
+~~~
+
+It compiles with Scala 2, but Scala 3 produces the following warnings:
+
+~~~
+[warn] -- Migration Warning:
+[warn] 132 |  def f(foo: Foo[_]): Unit
+[warn]     |             ^^^^^^
+[warn]     |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
+[warn] -- Migration Warning:
+[warn] 134 |  def g(foos: Seq[Foo[_]]): Unit
+[warn]     |                  ^^^^^^
+[warn]     |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
+[warn] two warnings found
+~~~
+
+Two solutions can be considered for cross-compiling.
+
+In the case of the function `f`, we can change its signature to take a type parameter:
+
+~~~ scala
+  def f[A](foo: Foo[A]): Unit // Compiles with both Scala 2 and Scala 3
+~~~
+
+The second function, `g`, requires more work. We want to accept collections containing
+values of type `Foo[A]` with possibly different types for the parameter `A`. To achieve
+this, we create a wrapper type that models the type parameter as a type member instead:
+
+~~~ scala
+  // Wrapper type
+  trait SomeFoo {
+    type T
+    def value: Foo[T]
+  }
+
+  // Construct a value of type `SomeFoo`
+  def SomeFoo[A](foo: Foo[A]): SomeFoo =
+    new SomeFoo {
+      type T = A
+      def value = foo
+    }
+
+  def g(foos: Seq[SomeFoo]): Unit // Compiles with both Scala 2 and Scala 3
+~~~
+
+Users will have to explicitly wrap their `Foo` values into `SomeFoo` by calling the
+corresponding constructor.
+
 ### Other incompatibilities
 
 [Contributors Welcome!](CONTRIBUTING.md)
