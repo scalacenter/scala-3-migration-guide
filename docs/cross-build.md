@@ -74,11 +74,11 @@ It compiles with Scala 2, but Scala 3 produces the following errors:
 
 ~~~
 [error] -- [E043] Type Error:
-[error] 5 |  def f(foo: Foo[_]): Unit // Warning with Scala 3
+[error] 5 |  def f(foo: Foo[_]): Unit // Error with Scala 3
 [error]   |             ^^^^^^
 [error]   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
 [error] -- [E043] Type Error:
-[error] 6 |  def g(foos: Seq[Foo[_]]): Unit // Warning with Scala 3
+[error] 6 |  def g(foos: Seq[Foo[_]]): Unit // Error with Scala 3
 [error]   |                  ^^^^^^
 [error]   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
 ~~~
@@ -95,27 +95,17 @@ In the case of the function `f`, we can change its signature to take a type para
 
 The second function, `g`, requires more work. We want to accept collections containing
 values of type `Foo[A]` with possibly different types for the parameter `A`. To achieve
-this, we create a wrapper type that models the type parameter as a type member instead:
+this, we create a wrapper class. The fact that the wrapper is a class and not an abstract
+type member makes it possible to apply a wildcard type argument to it:
 
 ~~~ scala
-  // Wrapper type
-  trait SomeFoo {
-    type T
-    def value: Foo[T]
-  }
+  // Wrapper class
+  class FooWrapper[A](val value: Foo[A])
 
-  // Construct a value of type `SomeFoo`
-  def SomeFoo[A](foo: Foo[A]): SomeFoo =
-    new SomeFoo {
-      type T = A
-      def value = foo
-    }
-
-  def g(foos: Seq[SomeFoo]): Unit // Compiles with both Scala 2 and Scala 3
+  def g(foos: Seq[FooWrapper[_]]): Unit // Compiles with both Scala 2 and Scala 3
 ~~~
 
-Users will have to explicitly wrap their `Foo` values into `SomeFoo` by calling the
-corresponding constructor.
+Users will have to explicitly wrap their `Foo` values into the `FooWrapper` class.
 
 ### Other incompatibilities
 
