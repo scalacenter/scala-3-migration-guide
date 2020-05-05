@@ -10,6 +10,9 @@ While being experimental, the Scala community has largely adopted the Scala 2 [D
 
 Here is an incomplete list of libraries that use Scala 2 macros and their migration status:
 
+* [expression-evaluator](https://github.com/plokhotnyuk/expression-evaluator) - not migrated, no replacement for `Evals.eval` 
+* [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala) - not migrated, no replacement for `Evals.eval`
+
 [Contributors welcome!](CONTRIBUTING.md)
 
 ## How to?
