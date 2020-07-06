@@ -1,10 +1,12 @@
-# Full upgrade to Scala 3
+# Upgrading a Scala Application
 
-Scala 2 is binary compatible with Scala 3. It means that you can migrate your application one module at a time. It also means that you can try those exciting new features without blocking anyone. Prior to this you will need your build tool to handle multiple Scala versions, that is not something that every build tool can do though. Otherwise you will have to port your application all at once.
+Scala 2 is binary compatible with Scala 3. It means that you can migrate your application one module at a time. It also means that you can try those exciting new features without blocking anyone.
+
+Prior to this you have to configure your build tool to handle several Scala versions. Sbt, Mill and other build tools can do that but not all of them. Otherwise you have to migrate the entire application all at once.
 
 ## How to?
 
-[Contributors Welcome!](CONTRIBUTING.md)
+Lunatech ["Moving from Scala 2 to Scala 3"](https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course) course is a good way to get started. It guides you through the migration of a single module Akka Typed sudoku solver project and it demonstrates various of the new features of the langugage. 
 
 ## Aditionnal Resources
 
