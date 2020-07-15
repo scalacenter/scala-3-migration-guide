@@ -2,15 +2,13 @@
 
 This repository is a continuously evolving guide to support the migration to Scala 3. As a member of the community you are encouraged to participate the effort by sharing your migrating experience.
 
-Since the announcement that Dotty will eventually become Scala 3, the Dotty contributors and the SIP committee is taking great care of the migration accessibility for everyone (library maintainer, application owner, and people teaching others).
+Since the announcement that Dotty will eventually become Scala 3, the Dotty contributors and the SIP committee are taking great care of the migration accessibility for everyone (library maintainer, application owner, and people teaching others).
 
 A number of complementary initiatives are being undertaken to ease the migration. This repository is not a replacement of those initiatives. Its purpose is to gather knowledge, to collect feedback and to encourage the collaboration. The ultimate goal being to drive the effort of the community toward the release of Scala 3.
 
 All information you may want to know before starting the migration of your codebase should be available in this guide. If not you may want to [contribute](CONTRIBUTING.md).
 
-## Introduction
-
-### What is Scala 3?
+## Scala 3 (aka Dotty)
 
 Dotty is the project name of the new compiler and improved language that will become Scala 3.
 
@@ -21,41 +19,16 @@ The language itself has been improved. The changes compared to Scala 2 are limit
 - some dropped features
 - and also some exciting new features
 
-Last but not least, the macros system from Scala 2 has been dropped and replaced by a new macro system that is safer, more robust and that breaks the compiler dependency. The downside of it, in terms of migration, is that all the macro usages must be re-written. Chances are that you don't use macros in your codebase, but you depend on libraries that define macro methods.
+Last but not least, the macros system from Scala 2 has been dropped and replaced by a new macro system that is safer, more robust and that breaks the compiler dependency. The downside of it, in terms of migration, is that all the macro usages must be re-written. Chances are you don't use macros in your codebase, but you depend on libraries that define macro methods.
 
 For a complete overview of the changes in Dotty compared to Scala 2, please visit the [Dotty website](https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html).
 
-### What is left unchanged?
-
-There are reasons to say that Scala 3 is just another Scala version:
+Despite all those changes, Scala 3 is just another Scala version:
 - A large subset of the Scala 2 language still compiles to Scala 3.
-- The standard library API and implementation are unchanged.
-- The ABI (Application Binary Interface) is unchanged, Scala 2 libraries can be used by Scala 3, and the other way around.
-
-### ABI Compatibility
-
-The bytecode and the IR of scala-js, produced by the Scala 2 and Dotty compilers are the same.
-It means libraries published for either version can be used on the same classpath.
-It enables interoperability and gradual migration, and it relieves us from surprising behavior at runtime.
-
-### Metaprogramming
-Compiletime and runtime reflection of programs is incompatible between Scala 2 and Scala 3, so to provide macros with
-a common API across versions, the best solution is to [cross build](docs/cross-build.md).
-Some community libraries are already cross building macros between 2 and 3, listed in [macros.md](docs/macros.md).
-If you instead go all-in with Scala 3, you can still define Scala 2 macros in the same source file as Scala 3 macros,
-using the same API, as long as the macro implementation is compiled by Scala 2, (a guide will follow with how to do this).
-
-### Forwards Compatibility
-Scala 2 can actually understand many of the new features of Scala 3 as equivalent Scala 2 code.
-This means that using many of the new features in an API does not require cross publishing, such as:
-  - Enums
-  - Intersection types
-  - Higher Kinded type lambdas.
-  - Opaque type aliases.
-  - Scala 3 extension methods.
-  - New syntax for implicits.
-  - Inheritance of `open` classes and `super` traits.
-  - Exported definitions
+- The standard library is unchanged.
+- The ABI (Application Binary Interface) is unchanged. Scala 2.13 and Scala 3 libraries can be used on the same classpath.
+- The Scala 3 compiler can read the Scala 2.13 class files, so you can have Scala 2 dependencies in your Scala 3 project.
+- The scala 2.13 compiler will soon be able to read the Scala 3 class files as well. See the [Tasty reader roadmap](https://contributors.scala-lang.org/t/roadmap-for-the-tasty-reader-for-scala-2/4231).
 
 ## A Tour of the Migration Tools
 
@@ -104,9 +77,10 @@ Scala 3 is backward compatible with the Scala 2.13 libraries with the exception 
 ## Content
 
 The `/docs` folder in this repository contains:
-- [dotty-rewrites.md](docs/dotty-rewrites.md): A list of the dotty rewrite rules.
+- [compatibility.md](docs/compatibility.md): The Scala 2 to Scala 3 compatibility reference.
+- [dotty-rewrites.md](docs/dotty-rewrites.md): The documentation of the Dotty rewrite rules, that can be performed by the compiler.
 - [cross-build.md](docs/cross-build.md): A tutorial for cross building your codebase. This is something that library maintainers would be interested in.
-- [upgrade.md](docs/upgrade.md): Applications do not require cross building. You can jump straight and upgrade them to Scala 3 by following this tutorial.
+- [upgrade.md](docs/upgrade.md): Applications do not require cross building. You can jump straight and upgrade yours to Scala 3 by following this tutorial.
 - [macros.md](docs/macros.md): General knowledge about migrating macros.
 
 The structure of this repository is not fully defined yet.
