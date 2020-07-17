@@ -10,5 +10,5 @@ trait Foo[A]
 object Foo {
   def foo(implicit ctx: Context): Foo[ctx.Out] = ???
 
-  def bar(f: Foo[String] => Int): Option[Int] = Option(foo).map(f) 
+  def bar(f: Foo[String] => Int): Option[Int] = Option(foo).map(f)
 }
