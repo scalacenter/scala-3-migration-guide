@@ -3,6 +3,7 @@ import scala.io.Source
 import scala.collection.JavaConverters._
 import sbt.util.Logger
 import com.github.difflib.text._
+import sbt.internal.util.MessageOnlyException
 
 class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
   private val diffGen = DiffRowGenerator.create()
@@ -34,7 +35,7 @@ class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
     }
 
     if (finalReport.failed > 0)
-      throw new Exception(s"${finalReport.failed} file checks failed")
+      throw new MessageOnlyException(s"${finalReport.failed} file checks failed")
   }
 
   private def compare(outputFile: File, checkFile: File): Seq[String] = {
