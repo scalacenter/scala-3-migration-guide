@@ -48,9 +48,10 @@ val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
 
 lazy val incompat = (project in file("incompat"))
   .configs(CompileBackward)
-  .aggregate(typeInfer1, typeOfImplicitDef, anonymouTypeParam)
+  .aggregate(typeInfer1, typeInfer2, typeOfImplicitDef, anonymouTypeParam)
 
 lazy val typeInfer1 = (project in file("incompat/type-infer-1")).settings(incompatSettings)
+lazy val typeInfer2 = (project in file("incompat/type-infer-2")).settings(incompatSettings)
 lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).settings(incompatSettings)
 lazy val anonymouTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
 
