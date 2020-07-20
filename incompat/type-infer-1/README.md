@@ -2,12 +2,10 @@ This incompatibility is inspired by [endpoints4s](https://github.com/endpoints4s
 
 As of `0.25.0-RC2` the error message is:
 
-```
-[error] -- [E007] Type Mismatch Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/src/main/scala/type-infer.scala:13:64 
-[error] 13 |  def bar(f: Foo[String] => Int): Option[Int] = Option(foo).map(f)
+``` 
+[error] -- [E007] Type Mismatch Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/type-infer-1/src/main/scala-2.13/type-infer.scala:10:64 
+[error] 10 |  def bar(f: String => Int): Option[Int] = Some(inner(foo)).map(f)
 [error]    |                                                                ^
-[error]    |                                      Found:    (f : Foo[String] => Int)
-[error]    |                                      Required: Foo[Nothing] => Int
-[error] one error found
-[error] (Compile / compileIncremental) Compilation failed
+[error]    |                                           Found:    (f : String => Int)
+[error]    |                                           Required: Any => Int
 ```

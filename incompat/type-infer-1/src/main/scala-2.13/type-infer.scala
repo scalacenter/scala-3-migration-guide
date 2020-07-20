@@ -1,14 +1,11 @@
-trait Context { type Out }
-
-object Context {
-  type Aux[A] = Context { type Out = A }
-  implicit val ctx: Aux[String] = ???
+trait Foo { 
+  type Inner
 }
 
-trait Foo[A]
-
 object Foo {
-  def foo(implicit ctx: Context): Foo[ctx.Out] = ???
+  val foo: Foo { type Inner = String } = ???
+  
+  def inner(foo: Foo): foo.Inner = ???
 
-  def bar(f: Foo[String] => Int): Option[Int] = Option(foo).map(f)
+  def bar(f: String => Int): Option[Int] = Some(inner(foo)).map(f)
 }
