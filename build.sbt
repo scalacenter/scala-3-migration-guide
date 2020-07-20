@@ -48,10 +48,10 @@ val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
 
 lazy val incompat = (project in file("incompat"))
   .configs(CompileBackward)
-  .aggregate(typeInfer1)
+  .aggregate(typeInfer1, typeOfImplicitDef)
 
-lazy val typeInfer1 = (project in file("incompat/type-infer-1"))
-  .settings(incompatSettings)
+lazy val typeInfer1 = (project in file("incompat/type-infer-1")).settings(incompatSettings)
+lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).settings(incompatSettings)
 
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)
