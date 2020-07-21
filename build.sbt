@@ -33,8 +33,8 @@ val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
     scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
-      case (0, _) => Seq("-source:3.0-migration")
-      case _ => Seq()
+      case (0, _) => Seq("-source:3.0-migration", "-language:implicitConversions")
+      case _ => Seq("-feature", "-language:implicitConversions")
     },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
     CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala-2.13"),
@@ -61,6 +61,7 @@ lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).
 lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
 lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
 lazy val earlyInitializer = (project in file("incompat/early-initializer")).settings(incompatSettings)
+lazy val ambiguousConversion = (project in file("incompat/ambiguous-conversion")).settings(incompatSettings)
 
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)
