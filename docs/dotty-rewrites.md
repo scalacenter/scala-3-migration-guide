@@ -197,12 +197,34 @@ object Bar {
 }
 ```
 
+### Rule 7 - Auto-application
+
+Auto-application is the syntax of calling a nullary method without argument list. In Scala 3, when calling a method defined in Scala 3, auto-application is forbidden.
+
+The following code is now illegal:
+
+```scala
+trait Chunk {
+  def bytes(): Array[Byte]
+  def toSeq: Seq[Byte] = bytes
+}
+```
+
+Compiling with `dotc -source:3.0-migration -rewrite` rewrites it into:
+
+```scala
+trait Chunk {
+  def bytes(): Array[Byte]
+  def toSeq: Seq[Byte] = bytes()
+}
+```
+Auto-application in Scala 3 is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Dotty reference.
 
 ## Looking ahead to Scala 3.1
 
 Some deprecations have been postponed to 3.1 to facilitate the migration from 2.13 to 3.0 and then from 3.0 to 3.1. However some of the migration rules are already available and you are likely to be able to apply them in your codebase. In this way you get accustomed to the new syntax and prepared for 3.1.
 
-### Rule 7 - Replace wildcard type argument '_' with '?'
+### Rule 1 - Replace wildcard type argument '_' with '?'
 
 The deprecation of the `_` syntax for wildcard type arguments has be postponed to Scala 3.1 and it will be replaced by the `?` syntax. You can find the motivation for this in the [Dotty reference](https://dotty.epfl.ch/docs/reference/changed-features/wildcards.html).
 

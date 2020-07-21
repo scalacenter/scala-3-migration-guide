@@ -16,7 +16,7 @@ val rewrites = (project in file("rewrites"))
   .settings(
     scalaVersion := dotty,
     migration := "3.0",
-    scalacOptions ++= Seq(s"-source:${migration.value}-migration","-rewrite"),
+    scalacOptions ++= Seq(s"-source:${migration.value}-migration", "-rewrite"),
     inputDir := baseDirectory.value / s"src/input/scala-${migration.value}",
     outputDir := target.value / s"src-managed/main/scala-${migration.value}",
     checkDir := baseDirectory.value / s"src/check/scala-${migration.value}",
