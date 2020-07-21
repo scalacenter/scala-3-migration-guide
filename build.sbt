@@ -52,7 +52,10 @@ val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
 
 lazy val incompat = (project in file("incompat"))
   .configs(CompileBackward)
-  .aggregate(typeInfer1, typeInfer2, typeInfer3, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance)
+  .aggregate(
+    typeInfer1, typeInfer2, typeInfer3, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance,
+    ambiguousConversion, reflectiveCall
+  )
 
 lazy val typeInfer1 = (project in file("incompat/type-infer-1")).settings(incompatSettings)
 lazy val typeInfer2 = (project in file("incompat/type-infer-2")).settings(incompatSettings)
@@ -62,6 +65,7 @@ lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")
 lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
 lazy val earlyInitializer = (project in file("incompat/early-initializer")).settings(incompatSettings)
 lazy val ambiguousConversion = (project in file("incompat/ambiguous-conversion")).settings(incompatSettings)
+lazy val reflectiveCall = (project in file("incompat/reflective-call")).settings(incompatSettings)
 
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)
