@@ -33,7 +33,7 @@ lazy val incompat = (project in file("incompat"))
   .configs(CompileBackward)
   .aggregate(
     typeInfer1, typeInfer2, typeInfer3, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance,
-    ambiguousConversion, reflectiveCall, explicitCallToUnapply, implicitView
+    ambiguousConversion, reflectiveCall, explicitCallToUnapply, implicitView, any2stringaddConversion
   )
 
 // compile incompatibilities
@@ -47,6 +47,7 @@ lazy val earlyInitializer = (project in file("incompat/early-initializer")).sett
 lazy val ambiguousConversion = (project in file("incompat/ambiguous-conversion")).settings(incompatSettings)
 lazy val reflectiveCall = (project in file("incompat/reflective-call")).settings(incompatSettings)
 lazy val explicitCallToUnapply = (project in file("incompat/explicit-call-to-unapply")).settings(incompatSettings)
+lazy val any2stringaddConversion = (project in file("incompat/any2stringadd-conversion")).settings(incompatSettings)
 
 // runtime incompatibilities
 lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
@@ -57,7 +58,7 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
     crossScalaVersions := List(scala213, dotty),
     scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
       case (0, _) => Seq("-source:3.0-migration", "-language:implicitConversions")
-      case _ => Seq("-feature", "-language:implicitConversions")
+      case _ => Seq("-feature", "-deprecation", "-language:implicitConversions")
     },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
     CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala-2.13"),
