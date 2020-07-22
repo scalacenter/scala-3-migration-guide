@@ -34,7 +34,7 @@ lazy val incompat = (project in file("incompat"))
   .aggregate(
     typeInfer1, typeInfer2, typeInfer3, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance,
     ambiguousConversion, reflectiveCall, explicitCallToUnapply, implicitView, any2stringaddConversion,
-    typeParamIdentifier
+    typeParamIdentifier, restrictedOperator
   )
 
 // compile incompatibilities
@@ -50,6 +50,7 @@ lazy val reflectiveCall = (project in file("incompat/reflective-call")).settings
 lazy val explicitCallToUnapply = (project in file("incompat/explicit-call-to-unapply")).settings(incompatSettings)
 lazy val any2stringaddConversion = (project in file("incompat/any2stringadd-conversion")).settings(incompatSettings)
 lazy val typeParamIdentifier = (project in file("incompat/type-param-identifier")).settings(incompatSettings)
+lazy val restrictedOperator = (project in file ("incompat/restricted-operator")).settings(incompatSettings)
 
 // runtime incompatibilities
 lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
