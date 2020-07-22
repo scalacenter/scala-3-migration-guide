@@ -28,7 +28,30 @@ val rewrites = (project in file("rewrites"))
     }
   )
 
-val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++ 
+
+lazy val incompat = (project in file("incompat"))
+  .configs(CompileBackward)
+  .aggregate(
+    typeInfer1, typeInfer2, typeInfer3, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance,
+    ambiguousConversion, reflectiveCall, explicitCallToUnapply, implicitView
+  )
+
+// compile incompatibilities
+lazy val typeInfer1 = (project in file("incompat/type-infer-1")).settings(incompatSettings)
+lazy val typeInfer2 = (project in file("incompat/type-infer-2")).settings(incompatSettings)
+lazy val typeInfer3 = (project in file("incompat/type-infer-3")).settings(incompatSettings)
+lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).settings(incompatSettings)
+lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
+lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
+lazy val earlyInitializer = (project in file("incompat/early-initializer")).settings(incompatSettings)
+lazy val ambiguousConversion = (project in file("incompat/ambiguous-conversion")).settings(incompatSettings)
+lazy val reflectiveCall = (project in file("incompat/reflective-call")).settings(incompatSettings)
+lazy val explicitCallToUnapply = (project in file("incompat/explicit-call-to-unapply")).settings(incompatSettings)
+
+// runtime incompatibilities
+lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
+
+lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++ 
   Seq(
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
@@ -50,23 +73,27 @@ val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
     }
   )
 
-lazy val incompat = (project in file("incompat"))
-  .configs(CompileBackward)
-  .aggregate(
-    typeInfer1, typeInfer2, typeInfer3, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance,
-    ambiguousConversion, reflectiveCall, explicitCallToUnapply
+lazy val runtimeIncompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
+  Seq(
+    scalaVersion := dotty,
+    crossScalaVersions := List(scala213, dotty),
+    scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
+      case (0, _) => Seq("-language:implicitConversions")
+      case _ => Seq("-language:implicitConversions")
+    },
+    Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
+    CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala-2.13"),
+    CompileBackward / managedClasspath := (managedClasspath in Compile).value,
+    Test / test := {
+      val _ = (Compile / run).toTask("").value
+      checkRuntimeIncompatibility(
+        name.value,
+        scalaVersion.value,
+        (CompileBackward / run).toTask("").result.value,
+        streams.value.log
+      )
+    }
   )
-
-lazy val typeInfer1 = (project in file("incompat/type-infer-1")).settings(incompatSettings)
-lazy val typeInfer2 = (project in file("incompat/type-infer-2")).settings(incompatSettings)
-lazy val typeInfer3 = (project in file("incompat/type-infer-3")).settings(incompatSettings)
-lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).settings(incompatSettings)
-lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
-lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
-lazy val earlyInitializer = (project in file("incompat/early-initializer")).settings(incompatSettings)
-lazy val ambiguousConversion = (project in file("incompat/ambiguous-conversion")).settings(incompatSettings)
-lazy val reflectiveCall = (project in file("incompat/reflective-call")).settings(incompatSettings)
-lazy val explicitCallToUnapply = (project in file("incompat/explicit-call-to-unapply")).settings(incompatSettings)
 
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)
@@ -90,6 +117,28 @@ def checkIncompatibility(name: String, scalaVersion: String, compileResult: Resu
       case Value(_) => ()
       case Inc(_) => 
         throw new MessageOnlyException(s"$name does not compile with version $scalaVersion anymore.")
+    }
+
+    case _ => ()
+  }
+}
+
+def checkRuntimeIncompatibility(name: String, scalaVersion: String, runResult: Result[Unit], log: Logger): Unit = {
+  CrossVersion.partialVersion(scalaVersion).foreach {
+    case (0, _) => runResult match {
+      case Value(_) => 
+        throw new MessageOnlyException(
+          "Run has succeeded but failure was expected. " + 
+          s"The '$name' incompatibility is probably fixed, in version $scalaVersion."
+        )
+      case Inc(_) =>
+        log.info(s"$name is incompatible with $scalaVersion")
+    }
+    
+    case (2, _) => runResult match { 
+      case Value(_) => ()
+      case Inc(_) => 
+        throw new MessageOnlyException(s"$name does not run successfully with version $scalaVersion anymore.")
     }
 
     case _ => ()
