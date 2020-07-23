@@ -71,9 +71,9 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
   Seq(
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
-    scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
-      case (0, _) => Seq("-source:3.0-migration", "-language:implicitConversions")
-      case _ => Seq("-feature", "-deprecation", "-language:implicitConversions")
+    scalacOptions ++= {
+      if (isDotty.value) Seq("-source:3.0-migration", "-language:implicitConversions")
+      else Seq("-feature", "-deprecation", "-language:implicitConversions")
     },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala"),
     CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala-2.13"),
@@ -82,6 +82,7 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
       val _ = (Compile / compile).value
       checkIncompatibility(
         name.value,
+        isDotty.value,
         scalaVersion.value,
         (CompileBackward / compile).result.value,
         streams.value.log
@@ -93,9 +94,9 @@ lazy val runtimeIncompatSettings = inConfig(CompileBackward)(Defaults.compileSet
   Seq(
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
-    scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
-      case (0, _) => Seq("-language:implicitConversions")
-      case _ => Seq("-language:implicitConversions")
+    scalacOptions ++= {
+      if (isDotty.value) Seq("-language:implicitConversions")
+      else Seq("-feature", "-deprecation", "-language:implicitConversions")
     },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
     CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala-2.13"),
@@ -104,6 +105,7 @@ lazy val runtimeIncompatSettings = inConfig(CompileBackward)(Defaults.compileSet
       val _ = (Compile / run).toTask("").value
       checkRuntimeIncompatibility(
         name.value,
+        isDotty.value,
         scalaVersion.value,
         (CompileBackward / run).toTask("").result.value,
         streams.value.log
@@ -117,9 +119,9 @@ def copySources(inputDir: File, outputDir: File): Seq[File] = {
   outputDir.listFiles.filter(_.isFile)
 }
 
-def checkIncompatibility(name: String, scalaVersion: String, compileResult: Result[CompileAnalysis], log: Logger): Unit = {
-  CrossVersion.partialVersion(scalaVersion).foreach {
-    case (0, _) => compileResult match {
+def checkIncompatibility(name: String, isDotty: Boolean, scalaVersion: String, compileResult: Result[CompileAnalysis], log: Logger): Unit = {
+  if (isDotty) {
+    compileResult match {
       case Value(_) => 
         throw new MessageOnlyException(
           "Compilation has succeeded but failure was expected. " + 
@@ -128,20 +130,18 @@ def checkIncompatibility(name: String, scalaVersion: String, compileResult: Resu
       case Inc(_) =>
         log.info(s"$name is incompatible with $scalaVersion")
     }
-    
-    case (2, _) => compileResult match { 
+  } else {
+    compileResult match {
       case Value(_) => ()
       case Inc(_) => 
         throw new MessageOnlyException(s"$name does not compile with version $scalaVersion anymore.")
     }
-
-    case _ => ()
   }
 }
 
-def checkRuntimeIncompatibility(name: String, scalaVersion: String, runResult: Result[Unit], log: Logger): Unit = {
-  CrossVersion.partialVersion(scalaVersion).foreach {
-    case (0, _) => runResult match {
+def checkRuntimeIncompatibility(name: String, isDotty: Boolean, scalaVersion: String, runResult: Result[Unit], log: Logger): Unit = {
+  if (isDotty) {
+    runResult match {
       case Value(_) => 
         throw new MessageOnlyException(
           "Run has succeeded but failure was expected. " + 
@@ -150,13 +150,11 @@ def checkRuntimeIncompatibility(name: String, scalaVersion: String, runResult: R
       case Inc(_) =>
         log.info(s"$name is incompatible with $scalaVersion")
     }
-    
-    case (2, _) => runResult match { 
+  } else {
+    runResult match {
       case Value(_) => ()
       case Inc(_) => 
         throw new MessageOnlyException(s"$name does not run successfully with version $scalaVersion anymore.")
     }
-
-    case _ => ()
   }
 }
