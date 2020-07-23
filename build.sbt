@@ -34,7 +34,8 @@ lazy val incompat = (project in file("incompat"))
   .aggregate(
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeOfImplicitDef, anonymousTypeParam,
     defaultParamVariance, ambiguousConversion, reflectiveCall, explicitCallToUnapply, 
-    implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator, existentialType
+    implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator, existentialType,
+    byNameParamTypeInfer
   )
 
 // compile incompatibilities
@@ -54,6 +55,7 @@ lazy val any2stringaddConversion = (project in file("incompat/any2stringadd-conv
 lazy val typeParamIdentifier = (project in file("incompat/type-param-identifier")).settings(incompatSettings)
 lazy val restrictedOperator = (project in file ("incompat/restricted-operator")).settings(incompatSettings)
 lazy val existentialType = (project in file ("incompat/existential-type")).settings(incompatSettings)
+lazy val byNameParamTypeInfer = (project in file ("incompat/by-name-param-type-infer")).settings(incompatSettings)
 
 // runtime incompatibilities
 lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
@@ -63,7 +65,7 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
     scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
-      case (0, _) => Seq("-source:3.0-migration", "-language:implicitConversions")
+      case (0, _) => Seq()
       case _ => Seq("-feature", "-deprecation", "-language:implicitConversions")
     },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
