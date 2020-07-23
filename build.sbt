@@ -35,7 +35,7 @@ lazy val incompat = (project in file("incompat"))
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeInfer6, typeOfImplicitDef,
     anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall, explicitCallToUnapply, 
     implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator, existentialType,
-    byNameParamTypeInfer, javaVarargs
+    byNameParamTypeInfer, javaVarargs, accessModifier
   )
 
 // compile incompatibilities
@@ -63,6 +63,7 @@ lazy val javaVarargs = (project in file ("incompat/java-varargs"))
     Compile / unmanagedSourceDirectories += baseDirectory.value / "src/main/java",
     CompileBackward / unmanagedSourceDirectories += baseDirectory.value / "src/main/java"
   )
+lazy val accessModifier = (project in file ("incompat/access-modifier")).settings(incompatSettings)
 
 // runtime incompatibilities
 lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
@@ -72,7 +73,7 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
     scalacOptions ++= {
-      if (isDotty.value) Seq("-source:3.0-migration", "-language:implicitConversions")
+      if (isDotty.value) Seq("-language:implicitConversions")
       else Seq("-feature", "-deprecation", "-language:implicitConversions")
     },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala"),
@@ -90,28 +91,18 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
     }
   )
 
-lazy val runtimeIncompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
-  Seq(
-    scalaVersion := dotty,
-    crossScalaVersions := List(scala213, dotty),
-    scalacOptions ++= {
-      if (isDotty.value) Seq("-language:implicitConversions")
-      else Seq("-feature", "-deprecation", "-language:implicitConversions")
-    },
-    Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
-    CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala-2.13"),
-    CompileBackward / managedClasspath := (managedClasspath in Compile).value,
-    Test / test := {
-      val _ = (Compile / run).toTask("").value
-      checkRuntimeIncompatibility(
-        name.value,
-        isDotty.value,
-        scalaVersion.value,
-        (CompileBackward / run).toTask("").result.value,
-        streams.value.log
-      )
-    }
-  )
+lazy val runtimeIncompatSettings = incompatSettings :+ {
+  Test / test := {
+    val _ = (Compile / run).toTask("").value
+    checkRuntimeIncompatibility(
+      name.value,
+      isDotty.value,
+      scalaVersion.value,
+      (CompileBackward / run).toTask("").result.value,
+      streams.value.log
+    )
+  }
+}
 
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)
