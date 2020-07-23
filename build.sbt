@@ -35,7 +35,7 @@ lazy val incompat = (project in file("incompat"))
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeInfer6, typeOfImplicitDef,
     anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall, explicitCallToUnapply, 
     implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator, existentialType,
-    byNameParamTypeInfer
+    byNameParamTypeInfer, javaVarargs
   )
 
 // compile incompatibilities
@@ -57,6 +57,12 @@ lazy val typeParamIdentifier = (project in file("incompat/type-param-identifier"
 lazy val restrictedOperator = (project in file ("incompat/restricted-operator")).settings(incompatSettings)
 lazy val existentialType = (project in file ("incompat/existential-type")).settings(incompatSettings)
 lazy val byNameParamTypeInfer = (project in file ("incompat/by-name-param-type-infer")).settings(incompatSettings)
+lazy val javaVarargs = (project in file ("incompat/java-varargs"))
+  .settings(incompatSettings)
+  .settings(
+    Compile / unmanagedSourceDirectories += baseDirectory.value / "src/main/java",
+    CompileBackward / unmanagedSourceDirectories += baseDirectory.value / "src/main/java"
+  )
 
 // runtime incompatibilities
 lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
@@ -66,11 +72,11 @@ lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) 
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
     scalacOptions ++= CrossVersion.partialVersion(scalaVersion.value).toSeq.flatMap {
-      case (0, _) => Seq()
+      case (0, _) => Seq("-source:3.0-migration", "-language:implicitConversions")
       case _ => Seq("-feature", "-deprecation", "-language:implicitConversions")
     },
-    Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala"),
-    CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / s"src/main/scala-2.13"),
+    Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala"),
+    CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala-2.13"),
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
     Test / test := {
       val _ = (Compile / compile).value
