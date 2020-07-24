@@ -33,7 +33,7 @@ lazy val incompat = (project in file("incompat"))
   .configs(CompileBackward)
   .aggregate(
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeInfer6, typeInfer7, typeInfer8, typeInfer9,
-    typeOfImplicitDef, anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall,
+    typeInfer10, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall,
     explicitCallToUnapply, implicitView, any2stringaddConversion, typeParamIdentifier,
     restrictedOperator, existentialType, byNameParamTypeInfer, javaVarargs, accessModifier,
     javaLangEnum, viewBound
@@ -49,6 +49,7 @@ lazy val typeInfer6 = (project in file("incompat/type-infer-6")).settings(incomp
 lazy val typeInfer7 = (project in file("incompat/type-infer-7")).settings(incompatSettings)
 lazy val typeInfer8 = (project in file("incompat/type-infer-8")).settings(incompatSettings)
 lazy val typeInfer9 = (project in file("incompat/type-infer-9")).settings(incompatSettings)
+lazy val typeInfer10 = (project in file("incompat/type-infer-10")).settings(incompatSettings)
 lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).settings(incompatSettings)
 lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
 lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
