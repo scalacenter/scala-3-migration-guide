@@ -54,7 +54,10 @@ lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).
 lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
 lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
 lazy val earlyInitializer = (project in file("incompat/early-initializer")).settings(incompatSettings)
-lazy val ambiguousConversion = (project in file("incompat/ambiguous-conversion")).settings(incompatSettings)
+lazy val ambiguousConversion = 
+  (project in file("incompat/ambiguous-conversion"))
+    .settings(incompatSettings)
+    .settings(scalacOptions += "-language:implicitConversions")
 lazy val reflectiveCall = (project in file("incompat/reflective-call")).settings(incompatSettings)
 lazy val explicitCallToUnapply = (project in file("incompat/explicit-call-to-unapply")).settings(incompatSettings)
 lazy val any2stringaddConversion = (project in file("incompat/any2stringadd-conversion")).settings(incompatSettings)
@@ -62,27 +65,27 @@ lazy val typeParamIdentifier = (project in file("incompat/type-param-identifier"
 lazy val restrictedOperator = (project in file ("incompat/restricted-operator")).settings(incompatSettings)
 lazy val existentialType = (project in file ("incompat/existential-type")).settings(incompatSettings)
 lazy val byNameParamTypeInfer = (project in file ("incompat/by-name-param-type-infer")).settings(incompatSettings)
-lazy val javaVarargs = (project in file ("incompat/java-varargs"))
-  .settings(incompatSettings)
-  .settings(
-    Compile / unmanagedSourceDirectories += baseDirectory.value / "src/main/java",
-    CompileBackward / unmanagedSourceDirectories += baseDirectory.value / "src/main/java"
-  )
+lazy val javaVarargs = 
+  (project in file ("incompat/java-varargs"))
+    .settings(incompatSettings)
+    .settings(
+      Compile / unmanagedSourceDirectories += baseDirectory.value / "src/main/java",
+      CompileBackward / unmanagedSourceDirectories += baseDirectory.value / "src/main/java"
+    )
 lazy val accessModifier = (project in file ("incompat/access-modifier")).settings(incompatSettings)
 lazy val javaLangEnum = (project in file("incompat/java-lang-enum")).settings(incompatSettings)
 lazy val viewBound = (project in file("incompat/view-bound")).settings(incompatSettings)
 
 // runtime incompatibilities
-lazy val implicitView = (project in file("incompat/implicit-view")).settings(runtimeIncompatSettings)
+lazy val implicitView =
+  (project in file("incompat/implicit-view"))
+    .settings(runtimeIncompatSettings)
+    .settings(scalacOptions += "-language:implicitConversions")
 
 lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++ 
   Seq(
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
-    scalacOptions ++= {
-      if (isDotty.value) Seq("-language:implicitConversions")
-      else Seq("-feature", "-deprecation", "-language:implicitConversions")
-    },
     Compile / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala"),
     CompileBackward / unmanagedSourceDirectories := Seq(baseDirectory.value / "src/main/scala-2.13"),
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
