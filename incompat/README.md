@@ -30,7 +30,6 @@ This set of incompatibilities will be used to track the progress of the migratio
 - [existentialType](existential-type/)
 - [explicitCallToUnapply](explicit-call-to-unapply/)
 - [javaLangEnum](java-lang-enum/)
-- [javaVarargs](java-varargs/)
 - [reflectiveCall](reflective-call/)
 - [restrictedOperator](restricted-operator/)
 - [typeParamIdentifier](type-param-identifier/)
