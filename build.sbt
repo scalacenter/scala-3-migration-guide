@@ -3,7 +3,7 @@ import sbt.librarymanagement.CrossVersion
 import xsbti.compile.CompileAnalysis
 
 val scala213 = "2.13.3"
-val dotty = "0.25.0-RC2"
+val dotty = "0.26.0-RC1"
 
 val inputDir = settingKey[File]("Directory containing the source files that will be rewitten")
 val outputDir = settingKey[File]("Directory in which the source files are rewritten")
@@ -34,9 +34,8 @@ lazy val incompat = (project in file("incompat"))
   .aggregate(
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeInfer6, typeInfer7, typeInfer8, typeInfer9,
     typeInfer10, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall,
-    explicitCallToUnapply, implicitView, any2stringaddConversion, typeParamIdentifier,
-    restrictedOperator, existentialType, byNameParamTypeInfer, javaVarargs, accessModifier,
-    javaLangEnum, viewBound
+    explicitCallToUnapply, implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator,
+    existentialType, byNameParamTypeInfer, accessModifier, javaLangEnum, viewBound
   )
 
 // compile incompatibilities
@@ -65,13 +64,6 @@ lazy val typeParamIdentifier = (project in file("incompat/type-param-identifier"
 lazy val restrictedOperator = (project in file ("incompat/restricted-operator")).settings(incompatSettings)
 lazy val existentialType = (project in file ("incompat/existential-type")).settings(incompatSettings)
 lazy val byNameParamTypeInfer = (project in file ("incompat/by-name-param-type-infer")).settings(incompatSettings)
-lazy val javaVarargs = 
-  (project in file ("incompat/java-varargs"))
-    .settings(incompatSettings)
-    .settings(
-      Compile / unmanagedSourceDirectories += baseDirectory.value / "src/main/java",
-      CompileBackward / unmanagedSourceDirectories += baseDirectory.value / "src/main/java"
-    )
 lazy val accessModifier = (project in file ("incompat/access-modifier")).settings(incompatSettings)
 lazy val javaLangEnum = (project in file("incompat/java-lang-enum")).settings(incompatSettings)
 lazy val viewBound = (project in file("incompat/view-bound")).settings(incompatSettings)

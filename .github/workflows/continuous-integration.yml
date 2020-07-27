@@ -26,4 +26,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v7
       - name: Test Incompatibilities
-        run: sbt '++0.25.0-RC2; incompat / test; ++2.13.3; incompat / test'
+        run: sbt '++0.26.0-RC1; incompat / test; ++2.13.3; incompat / test'
