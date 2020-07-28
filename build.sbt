@@ -35,7 +35,7 @@ lazy val incompat = (project in file("incompat"))
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeInfer6, typeInfer7, typeInfer8, typeInfer9,
     typeInfer10, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall,
     explicitCallToUnapply, implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator,
-    existentialType, byNameParamTypeInfer, accessModifier, javaLangEnum, viewBound
+    existentialType, byNameParamTypeInfer, accessModifier, javaLangEnum, viewBound, abstractOverride
   )
 
 // compile incompatibilities
@@ -53,7 +53,7 @@ lazy val typeOfImplicitDef = (project in file("incompat/type-of-implicit-def")).
 lazy val anonymousTypeParam = (project in file ("incompat/anonymous-type-param")).settings(incompatSettings)
 lazy val defaultParamVariance = (project in file("incompat/default-param-variance")).settings(incompatSettings)
 lazy val earlyInitializer = (project in file("incompat/early-initializer")).settings(incompatSettings)
-lazy val ambiguousConversion = 
+lazy val ambiguousConversion =
   (project in file("incompat/ambiguous-conversion"))
     .settings(incompatSettings)
     .settings(scalacOptions += "-language:implicitConversions")
@@ -67,6 +67,7 @@ lazy val byNameParamTypeInfer = (project in file ("incompat/by-name-param-type-i
 lazy val accessModifier = (project in file ("incompat/access-modifier")).settings(incompatSettings)
 lazy val javaLangEnum = (project in file("incompat/java-lang-enum")).settings(incompatSettings)
 lazy val viewBound = (project in file("incompat/view-bound")).settings(incompatSettings)
+lazy val abstractOverride = (project in file("incompat/abstract-override")).settings(incompatSettings)
 
 // runtime incompatibilities
 lazy val implicitView =
@@ -74,7 +75,7 @@ lazy val implicitView =
     .settings(runtimeIncompatSettings)
     .settings(scalacOptions += "-language:implicitConversions")
 
-lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++ 
+lazy val incompatSettings = inConfig(CompileBackward)(Defaults.compileSettings) ++
   Seq(
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
@@ -115,9 +116,9 @@ def copySources(inputDir: File, outputDir: File): Seq[File] = {
 def checkIncompatibility(name: String, isDotty: Boolean, scalaVersion: String, compileResult: Result[CompileAnalysis], log: Logger): Unit = {
   if (isDotty) {
     compileResult match {
-      case Value(_) => 
+      case Value(_) =>
         throw new MessageOnlyException(
-          "Compilation has succeeded but failure was expected. " + 
+          "Compilation has succeeded but failure was expected. " +
           s"The '$name' incompatibility is probably fixed, in version $scalaVersion."
         )
       case Inc(_) =>
@@ -126,7 +127,7 @@ def checkIncompatibility(name: String, isDotty: Boolean, scalaVersion: String, c
   } else {
     compileResult match {
       case Value(_) => ()
-      case Inc(_) => 
+      case Inc(_) =>
         throw new MessageOnlyException(s"$name does not compile with version $scalaVersion anymore.")
     }
   }
@@ -135,9 +136,9 @@ def checkIncompatibility(name: String, isDotty: Boolean, scalaVersion: String, c
 def checkRuntimeIncompatibility(name: String, isDotty: Boolean, scalaVersion: String, runResult: Result[Unit], log: Logger): Unit = {
   if (isDotty) {
     runResult match {
-      case Value(_) => 
+      case Value(_) =>
         throw new MessageOnlyException(
-          "Run has succeeded but failure was expected. " + 
+          "Run has succeeded but failure was expected. " +
           s"The '$name' incompatibility is probably fixed, in version $scalaVersion."
         )
       case Inc(_) =>
@@ -146,7 +147,7 @@ def checkRuntimeIncompatibility(name: String, isDotty: Boolean, scalaVersion: St
   } else {
     runResult match {
       case Value(_) => ()
-      case Inc(_) => 
+      case Inc(_) =>
         throw new MessageOnlyException(s"$name does not run successfully with version $scalaVersion anymore.")
     }
   }
