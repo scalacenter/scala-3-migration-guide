@@ -22,6 +22,7 @@ This set of incompatibilities will be used to track the progress of the migratio
 
 ### Dropped/Changed Features
 
+- [abstractOverride](abstract-override/)
 - [anonymousTypeParam](anonymous-type-param/)
 - [any2stringaddConversion](any2stringadd-conversion/)
 - [byNameParamTypeInfer](by-name-param-type-infer/)
