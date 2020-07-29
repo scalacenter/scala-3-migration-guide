@@ -19,11 +19,17 @@ This set of incompatibilities will be used to track the progress of the migratio
 
 ## Index
 
+### Syntax
+
+- [anonymousTypeParam](anonymous-type-param/)
+- [indentation-1](indentation-1/)
+- [indentation-2](indentation-2/)
+- [restrictedOperator](restricted-operator/)
+- [typeParamIdentifier](type-param-identifier/)
 
 ### Dropped/Changed Features
 
 - [abstractOverride](abstract-override/)
-- [anonymousTypeParam](anonymous-type-param/)
 - [any2stringaddConversion](any2stringadd-conversion/)
 - [byNameParamTypeInfer](by-name-param-type-infer/)
 - [defaultParamVariance](default-param-variance/)
@@ -32,8 +38,6 @@ This set of incompatibilities will be used to track the progress of the migratio
 - [explicitCallToUnapply](explicit-call-to-unapply/)
 - [javaLangEnum](java-lang-enum/)
 - [reflectiveCall](reflective-call/)
-- [restrictedOperator](restricted-operator/)
-- [typeParamIdentifier](type-param-identifier/)
 
 ### Contextual Abstractions
 
