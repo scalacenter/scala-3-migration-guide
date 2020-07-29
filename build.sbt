@@ -35,7 +35,8 @@ lazy val incompat = (project in file("incompat"))
     typeInfer1, typeInfer2, typeInfer3, typeInfer4,  typeInfer5, typeInfer6, typeInfer7, typeInfer8, typeInfer9,
     typeInfer10, typeOfImplicitDef, anonymousTypeParam, defaultParamVariance, ambiguousConversion, reflectiveCall,
     explicitCallToUnapply, implicitView, any2stringaddConversion, typeParamIdentifier, restrictedOperator,
-    existentialType, byNameParamTypeInfer, accessModifier, javaLangEnum, viewBound, abstractOverride
+    existentialType, byNameParamTypeInfer, accessModifier, javaLangEnum, viewBound, abstractOverride,
+    indentation1, indentation2
   )
 
 // compile incompatibilities
@@ -68,6 +69,8 @@ lazy val accessModifier = (project in file ("incompat/access-modifier")).setting
 lazy val javaLangEnum = (project in file("incompat/java-lang-enum")).settings(incompatSettings)
 lazy val viewBound = (project in file("incompat/view-bound")).settings(incompatSettings)
 lazy val abstractOverride = (project in file("incompat/abstract-override")).settings(incompatSettings)
+lazy val indentation1 = (project in file ("incompat/indentation-1")).settings(incompatSettings)
+lazy val indentation2 = (project in file ("incompat/indentation-2")).settings(incompatSettings)
 
 // runtime incompatibilities
 lazy val implicitView =
