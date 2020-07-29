@@ -76,18 +76,17 @@ Scala 3 is backward compatible with the Scala 2.13 libraries with the exception 
 
 ## Content
 
-The `/docs` folder in this repository contains:
-- [compatibility.md](docs/compatibility.md): The Scala 2 to Scala 3 compatibility reference.
-- [dotty-rewrites.md](docs/dotty-rewrites.md): The documentation of the Dotty rewrite rules, that can be performed by the compiler.
-- [cross-build.md](docs/cross-build.md): A tutorial for cross building your codebase. This is something that library maintainers would be interested in.
-- [upgrade.md](docs/upgrade.md): Applications do not require cross building. You can jump straight and upgrade yours to Scala 3 by following this tutorial.
-- [macros.md](docs/macros.md): General knowledge about migrating macros.
+The [`docs/`](docs/) folder in this repository contains:
+- [`compatibility.md`](docs/compatibility.md): The Scala 2 to Scala 3 compatibility reference.
+- [`dotty-rewrites.md`](docs/dotty-rewrites.md): The documentation of the Dotty rewrite rules, that can be performed by the compiler.
+- [`cross-build.md`](docs/cross-build.md): A tutorial for cross building your codebase. This is something that library maintainers would be interested in.
+- [`upgrade.md`](docs/upgrade.md): Applications do not require cross building. You can jump straight and upgrade yours to Scala 3 by following this tutorial.
+- [`macros.md`](docs/macros.md): General knowledge about migrating macros.
 
-The structure of this repository is not fully defined yet.
+The [`incompat/`](incompat/) folder contains a corpus of incompatibilities between Scala 2 and Scala 3 and how they should translate from Scala 2.13 to Dotty.
 
 In the near future it may be added:
-- A status of the migration related issues that have been submitted to the dotty project or to another migration related project. As well as a list of the on-going initiatives to help the migration.
-- A corpus of source code examples that don't cross-compile and how they should translate from scala 2.13 to Dotty.
+- a list of the on-going initiatives to help the migration.
 
 ## Additional Resources
 
