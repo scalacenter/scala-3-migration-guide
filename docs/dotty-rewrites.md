@@ -220,6 +220,39 @@ trait Chunk {
 ```
 Auto-application in Scala 3 is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Dotty reference.
 
+### Rule 8 - Disambiguate inheritance shadowing
+
+An inherited member cannot shadow an identifier defined in a outer scope anymore.
+For instance, the following code does not compile anymore because the `x` term in C refers to the inherited member from class `A` and shadows the member of the same name in the outer class `B`.
+
+```scala
+class A {
+  val x = 2
+}
+
+object B {
+  val x = 1
+  class C extends A {
+    println(x)
+  }
+}
+```
+
+To avoid any ambiguity you can write `this.x` instead of `x`. The compiler can make this rewrite automatically, under `-source:3.0-migration-rewrite`:
+
+```scala
+class A {
+  val x = 2
+}
+
+object B {
+  val x = 1
+  class C extends A {
+    println(this.x)
+  }
+}
+```
+
 ## Looking ahead to Scala 3.1
 
 Some deprecations have been postponed to 3.1 to facilitate the migration from 2.13 to 3.0 and then from 3.0 to 3.1. However some of the migration rules are already available and you are likely to be able to apply them in your codebase. In this way you get accustomed to the new syntax and prepared for 3.1.
