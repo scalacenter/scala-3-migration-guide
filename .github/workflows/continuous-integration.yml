@@ -17,6 +17,8 @@ jobs:
         run: sbt 'set rewrites / migration := "3.0"; rewrites / test'
       - name: Rewrites 3.1
         run: sbt 'set rewrites / migration := "3.1"; rewrites / test'
+      - name: Rewrites 3.1 Deprecation
+        run: sbt 'set rewrites / migration := "3.1-deprecation"; rewrites / test'
   incompat:
     name: Test Incompatibilities
     runs-on: ubuntu-latest
