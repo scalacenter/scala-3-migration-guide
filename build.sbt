@@ -16,7 +16,12 @@ val rewrites = (project in file("rewrites"))
   .settings(
     scalaVersion := dotty,
     migration := "3.0",
-    scalacOptions ++= Seq(s"-source:${migration.value}-migration", "-rewrite"),
+    scalacOptions ++= { 
+      migration.value match {
+        case "3.1-deprecation" => Seq(s"-source:3.1", "-deprecation", "-rewrite")
+        case version @ ("3.0" | "3.1") => Seq(s"-source:$version-migration", "-rewrite")
+      }
+    },
     inputDir := baseDirectory.value / s"src/input/scala-${migration.value}",
     outputDir := target.value / s"src-managed/main/scala-${migration.value}",
     checkDir := baseDirectory.value / s"src/check/scala-${migration.value}",

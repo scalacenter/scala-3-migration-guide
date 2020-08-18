@@ -261,3 +261,30 @@ Compiling with `dotc -source:3.1-migration -rewrite` rewrites it into:
 ```scala
 val f = { (implicit x: Context) => ??? }
 ```
+
+### Rule 3 (deprecation) - Backquote alphanumeric methods used as infix operator
+
+Starting from Scala 3.1, alphanumeric methods should be annotated with `@infix` to be used as infix operators (see [Dotty documentation](https://dotty.epfl.ch/docs/reference/changed-features/operators.html#the-infix-annotation)).
+The `-deprecation` mode of the compiler will warn you foreach infix call of un-annotated methods.
+
+Here, the call of the `difference` method is deprecated:
+
+```scala
+trait MultiSet {
+  def difference(other: MultiSet): MultiSet
+}
+
+def test(s1: MultiSet, s2: MultiSet): MultiSet = 
+  s1 difference s2
+```
+
+The compiler can backquote the method call under the `-source:3.1 -deprecation -rewrite` options.
+
+```scala
+trait MultiSet {
+  def difference(other: MultiSet): MultiSet
+}
+
+def test(s1: MultiSet, s2: MultiSet): MultiSet = 
+  s1 `difference` s2
+```
