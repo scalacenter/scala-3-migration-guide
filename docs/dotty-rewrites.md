@@ -245,3 +245,19 @@ def compare(x: Container[?], y: Container[?]): Int = {
   x.weight - y.weight
 }
 ```
+
+### Rule 2 - Add Parentheses around the implicit parameter of a lambda
+
+*Will be available in Dotty 0.26.0 or Dotty 0.27.0-RC1*
+
+Starting from Scala 3.1, it will be required to enclose the implicit parameter of a lambda in parentheses, making the following Scala 3 code illegal.
+
+```scala
+val f = { implicit x: Context => ??? }
+```
+
+Compiling with `dotc -source:3.1-migration -rewrite` rewrites it into:
+
+```scala
+val f = { (implicit x: Context) => ??? }
+```
