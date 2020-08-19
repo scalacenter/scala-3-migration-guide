@@ -273,7 +273,11 @@ val f: () => Int = (() => x)
 
 ## Looking ahead to Scala 3.1
 
-Some deprecations have been postponed to 3.1 to facilitate the migration from 2.13 to 3.0 and then from 3.0 to 3.1. However some of the migration rules are already available and you are likely to be able to apply them in your codebase. In this way you get accustomed to the new syntax and prepared for 3.1.
+Some deprecations have been postponed to 3.1 to facilitate the migration from 2.13 to 3.0 and then from 3.0 to 3.1.
+However some of the migration rules are already available and you are likely to be able to apply them in your codebase.
+In this way you get accustomed to the new syntax and prepared for 3.1.
+
+Beware though that some of the `3.1-migration` rewrites break the source compatibility with Scala 2.13.
 
 ### Rule 1 - Replace wildcard type argument '_' with '?'
 
