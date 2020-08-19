@@ -253,6 +253,24 @@ object B {
 }
 ```
 
+### Rule 9 - Value Eta-Expansion
+
+Dotty introduces [automatic eta-expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html) which will deprecate the method value syntax `m _`.
+Furthermore Dotty does not allow eta-expansion of values to nullary functions anymore.
+Thus this piece of code is now illegal:
+
+```scala
+val x = 1
+val f: () => Int = x _
+```
+
+Compiling with `dotc -source:3.0-migration -rewrite` can rewrite it to:
+
+```scala
+val x = 1
+val f: () => Int = (() => x)
+```
+
 ## Looking ahead to Scala 3.1
 
 Some deprecations have been postponed to 3.1 to facilitate the migration from 2.13 to 3.0 and then from 3.0 to 3.1. However some of the migration rules are already available and you are likely to be able to apply them in your codebase. In this way you get accustomed to the new syntax and prepared for 3.1.
