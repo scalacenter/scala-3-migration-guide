@@ -379,3 +379,40 @@ Compiling with `dotc -source:3.1-migration -rewrite` can add it for you automati
 val listOpt: List[Option[Int]] = List(Some(1), None)
 for (case Some(value) <- listOpt) println(value)
 ```
+
+### Rule 5 - Remove method value syntax for eta-expansion
+
+*This rule breaks the source compatibility with Scala 2.13.*
+
+The method value syntax `m _` will no longer be supported in Scala 3.1, since we now have [automatic eta-expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html).
+
+In general you can simply drop the `_` symbol.
+Compiling with `dotc -source:3.1-migration -rewrite` rewrites
+
+```scala
+def foo(x: Int)(y: Int): Int = x + y
+val f = foo _
+```
+
+Into
+
+```scala
+def foo(x: Int)(y: Int): Int = x + y
+val f = foo
+```
+
+In the special case of a nullary method, the rewrite rule transforms
+
+```scala
+def bar(): Int = 3
+val g = bar _
+```
+
+Into
+
+```scala
+def bar(): Int = 3
+val g = (() => bar())
+```
+
+This rule break the source compatibility with Scala 2.13.
