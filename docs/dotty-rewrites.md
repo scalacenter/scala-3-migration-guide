@@ -415,4 +415,25 @@ def bar(): Int = 3
 val g = (() => bar())
 ```
 
-This rule break the source compatibility with Scala 2.13.
+### Rule 6 - Add `using` clause to pass explicit arguments to context bound
+
+*This rule breaks the source compatibility with Scala 2.13.*
+
+From Scala 3.1 on, context bounds will map to context parameters.
+Thus a `using` clause is needed to pass explicit arguments to them.
+
+Compiling with `dotc -source:3.1-migration -rewrite` rewrites
+
+```scala
+def show[T: Show](value: T): String = ???
+val intShow = new Show[Int] {}
+show(5)(intShow)
+```
+
+Into
+
+```scala
+def show[T: Show](value: T): String = ???
+val intShow = new Show[Int] {}
+show(5)(using intShow)
+```
