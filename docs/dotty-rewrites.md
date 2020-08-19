@@ -321,3 +321,43 @@ trait MultiSet {
 def test(s1: MultiSet, s2: MultiSet): MultiSet = 
   s1 `difference` s2
 ```
+
+### Rule 4 - Unchecked pattern bindings
+
+*Will be available in Dotty 0.26.0 or Dotty 0.27.0-RC1*
+
+From Scala 3.1 on, pattern binding will require to be type consistent in order to prevent undesired runtime errors.
+See [Dotty documentation](https://dotty.epfl.ch/docs/reference/changed-features/pattern-bindings.html) for more information on this.
+
+This piece of code compiles in Scala 2.13 and Scala 3.0 but not in Scala 3.1:
+
+```scala
+val list: List[Int] = List(1)
+val head :: _ = list
+```
+
+You can use the `@unchecked` annotation to tell the compiler to ignore that the binding can fail.
+Compiling with `dotc -source:3.1-migration -rewrite` can write it automatically.
+
+```scala
+val list: List[Int] = List(1)
+val head :: _: @unchecked = list
+```
+
+Similarly, in a `for` expression, this piece of code compiles in Scala 2.13 and Scala 3.0 but not in Scala 3.1:
+
+```scala
+val listOpt: List[Option[Int]] = List(Some(1), None)
+for (Some(value) <- listOpt) println(value)
+```
+
+In Scala 2 and Scala 3.0, the elements of `listOpt` are filtered to retain only the value of type `Some` .
+
+In Scala 3.1, this syntax does not induce filtering, but the binding is type checked to prevent runtime errors.
+You can still have the same behavior than Scala 2 by adding the `case` keyword.
+Compiling with `dotc -source:3.1-migration -rewrite` can add it for you automatically.
+
+```scala
+val listOpt: List[Option[Int]] = List(Some(1), None)
+for (case Some(value) <- listOpt) println(value)
+```
