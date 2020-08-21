@@ -8,7 +8,7 @@ Prior to this you have to configure your build tool to handle several Scala vers
 
 Lunatech ["Moving from Scala 2 to Scala 3"](https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course) course is a good way to get started. It guides you through the migration of a single module Akka Typed sudoku solver project and it demonstrates various of the new features of the langugage. 
 
-## Aditionnal Resources
+## Additional Resources
 
 - [Dotty Getting Started](https://dotty.epfl.ch/docs/usage/getting-started.html)
 - [Scala Blog Post: The Road to Scala 3](https://www.scala-lang.org/2019/12/18/road-to-scala-3.html#how-can-i-contribute)
