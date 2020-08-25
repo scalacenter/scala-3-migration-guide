@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Scala 3 migration guide · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This repository is a continuously evolving guide to support the migration to Scala 3. As a member of the community you are encouraged to participate the effort by sharing your migrating experience."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Scala 3 migration guide · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="This repository is a continuously evolving guide to support the migration to Scala 3. As a member of the community you are encouraged to participate the effort by sharing your migrating experience."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/scala-3-migration-guide/docs/get-started.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>General</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/get-started.html">Scala 3 migration guide</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/cross-build.html">Cross-building</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty rewrite rules</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros.html">Macros migration</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/upgrade.html">Upgrading a Scala Application</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/get-started.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Scala 3 migration guide</h1></header><article><div><span><p>This repository is a continuously evolving guide to support the migration to Scala 3. As a member of the community you are encouraged to participate the effort by sharing your migrating experience.</p>
+<p>Since the announcement that Dotty will eventually become Scala 3, the Dotty contributors and the SIP committee are taking great care of the migration accessibility for everyone (library maintainer, application owner, and people teaching others).</p>
+<p>A number of complementary initiatives are being undertaken to ease the migration. This repository is not a replacement of those initiatives. Its purpose is to gather knowledge, to collect feedback and to encourage the collaboration. The ultimate goal being to drive the effort of the community toward the release of Scala 3.</p>
+<p>All information you may want to know before starting the migration of your codebase should be available in this guide. If not you may want to <a href="/scala-3-migration-guide/docs/contributing.html">contribute</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="scala-3-aka-dotty"></a><a href="#scala-3-aka-dotty" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala 3 (aka Dotty)</h2>
+<p>Dotty is the project name of the new compiler and improved language that will become Scala 3.</p>
+<p>The compiler has been completely redesigned, which means that the typechecker and type inferencer are totally new. In the corner cases they may not behave as in the scala 2 compiler. The implicit resolution rules have been cleaned up as well.</p>
+<p>The language itself has been improved. The changes compared to Scala 2 are limited to:</p>
+<ul>
+<li>some simplified and restricted constructs for safety or consistency reasons</li>
+<li>some dropped features</li>
+<li>and also some exciting new features</li>
+</ul>
+<p>Last but not least, the macros system from Scala 2 has been dropped and replaced by a new macro system that is safer, more robust and that breaks the compiler dependency. The downside of it, in terms of migration, is that all the macro usages must be re-written. Chances are you don't use macros in your codebase, but you depend on libraries that define macro methods.</p>
+<p>For a complete overview of the changes in Dotty compared to Scala 2, please visit the <a href="https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html">Dotty website</a>.</p>
+<p>Despite all those changes, Scala 3 is just another Scala version:</p>
+<ul>
+<li>A large subset of the Scala 2 language still compiles to Scala 3.</li>
+<li>The standard library is unchanged.</li>
+<li>The ABI (Application Binary Interface) is unchanged. Scala 2.13 and Scala 3 libraries can be used on the same classpath.</li>
+<li>The Scala 3 compiler can read the Scala 2.13 class files, so you can have Scala 2 dependencies in your Scala 3 project.</li>
+<li>The scala 2.13 compiler will soon be able to read the Scala 3 class files as well. See the <a href="https://contributors.scala-lang.org/t/roadmap-for-the-tasty-reader-for-scala-2/4231">Tasty reader roadmap</a>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="a-tour-of-the-migration-tools"></a><a href="#a-tour-of-the-migration-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A Tour of the Migration Tools</h2>
+<h3><a class="anchor" aria-hidden="true" id="the-dotty-compiler"></a><a href="#the-dotty-compiler" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Dotty compiler</h3>
+<p>The Dotty compiler itself is a powerful migration tool.</p>
+<p>You can use <code>dotc</code> on your Scala 2 source code with the <code>-source 3.0-migration</code> option. It will do its best to compile most of your code and it will issue a warning for each incompatibility. For a detailed explanation of the <code>dotc</code> <code>-source</code> option see <a href="https://github.com/lampepfl/dotty/pull/8700">#5700</a>.</p>
+<p>Even more than that, in combination with the <code>-rewrite</code> flag, the Dotty compiler is able to rewrite some of the Scala 2 code.</p>
+<p>Leveraging this tool, the community has already migrated a significant number of well-known libraries, forming the <a href="https://github.com/lampepfl/dotty/tree/master/community-build/community-projects">community build</a>.</p>
+<p>The description of these rules are being documented <a href="/scala-3-migration-guide/docs/dotty-rewrites.html">here</a>. If you find any missing rule that is straightforward to implement, please create an issue in the <a href="https://github.com/lampepfl/dotty">Dotty repository</a>.</p>
+<p>In case the rule is not trivial to implement you may fall back to the Scalafix tool.</p>
+<h3><a class="anchor" aria-hidden="true" id="scalafix"></a><a href="#scalafix" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scalafix</h3>
+<p><a href="https://scalacenter.github.io/scalafix/docs/users/installation.html">Scalafix</a> may be the complementary tool to assist the compiler for non-trivial incompatibilities.</p>
+<p>In particular, it might be very convenient for automatic or semi-automatic resolution of the type inference and implicit resolution incompatibilities, by explicitly writting down the types and implicit values.</p>
+<p>Such Scalafix rules could be hosted by the <a href="https://github.com/scala/scala-rewrites">scala-rewrites</a> repository. <a href="/scala-3-migration-guide/docs/contributing.html">Contributors Welcome!</a></p>
+<h3><a class="anchor" aria-hidden="true" id="sbt-and-other-build-tools"></a><a href="#sbt-and-other-build-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>sbt and other build tools</h3>
+<p>The sbt build tool does already support Dotty and cross-compilation with Scala 2. It is able to glue all the migration tools together to provide the best migration experience.</p>
+<p>Other build tools may also support Dotty and cross-compilation with Scala 2. <a href="/scala-3-migration-guide/docs/contributing.html">Contributors Welcome!</a></p>
+<h3><a class="anchor" aria-hidden="true" id="metals-and-other-ides"></a><a href="#metals-and-other-ides" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Metals and other IDEs</h3>
+<p>Visual Studio Code has its own Dotty Language Server plugin that you can simply configure by running the <code>sbt launchIDE</code> task of the <code>sbt-dotty</code> plugin.</p>
+<p>The Dotty support in Metals is on its way, stay tuned to <a href="https://github.com/scalameta/metals/issues/1367">#1367</a>.</p>
+<p>The latest Scala plugin for Intellij Idea already have preliminary support for Scala 3.</p>
+<p><a href="/scala-3-migration-guide/docs/contributing.html">Contributors Welcome!</a></p>
+<h3><a class="anchor" aria-hidden="true" id="scaladex"></a><a href="#scaladex" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scaladex</h3>
+<p>Scala 3 is backward compatible with the Scala 2.13 libraries with the exception of libraries that use macros. If you depend on one of those libraries you may want to check in <a href="https://index.scala-lang.org/">Scaladex</a>, the Scala library index, if this dependency has already been ported to Dotty.</p>
+<h2><a class="anchor" aria-hidden="true" id="content"></a><a href="#content" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Content</h2>
+<p>The <a href="../docs"><code>docs/</code></a> folder in this repository contains:</p>
+<ul>
+<li><a href="/scala-3-migration-guide/docs/compatibility.html"><code>/scala-3-migration-guide/docs/compatibility.html</code></a>: The Scala 2 to Scala 3 compatibility reference.</li>
+<li><a href="/scala-3-migration-guide/docs/dotty-rewrites.html"><code>/scala-3-migration-guide/docs/dotty-rewrites.html</code></a>: The documentation of the Dotty rewrite rules, that can be performed by the compiler.</li>
+<li><a href="/scala-3-migration-guide/docs/cross-build.html"><code>/scala-3-migration-guide/docs/cross-build.html</code></a>: A tutorial for cross building your codebase. This is something that library maintainers would be interested in.</li>
+<li><a href="/scala-3-migration-guide/docs/upgrade.html"><code>/scala-3-migration-guide/docs/upgrade.html</code></a>: Applications do not require cross building. You can jump straight and upgrade yours to Scala 3 by following this tutorial.</li>
+<li><a href="/scala-3-migration-guide/docs/macros.html"><code>/scala-3-migration-guide/docs/macros.html</code></a>: General knowledge about migrating macros.</li>
+</ul>
+<p>The <a href="../incompat"><code>incompat/</code></a> folder contains a corpus of incompatibilities between Scala 2 and Scala 3 and how they should translate from Scala 2.13 to Dotty.</p>
+<p>In the near future it may be added:</p>
+<ul>
+<li>a list of the on-going initiatives to help the migration.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="additional-resources"></a><a href="#additional-resources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Additional Resources</h2>
+<ul>
+<li><a href="https://dotty.epfl.ch/">The Dotty website</a></li>
+<li><a href="https://github.com/lampepfl/dotty-example-project#getting-your-project-to-compile-with-dotty">The Dotty example projects</a></li>
+<li><a href="https://github.com/lampepfl/dotty/tree/master/community-build/community-projects">The Dotty community projects</a></li>
+<li><a href="https://scalacenter.github.io/scalafix/">The Scalafix website</a></li>
+<li><a href="https://www.scala-sbt.org/1.x/docs/Cross-Build.html">The sbt Cross-Build Manual</a></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/scala-3-migration-guide/docs/compatibility.html"><span>Compatibility reference</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scala-3-aka-dotty">Scala 3 (aka Dotty)</a></li><li><a href="#a-tour-of-the-migration-tools">A Tour of the Migration Tools</a><ul class="toc-headings"><li><a href="#the-dotty-compiler">The Dotty compiler</a></li><li><a href="#scalafix">Scalafix</a></li><li><a href="#sbt-and-other-build-tools">sbt and other build tools</a></li><li><a href="#metals-and-other-ides">Metals and other IDEs</a></li><li><a href="#scaladex">Scaladex</a></li></ul></li><li><a href="#content">Content</a></li><li><a href="#additional-resources">Additional Resources</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#ca445e"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/get-started.html">Get started</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2020 Scala Center</section></footer></div></body></html>

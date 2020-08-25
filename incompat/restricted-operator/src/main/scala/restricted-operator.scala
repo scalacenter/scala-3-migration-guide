@@ -1,3 +1,0 @@
-trait Foo {
-  def `=>>` : Unit
-}
