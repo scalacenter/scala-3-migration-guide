@@ -1,5 +1,7 @@
-# Cross-building
-
+---
+id: cross-build
+title: Cross-building
+---
 Library authors are likely to want their library compatible with Scala 3 and Scala 2, so that it can continuously evolve without frustrating anyone. Cross-building has been the best solution so far to do so.
 
 ## How to cross-build your library with Dotty
@@ -109,7 +111,7 @@ Users will have to explicitly wrap their `Foo` values into the `FooWrapper` clas
 
 ### Other incompatibilities
 
-[Contributors Welcome!](CONTRIBUTING.md)
+[Contributors Welcome!](contributing.md)
 
 ## Additional Resources
 

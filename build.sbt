@@ -115,6 +115,10 @@ lazy val runtimeIncompatSettings = incompatSettings :+ {
   }
 }
 
+lazy val docs = project
+  .in(file("migration-docs"))
+  .enablePlugins(MdocPlugin, DocusaurusPlugin)
+
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)
   FileUtils.copyDirectory(inputDir, outputDir)

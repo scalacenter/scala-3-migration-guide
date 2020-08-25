@@ -2,3 +2,16 @@
 target/
 .bloop/
 project/metals.sbt
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+.idea 
+node_modules
+
+
+website/build/
+website/yarn.lock
+website/node_modules
+website/i18n/*
+!website/i18n/en.json

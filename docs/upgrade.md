@@ -1,5 +1,7 @@
-# Upgrading a Scala Application
-
+---
+id: upgrade
+title: Upgrading a Scala Application
+---
 Scala 2 is binary compatible with Scala 3. It means that you can migrate your application one module at a time. It also means that you can try those exciting new features without blocking anyone.
 
 Prior to this you have to configure your build tool to handle several Scala versions. Sbt, Mill and other build tools can do that but not all of them. Otherwise you have to migrate the entire application all at once.

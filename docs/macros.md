@@ -1,5 +1,7 @@
-# Macros migration
-
+---
+id: macros
+title: Macros migration
+---
 The Scala 2 macros are compiler dependent. In other words, macros defined in a Scala 2 library cannot be consumed by a different compiler version.
 
 Scala 3 will break this limitation but it comes with the cost of rewriting all the macro usages of the Scala ecosystem.
@@ -21,7 +23,7 @@ Here is an incomplete list of libraries that use Scala 2 macros and their migrat
 * [scalatest](https://github.com/dotty-staging/scalatest) - ported to Scala 3 in the Dotty community build but not merged to upstream
 * [scodec-bits](https://github.com/dotty-staging/scodec) - ported to Scala 3 in the Dotty community build but not merged to upstream
 
-[Contributors welcome!](CONTRIBUTING.md)
+[Contributors welcome!](contributing.md)
 
 ## How to?
 
@@ -55,7 +57,7 @@ If you are already cross-compiling your macro for different versions of Scala 2 
   * [utest](https://github.com/dotty-staging/utest/tree/dotty)
   * [sourcecode](https://github.com/dotty-staging/sourcecode/tree/dotty-community-build)
 
-[Contributors welcome!](CONTRIBUTING.md)
+[Contributors welcome!](contributing.md)
 
 ## Additional Resources
 
@@ -72,4 +74,4 @@ Projects:
 * [XML Interpolator](https://github.com/dotty-staging/xml-interpolator/tree/master)
 * [Shapeless 3](https://github.com/dotty-staging/shapeless/tree/shapeless-3)
 
-[Contributors welcome!](CONTRIBUTING.md)
+[Contributors welcome!](contributing.md)
