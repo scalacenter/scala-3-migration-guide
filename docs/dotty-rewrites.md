@@ -1,5 +1,7 @@
-# Dotty rewrite rules
-
+---
+id: dotty-rewrites
+title: Dotty rewrite rules
+---
 ## Usage
 
 The Dotty compiler, named `dotc`, has been carefully designed to ease the migration from Scala 2.13 to Scala 3.0. It comes with a handful of utilities to encourage you to cross-compile your codebase:

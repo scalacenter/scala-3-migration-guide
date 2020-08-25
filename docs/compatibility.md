@@ -1,5 +1,7 @@
-# Compatibility reference
-
+---
+id: compatibility
+title: Compatibility reference
+---
 Scala 3 is a game changer in terms of compatibility in the Scala ecosystem that will greatly improve the day-to-day experience of the Scala programmers, starting from the migration.
 
 In this page you will learn about the compatibility between Scala 2.13 and Scala 3.0 at different levels of the program lifetime.
