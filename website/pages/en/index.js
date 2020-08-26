@@ -53,6 +53,12 @@ const SplashContainer = props => (
   </div>
 );
 
+const Logo = (props) => (
+  <div className="projectLogo">
+    <img src={props.img_src} alt="Project Logo" />
+  </div>
+);
+
 const ProjectTitle = props => (
   <h2 className="projectTitle">
     {siteConfig.title}
@@ -73,13 +79,10 @@ class HomeSplash extends React.Component {
     let language = this.props.language || "";
     return (
       <SplashContainer>
+        <Logo img_src={imgUrl("dotty-logo.svg")} />
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
-          <img
-            src={imgUrl("dotty-logo.svg")}
-            width="400"
-          />
             <Button href={docUrl("get-started.html", language)}>
               Get started
             </Button>
@@ -90,41 +93,57 @@ class HomeSplash extends React.Component {
   }
 }
 
-const Features = props => {
-  const features = [
-    {
-      title: "Cross-build your library with Dotty",
-      content:
-        "We list incompatibilities between Scala 3 and Scala 2, and solutions for cross-compiling the source code.",
-      image: imgUrl("dotty-logo.svg"),
-      imageAlign: "left"
-    },
-    {
-      title: "Dotty rewrites",
-      content:
-        "The Dotty compiler, has been carefully designed to ease the migration from Scala 2.13 to Scala 3.0. It comes with a handful of utilities to encourage you to cross-compile your codebase",
-      image: imgUrl("dotty-logo.svg"),
-      imageAlign: "right"
-    },
-    {
-      title: "Macros",
-      content:
-        "The Scala 2 macros are compiler dependent. In other words, macros defined in a Scala 2 library cannot be consumed by a different compiler version. Scala 3 will break this limitation but it comes with the cost of rewriting all the macro usages of the Scala ecosystem.",
-      image: imgUrl("dotty-logo.svg"),
-      imageAlign: "left"
-    }
-  ];
-  return (
-    <div
-      className="productShowcaseSection paddingBottom"
-      style={{ textAlign: "center" }}
-    >
-      {features.map(feature => (
-        <Block key={feature.title}>{[feature]}</Block>
-      ))}
-    </div>
-  );
-};
+const Compatibility = () => (
+  <Block background="light">
+    {[
+      {
+        content:
+          'Scala 3 has been carefully designed to improve the backward and forward compatibility of the Scala programming language.\n\n' +
+          `In the [Compatibility Reference](${docUrl('compatibility.html')}) ` +
+          'you will learn about the compatibility between Scala 2.13 and Scala 3.0 in the context of migration.',
+        image: `${imgUrl('puzzle-primary.svg')}`,
+        imageAlt: 'Icon made by Nikita Kozin from the Noun Project',
+        imageAlign: 'left',
+        title: `[Compatibility Reference](${docUrl('compatibility.html')})`,
+      },
+    ]}
+  </Block>
+);
+
+const MigrationMode = () => (
+  <Block>
+    {[
+      {
+        content:
+          'The Dotty compiler is, in itself, a migration tool that can assists you while doing the migration.\n\n ' +
+          'No installation required, everything is in the compiler. ' + `Discover the [Dotty Migration Mode](${docUrl('dotty-rewrites.html')}).`,
+        title: `[Dotty Migration Mode](${docUrl('dotty-rewrites.html')})`,
+        image: `${imgUrl('tools-primary.svg')}`,
+        imageAlt: 'Icon made by Maxime Kulikov from the Noun Project.',
+        imageAlign: 'right',
+      },
+    ]}
+  </Block>
+);
+
+const Metaprogramming = () => (
+  <Block background="light">
+    {[
+      {
+        content:
+          'Scala 3 metaprogramming features are safer, more robust and much more stable than Scala 2 macro mechanisms. ' +
+          'Existing macro libraries will turn out to be much more simple. ' +
+          'But it comes at the price of rewritting them from the ground up.\n\n' +
+          `In the [Metaprogramming](${docUrl('macros.html')}) section, ` + 
+          'you will find helpful content to help you port your metaprogramming library.',
+        title: `[Migrating Macros](${docUrl('macros.html')})`,
+        image: `${imgUrl('magnifying-primary.svg')}`,
+        imageAlt: 'Icon made by Eucalyp from the Noun Project.',
+        imageAlign: 'left',
+      },
+    ]}
+  </Block>
+);
 
 const Block = props => (
   <Container
@@ -143,7 +162,9 @@ class Index extends React.Component {
       <div>
         <HomeSplash language={language} />
         <div className="mainContainer">
-          <Features />
+          <Compatibility />
+          <MigrationMode />
+          <Metaprogramming />
         </div>
       </div>
     );

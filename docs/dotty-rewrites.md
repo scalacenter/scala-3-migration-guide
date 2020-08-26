@@ -1,6 +1,6 @@
 ---
 id: dotty-rewrites
-title: Dotty rewrite rules
+title: Dotty Migration Mode
 ---
 ## Usage
 

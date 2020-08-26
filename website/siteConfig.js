@@ -14,31 +14,31 @@ const siteConfig = {
   projectName: "scala-3-migration-guide",
   organizationName: "scalacenter",
 
-  customDocsPath: 'migration-docs/target/mdoc',
+  customDocsPath: 'website/target/mdoc',
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-  {doc: 'get-started', label: 'User Guide'},
-  {doc: 'contributing', label: 'Contribute'},
-  { href: repoUrl, label: "GitHub", external: true }
+    {doc: 'get-started', label: 'User Guide'},
+    {doc: 'contributing', label: 'Contribute'},
+    { href: repoUrl, label: "GitHub", external: true }
   ],
 
   /* path to images for header/footer */
-  headerIcon: 'img/dotty-logo.svg',
+  headerIcon: 'img/dotty-logo-white.svg',
   footerIcon: 'img/dotty-logo-white.svg',
   favicon: 'img/dotty-logo.svg',
 
   /* Colors for website */
   colors: {
-    primaryColor: '#414551',
-    secondaryColor: '#ca445e',
+    primaryColor: '#ca445e',
+    secondaryColor: '#224951',
   },
 
   /* Custom fonts for website */
   /*
   fonts: {
     myFont: [
-      "Times New Roman",
+      "Lato",
       "Serif"
     ],
     myOtherFont: [
@@ -47,6 +47,11 @@ const siteConfig = {
     ]
   },
   */
+
+  stylesheets: [
+    'https://fonts.googleapis.com/css?family=Lobster&display=swap',
+    'https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&display=fallback'
+  ],
 
   // This copyright info is used in /core/Footer.js and blog rss/atom feeds.
   copyright: `Copyright © ${new Date().getFullYear()} Scala Center`,

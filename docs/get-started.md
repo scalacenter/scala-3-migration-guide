@@ -1,12 +1,11 @@
 ---
 id: get-started
-title: Scala 3 migration guide
+title: Introduction
 ---
-This repository is a continuously evolving guide to support the migration to Scala 3. As a member of the community you are encouraged to participate the effort by sharing your migrating experience.
 
-Since the announcement that Dotty will eventually become Scala 3, the Dotty contributors and the SIP committee are taking great care of the migration accessibility for everyone (library maintainer, application owner, and people teaching others).
+Since the announcement that Dotty will eventually become Scala 3, the Dotty contributors and the SIP committee are taking great care of the migration accessibility for everyone: library maintainer, application owner, and teachers.
 
-A number of complementary initiatives are being undertaken to ease the migration. This repository is not a replacement of those initiatives. Its purpose is to gather knowledge, to collect feedback and to encourage the collaboration. The ultimate goal being to drive the effort of the community toward the release of Scala 3.
+This guide gathers knowledge about the migration. The ultimate goal being to drive the effort of the community toward the release of Scala 3.
 
 All information you may want to know before starting the migration of your codebase should be available in this guide. If not you may want to [contribute](contributing.md).
 
@@ -14,14 +13,11 @@ All information you may want to know before starting the migration of your codeb
 
 Dotty is the project name of the new compiler and improved language that will become Scala 3.
 
-The compiler has been completely redesigned, which means that the typechecker and type inferencer are totally new. In the corner cases they may not behave as in the scala 2 compiler. The implicit resolution rules have been cleaned up as well.
+Scala 3 is bringing more consistency, more safety and more ergonomics by simplifying, restricting and even dropping some of Scala 2 constructs. It also improves the expressiveness of the language by introducing new types and features. 
 
-The language itself has been improved. The changes compared to Scala 2 are limited to:
-- some simplified and restricted constructs for safety or consistency reasons
-- some dropped features
-- and also some exciting new features
+The compiler has been completely redesigned. In particular the type checker and the type inferencer are different and they do not behave as in Scala 2. The implicit resolution rules have also been reworked.
 
-Last but not least, the macros system from Scala 2 has been dropped and replaced by a new macro system that is safer, more robust and that breaks the compiler dependency. The downside of it, in terms of migration, is that all the macro usages must be re-written. Chances are you don't use macros in your codebase, but you depend on libraries that define macro methods.
+Last but not least, the macros system from Scala 2 has been dropped and replaced by a new macro system that is safer, more robust and much more stable. It is intended to be forward compatible.
 
 For a complete overview of the changes in Dotty compared to Scala 2, please visit the [Dotty website](https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html).
 
@@ -29,8 +25,12 @@ Despite all those changes, Scala 3 is just another Scala version:
 - A large subset of the Scala 2 language still compiles to Scala 3.
 - The standard library is unchanged.
 - The ABI (Application Binary Interface) is unchanged. Scala 2.13 and Scala 3 libraries can be used on the same classpath.
+
+Surprisingly, the compatibility is better between Scala 2.13 and Scala 3.0 than it was between any two older Scala 2 versions:
 - The Scala 3 compiler can read the Scala 2.13 class files, so you can have Scala 2 dependencies in your Scala 3 project.
-- The scala 2.13 compiler will soon be able to read the Scala 3 class files as well. See the [Tasty reader roadmap](https://contributors.scala-lang.org/t/roadmap-for-the-tasty-reader-for-scala-2/4231).
+- The scala 2.13 compiler will soon be able to read the Scala 3 class files as well.
+
+The next section of this guide focuses on the compatibility in the context of the migration. 
 
 ## A Tour of the Migration Tools
 
@@ -38,57 +38,43 @@ Despite all those changes, Scala 3 is just another Scala version:
 
 The Dotty compiler itself is a powerful migration tool.
 
-You can use `dotc` on your Scala 2 source code with the `-source 3.0-migration` option. It will do its best to compile most of your code and it will issue a warning for each incompatibility. For a detailed explanation of the `dotc` `-source` option see [#5700](https://github.com/lampepfl/dotty/pull/8700).
+It comes with a migration mode that does its best at compiling Scala 2 code and issues a migration warning wherever the code need some care.
 
-Even more than that, in combination with the `-rewrite` flag, the Dotty compiler is able to rewrite some of the Scala 2 code.
+Even more than that, it is able to rewrite your code where necessary.
+
+You can learn more about it in the [`Dotty Migration Mode`](dotty-rewrites.md) section.
 
 Leveraging this tool, the community has already migrated a significant number of well-known libraries, forming the [community build](https://github.com/lampepfl/dotty/tree/master/community-build/community-projects).
 
-The description of these rules are being documented [here](dotty-rewrites.md). If you find any missing rule that is straightforward to implement, please create an issue in the [Dotty repository](https://github.com/lampepfl/dotty).
-
-In case the rule is not trivial to implement you may fall back to the Scalafix tool.
-
 ### Scalafix
 
-[Scalafix](https://scalacenter.github.io/scalafix/docs/users/installation.html) may be the complementary tool to assist the compiler for non-trivial incompatibilities.
+[Scalafix](https://scalacenter.github.io/scalafix/) is a refactoring tool for Scala.
+It is the complementary tool to assist the compiler in the migration.
 
-In particular, it might be very convenient for automatic or semi-automatic resolution of the type inference and implicit resolution incompatibilities, by explicitly writting down the types and implicit values.
+The main advantage of Scalafix is that it can operate in Scala 2.13 so that you can prepare the code before the migration.
+It gives you have control on the applied changes by proceeding incrementally, one rule at a time.
 
-Such Scalafix rules could be hosted by the [scala-rewrites](https://github.com/scala/scala-rewrites) repository. [Contributors Welcome!](contributing.md)
+In particular, it might be very convenient for automatic or semi-automatic resolution of the type inference and implicit resolution problems, by adding some types and implicit values in the code.
 
 ### sbt and other build tools
 
-The sbt build tool does already support Dotty and cross-compilation with Scala 2. It is able to glue all the migration tools together to provide the best migration experience.
+The sbt build tool does already support Dotty and cross-compilation with Scala 2, thanks to the sbt with the [sbt-dotty plugin](https://dotty.epfl.ch/docs/usage/getting-started.html)
 
-Other build tools may also support Dotty and cross-compilation with Scala 2. [Contributors Welcome!](contributing.md)
+It is able to glue all the migration tools together to provide the best migration experience.
+
+Other build tools may also support Dotty and cross-compilation with Scala 2. [Contributions are welcome here!](contributing.md)
 
 ### Metals and other IDEs
 
 Visual Studio Code has its own Dotty Language Server plugin that you can simply configure by running the `sbt launchIDE` task of the `sbt-dotty` plugin.
 
-The Dotty support in Metals is on its way, stay tuned to [#1367](https://github.com/scalameta/metals/issues/1367).
+The Dotty support in Metals is on its way, stay tuned to this [Scala Center Update](https://contributors.scala-lang.org/t/metals-and-scala-3/4274).
 
-The latest Scala plugin for Intellij Idea already have preliminary support for Scala 3.
-
-[Contributors Welcome!](contributing.md)
+The latest version of the Scala plugin for Intellij Idea already has preliminary support for Scala 3.
 
 ### Scaladex
 
-Scala 3 is backward compatible with the Scala 2.13 libraries with the exception of libraries that use macros. If you depend on one of those libraries you may want to check in [Scaladex](https://index.scala-lang.org/), the Scala library index, if this dependency has already been ported to Dotty.
-
-## Content
-
-The [`docs/`](../docs) folder in this repository contains:
-- [`compatibility.md`](compatibility.md): The Scala 2 to Scala 3 compatibility reference.
-- [`dotty-rewrites.md`](dotty-rewrites.md): The documentation of the Dotty rewrite rules, that can be performed by the compiler.
-- [`cross-build.md`](cross-build.md): A tutorial for cross building your codebase. This is something that library maintainers would be interested in.
-- [`upgrade.md`](upgrade.md): Applications do not require cross building. You can jump straight and upgrade yours to Scala 3 by following this tutorial.
-- [`macros.md`](macros.md): General knowledge about migrating macros.
-
-The [`incompat/`](../incompat) folder contains a corpus of incompatibilities between Scala 2 and Scala 3 and how they should translate from Scala 2.13 to Dotty.
-
-In the near future it may be added:
-- a list of the on-going initiatives to help the migration.
+Check the list of Scala 3 open-source libraries in [Scaladex](https://index.scala-lang.org/).
 
 ## Additional Resources
 

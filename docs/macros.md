@@ -1,10 +1,11 @@
 ---
 id: macros
-title: Macros migration
+title: Macros Migration
 ---
-The Scala 2 macros are compiler dependent. In other words, macros defined in a Scala 2 library cannot be consumed by a different compiler version.
+The Scala 2 macros are compiler dependent by design.
+Therefore it is impossible to compile or even consume them in Scala 3.
 
-Scala 3 will break this limitation but it comes with the cost of rewriting all the macro usages of the Scala ecosystem.
+In this document, we provide guidelines to help you migrate your macro library to Scala 3.
 
 ## Migration status
 
