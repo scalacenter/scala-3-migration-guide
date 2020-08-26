@@ -12,6 +12,10 @@ val migration = settingKey[String]("Target Scala version - 3.0 or 3.1")
 
 val CompileBackward = Configuration.of("CompileBackward", "compile-bwd")
 
+lazy val website = project
+  .in(file("website"))
+  .enablePlugins(MdocPlugin, DocusaurusPlugin)
+
 val rewrites = (project in file("rewrites"))
   .settings(
     scalaVersion := dotty,
@@ -114,10 +118,6 @@ lazy val runtimeIncompatSettings = incompatSettings :+ {
     )
   }
 }
-
-lazy val docs = project
-  .in(file("migration-docs"))
-  .enablePlugins(MdocPlugin, DocusaurusPlugin)
 
 def copySources(inputDir: File, outputDir: File): Seq[File] = {
   if (outputDir.exists) FileUtils.deleteDirectory(outputDir)

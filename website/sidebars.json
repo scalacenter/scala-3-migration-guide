@@ -1,5 +1,5 @@
 {
   "docs": {
-    "General": ["get-started", "compatibility", "cross-build", "dotty-rewrites", "macros", "upgrade"]
+    "General": ["get-started", "compatibility", "dotty-rewrites", "macros"]
   }
 }

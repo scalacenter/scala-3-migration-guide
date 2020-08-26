@@ -9,17 +9,11 @@ All information you may want to know before starting the migration of your codeb
 
 ## Content
 
-The [`docs/`](docs/) folder in this repository contains:
-- [`compatibility.md`](docs/compatibility.md): The Scala 2 to Scala 3 compatibility reference.
-- [`dotty-rewrites.md`](docs/dotty-rewrites.md): The documentation of the Dotty rewrite rules, that can be performed by the compiler.
-- [`cross-build.md`](docs/cross-build.md): A tutorial for cross building your codebase. This is something that library maintainers would be interested in.
-- [`upgrade.md`](docs/upgrade.md): Applications do not require cross building. You can jump straight and upgrade yours to Scala 3 by following this tutorial.
-- [`macros.md`](docs/macros.md): General knowledge about migrating macros.
-
-The [`incompat/`](incompat/) folder contains a corpus of incompatibilities between Scala 2 and Scala 3 and how they should translate from Scala 2.13 to Dotty.
-
-In the near future it may be added:
-- a list of the on-going initiatives to help the migration.
+This repository contains:
+ - [`incompat/`](incomapt/): A corpus of incompatibilities between Scala and Scala 3 with proposed solution.
+ - [`rewrites/`](rewrite/): The tests of the Dotty rewrites.
+ - [`docs/`](doc/): The documentation that is published to the [website](https://scalacenter.github.io/scala-3-migration-guide/)
+ - [`website/`](website/): The website skeleton powered by [Docusaurus](https://docusaurus.io/en/).
 
 ## Additional Resources
 

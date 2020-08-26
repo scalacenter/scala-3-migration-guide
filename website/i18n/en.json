@@ -6,7 +6,7 @@
     "tagline": "An evolving guide to support the migration to Scala 3",
     "docs": {
       "compatibility": {
-        "title": "Compatibility reference"
+        "title": "Compatibility Reference"
       },
       "contributing": {
         "title": "Contributing"
@@ -15,13 +15,13 @@
         "title": "Cross-building"
       },
       "dotty-rewrites": {
-        "title": "Dotty rewrite rules"
+        "title": "Dotty Migration Mode"
       },
       "get-started": {
-        "title": "Scala 3 migration guide"
+        "title": "Introduction"
       },
       "macros": {
-        "title": "Macros migration"
+        "title": "Macros Migration"
       },
       "upgrade": {
         "title": "Upgrading a Scala Application"
@@ -33,7 +33,7 @@
       "GitHub": "GitHub"
     },
     "categories": {
-      "general": "general"
+      "General": "General"
     }
   },
   "pages-strings": {

@@ -1,4 +1,4 @@
-name: Release Doc
+name: Deploy Website
 on:
   push:
     branches: [master]
