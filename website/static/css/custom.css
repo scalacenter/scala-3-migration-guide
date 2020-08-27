@@ -72,12 +72,13 @@ article a {
   text-decoration: underline;
 }
 
-
-table td,
-table th {
-  border-color: transparent;
-}
-table th {
-  border-bottom-color: inherit;
+blockquote {
+  background-color: #e8f8f7;
+  border-left: 8px solid #c1ece9
 }
 
+blockquote h4,
+blockquote p,
+blockquote li {
+  color: #19524f
+}
