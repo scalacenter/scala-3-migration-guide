@@ -19,7 +19,7 @@ object Assert {
     }
   }
 
-  def dottyIncompatibility(
+  def incompatibility(
     name: String,
     scalaVersion: String,
     compileResult: Result[CompileAnalysis],
@@ -36,7 +36,7 @@ object Assert {
     }
   }
 
-  def scala2Compilation(
+  def compilation(
     name: String,
     scalaVersion: String,
     compileResult: Result[CompileAnalysis],
@@ -49,7 +49,7 @@ object Assert {
     }
   }
 
-  def dottyRuntimeIncompatibility(
+  def runtimeIncompatibility(
     name: String,
     scalaVersion: String,
     runResult: Result[Unit],
@@ -66,7 +66,7 @@ object Assert {
     }
   }
 
-  def scala2Run(
+  def run(
     name: String,
     scalaVersion:String,
     runResult: Result[Unit],
