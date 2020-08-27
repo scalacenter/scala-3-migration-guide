@@ -5,15 +5,15 @@ import sbt.util.Logger
 import com.github.difflib.text._
 import sbt.internal.util.MessageOnlyException
 
-class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
+class FileChecker(logger: Logger) {
   private val diffGen = DiffRowGenerator.create()
     .showInlineDiffs(true)
     .inlineDiffByWord(true)
     .oldTag(f => "**")
     .build()
 
-  def run(): Unit = {
-    val outputFiles = outputDir.listFiles
+  def check(inputDir: File, checkDir: File): Unit = {
+    val inputFiles = inputDir.listFiles
       .filter(_.isFile)
       .map(f => f.getName() -> f)
       .toMap
@@ -25,10 +25,10 @@ class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
     val finalReport = checkFiles.foldLeft(initialReport) {
       (report, checkFile) =>
         val fileName = checkFile.getName
-        outputFiles.get(fileName) match {
+        inputFiles.get(fileName) match {
           case None => report.missingFile(fileName)
-          case Some(outputFile) =>
-            val diff = compare(outputFile, checkFile)
+          case Some(inputFile) =>
+            val diff = compare(inputFile, checkFile)
             if (diff.isEmpty) report.success(fileName)
             else report.fileDiff(fileName, diff) 
         }
@@ -38,9 +38,9 @@ class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
       throw new MessageOnlyException(s"${finalReport.failed} file checks failed")
   }
 
-  private def compare(outputFile: File, checkFile: File): Seq[String] = {
+  private def compare(inputFile: File, checkFile: File): Seq[String] = {
     val diff = diffGen.generateDiffRows(
-      Source.fromFile(outputFile).getLines().toList.asJava,
+      Source.fromFile(inputFile).getLines().toList.asJava,
       Source.fromFile(checkFile).getLines().toList.asJava
     )
     diff.asScala.toSeq
@@ -51,7 +51,7 @@ class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
 
   private case class Report(succeeded: Int, failed: Int) {
     def missingFile(name: String): Report = {
-      logger.error(s"missing output file $name")
+      logger.error(s"missing input file $name")
       Report(succeeded, failed + 1)
     }
 
@@ -66,4 +66,8 @@ class FileChecker(outputDir: File, checkDir: File, logger: Logger) {
       Report(succeeded + 1, failed)
     }
   }
+}
+
+object FileChecker {
+  def apply(logger: Logger): FileChecker = new FileChecker(logger)
 }
