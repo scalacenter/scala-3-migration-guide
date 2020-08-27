@@ -5,18 +5,6 @@ on:
  push:
    branches: [master]
 jobs:
-  rewrites:
-    name: Test Rewrites
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v2
-      - uses: olafurpg/setup-scala@v7
-      - name: Rewrites 3.1
-        run: sbt 'set rewrites / migration := "3.1"; rewrites / test'
-      - name: Rewrites 3.1 Deprecation
-        run: sbt 'set rewrites / migration := "3.1-deprecation"; rewrites / test'
   incompat:
     name: Test Incompatibilities
     runs-on: ubuntu-latest
@@ -25,5 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v7
-      - name: Test Incompatibilities
+      - name: Test Incompatibilities 3.0
         run: sbt '++0.26.0-RC1; incompat30 / test; ++2.13.3; incompat30 / test'
+      - name: Test Incompatibilities 3.1
+        run: sbt 'incompat31 / test'
