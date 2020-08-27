@@ -13,8 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v7
-      - name: Rewrites 3.0
-        run: sbt 'set rewrites / migration := "3.0"; rewrites / test'
       - name: Rewrites 3.1
         run: sbt 'set rewrites / migration := "3.1"; rewrites / test'
       - name: Rewrites 3.1 Deprecation
@@ -28,4 +26,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v7
       - name: Test Incompatibilities
-        run: sbt '++0.26.0-RC1; incompat / test; ++2.13.3; incompat / test'
+        run: sbt '++0.26.0-RC1; incompat30 / test; ++2.13.3; incompat30 / test'
