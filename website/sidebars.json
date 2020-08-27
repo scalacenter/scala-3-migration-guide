@@ -1,5 +1,11 @@
 {
   "docs": {
-    "General": ["get-started", "compatibility", "dotty-rewrites", "macros"]
+    "General": [
+      "get-started",
+      "compatibility",
+      "dotty-rewrites",
+      "incompatibility-table",
+      "macros"
+    ]
   }
 }

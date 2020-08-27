@@ -20,6 +20,9 @@
       "get-started": {
         "title": "Introduction"
       },
+      "incompatibility-table": {
+        "title": "Incompatibility Table"
+      },
       "macros": {
         "title": "Macros Migration"
       },
