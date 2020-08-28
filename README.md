@@ -1,7 +1,8 @@
 # Scala 3 migration guide
 
 This repository is a continuously evolving guide to support the migration to Scala 3. As a member of the community you are encouraged to participate the effort by sharing your migrating experience.
-Visit https://scalacenter.github.io/scala-3-migration-guide to learn more about the migration guide.
+
+Visit [**the Scala 3 Migration website**](https://scalacenter.github.io/scala-3-migration-guide) to learn more about the migration.
 
 A number of complementary initiatives are being undertaken to ease the migration. This repository is not a replacement of those initiatives. Its purpose is to gather knowledge, to collect feedback and to encourage the collaboration. The ultimate goal being to drive the effort of the community toward the release of Scala 3.
 
@@ -10,8 +11,8 @@ All information you may want to know before starting the migration of your codeb
 ## Content
 
 This repository contains:
- - [`incompat/`](incomapt/): A corpus of incompatibilities between Scala and Scala 3 with proposed solution.
- - [`rewrites/`](rewrite/): The tests of the Dotty rewrites.
+ - [`incompat30/`](incomapt30/): A corpus of incompatibilities between Scala 2.13 and Scala 3.0 with proposed solution. It also contains the tests of the Dotty migration rewrites for 3.0.
+ - [`incompat31/`](incompat31/): The tests of the Dotty migration rewrites that are already implemented for 3.1.
  - [`docs/`](doc/): The documentation that is published to the [website](https://scalacenter.github.io/scala-3-migration-guide/)
  - [`website/`](website/): The website skeleton powered by [Docusaurus](https://docusaurus.io/en/).
 
