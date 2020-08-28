@@ -3,9 +3,13 @@ import org.apache.commons.io.FileUtils
 val scala213 = "2.13.3"
 val dotty = "0.26.0"
 
-lazy val website = project
-  .in(file("website"))
-  .enablePlugins(MdocPlugin, DocusaurusPlugin)
+lazy val docs = project
+  .in(file("mdoc"))
+  .settings(
+    skip.in(publish) := true,
+    mdoc := run.in(Compile).evaluated,
+  )
+  .enablePlugins(DocusaurusPlugin)
 
 val CompileBackward = Configuration.of("CompileBackward", "compile-bwd")
 val scala213SourceDir = settingKey[File]("Directory containing the Scala 2.13 sources")

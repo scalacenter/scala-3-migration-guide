@@ -14,7 +14,7 @@ const siteConfig = {
   projectName: "scala-3-migration-guide",
   organizationName: "scalacenter",
 
-  customDocsPath: 'website/target/mdoc',
+  customDocsPath: 'website/target/docs',
 
   algolia: {
     apiKey: "f77e0c381ea8939fc6c34dc0e17ea492",
