@@ -3,5 +3,5 @@ addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.5")
 
 ThisBuild / libraryDependencies ++= Seq(
   "org.apache.commons" % "commons-io" % "1.3.2",
-  "io.github.java-diff-utils" % "java-diff-utils" % "4.5"
+  "io.github.java-diff-utils" % "java-diff-utils" % "4.7"
 )
