@@ -1,7 +1,7 @@
 import org.apache.commons.io.FileUtils
 
 val scala213 = "2.13.3"
-val dotty = "0.26.0-RC1"
+val dotty = "0.26.0"
 
 lazy val website = project
   .in(file("website"))
@@ -18,7 +18,7 @@ val rewriteDir = settingKey[File]("Directory where the sources are rewritten by 
   List of all incompatibilities between Scala 2.13 and Scala 3.0
 
   You can run:
-    - `++0.26.0-RC1; <incompat> / test` to validate the incompatibility as well as the Dotty rewrite if it has one
+    - `++0.26.0; <incompat> / test` to validate the incompatibility as well as the Dotty rewrite if it has one
     - `++2.13.3; <incompat> / test` to cross-compile the proposed solution and validate the scalafix rule if it has one
   where <incompat> can be a single incompatibility or `incompat30` for all incompatibilities
 */
@@ -33,7 +33,7 @@ lazy val incompat30 = (project in file("incompat-3.0"))
   It only contains the already existing 3.1-migration rewrites in Dotty
 
   You can run:
-    - `++0.26.0-RC1; <incompat> / test` to validate the Dotty rewrite
+    - `++0.26.0; <incompat> / test` to validate the Dotty rewrite
   where <incompat> can be a single incompatibility or `incompat31` for all incompatibilities
 */
 lazy val incompat31 = project.in(file("incompat-3.1"))
