@@ -14,7 +14,7 @@ const siteConfig = {
   projectName: "scala-3-migration-guide",
   organizationName: "scalacenter",
 
-  customDocsPath: 'website/target/mdoc',
+  customDocsPath: 'website/target/docs',
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
