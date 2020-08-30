@@ -16,6 +16,11 @@ const siteConfig = {
 
   customDocsPath: 'website/target/mdoc',
 
+  algolia: {
+    apiKey: "f77e0c381ea8939fc6c34dc0e17ea492",
+    indexName: "scala-3-migration-guide"
+  },
+
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     {doc: 'get-started', label: 'User Guide'},
