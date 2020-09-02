@@ -56,12 +56,12 @@
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/incompatibility-table.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Incompatibility Table</h1></header><article><div><span><p>We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0.
 Migrating a codebase involves finding and fixing all the incompatibilities of the source code.
-On rare occasions we can also have runtime incompatibilities, that compile in Scala 3.0 but results in a different runtime behavior.</p>
+On rare occasions we can also have runtime incompatibilities, that compile in Scala 3.0 but result in a different runtime behavior.</p>
 <p>In this page we propose a classification and status of the known incompatibilities.
 The status of an incompatibility is comprised of:</p>
 <ul>
 <li>Whether the Scala 2.13 compiler produces a deprecation or feature warning on it.</li>
-<li>The existence of a <a href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty rewrite</a> rule for it.</li>
+<li>The existence of a <a href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty migration</a> rule for it.</li>
 <li>The existence of a Scalafix rule that can fix it.</li>
 </ul>
 <blockquote>
