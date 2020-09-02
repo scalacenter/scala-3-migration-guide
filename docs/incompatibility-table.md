@@ -295,7 +295,7 @@ This fundamental change in Dotty leads to a few incompatibilities:
 - The Scala 3 compiler can infer a different type than the one inferred by the Scala 2 compiler
 - The Scala 3 compiler can diagnose a type-checking error where the Scala 2 compiler does not
 
-> #### From Scala 2 to Scala 3 type inference and implicit resolution
+> #### From Scala 2 to Scala 3 Typer and Implicit resolver
 > 
 > Given the complexity of the type inference and implicit resolution algorithms it is hard to predict the incompatibilities.
 > 
