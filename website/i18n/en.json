@@ -20,6 +20,9 @@
       "get-started": {
         "title": "Introduction"
       },
+      "incompat-3.1": {
+        "title": "Dotty 3.1-migration Mode"
+      },
       "incompatibility-table": {
         "title": "Incompatibility Table"
       },
