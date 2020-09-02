@@ -5,12 +5,12 @@ title: Incompatibility Table
 
 We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0.
 Migrating a codebase involves finding and fixing all the incompatibilities of the source code.
-On rare occasions we can also have runtime incompatibilities, that compile in Scala 3.0 but results in a different runtime behavior.
+On rare occasions we can also have runtime incompatibilities, that compile in Scala 3.0 but result in a different runtime behavior.
 
 In this page we propose a classification and status of the known incompatibilities.
 The status of an incompatibility is comprised of:
  - Whether the Scala 2.13 compiler produces a deprecation or feature warning on it.
- - The existence of a [Dotty rewrite](dotty-rewrites.md) rule for it.
+ - The existence of a [Dotty migration](dotty-rewrites.md) rule for it.
  - The existence of a Scalafix rule that can fix it.
 
 > #### Scala 2.13 deprecations and feature warnings

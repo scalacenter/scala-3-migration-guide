@@ -100,7 +100,7 @@ const Compatibility = () => (
         content:
           'Scala 3 has been carefully designed to improve the backward and forward compatibility of the Scala programming language.\n\n' +
           `In the [Compatibility Reference](${docUrl('compatibility.html')}) ` +
-          'you will learn about the compatibility between Scala 2.13 and Scala 3.0 in the context of migration.',
+          'you will learn about the compatibility between Scala 2.13 and Scala 3.0 in the context of the migration.',
         image: `${imgUrl('puzzle-primary.svg')}`,
         imageAlt: 'Icon made by Nikita Kozin from the Noun Project',
         imageAlign: 'left',
@@ -115,7 +115,7 @@ const MigrationMode = () => (
     {[
       {
         content:
-          'The Dotty compiler is, in itself, a migration tool that can assists you while doing the migration.\n\n ' +
+          'The Dotty compiler is, in itself, a migration tool that can assist you while doing the migration.\n\n ' +
           'No installation required, everything is in the compiler. ' + `Discover the [Dotty Migration Mode](${docUrl('dotty-rewrites.html')}).`,
         title: `[Dotty Migration Mode](${docUrl('dotty-rewrites.html')})`,
         image: `${imgUrl('tools-primary.svg')}`,
@@ -131,11 +131,11 @@ const Metaprogramming = () => (
     {[
       {
         content:
-          'Scala 3 metaprogramming features are safer, more robust and much more stable than Scala 2 macro mechanisms. ' +
+          'Scala 3 metaprogramming features are safer, more robust and much more stable than the Scala 2 macro mechanisms. ' +
           'Existing macro libraries will turn out to be much more simple. ' +
-          'But it comes at the price of rewritting them from the ground up.\n\n' +
-          `In the [Metaprogramming](${docUrl('macros.html')}) section, ` + 
-          'you will find helpful content to help you port your metaprogramming library.',
+          'But it comes at the price of re-implementing the macro methods from the ground up.\n\n' +
+          `In the [Migrating Macros](${docUrl('macros.html')}) section, ` + 
+          'you will find helpful content to port your macros code to Scala 3.',
         title: `[Migrating Macros](${docUrl('macros.html')})`,
         image: `${imgUrl('magnifying-primary.svg')}`,
         imageAlt: 'Icon made by Eucalyp from the Noun Project.',
