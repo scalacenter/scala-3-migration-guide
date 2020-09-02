@@ -1,5 +1,5 @@
 addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.2")
-addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.5")
+addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.6")
 
 ThisBuild / libraryDependencies ++= Seq(
   "org.apache.commons" % "commons-io" % "1.3.2",
