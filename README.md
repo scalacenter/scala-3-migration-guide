@@ -11,9 +11,9 @@ All information you may want to know before starting the migration of your codeb
 ## Content
 
 This repository contains:
- - [`incompat30/`](incomapt30/): A corpus of incompatibilities between Scala 2.13 and Scala 3.0 with proposed solution. It also contains the tests of the Dotty migration rewrites for 3.0.
- - [`incompat31/`](incompat31/): The tests of the Dotty migration rewrites that are already implemented for 3.1.
- - [`docs/`](doc/): The documentation that is published to the [website](https://scalacenter.github.io/scala-3-migration-guide/)
+ - [`incompat-3.0/`](incompat-3.0/): A corpus of incompatibilities between Scala 2.13 and Scala 3.0 with proposed solution. It also contains the tests of the Dotty migration rewrites for 3.0.
+ - [`incompat-3.1/`](incompat-3.1/): The tests of the Dotty migration rewrites that are already implemented for 3.1.
+ - [`docs/`](docs/): The documentation that is published to the [website](https://scalacenter.github.io/scala-3-migration-guide/)
  - [`website/`](website/): The website skeleton powered by [Docusaurus](https://docusaurus.io/en/).
 
 ## Additional Resources
