@@ -16,7 +16,20 @@ val scala213SourceDir = settingKey[File]("Directory containing the Scala 2.13 so
 val scala30SourceDir = settingKey[File]("Directory containing the Scala 3.0 sources")
 val scala31SourceDir = settingKey[File]("Directory containing the Scala 3.1 sources")
 val dottyRewrite = settingKey[Boolean]("Does this incompatibility have a Dotty rewrite?")
+val scalafixRewrite = settingKey[Boolean]("Does this incompatibility have a Scalafix rewrite?")
 val rewriteDir = settingKey[File]("Directory where the sources are rewritten by either Dotty or Scalafix")
+
+// scalafix configuration
+inThisBuild(
+  Seq(
+    scalaVersion := scala213,
+    scalafixDependencies ++= Seq(
+      "com.sandinh" %% "scala-rewrites" % "0.1.10-sd",
+      "org.scala-lang" %% "scala-rewrites" % "0.1.2"
+    ),
+    scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value)
+  )
+)
 
 /*
   List of all incompatibilities between Scala 2.13 and Scala 3.0
@@ -26,7 +39,7 @@ val rewriteDir = settingKey[File]("Directory where the sources are rewritten by 
     - `++2.13.3; <incompat> / test` to cross-compile the proposed solution and validate the scalafix rule if it has one
   where <incompat> can be a single incompatibility or `incompat30` for all incompatibilities
 */
-lazy val incompat30 = (project in file("incompat-3.0"))
+lazy val incompat30 = project.in(file("incompat-3.0"))
   .configs(CompileBackward)
   .aggregate(dotty30MigrationRewrites: _*)
   .aggregate(typeInferIncompats: _*)
@@ -69,6 +82,7 @@ lazy val keywords =
 lazy val lambdaParams = 
   project.in(file("incompat-3.0/lambda-params"))
     .settings(dotty30MigrationRewriteSettings)
+    .settings(scalafixRewrite := true)
 
 lazy val symbolLiterals =
   project.in(file("incompat-3.0/symbol-literals"))
@@ -85,10 +99,12 @@ lazy val doWhile =
 lazy val procedureSyntax =
   project.in(file("incompat-3.0/procedure-syntax"))
     .settings(dotty30MigrationRewriteSettings)
+    .settings(scalafixRewrite := true)
 
 lazy val autoApplication =
   project.in(file("incompat-3.0/auto-application"))
     .settings(dotty30MigrationRewriteSettings)
+    .settings(scalafixRewrite := true)
 
 lazy val inheritanceShadowing =
   project.in(file("incompat-3.0/inheritance-shadowing"))
@@ -97,6 +113,8 @@ lazy val inheritanceShadowing =
 lazy val valueEtaExpansion =
   project.in(file("incompat-3.0/value-eta-expansion"))
     .settings(dotty30MigrationRewriteSettings)
+    // does not add enclosing parens like dotc does
+    // .settings(scalafixRewrite := true)
 
 /*
   Type inference incompatibilities
@@ -114,16 +132,16 @@ lazy val typeInferIncompats = Seq[ProjectReference](
   typeInfer10
 ) 
 
-lazy val typeInfer1 = (project in file("incompat-3.0/type-infer-1")).settings(incompat30Settings)
-lazy val typeInfer2 = (project in file("incompat-3.0/type-infer-2")).settings(incompat30Settings)
-lazy val typeInfer3 = (project in file("incompat-3.0/type-infer-3")).settings(incompat30Settings)
-lazy val typeInfer4 = (project in file("incompat-3.0/type-infer-4")).settings(incompat30Settings)
-lazy val typeInfer5 = (project in file("incompat-3.0/type-infer-5")).settings(incompat30Settings)
-lazy val typeInfer6 = (project in file("incompat-3.0/type-infer-6")).settings(incompat30Settings)
-lazy val typeInfer7 = (project in file("incompat-3.0/type-infer-7")).settings(incompat30Settings)
-lazy val typeInfer8 = (project in file("incompat-3.0/type-infer-8")).settings(incompat30Settings)
-lazy val typeInfer9 = (project in file("incompat-3.0/type-infer-9")).settings(incompat30Settings)
-lazy val typeInfer10 = (project in file("incompat-3.0/type-infer-10")).settings(incompat30Settings)
+lazy val typeInfer1 = project.in(file("incompat-3.0/type-infer-1")).settings(incompat30Settings)
+lazy val typeInfer2 = project.in(file("incompat-3.0/type-infer-2")).settings(incompat30Settings)
+lazy val typeInfer3 = project.in(file("incompat-3.0/type-infer-3")).settings(incompat30Settings)
+lazy val typeInfer4 = project.in(file("incompat-3.0/type-infer-4")).settings(incompat30Settings)
+lazy val typeInfer5 = project.in(file("incompat-3.0/type-infer-5")).settings(incompat30Settings)
+lazy val typeInfer6 = project.in(file("incompat-3.0/type-infer-6")).settings(incompat30Settings)
+lazy val typeInfer7 = project.in(file("incompat-3.0/type-infer-7")).settings(incompat30Settings)
+lazy val typeInfer8 = project.in(file("incompat-3.0/type-infer-8")).settings(incompat30Settings)
+lazy val typeInfer9 = project.in(file("incompat-3.0/type-infer-9")).settings(incompat30Settings)
+lazy val typeInfer10 = project.in(file("incompat-3.0/type-infer-10")).settings(incompat30Settings)
 
 /*
   Other incompatibilities
@@ -151,37 +169,42 @@ lazy val otherIncompats = Seq[ProjectReference](
 )
 
 // Syntactic incompatibilities
-lazy val anonymousTypeParam = (project in file ("incompat-3.0/anonymous-type-param")).settings(incompat30Settings)
-lazy val indentation1 = (project in file ("incompat-3.0/indentation-1")).settings(incompat30Settings)
-lazy val indentation2 = (project in file ("incompat-3.0/indentation-2")).settings(incompat30Settings)
-lazy val restrictedOperator = (project in file ("incompat-3.0/restricted-operator")).settings(incompat30Settings)
-lazy val typeParamIdentifier = (project in file("incompat-3.0/type-param-identifier")).settings(incompat30Settings)
+lazy val anonymousTypeParam = project.in(file("incompat-3.0/anonymous-type-param")).settings(incompat30Settings)
+lazy val indentation1 = project.in(file("incompat-3.0/indentation/indentation-1")).settings(incompat30Settings)
+lazy val indentation2 = project.in(file("incompat-3.0/indentation/indentation-2")).settings(incompat30Settings)
+lazy val restrictedOperator = project.in(file("incompat-3.0/restricted-operator")).settings(incompat30Settings)
+lazy val typeParamIdentifier = project.in(file("incompat-3.0/type-param-identifier")).settings(incompat30Settings)
 
 // Changed or dropped features
-lazy val abstractOverride = (project in file("incompat-3.0/abstract-override")).settings(incompat30Settings)
-lazy val any2stringaddConversion = (project in file("incompat-3.0/any2stringadd-conversion")).settings(incompat30Settings)
-lazy val byNameParamTypeInfer = (project in file ("incompat-3.0/by-name-param-type-infer")).settings(incompat30Settings)
-lazy val defaultParamVariance = (project in file("incompat-3.0/default-param-variance")).settings(incompat30Settings)
-lazy val earlyInitializer = (project in file("incompat-3.0/early-initializer")).settings(incompat30Settings)
-lazy val existentialType = (project in file ("incompat-3.0/existential-type")).settings(incompat30Settings)
-lazy val explicitCallToUnapply = (project in file("incompat-3.0/explicit-call-to-unapply")).settings(incompat30Settings)
-lazy val javaLangEnum = (project in file("incompat-3.0/java-lang-enum")).settings(incompat30Settings)
-lazy val reflectiveCall = (project in file("incompat-3.0/reflective-call")).settings(incompat30Settings)
+lazy val abstractOverride = project.in(file("incompat-3.0/abstract-override")).settings(incompat30Settings)
+lazy val any2stringaddConversion = project.in(file("incompat-3.0/any2stringadd-conversion")).settings(incompat30Settings)
+lazy val byNameParamTypeInfer = project.in(file("incompat-3.0/by-name-param-type-infer")).settings(incompat30Settings)
+lazy val defaultParamVariance = project.in(file("incompat-3.0/default-param-variance")).settings(incompat30Settings)
+lazy val earlyInitializer = project.in(file("incompat-3.0/early-initializer")).settings(incompat30Settings)
+lazy val existentialType = project.in(file("incompat-3.0/existential-type")).settings(incompat30Settings)
+lazy val explicitCallToUnapply = project.in(file("incompat-3.0/explicit-call-to-unapply")).settings(incompat30Settings)
+lazy val javaLangEnum = project.in(file("incompat-3.0/java-lang-enum")).settings(incompat30Settings)
+lazy val reflectiveCall = project.in(file("incompat-3.0/reflective-call")).settings(incompat30Settings)
 
 // Contextual abstraction incompatibilities
 lazy val ambiguousConversion =
-  (project in file("incompat-3.0/ambiguous-conversion"))
+  project.in(file("incompat-3.0/ambiguous-conversion"))
     .settings(incompat30Settings)
     .settings(scalacOptions += "-language:implicitConversions")
-lazy val typeOfImplicitDef = (project in file("incompat-3.0/type-of-implicit-def")).settings(incompat30Settings)
-lazy val accessModifier = (project in file ("incompat-3.0/access-modifier")).settings(incompat30Settings)
-lazy val viewBound = (project in file("incompat-3.0/view-bound")).settings(incompat30Settings)
+
+lazy val typeOfImplicitDef = 
+  project.in(file("incompat-3.0/type-of-implicit-def"))
+    .settings(incompat30Settings)
+    .settings(scalafixRewrite := true)
+
+lazy val accessModifier = project.in(file("incompat-3.0/access-modifier")).settings(incompat30Settings)
+lazy val viewBound = project.in(file("incompat-3.0/view-bound")).settings(scalacOptions += "-deprecation").settings(incompat30Settings)
 
 // This one is a runtime incompatibility
 // It compiles but the runtime behavior is different
 // In this case Dotty throws an `AssertionError`
 lazy val implicitView =
-  (project in file("incompat-3.0/implicit-view"))
+  project.in(file("incompat-3.0/implicit-view"))
     .settings(runtimeIncompat30Settings)
     .settings(scalacOptions += "-language:implicitConversions")
 
@@ -231,9 +254,9 @@ lazy val wildcard =
   project.in(file("incompat-3.1/wildcard"))
     .settings(dotty31MigrationRewriteSettings)
 
-
 lazy val incompat30Settings = 
   inConfig(CompileBackward)(Defaults.compileSettings) ++
+  inConfig(CompileBackward)(ScalafixPlugin.autoImport.scalafixConfigSettings(CompileBackward)) ++
   Seq(
     scalaVersion := dotty,
     crossScalaVersions := List(scala213, dotty),
@@ -241,19 +264,31 @@ lazy val incompat30Settings =
     scala213SourceDir := baseDirectory.value / s"src/main/scala-2.13",
     scala30SourceDir := baseDirectory.value / s"src/main/scala",  
     dottyRewrite := false,
+    scalafixRewrite := false,
     rewriteDir := target.value / s"src-managed/main/scala",
 
     Compile / unmanagedSourceDirectories := Seq(scala30SourceDir.value),
     // we copy the scala213 sources into the target folder
     // because it might be rewritten by dotc or scalafix
-    CompileBackward / sourceGenerators += 
-      Def.task { copySources(scala213SourceDir.value, rewriteDir.value) },
+    CompileBackward / sourceGenerators += Def.task {
+      copySources(scala213SourceDir.value, rewriteDir.value)
+    },
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
+    
     CompileBackward / scalacOptions ++= {
       if (isDotty.value && dottyRewrite.value)
-        Seq(s"-source:3.0-migration", "-rewrite")
-      else Seq.empty
+        Seq("-source:3.0-migration", "-rewrite")
+      else Seq()
     },
+
+    // scalafix configuration
+    semanticdbVersion := scalafixSemanticdb.revision,
+    semanticdbEnabled := !isDotty.value && scalafixRewrite.value,
+    CompileBackward / scalafixConfig := Some(baseDirectory.value / ".scalafix.conf"),
+    CompileBackward / scalafixOnCompile := !isDotty.value && scalafixRewrite.value,
+    CompileBackward / scalafix / unmanagedSources := (CompileBackward / managedSources).value, // hack to force Scalafix on managedSources
+    CompileBackward / scalafixCaching := false,
+
     Test / test := {
       val logger = streams.value.log
       val _ = (Compile / compile).value
@@ -269,6 +304,15 @@ lazy val incompat30Settings =
         )
       else if (isDotty.value && !dottyRewrite.value)
         Assert.incompatibility(name.value, scalaVersion.value, compileBwd, logger)
+      else if (scalafixRewrite.value)
+        Assert.scalafixRewrite(
+          name.value,
+          scalaVersion.value,
+          compileBwd,
+          rewriteDir.value,
+          scala30SourceDir.value,
+          logger
+        )
       else
         Assert.compilation(name.value, scalaVersion.value, compileBwd, logger)
     }

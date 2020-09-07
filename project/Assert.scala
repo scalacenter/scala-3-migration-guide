@@ -19,6 +19,23 @@ object Assert {
     }
   }
 
+  def scalafixRewrite(
+    name: String,
+    scalaVersion: String,
+    compileResult: Result[CompileAnalysis],
+    rewriteDir: File,
+    dottySourceDir: File,
+    logger: Logger
+  ): Unit = {
+    compileResult match {
+      case Inc(_) =>
+        throw new MessageOnlyException(s"$name does not compile with Scala version $scalaVersion.")
+      case Value(_) =>
+        FileChecker(logger).check(rewriteDir, dottySourceDir)
+        logger.info(s"$name is rewritten successfully by Scalafix")
+    }
+  }
+
   def incompatibility(
     name: String,
     scalaVersion: String,

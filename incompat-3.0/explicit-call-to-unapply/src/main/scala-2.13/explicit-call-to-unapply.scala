@@ -1,7 +1,7 @@
-case class Foo(a: String, b: Int)
+case class Location(lat: Int, lon: Int)
 
-object Foo {
-  def tuple(foo: Foo): (String, Int) = {
-    Foo.unapply(foo).get
+object Location {
+  def tuple(location: Location): (Int, Int) = {
+    Location.unapply(location).get
   }
 }

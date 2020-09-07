@@ -4,8 +4,14 @@
       "get-started",
       "compatibility",
       "dotty-rewrites",
-      "incompatibility-table",
       "macros"
+    ],
+    "Incompatibilities": [
+      "incompatibilities/table",
+      "incompatibilities/syntactic-changes",
+      "incompatibilities/dropped-features",
+      "incompatibilities/contextual-abstractions",
+      "incompatibilities/other-changed-features"
     ]
   }
 }

@@ -11,9 +11,6 @@
       "contributing": {
         "title": "Contributing"
       },
-      "cross-build": {
-        "title": "Cross-building"
-      },
       "dotty-rewrites": {
         "title": "Dotty Migration Mode"
       },
@@ -23,7 +20,19 @@
       "incompat-3.1": {
         "title": "Dotty 3.1-migration Mode"
       },
-      "incompatibility-table": {
+      "incompatibilities/contextual-abstractions": {
+        "title": "Contextual Abstractions"
+      },
+      "incompatibilities/dropped-features": {
+        "title": "Dropped Features"
+      },
+      "incompatibilities/other-changed-features": {
+        "title": "Other Changed Features"
+      },
+      "incompatibilities/syntactic-changes": {
+        "title": "Syntactic Changes"
+      },
+      "incompatibilities/table": {
         "title": "Incompatibility Table"
       },
       "macros": {
@@ -39,7 +48,8 @@
       "GitHub": "GitHub"
     },
     "categories": {
-      "General": "General"
+      "General": "General",
+      "Incompatibilities": "Incompatibilities"
     }
   },
   "pages-strings": {

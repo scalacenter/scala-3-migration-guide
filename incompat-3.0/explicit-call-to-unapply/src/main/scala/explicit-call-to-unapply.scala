@@ -1,10 +1,10 @@
-case class Foo(a: String, b: Int)
+case class Location(lat: Int, lon: Int)
 
-object Foo {
-  def tuple(foo: Foo): (String, Int) = {
+object Location {
+  def tuple(location: Location): (Int, Int) = {
     locally {
-      val Foo(a, b) = foo
-      (a, b)
+      val Location(lat, lon) = location
+      (lat, lon)
     }
   }
 }

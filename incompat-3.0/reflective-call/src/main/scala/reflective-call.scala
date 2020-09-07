@@ -1,5 +1,7 @@
+import scala.language.reflectiveCalls
+
 object Foo {
-  object foo {
+  val foo: { def bar: Unit } = new {
     def bar: Unit = ???
   }
 

@@ -68,7 +68,7 @@ body {
   font-family: "Lobster";
 }
 
-article a {
+article a:hover {
   text-decoration: underline;
 }
 
@@ -81,4 +81,8 @@ blockquote h4,
 blockquote p,
 blockquote li {
   color: #19524f
+}
+
+th, td {
+  text-align: center; 
 }

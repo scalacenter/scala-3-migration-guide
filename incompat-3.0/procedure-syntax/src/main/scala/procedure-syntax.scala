@@ -1,9 +1,15 @@
-trait Foo {
-  def print(): Unit 
-}
+// Here Dotty adds useless blank character
+// trait Foo {
+//   def print()
+// }
 
-object Bar {
+class Bar(a: String) {
+  def this() = {
+    this("bar")
+    print()
+  }
+
   def print(): Unit = {
-    println("bar")
+    println(a)
   }
 }

@@ -1,19 +1,35 @@
-This incompatibility is inspired by the [dotty-staging-fork](https://github.com/dotty-staging/scalacheck) of [scalacheck](https://github.com/typelevel/scalacheck) from this [original commit](https://github.com/dotty-staging/scalacheck/commit/dc37c607cd9715c4e0ddc676314c6784cbf2beb5).
+## Ambiguous Conversion On `A` And `=> A`
 
-## Error message
+This incompatibility is inspired by this [commit](https://github.com/dotty-staging/scalacheck/commit/dc37c607cd9715c4e0ddc676314c6784cbf2beb5) in the [dotty-staging-fork](https://github.com/dotty-staging/scalacheck) of [scalacheck](https://github.com/typelevel/scalacheck).
 
-As of `0.25.0-RC2` the error message is:
+In Scala 2 the implicit conversion on `Boolean` wins over the implicit conversion on `=> Boolean`.
+It is not the case in Scala 3, causing incompatibilities in the form of ambiguous conversions.
+
+```scala
+trait Foo {
+  def foo(): Unit 
+}
+
+implicit def boolFoo(bool: Boolean): Foo = ???
+implicit def lazyBoolFoo(lazyBool:  => Boolean): Foo = ???
+
+true.foo()
+```
+
+In this example the Scala 2 compiler chooses the `boolFoo` conversion whereas the Scala 3 compiler refuses to compile.
 
 ```
-[error] -- Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/access-modifier/src/main/scala-2.13/access-modifier.scala:4:19
-[error] 9 |  true.foo()
-[error]   |  ^^^^
-[error]   |Found:    (true : Boolean)
-[error]   |Required: ?{ foo: ? }
-[error]   |Note that implicit extension methods cannot be applied because they are ambiguous;
-[error]   |both method boolFoo in object Foo and method lazyBoolFoo in object Foo provide an extension method `foo` on (true : Boolean)
+-- Error: src/main/scala/ambiguous-conversion.scala:4:19
+9 |  true.foo()
+  |  ^^^^
+  |Found:    (true : Boolean)
+  |Required: ?{ foo: ? }
+  |Note that implicit extension methods cannot be applied because they are ambiguous;
+  |both method boolFoo in object Foo and method lazyBoolFoo in object Foo provide an extension method `foo` on (true : Boolean)
 ```
 
-## Explanation
+A temporary solution is to write the conversion explicitly.
 
-In Scala 2 the implicit conversion from `Boolean` wins over the implicit conversion from `=> Boolean`. It is not the case in Scala 3.
+```scala
+boolFoo(true).foo()
+```

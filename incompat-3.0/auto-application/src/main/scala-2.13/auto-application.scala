@@ -1,4 +1,4 @@
 trait Chunk {
-  def bytes(): Array[Byte]
+  def bytes(): Seq[Byte]
   def toSeq: Seq[Byte] = bytes
 }
