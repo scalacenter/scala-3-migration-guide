@@ -1,16 +1,26 @@
+## `any2stringadd` conversion
+
 The implicit `Predef.any2stringadd` conversion is deprecated since `2.13` and dropped in Scala 3.
 
-As of `0.25.0-RC2` the error message is
+#### Scala 2.13 deprecation
+
+Given this piece of code:
+
+```scala
+val str = new AnyRef + "foo"
 ```
-[error] -- [E008] Not Found Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/any2stringadd-conversion/src/main/scala-2.13/any2stringadd-conversion.scala:2:23 
-[error] 2 |  val str = new AnyRef + "foo"
-[error]   |            ^^^^^^^^^^^^
-[error]   |value + is not a member of Object, but could be made available as an extension method.
-[error]   |
-[error]   |One of the following imports might make progress towards fixing the problem:
-[error]   |
-[error]   |  import math.Fractional.Implicits.infixFractionalOps
-[error]   |  import math.Integral.Implicits.infixIntegralOps
-[error]   |  import math.Numeric.Implicits.infixNumericOps
-[error]   |
+
+With the `-deprecation` flag, the Scala 2.13 compiler produces the following warning.
+
+```
+src/main/scala/any2stringadd-conversion.scala:2:13: method any2stringadd in object Predef is deprecated (since 2.13.0): Implicit injection of + is deprecated. Convert to String to call +
+  val str = new AnyRef + "foo"
+```
+
+#### Scalafix rule
+
+The [`scala/scala-rewrites`](https://index.scala-lang.org/scala/scala-rewrites/scala-rewrites/0.1.2?target=_2.13) rule named `fix.scala213.Any2StringAdd` can fix this issue by calling `String.valueOf` explicitly. It rewrites the example code into:
+
+```scala
+val str = String.valueOf(new AnyRef) + "foo"
 ```
