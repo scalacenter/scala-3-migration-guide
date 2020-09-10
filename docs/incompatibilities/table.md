@@ -80,6 +80,7 @@ Some proven features are simplified or restricted to make the language easier an
 |[`java.lang.Enum`](other-changed-features.md#javalangenum)|||||
 |[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
 |[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
+|[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 
 
 ## Implicit Resolution
