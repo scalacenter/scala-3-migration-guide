@@ -1,0 +1,194 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Incompatibility Table · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Incompatibility Table · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/get-started.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Incompatibilities</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/get-started.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros.html">Macros Migration</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/incompatibilities/table.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Incompatibility Table</h1></header><article><div><span><p>We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0.
+Migrating a codebase involves finding and fixing all the incompatibilities of the source code.
+On rare occasions we can also have runtime incompatibilities, that compile in Scala 3.0 but result in a different runtime behavior.</p>
+<p>In this page we propose a classification and status of the known incompatibilities.
+The status of an incompatibility is comprised of:</p>
+<ul>
+<li>Whether the Scala 2.13 compiler produces a deprecation or feature warning on it</li>
+<li>The existence of a <a href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty migration</a> rule for it</li>
+<li>The existence of a Scalafix rule that can fix it</li>
+</ul>
+<blockquote>
+<h4><a class="anchor" aria-hidden="true" id="scala-213-deprecations-and-feature-warnings"></a><a href="#scala-213-deprecations-and-feature-warnings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala 2.13 deprecations and feature warnings</h4>
+<p>The below tables show which incompatibilitiy can emit a warning when compiled in Scala 2.13:</p>
+<ul>
+<li>Add the <code>-deprecation</code> compiler option to locate the usage of deprecated APIs</li>
+<li>For locating the feature warnings, you can look for the feature specific <code>import</code> and/or add the <code>-feature</code> compiler option.</li>
+</ul>
+</blockquote>
+<blockquote>
+<h4><a class="anchor" aria-hidden="true" id="dotty-migration-and-scalafix-rewrites"></a><a href="#dotty-migration-and-scalafix-rewrites" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dotty migration and Scalafix rewrites</h4>
+<p>The Dotty migration mode is fully integrated in the Dotty compiler.
+On the contrary, Scalafix is a tool that must be installed and manually configured in your project.
+However Scalafix has its own advantages:</p>
+<ul>
+<li>It runs on Scala 2.13.</li>
+<li>It is composed of individual rules that you can apply one at a time.</li>
+<li>It is easily extensible by adding custom rules.</li>
+</ul>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="syntactic-changes"></a><a href="#syntactic-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntactic Changes</h2>
+<p>Some of the old Scala syntax is not supported anymore.</p>
+<table>
+<thead>
+<tr><th></th><th>Scala 2.13</th><th>Dotty Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#restricted-keywords">Restricted keywords</a></td><td></td><td>✅</td><td></td><td>The Dotty rule does not handle all cases</td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#procedure-syntax">Procedure syntax</a></td><td>Deprecation</td><td>✅</td><td>✅</td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#parentheses-around-lambda-parameter">Parentheses around lambda parameter</a></td><td></td><td>✅</td><td>✅</td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#open-brace-indentation-for-passing-an-argument">Open brace indentation for passing an argument</a></td><td></td><td>✅</td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#wrong-indentation">Wrong indentation</a></td><td></td><td></td><td></td><td>Can be handled by a code formatting tool</td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#--as-a-type-parameter"><code>_</code> as a type parameter</a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#-and---as-type-parameters"><code>+</code> and <code>-</code> as type parameters</a></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="dropped-features"></a><a href="#dropped-features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dropped Features</h2>
+<p>Some features are dropped to simplify the language.</p>
+<table>
+<thead>
+<tr><th></th><th>Scala 2.13</th><th>Dotty Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#symbol-literals">Symbol literals</a></td><td>Deprecation</td><td>✅</td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#do-while-construct"><code>do</code>-<code>while</code> construct</a></td><td></td><td>✅</td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#auto-application">Auto-application</a></td><td>Deprecation</td><td>✅</td><td>✅</td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#value-eta-expansion">Value eta-expansion</a></td><td>Deprecation</td><td>✅</td><td>✅</td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#any2stringadd-conversion"><code>any2stringadd</code> conversion</a></td><td>Deprecation</td><td></td><td>✅</td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#early-initializer">Early initializer</a></td><td>Deprecation</td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#existential-type">Existential type</a></td><td>Feature warning</td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="contextual-abstractions"></a><a href="#contextual-abstractions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contextual Abstractions</h2>
+<p>The redesign of <a href="https://dotty.epfl.ch/docs/reference/contextual/motivation.html">contextual abstractions</a> in Scala introduces the following incompatibilities:</p>
+<table>
+<thead>
+<tr><th></th><th>Scala 2.13</th><th>Dotty Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#type-of-implicit-definition">Type of implicit def</a></td><td></td><td></td><td>✅</td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#implicit-views">Implicit views</a></td><td></td><td></td><td></td><td>Possible runtime incompatibility</td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#view-bounds">View bounds</a></td><td>Deprecation</td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#ambiguous-conversion-on-a-and--a">Ambiguous conversion on <code>A</code> and <code>=&gt; A</code></a></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="other-changed-features"></a><a href="#other-changed-features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other Changed Features</h2>
+<p>Some proven features are simplified or restricted to make the language easier and safer to use.</p>
+<table>
+<thead>
+<tr><th></th><th>Scala 2.13</th><th>Dotty Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#inheritance-shadowing">Inheritance shadowing</a></td><td></td><td>✅</td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#abstract-override">Abstract override</a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#exprtype-as-value-type"><code>ExprType</code> as value type</a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#variance-of-default-parameters">Variance of default parameters</a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#explicit-call-to-unapply">Explicit call to unapply</a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#javalangenum"><code>java.lang.Enum</code></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#non-private-constructor-in-private-class">Non-private constructor in private class</a></td><td></td><td>warning</td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#reflective-call">Reflective call</a></td><td></td><td></td><td></td><td>Type inference problem</td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#wildcard-type-argument">Wildcard type argument</a></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="implicit-resolution"></a><a href="#implicit-resolution" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Implicit Resolution</h2>
+<p>The implicit resolution rules have been cleaned up to make them more useful and less surprising.</p>
+<p>Since the rules are different, Scala 3.0 can fail at resolving some implicit parameters of existing Scala 2 code.
+Even worse, it can resolve a different value than the one resolved by Scala 2.13, which would silently change the behavior of the program.
+However we believe these cases are rare or inexistent.</p>
+<h2><a class="anchor" aria-hidden="true" id="type-inference"></a><a href="#type-inference" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Inference</h2>
+<p>The Scala 3 compiler uses a new type inference algorithm that is better than the old one.</p>
+<p>This fundamental change in Dotty leads to a few incompatibilities:</p>
+<ul>
+<li>The Scala 3 compiler can infer a different type than the one inferred by the Scala 2 compiler</li>
+<li>The Scala 3 compiler can diagnose a type-checking error where the Scala 2 compiler does not</li>
+</ul>
+<blockquote>
+<h4><a class="anchor" aria-hidden="true" id="from-scala-2-to-scala-3-typer-and-implicit-resolver"></a><a href="#from-scala-2-to-scala-3-typer-and-implicit-resolver" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>From Scala 2 to Scala 3 Typer and Implicit resolver</h4>
+<p>Given the complexity of the type inference and implicit resolution algorithms it is hard to predict the incompatibilities.</p>
+<p>The Scala Center is prototyping a tool that can detect and fix the type inference and implicit resolution incompatibilities.
+While being experimental, this project has the potential to migrate large codebases and to identify new patterns of incompatibilities.</p>
+<p>You can check the roadmap and the progress on the <a href="https://contributors.scala-lang.org/t/the-scala-2-to-scala-3-typer-and-implicit-resolver/4446">Scala contributor forum</a>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="macros"></a><a href="#macros" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Macros</h2>
+<p>The Scala 3 compiler is not able to compile or consume a Scala 2 macro method.
+Under those circumstances it is necessary to re-implement the Scala 2 macro implementations by using the new Scala 3 metaprogramming features.</p>
+<p>You can redirect to the <a href="/scala-3-migration-guide/docs/macros.html">Macros Migration</a> page to learn how to do so.</p>
+<p>Some of the most used metaprogramming libraries have already been migrated to Scala 3.
+Check the list of the <a href="/scala-3-migration-guide/docs/macros.html#migration-status">Scala 3 metaprogramming libraries</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/macros.html"><span class="arrow-prev">← </span><span>Macros Migration</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html"><span>Syntactic Changes</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#syntactic-changes">Syntactic Changes</a></li><li><a href="#dropped-features">Dropped Features</a></li><li><a href="#contextual-abstractions">Contextual Abstractions</a></li><li><a href="#other-changed-features">Other Changed Features</a></li><li><a href="#implicit-resolution">Implicit Resolution</a></li><li><a href="#type-inference">Type Inference</a></li><li><a href="#macros">Macros</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/get-started.html">Get started</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2020 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

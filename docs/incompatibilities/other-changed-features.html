@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Other Changed Features · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Inheritance Shadowing"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Other Changed Features · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="## Inheritance Shadowing"/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/get-started.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Incompatibilities</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/get-started.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros.html">Macros Migration</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/incompatibilities/other-changed-features.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Other Changed Features</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="inheritance-shadowing"></a><a href="#inheritance-shadowing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inheritance Shadowing</h2>
+<p>An inherited member, from a parent trait or class, can shadow an identifier defined in a outer scope.
+That pattern is called inheritance shadowing.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">B</span> </span>{
+  <span class="hljs-keyword">val</span> x = <span class="hljs-number">1</span>
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>{
+    println(x)
+  }
+}
+</code></pre>
+<p>For instance, in this preceding piece of code, the <code>x</code> term in C can refer to the <code>x</code> member defined in the outer class <code>B</code> or it can refer to a <code>x</code> member of the parent class <code>A</code>.
+You cannot know until you go to the definition of <code>A</code>.</p>
+<p>This is known for being error prone.</p>
+<p>In Scala 3, if the parent class <code>A</code> does actually have a member <code>x</code>, the compiler will require disambiguation.</p>
+<p>It prevents the following piece of code from compiling.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>{
+  <span class="hljs-keyword">val</span> x = <span class="hljs-number">2</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">B</span> </span>{
+  <span class="hljs-keyword">val</span> x = <span class="hljs-number">1</span>
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>{
+    println(x)
+  }
+}
+</code></pre>
+<pre><code class="hljs">-- [E049] Reference Error: src/main/scala/inheritance-shadowing.scala:<span class="hljs-number">9</span>:<span class="hljs-number">14</span> 
+<span class="hljs-number">9</span> |      println(x)
+  |              ^
+  |              Reference to x <span class="hljs-keyword">is</span> ambiguous,
+  |              it <span class="hljs-keyword">is</span> both defined <span class="hljs-keyword">in</span> object B
+  |              <span class="hljs-keyword">and</span> inherited subsequently <span class="hljs-keyword">in</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">C</span>
+</code></pre>
+<p>To avoid any ambiguity you have to write <code>this.x</code> instead of <code>x</code>.</p>
+<h4><a class="anchor" aria-hidden="true" id="dotty-migration-rule"></a><a href="#dotty-migration-rule" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dotty migration rule</h4>
+<p>The Dotty compiler can automatically disambiguate the code when called with the <code>-source:3.0-migration -rewrite</code> options.</p>
+<p>In this case it replaces <code>println(x)</code> by <code>println(this.x)</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="abstract-override"></a><a href="#abstract-override" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Abstract Override</h2>
+<p>In Scala 3, overriding a concrete def with an abstract def causes subclasses to consider the def abstract, whereas in Scala 2 it was considered as concrete.</p>
+<p>In the following piece of code, the <code>bar</code> method in <code>C</code> is considered concrete by the Scala 2 compiler but abstract by the Scala 3 compiler, causing the following error.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">A</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>(x: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span> = x + <span class="hljs-number">3</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>(x: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span></span>
+</code></pre>
+<pre><code class="hljs">[error] -- Error: src/main/scala/<span class="hljs-keyword">abstract</span>-<span class="hljs-keyword">override</span>.scala:<span class="hljs-number">11</span>:<span class="hljs-number">6</span>
+[error] <span class="hljs-number">11</span> |<span class="hljs-keyword">class</span> <span class="hljs-symbol">C</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">B</span>
+[<span class="hljs-symbol">error</span>]    |      ^
+[<span class="hljs-symbol">error</span>]    |<span class="hljs-symbol">class</span> <span class="hljs-symbol">C</span> <span class="hljs-symbol">needs</span> <span class="hljs-symbol">to</span> <span class="hljs-symbol">be</span> <span class="hljs-symbol">abstract, <span class="hljs-symbol">since</span></span> <span class="hljs-symbol">def</span> <span class="hljs-symbol">bar</span>(<span class="hljs-symbol">x: <span class="hljs-symbol">Int</span></span>): <span class="hljs-symbol">Int</span> <span class="hljs-symbol">is</span> <span class="hljs-symbol">not</span> <span class="hljs-symbol">defined</span>
+</code></pre>
+<p>This behavior was decided in <a href="https://github.com/lampepfl/dotty/issues/4770">Dotty issue #4770</a>.</p>
+<p>An easy fix is simply to remove the abstract def, since in practice it had no effect in Scala 2.</p>
+<h2><a class="anchor" aria-hidden="true" id="exprtype-as-value-type"></a><a href="#exprtype-as-value-type" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>ExprType</code> as value type</h2>
+<p>This incompatibility is inspired by <a href="https://github.com/scalaz/scalaz/commit/59f20aa5b695106b9daeac6c88c0b877d230ddd1">this commit</a> in <a href="https://github.com/scalaz/scalaz">scalaz</a>.</p>
+<p>An <code>ExprType</code> is a type of the form <code>=&gt; T</code> that is used for defining by-name parameters.
+Scala 3 does not allow to use them as type parameters. This decision is explained in <a href="https://github.com/lampepfl/dotty/blob/0f1a23e008148f76fd0a1c2991b991e1dad600e8/compiler/src/dotty/tools/dotc/core/ConstraintHandling.scala#L144-L152">this comment</a> of the Dotty source code.</p>
+<p>For instance, it is now invalid to pass a function of type <code>Int =&gt; (=&gt; Int) =&gt; Int</code> to the <code>uncurried</code> method since it would assign <code>=&gt; Int</code> to the type parameter <code>T2</code>.</p>
+<pre><code class="hljs">-- [E134] <span class="hljs-keyword">Type</span> Mismatch Error: src/main/scala/<span class="hljs-built_in">by</span>-name-param-type-infer.scala:<span class="hljs-number">3</span>:<span class="hljs-number">41</span>
+<span class="hljs-number">3</span> |  <span class="hljs-type">val</span> g: (Int, =&gt; Int) =&gt; Int = <span class="hljs-keyword">Function</span>.uncurried(f)
+  |                                <span class="hljs-type">^^^^^^^^^^^^^^^^^^
+  |None</span> of the overloaded alternatives of method uncurried <span class="hljs-built_in">in</span> object <span class="hljs-keyword">Function</span> <span class="hljs-built_in">with</span> types
+  | <span class="hljs-type">[T1</span>, T2, T3, T4, T5, R]
+  |  <span class="hljs-type">(f</span>: T1 =&gt; T2 =&gt; T3 =&gt; T4 =&gt; T5 =&gt; R): (T1, T2, T3, T4, T5) =&gt; R
+  | <span class="hljs-type">[T1</span>, T2, T3, T4, R](f: T1 =&gt; T2 =&gt; T3 =&gt; T4 =&gt; R): (T1, T2, T3, T4) =&gt; R
+  | <span class="hljs-type">[T1</span>, T2, T3, R](f: T1 =&gt; T2 =&gt; T3 =&gt; R): (T1, T2, T3) =&gt; R
+  | <span class="hljs-type">[T1</span>, T2, R](f: T1 =&gt; T2 =&gt; R): (T1, T2) =&gt; R
+  |<span class="hljs-type">match</span> arguments ((<span class="hljs-keyword">Test</span>.f : Int =&gt; (=&gt; Int) =&gt; Int))
+</code></pre>
+<p>The solution depends on the situation. In the given example, you can either:</p>
+<ul>
+<li>define your own <code>uncurried</code> method with the appropriate signature</li>
+<li>inline the implementation of <code>uncurried</code> locally</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="variance-of-default-parameters"></a><a href="#variance-of-default-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variance Of Default Parameters</h2>
+<p>This incompatibility is inspired by <a href="https://github.com/dotty-staging/geny/commit/61cc4b5dead21b23f664549dfceb5056a2c7e579">this commit</a> in the  <a href="https://github.com/dotty-staging/geny">dotty-staging fork</a> of the <a href="https://github.com/lihaoyi/geny">lihaoyi/geny</a> project.</p>
+<p>In Scala 2, default parameters are not subject to variance checks which is unsound and might cause runtime failures, as demonstrated by this <a href="https://github.com/lampepfl/dotty/blob/10526a7d0aa8910729b6036ee51942e05b71abf6/tests/neg/variances.scala#L1-L20">test</a> in the Dotty repository.</p>
+<p>Scala 3 does not permit this anymore.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Show</span>[-<span class="hljs-type">A</span>] </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span></span>(value: <span class="hljs-type">List</span>[<span class="hljs-type">A</span>] = <span class="hljs-type">List</span>.empty): <span class="hljs-type">String</span>
+}
+</code></pre>
+<pre><code class="hljs">-- Error: src/main/scala/default-param-variance.scala:6:28
+6 |  def show(value: List[A] = List.empty): String
+  |                            ^^^^^^^^^^
+  |contravariant<span class="hljs-built_in"> type </span>A occurs <span class="hljs-keyword">in</span> covariant position <span class="hljs-keyword">in</span><span class="hljs-built_in"> type </span>=&gt; List[A] of method show<span class="hljs-variable">$default</span><span class="hljs-variable">$1</span>
+</code></pre>
+<p>In the given example we can fix the issue by providing a default parameter whose type is invariant: <code>List.empty[Nothing]</code> instead of <code>List.empty[A]</code>.</p>
+<h2><a class="anchor" aria-hidden="true" id="explicit-call-to-unapply"></a><a href="#explicit-call-to-unapply" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Explicit Call To <code>unapply</code></h2>
+<p>In Scala, case classes have an associated extractor method, called <code>unapply</code>, that is generated by the compiler in their companion object.
+The signature of the <code>unapplied</code> method is different between Scala 2 and Scala 3.</p>
+<p>The Scala 3 signature is now option-less (see the new <a href="https://dotty.epfl.ch/docs/reference/changed-features/pattern-matching.html">Pattern Matching reference</a>) which cause incompatibilities when <code>unapplied</code> is called explicitly.</p>
+<p>Note that this problem does not affect user-defined extractors, whose signature stays the same across Scala versions.</p>
+<p>Given the following case class definition:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Location</span>(<span class="hljs-params">lat: <span class="hljs-type">Double</span>, long: <span class="hljs-type">Double</span></span>)</span>
+</code></pre>
+<p>The Scala 2 compiler produces the following <code>unapply</code> method.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Location</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unapply</span></span>(location: <span class="hljs-type">Location</span>): <span class="hljs-type">Option</span>[(<span class="hljs-type">Double</span>, <span class="hljs-type">Double</span>)] = <span class="hljs-type">Some</span>((location.lat, location.long))
+}
+</code></pre>
+<p>Whereas the Scala 3 compiler produces the following <code>unapply</code> method.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">User</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">unapply</span></span>(location: <span class="hljs-type">Location</span>): <span class="hljs-type">Location</span> = location
+}
+</code></pre>
+<p>Consequently the following code does not compile anymore.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tuple</span></span>(location: <span class="hljs-type">Location</span>): (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = {
+  <span class="hljs-type">Location</span>.unapply(location).get
+}
+</code></pre>
+<p>A possible solution to make it compile is to use pattern binding:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tuple</span></span>(location: <span class="hljs-type">Location</span>): (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = {
+  <span class="hljs-keyword">val</span> <span class="hljs-type">Location</span>(lat, lon) = location
+  (lat, lon)
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="javalangenum"></a><a href="#javalangenum" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>java.lang.Enum</code></h2>
+<p>This incompatibility is inspired by <a href="https://github.com/ekrich/sconfig/commit/76f2ea0b3d4beb20887a0ee63e9f151303843f9e#diff-972416eb7520889dc7c1749326914527">this commit</a> in <a href="https://github.com/ekrich/sconfig">sconfig</a>.</p>
+<p>The new <a href="https://dotty.epfl.ch/api/scala/Enum.html"><code>Enum</code></a> trait in the Scala 3 API shadows the <code>java.lang.Enum</code> class, causing the following compilation errors:</p>
+<pre><code class="hljs">-- [E053]<span class="hljs-built_in"> Type </span>Error: src/main/scala/java-lang-enum.scala:2:15 
+2 |  def foo[E &lt;: Enum[E]](e: Enum[E]): Unit
+  |               ^^^^^^^
+  |               Enum does <span class="hljs-keyword">not</span> take<span class="hljs-built_in"> type </span>parameters
+</code></pre>
+<p>You can simply fix this issue by using the absolute path of <code>java.lang.Enum</code> or by aliasing it.</p>
+<h2><a class="anchor" aria-hidden="true" id="reflective-call"></a><a href="#reflective-call" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reflective Call</h2>
+<p>Scala 2 reflective calls are dropped and replaced by the broader <a href="https://dotty.epfl.ch/docs/reference/changed-features/structural-types.html">programmatic structural types</a>.</p>
+<p>Scala 3 can imitate the Scala 2 reflective calls by making <code>scala.reflect.Selectable.reflectiveSelectable</code> wherever <code>scala.language.reflectiveCalls</code> is imported.</p>
+<p>However the Scala 3 compiler does not infer structural types by default, and thus fails at compiling the following piece of code.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> scala.language.reflectiveCalls
+
+<span class="hljs-keyword">val</span> foo = <span class="hljs-keyword">new</span> {
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>: <span class="hljs-type">Unit</span> = ???
+}
+
+foo.bar
+</code></pre>
+<p>The straightforward solution is to give the structural type explicitly.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> foo: { <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>: <span class="hljs-type">Unit</span> }
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="non-private-constructor-in-private-class"></a><a href="#non-private-constructor-in-private-class" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-private Constructor In Private Class</h2>
+<p>This incompatibility is inspired by <a href="https://github.com/ekrich/sconfig/commit/76f2ea0b3d4beb20887a0ee63e9f151303843f9e#diff-f0d2b577a86f18363e5c552ea0f4ab63">this commit</a> in <a href="https://github.com/ekrich/sconfig">sconfig</a>.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">package</span> foo
+
+<span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-title">private</span>[foo] (<span class="hljs-params"></span>) </span>{}
+</code></pre>
+<p>The error message is:</p>
+<pre><code class="hljs">[<span class="hljs-builtin-name">error</span>] -- Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/access-modifier/src/main/scala-2.13/access-modifier.scala:4:19 
+[<span class="hljs-builtin-name">error</span>] 4 |  private class Bar private[foo] ()
+[<span class="hljs-builtin-name">error</span>]   |                   ^
+[<span class="hljs-builtin-name">error</span>]   |      non-private constructor Bar <span class="hljs-keyword">in</span> class Bar refers <span class="hljs-keyword">to</span> private class Bar
+[<span class="hljs-builtin-name">error</span>]   |      <span class="hljs-keyword">in</span> its<span class="hljs-built_in"> type </span>signature (): foo.Foo.Bar
+</code></pre>
+<p>The <code>-source:3.0-migration</code> mode would compile with a warning but no rewrite is provided.</p>
+<p>The solution is to make the constructor private, since the class is private.</p>
+<h2><a class="anchor" aria-hidden="true" id="wildcard-type-argument"></a><a href="#wildcard-type-argument" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wildcard type argument</h2>
+<p>Dotty cannot reduce the application of a higher-kinded abstract type member to the wildcard argument.</p>
+<p>For instance:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Example</span> </span>{
+  <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Foo</span>[<span class="hljs-type">A</span>]</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span></span>(foos: <span class="hljs-type">Seq</span>[<span class="hljs-type">Foo</span>[_]]): <span class="hljs-type">Unit</span>
+}
+</code></pre>
+<p>Produces the following error when compiled with Dotty:</p>
+<pre><code class="hljs">-- [E043]<span class="hljs-built_in"> Type </span>Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat-3.0/existential-type/wildcard-argument/target/src-managed/main/scala/wildcard-argument.scala:4:18 
+4 |  def f(foos: Seq[Foo[_]]): Unit
+  |                  ^^^^^^
+  |unreducible application of higher-kinded<span class="hljs-built_in"> type </span>Example.this.Foo <span class="hljs-keyword">to</span> wildcard arguments
+</code></pre>
+<p>We want method <code>f</code> to accept sequences of values of type <code>Foo[A]</code> with possibly different types of parameter <code>A</code>.
+Dotty cannot reduce the application of <code>Foo</code> to the wildcard argument <code>_</code> because <code>Foo</code> is an abstract type member.
+One possible solution is to introduce a wrapper class around <code>Foo</code>:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FooWrapper</span>[<span class="hljs-type">A</span>](<span class="hljs-params">foo: <span class="hljs-type">Foo</span>[<span class="hljs-type">A</span>]</span>)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span></span>(foos: <span class="hljs-type">Seq</span>[<span class="hljs-type">FooWrapper</span>[_]]): <span class="hljs-type">Unit</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html"><span class="arrow-prev">← </span><span>Contextual Abstractions</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#inheritance-shadowing">Inheritance Shadowing</a></li><li><a href="#abstract-override">Abstract Override</a></li><li><a href="#exprtype-as-value-type"><code>ExprType</code> as value type</a></li><li><a href="#variance-of-default-parameters">Variance Of Default Parameters</a></li><li><a href="#explicit-call-to-unapply">Explicit Call To <code>unapply</code></a></li><li><a href="#javalangenum"><code>java.lang.Enum</code></a></li><li><a href="#reflective-call">Reflective Call</a></li><li><a href="#non-private-constructor-in-private-class">Non-private Constructor In Private Class</a></li><li><a href="#wildcard-type-argument">Wildcard type argument</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/get-started.html">Get started</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2020 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

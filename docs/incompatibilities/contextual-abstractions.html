@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Contextual Abstractions · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Type Of Implicit Definition"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Contextual Abstractions · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="## Type Of Implicit Definition"/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/get-started.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Incompatibilities</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/get-started.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/dotty-rewrites.html">Dotty Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros.html">Macros Migration</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/incompatibilities/contextual-abstractions.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Contextual Abstractions</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="type-of-implicit-definition"></a><a href="#type-of-implicit-definition" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Of Implicit Definition</h2>
+<p>Type of implicit definitions (<code>val</code> or <code>def</code>) are now required by the Dotty compiler.
+They cannot be inferred.</p>
+<p>Wherever the type annotation of an implicit definition is missing, the Dotty compiler will print an error message of the form:</p>
+<pre><code class="hljs">-- Error: src/main/scala/<span class="hljs-keyword">type</span>-of-<span class="hljs-keyword">implicit</span>-def.scala:<span class="hljs-number">4</span>:<span class="hljs-number">15</span> 
+<span class="hljs-number">4</span> |  <span class="hljs-keyword">implicit</span> val context = new Context {}
+  |               ^
+  |               <span class="hljs-keyword">type</span> of <span class="hljs-keyword">implicit</span> definition needs to be given explicitly
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="scalafix-rewrite"></a><a href="#scalafix-rewrite" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scalafix rewrite</h4>
+<p>The Scalafix rule named <code>ExplicitImplicitTypes</code> in <a href="https://github.com/ohze/scala-rewrites#fixexplicittypesexplicitimplicittypes">ohze/scala-rewrites</a> repository can write the missing type annotations automatically.</p>
+<h2><a class="anchor" aria-hidden="true" id="implicit-views"></a><a href="#implicit-views" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Implicit Views</h2>
+<p>This incompatibility is inspired by this <a href="https://github.com/dotty-staging/scalacheck/commit/cb5395297a4178886e87c1c9c35fc0e7cf49c8b0">commit</a> in the <a href="https://github.com/dotty-staging/scalacheck">dotty-staging fork</a> of <a href="https://github.com/typelevel/scalacheck">scalacheck</a>.</p>
+<p>Scala 3 does not support implicit conversion from an implicit value of the form <code>implicit val ev: A =&gt; B</code>, making the following piece of code invalid:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Pretty</span> </span>{
+  <span class="hljs-keyword">val</span> print: <span class="hljs-type">String</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pretty</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Pretty</span>): <span class="hljs-type">String</span> = {
+  a.print
+}
+</code></pre>
+<p>The Dotty compiler denies those conversions, except if the migration mode is on.</p>
+<p>Be aware that, if you don't fix the incompatibility, the compiler would look for another conversion from the outer scope and it may find one.
+It would result in an undesired behavior at runtime.</p>
+<p>The following code illustrates the case:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Pretty</span> </span>{
+  <span class="hljs-keyword">val</span> print: <span class="hljs-type">String</span>
+}
+
+<span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">anyPretty</span></span>(any: <span class="hljs-type">Any</span>): <span class="hljs-type">Pretty</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Pretty</span> { <span class="hljs-keyword">val</span> print = <span class="hljs-string">"any"</span> }
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pretty</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Pretty</span>): <span class="hljs-type">String</span> = {
+  a.print
+}
+</code></pre>
+<p>The resolved conversion depends on the compiler mode:</p>
+<ul>
+<li><code>3.0-migration</code>: the compiler performs the <code>ev</code> conversion</li>
+<li><code>3.0</code>: the compiler cannot perform the <code>ev</code> conversion but it can perform the <code>anyPretty</code>, which is undesired</li>
+</ul>
+<p>One simple fix is to call the conversion explicitly:</p>
+<pre><code class="hljs css language-scala">ev(a).print
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="view-bounds"></a><a href="#view-bounds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>View Bounds</h2>
+<p>View bounds have been deprecated for a long time but they still compile in Scala 2.13.
+They do not compile in Scala 3 anymore.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>[<span class="hljs-type">A</span> &lt;% <span class="hljs-type">Long</span>](a: <span class="hljs-type">A</span>): <span class="hljs-type">Long</span> = a
+</code></pre>
+<pre><code class="hljs">-- Error: src/main/scala/view-bound.scala:2:12 
+2 |  def foo[<span class="hljs-string">A &lt;% Long</span>](<span class="hljs-link">a: A</span>): Long = a
+  |            ^
+  |          view bounds <span class="hljs-code">`&lt;%' are deprecated, use a context bound `</span>:' instead
+</code></pre>
+<p>The compiler error message suggests we use a context bound instead.</p>
+<p>However, in the context of the migration, it may be easier to write the implicit parameter and then call it explicitly, so that the signature of the method is unchanged.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Long</span>): <span class="hljs-type">Long</span> = ev(a)
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="scala-2-deprecation"></a><a href="#scala-2-deprecation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala 2 deprecation</h4>
+<p>You can locate the usage of the view bound feature by using the <code>-deprecation</code> option of the Scala 2 compiler.
+It produces messages of the form:</p>
+<pre><code class="hljs">src/main/scala/view-bound.scala:<span class="hljs-number">2</span>:<span class="hljs-number">13</span>: view bounds are deprecated; <span class="hljs-keyword">use</span> an <span class="hljs-keyword">implicit</span> <span class="hljs-keyword">parameter</span> instead.
+  example: instead of `def f[A &lt;% <span class="hljs-built_in">Int</span>](a: A)` <span class="hljs-keyword">use</span> `def f[A](a: A)(<span class="hljs-keyword">implicit</span> ev: A =&gt; <span class="hljs-built_in">Int</span>)`
+  def foo[A &lt;% Long](a: A): Long = a
+            ^
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="ambiguous-conversion-on-a-and--a"></a><a href="#ambiguous-conversion-on-a-and--a" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ambiguous Conversion On <code>A</code> And <code>=&gt; A</code></h2>
+<p>This incompatibility is inspired by this <a href="https://github.com/dotty-staging/scalacheck/commit/dc37c607cd9715c4e0ddc676314c6784cbf2beb5">commit</a> in the <a href="https://github.com/dotty-staging/scalacheck">dotty-staging-fork</a> of <a href="https://github.com/typelevel/scalacheck">scalacheck</a>.</p>
+<p>In Scala 2 the implicit conversion on <code>Boolean</code> wins over the implicit conversion on <code>=&gt; Boolean</code>.
+It is not the case in Scala 3, causing incompatibilities in the form of ambiguous conversions.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(): <span class="hljs-type">Unit</span> 
+}
+
+<span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">boolFoo</span></span>(bool: <span class="hljs-type">Boolean</span>): <span class="hljs-type">Foo</span> = ???
+<span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lazyBoolFoo</span></span>(lazyBool:  =&gt; <span class="hljs-type">Boolean</span>): <span class="hljs-type">Foo</span> = ???
+
+<span class="hljs-literal">true</span>.foo()
+</code></pre>
+<p>In this example the Scala 2 compiler chooses the <code>boolFoo</code> conversion whereas the Scala 3 compiler refuses to compile.</p>
+<pre><code class="hljs"><span class="hljs-comment">-- Error: src/main/scala/ambiguous-conversion.scala:4:19</span>
+<span class="hljs-number">9</span> |  <span class="hljs-keyword">true</span>.foo()
+  |  ^^^^
+  |<span class="hljs-built_in">Found</span>:    (<span class="hljs-keyword">true</span> : <span class="hljs-type">Boolean</span>)
+  |Required: ?{ foo: ? }
+  |Note that implicit <span class="hljs-keyword">extension</span> methods cannot be applied because they are ambiguous;
+  |<span class="hljs-keyword">both</span> <span class="hljs-keyword">method</span> boolFoo <span class="hljs-keyword">in</span> <span class="hljs-keyword">object</span> Foo <span class="hljs-keyword">and</span> <span class="hljs-keyword">method</span> lazyBoolFoo <span class="hljs-keyword">in</span> <span class="hljs-keyword">object</span> Foo provide an <span class="hljs-keyword">extension</span> <span class="hljs-keyword">method</span> `foo` <span class="hljs-keyword">on</span> (<span class="hljs-keyword">true</span> : <span class="hljs-type">Boolean</span>)
+</code></pre>
+<p>A temporary solution is to write the conversion explicitly.</p>
+<pre><code class="hljs css language-scala">boolFoo(<span class="hljs-literal">true</span>).foo()
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html"><span class="arrow-prev">← </span><span>Dropped Features</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html"><span>Other Changed Features</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#type-of-implicit-definition">Type Of Implicit Definition</a></li><li><a href="#implicit-views">Implicit Views</a></li><li><a href="#view-bounds">View Bounds</a></li><li><a href="#ambiguous-conversion-on-a-and--a">Ambiguous Conversion On <code>A</code> And <code>=&gt; A</code></a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/get-started.html">Get started</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2020 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

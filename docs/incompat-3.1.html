@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Dotty 3.1-migration Mode · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Looking ahead to Scala 3.1"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Dotty 3.1-migration Mode · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="## Looking ahead to Scala 3.1"/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/scala-3-migration-guide/docs/get-started.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/incompat-3.1.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Dotty 3.1-migration Mode</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="looking-ahead-to-scala-31"></a><a href="#looking-ahead-to-scala-31" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Looking ahead to Scala 3.1</h2>
+<p>Some deprecations have been postponed to 3.1 to facilitate the migration from 2.13 to 3.0 and then from 3.0 to 3.1.
+However some of the migration rules are already available and you are likely to be able to apply them in your codebase.
+In this way you get accustomed to the new syntax and prepared for 3.1.</p>
+<p>Beware though that some of the <code>3.1-migration</code> rewrites break the source compatibility with Scala 2.13.</p>
+<h3><a class="anchor" aria-hidden="true" id="rule-1---replace-wildcard-type-argument-_-with-"></a><a href="#rule-1---replace-wildcard-type-argument-_-with-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule 1 - Replace wildcard type argument '_' with '?'</h3>
+<p>The deprecation of the <code>_</code> syntax for wildcard type arguments has be postponed to Scala 3.1 and it will be replaced by the <code>?</code> syntax. You can find the motivation for this in the <a href="https://dotty.epfl.ch/docs/reference/changed-features/wildcards.html">Dotty reference</a>.</p>
+<p>However there already is a migration rule that you can apply using some slightly different options than before: <code>dotc -source:3.1-migration -rewrite</code>. Note the <code>3.1</code> version mentioned here.</p>
+<p>For example:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compare</span></span>(x: <span class="hljs-type">Container</span>[_], y: <span class="hljs-type">Container</span>[_]): <span class="hljs-type">Int</span> = {
+  x.weight - y.weight
+}
+</code></pre>
+<p>Is rewritten into</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compare</span></span>(x: <span class="hljs-type">Container</span>[?], y: <span class="hljs-type">Container</span>[?]): <span class="hljs-type">Int</span> = {
+  x.weight - y.weight
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="rule-2---add-parentheses-around-the-implicit-parameter-of-a-lambda"></a><a href="#rule-2---add-parentheses-around-the-implicit-parameter-of-a-lambda" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule 2 - Add Parentheses around the implicit parameter of a lambda</h3>
+<p><em>Will be available in Dotty 0.26.0 or Dotty 0.27.0-RC1</em></p>
+<p>Starting from Scala 3.1, it will be required to enclose the implicit parameter of a lambda in parentheses, making the following Scala 3 code illegal.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> f = { <span class="hljs-keyword">implicit</span> x: <span class="hljs-type">Context</span> =&gt; ??? }
+</code></pre>
+<p>Compiling with <code>dotc -source:3.1-migration -rewrite</code> rewrites it into:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> f = { (<span class="hljs-keyword">implicit</span> x: <span class="hljs-type">Context</span>) =&gt; ??? }
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="rule-3-deprecation---backquote-alphanumeric-methods-used-as-infix-operator"></a><a href="#rule-3-deprecation---backquote-alphanumeric-methods-used-as-infix-operator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule 3 (deprecation) - Backquote alphanumeric methods used as infix operator</h3>
+<p>Starting from Scala 3.1, alphanumeric methods should be annotated with <code>@infix</code> to be used as infix operators (see <a href="https://dotty.epfl.ch/docs/reference/changed-features/operators.html#the-infix-annotation">Dotty documentation</a>).
+The <code>-deprecation</code> mode of the compiler will warn you foreach infix call of un-annotated methods.</p>
+<p>Here, the call of the <code>difference</code> method is deprecated:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">MultiSet</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">difference</span></span>(other: <span class="hljs-type">MultiSet</span>): <span class="hljs-type">MultiSet</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span></span>(s1: <span class="hljs-type">MultiSet</span>, s2: <span class="hljs-type">MultiSet</span>): <span class="hljs-type">MultiSet</span> = 
+  s1 difference s2
+</code></pre>
+<p>The compiler can backquote the method call under the <code>-source:3.1 -deprecation -rewrite</code> options.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">MultiSet</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">difference</span></span>(other: <span class="hljs-type">MultiSet</span>): <span class="hljs-type">MultiSet</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test</span></span>(s1: <span class="hljs-type">MultiSet</span>, s2: <span class="hljs-type">MultiSet</span>): <span class="hljs-type">MultiSet</span> = 
+  s1 `difference` s2
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="rule-4---unchecked-pattern-bindings"></a><a href="#rule-4---unchecked-pattern-bindings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule 4 - Unchecked pattern bindings</h3>
+<p><em>Will be available in Dotty 0.26.0 or Dotty 0.27.0-RC1</em></p>
+<p>From Scala 3.1 on, pattern binding will require to be type consistent in order to prevent undesired runtime errors.
+See <a href="https://dotty.epfl.ch/docs/reference/changed-features/pattern-bindings.html">Dotty documentation</a> for more information on this.</p>
+<p>This piece of code compiles in Scala 2.13 and Scala 3.0 but not in Scala 3.1:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> list: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">List</span>(<span class="hljs-number">1</span>)
+<span class="hljs-keyword">val</span> head :: _ = list
+</code></pre>
+<p>You can use the <code>@unchecked</code> annotation to tell the compiler to ignore that the binding can fail.
+Compiling with <code>dotc -source:3.1-migration -rewrite</code> can write it automatically.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> list: <span class="hljs-type">List</span>[<span class="hljs-type">Int</span>] = <span class="hljs-type">List</span>(<span class="hljs-number">1</span>)
+<span class="hljs-keyword">val</span> head :: _: <span class="hljs-meta">@unchecked</span> = list
+</code></pre>
+<p>Similarly, in a <code>for</code> expression, this piece of code compiles in Scala 2.13 and Scala 3.0 but not in Scala 3.1:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> listOpt: <span class="hljs-type">List</span>[<span class="hljs-type">Option</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">List</span>(<span class="hljs-type">Some</span>(<span class="hljs-number">1</span>), <span class="hljs-type">None</span>)
+<span class="hljs-keyword">for</span> (<span class="hljs-type">Some</span>(value) &lt;- listOpt) println(value)
+</code></pre>
+<p>In Scala 2 and Scala 3.0, the elements of <code>listOpt</code> are filtered to retain only the value of type <code>Some</code> .</p>
+<p>In Scala 3.1, this syntax does not induce filtering, but the binding is type checked to prevent runtime errors.
+You can still have the same behavior than Scala 2 by adding the <code>case</code> keyword.
+Compiling with <code>dotc -source:3.1-migration -rewrite</code> can add it for you automatically.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> listOpt: <span class="hljs-type">List</span>[<span class="hljs-type">Option</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">List</span>(<span class="hljs-type">Some</span>(<span class="hljs-number">1</span>), <span class="hljs-type">None</span>)
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>(value) &lt;- listOpt) println(value)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="rule-5---remove-method-value-syntax-for-eta-expansion"></a><a href="#rule-5---remove-method-value-syntax-for-eta-expansion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule 5 - Remove method value syntax for eta-expansion</h3>
+<p><em>This rule breaks the source compatibility with Scala 2.13.</em></p>
+<p>The method value syntax <code>m _</code> will no longer be supported in Scala 3.1, since we now have <a href="https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html">automatic eta-expansion</a>.</p>
+<p>In general you can simply drop the <code>_</code> symbol.
+Compiling with <code>dotc -source:3.1-migration -rewrite</code> rewrites</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(x: <span class="hljs-type">Int</span>)(y: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span> = x + y
+<span class="hljs-keyword">val</span> f = foo _
+</code></pre>
+<p>Into</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(x: <span class="hljs-type">Int</span>)(y: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span> = x + y
+<span class="hljs-keyword">val</span> f = foo
+</code></pre>
+<p>In the special case of a nullary method, the rewrite rule transforms</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>(): <span class="hljs-type">Int</span> = <span class="hljs-number">3</span>
+<span class="hljs-keyword">val</span> g = bar _
+</code></pre>
+<p>Into</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>(): <span class="hljs-type">Int</span> = <span class="hljs-number">3</span>
+<span class="hljs-keyword">val</span> g = (() =&gt; bar())
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="rule-6---add-using-clause-to-pass-explicit-arguments-to-context-bound"></a><a href="#rule-6---add-using-clause-to-pass-explicit-arguments-to-context-bound" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rule 6 - Add <code>using</code> clause to pass explicit arguments to context bound</h3>
+<p><em>This rule breaks the source compatibility with Scala 2.13.</em></p>
+<p>From Scala 3.1 on, context bounds will map to context parameters.
+Thus a <code>using</code> clause is needed to pass explicit arguments to them.</p>
+<p>Compiling with <code>dotc -source:3.1-migration -rewrite</code> rewrites</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span></span>[<span class="hljs-type">T</span>: <span class="hljs-type">Show</span>](value: <span class="hljs-type">T</span>): <span class="hljs-type">String</span> = ???
+<span class="hljs-keyword">val</span> intShow = <span class="hljs-keyword">new</span> <span class="hljs-type">Show</span>[<span class="hljs-type">Int</span>] {}
+show(<span class="hljs-number">5</span>)(intShow)
+</code></pre>
+<p>Into</p>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span></span>[<span class="hljs-type">T</span>: <span class="hljs-type">Show</span>](value: <span class="hljs-type">T</span>): <span class="hljs-type">String</span> = ???
+<span class="hljs-keyword">val</span> intShow = <span class="hljs-keyword">new</span> <span class="hljs-type">Show</span>[<span class="hljs-type">Int</span>] {}
+show(<span class="hljs-number">5</span>)(using intShow)
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#looking-ahead-to-scala-31">Looking ahead to Scala 3.1</a><ul class="toc-headings"><li><a href="#rule-1---replace-wildcard-type-argument-_-with-">Rule 1 - Replace wildcard type argument '_' with '?'</a></li><li><a href="#rule-2---add-parentheses-around-the-implicit-parameter-of-a-lambda">Rule 2 - Add Parentheses around the implicit parameter of a lambda</a></li><li><a href="#rule-3-deprecation---backquote-alphanumeric-methods-used-as-infix-operator">Rule 3 (deprecation) - Backquote alphanumeric methods used as infix operator</a></li><li><a href="#rule-4---unchecked-pattern-bindings">Rule 4 - Unchecked pattern bindings</a></li><li><a href="#rule-5---remove-method-value-syntax-for-eta-expansion">Rule 5 - Remove method value syntax for eta-expansion</a></li><li><a href="#rule-6---add-using-clause-to-pass-explicit-arguments-to-context-bound">Rule 6 - Add <code>using</code> clause to pass explicit arguments to context bound</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/get-started.html">Get started</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2020 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
