@@ -26,3 +26,6 @@ title: Other Changed Features
 
 ```scala mdoc:file:incompat-3.0/access-modifier/README.md
 ```
+
+```scala mdoc:file:incompat-3.0/wildcard-argument/README.md
+```

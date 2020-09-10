@@ -159,6 +159,7 @@ lazy val otherIncompats = Seq[ProjectReference](
   defaultParamVariance,
   earlyInitializer,
   existentialType,
+  wildcardArgument,
   explicitCallToUnapply,
   javaLangEnum,
   reflectiveCall,
@@ -182,6 +183,7 @@ lazy val byNameParamTypeInfer = project.in(file("incompat-3.0/by-name-param-type
 lazy val defaultParamVariance = project.in(file("incompat-3.0/default-param-variance")).settings(incompat30Settings)
 lazy val earlyInitializer = project.in(file("incompat-3.0/early-initializer")).settings(incompat30Settings)
 lazy val existentialType = project.in(file("incompat-3.0/existential-type")).settings(incompat30Settings)
+lazy val wildcardArgument = project.in(file("incompat-3.0/wildcard-argument")).settings(incompat30Settings)
 lazy val explicitCallToUnapply = project.in(file("incompat-3.0/explicit-call-to-unapply")).settings(incompat30Settings)
 lazy val javaLangEnum = project.in(file("incompat-3.0/java-lang-enum")).settings(incompat30Settings)
 lazy val reflectiveCall = project.in(file("incompat-3.0/reflective-call")).settings(incompat30Settings)
