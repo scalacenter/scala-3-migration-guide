@@ -35,8 +35,11 @@
       "incompatibilities/table": {
         "title": "Incompatibility Table"
       },
-      "macros": {
-        "title": "Macros Migration"
+      "macros/macros": {
+        "title": "Migrating Macros"
+      },
+      "macros/status": {
+        "title": "Migration Status"
       },
       "upgrade": {
         "title": "Upgrading a Scala Application"
@@ -49,7 +52,8 @@
     },
     "categories": {
       "General": "General",
-      "Incompatibilities": "Incompatibilities"
+      "Incompatibilities": "Incompatibilities",
+      "Macros": "Macros"
     }
   },
   "pages-strings": {

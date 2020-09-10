@@ -12,6 +12,10 @@
       "incompatibilities/dropped-features",
       "incompatibilities/contextual-abstractions",
       "incompatibilities/other-changed-features"
+    ],
+    "Macros": [
+      "macros/status",
+      "macros/macros"
     ]
   }
 }

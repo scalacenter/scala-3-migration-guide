@@ -113,7 +113,7 @@ This fundamental change in Dotty leads to a few incompatibilities:
 The Scala 3 compiler is not able to compile or consume a Scala 2 macro method.
 Under those circumstances it is necessary to re-implement the Scala 2 macro implementations by using the new Scala 3 metaprogramming features.
 
-You can redirect to the [Macros Migration](../macros.md) page to learn how to do so.
+You can redirect to the [Migrating Macros](../macros/macros.md) page to learn how to do so.
 
 Some of the most used metaprogramming libraries have already been migrated to Scala 3.
-Check the list of the [Scala 3 metaprogramming libraries](../macros.md#migration-status).
+Check their [migration status](../macros/status.md).
