@@ -2,21 +2,56 @@
 id: dotty-rewrites
 title: Dotty Migration Mode
 ---
-## Usage
 
-The Dotty compiler, named `dotc`, has been carefully designed to ease the migration from Scala 2.13 to Scala 3.0. It comes with a handful of utilities to encourage you to cross-compile your codebase:
+The Dotty compiler, named `dotc`, has been carefully designed to ease the migration from Scala 2.13 to Scala 3.0.
+It comes with a handful of utilities to support you while migrating a Scala 2 codebase to Scala 3.
 
-### Migration mode
+Try running `dotc`, the Dotty compiler command, to have a glimpse of those utilities:
 
-The `-source:3.0-migration` option makes the compiler forgiving on most of the dropped features, printing warnings in place of errors. Each warning is a strong indication that the the compiler is capable of safely rewriting the deprecated code into a cross-compiling code.
+``` bash
+$ dotc
+Usage: dotc <options> <source files>
+where possible standard options include:
 
-### Error explanations
+...
+-explain           Explain errors in more detail.
+-explain-types     Explain type errors in more detail.
+...
+-rewrite           When used in conjunction with a `...-migration` source version, rewrites sources to migrate to new version.
+...
+-source            source version
+                   Default: 3.0.
+                   Choices: 3.0, 3.1, 3.0-migration, 3.1-migration.
+...
+```
 
-The `-source:3.0-migration` mode handles many of the dropped constructs but not all of them. In some cases you will have some remaining errors due to incompatibilities between Scala 2 and Scala 3. The Dotty compiler will not be able to apply the automatic rewrites until you fix those errors. However it can assist you by providing detailed explanations on them. You can enable this by using `-source:3.0-migration` in combination with `-explain`.
+## Migration mode
 
-This `-explain` option is not limited to migration, it is, in general a wonderful support to learn and code in Scala 3.
+The `-source:3.0-migration` option makes the compiler forgiving on most of the dropped features, printing warnings in place of errors.
+Each warning is a strong indication that the the compiler is even capable of safely rewriting the deprecated piece of code into a cross-compiling one.
 
-### Automatic rewrites
+We call this mode the **Dotty Migration Mode**.
 
-Once your code compiles with the `-source:3.0-migration`, all warnings can be resolved automatically by the addition of the `-rewrite` option. Beware that the compiler will modify your code! It is intended to be safe. However you may like to commit the initial state so that you can print the diff applied by the compiler and revert if necessary.
+## Automatic rewrites
 
+Once your code compiles in the migration mode, almost all warnings can be resolved automatically by the compiler itself.
+To do so you just need to compile again, this time with the `-source:3.0-migration` and the `-rewrite` options.
+
+> Beware that the compiler will modify the code! It is intended to be safe.
+> However you may like to commit the initial state so that you can print the diff applied by the compiler and revert it if necessary.
+
+> #### Good to know
+> - the rewrites are not applied if the code compiles in error
+> - you cannot choose which rules are applied, the compiler runs all of them
+
+You can refer to the [incompatibility table](incompatibilities/table.md) to see the list of Dotty migration rewrites.
+
+## Error explanations
+
+The `-source:3.0-migration` mode handles many of the changed features but not all of them.
+In some cases you can have remaining errors due to incompatibilities between Scala 2 and Scala 3.
+The Dotty compiler can assist you by providing detailed explanations on them.
+You can enable this by using `-source:3.0-migration` in combination with `-explain` and `-explain-types`.
+
+> The `-explain` and `-explain-types` options are not limited to the migration mode.
+> They can, in general, assist you to learn and code in Scala 3.
