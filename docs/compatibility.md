@@ -14,7 +14,7 @@ Not all of it though, some constructs have been simplified, restricted or droppe
 However those decisions were made for good reasons and by taking care that a good workaround is possible.
 
 In general there is a straightforward cross-compiling solution for every incompatibility, so that the migration from Scala 2 to Scala 3 is easy and smooth.
-You can find a corpus of incompatibilities associated with their solutions in the [Github repository](https://github.com/scalacenter/scala-3-migration-guide/tree/master/incompat).
+You can find a corpus of incompatibilities associated with their solutions in the [Incompatibility Table](incompatibilities/table.md).
 
 There is an exception though, which is the new metaprogramming framework that replaces the Scala 2 experimental macros.
 Further explanations are given down below.
