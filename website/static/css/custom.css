@@ -51,7 +51,7 @@
 }
 
 h1 {
-  font-family: "Lobster";
+  font-family: 'Lobster', 'Nimbus Sans', serif;
 }
 
 body {
@@ -59,13 +59,13 @@ body {
 }
 
 .projectTitle {
-  font-family: "Lobster";
+  font-family: 'Lobster', 'Nimbus Sans', serif;
   color: #224951
 }
 
 .blockContent h2 {
   font-size: 200%;
-  font-family: "Lobster";
+  font-family: 'Lobster', 'Nimbus Sans', serif;
 }
 
 article a:hover {
