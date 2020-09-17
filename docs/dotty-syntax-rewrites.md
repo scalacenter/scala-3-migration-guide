@@ -30,11 +30,8 @@ and they are all valid.
 
 |  | Classic Syntax | Significant Indentation Based Syntax |
 | :--- | :-------: | :-----: |
-| **Classic control structures**| ✓ | ✓ |
-| **New control structures**| ✓ | ✓ |
- 
-
-
+| **Classic control structures**| ✅ | ✅ |
+| **New control structures**| ✅ | ✅ |
 
 Let's start with showing the compiler options we have available to achieve our goal. 
 
@@ -170,6 +167,14 @@ case class State(n: Int, minValue: Int, maxValue: Int):
     do println(i + j)
 ```
 
+> ### Converting code using a project build
+>
+> Converting source files one by one using the Dotty compiler, is time consuming
+> (and requires you to specify the class path which can be a hassle). A more
+> efficient way to do this in bulk is to recompile your code as part of your
+> build. For example, if you have an sbt based build, simply add the required
+> options to `Compile / scalacOptions` and do a clean compilation of your project.
+
 ## Moving back to Classic syntax
 
 Starting from the final result in the previous section, we can move "back"
@@ -247,17 +252,8 @@ case class State(n: Int, minValue: Int, maxValue: Int) {
 
 And with this last rewrite, we have come full circle.
 
-## Wrapping things up
-
-### Converting code using a project build
-
-Converting source files one by one using the Dotty compiler, is time consuming
-(and requires you to specify the class path which can be a hassle). A more
-efficient way to do this in bulk is to recompile your code as part of your
-build. For example, if you have an sbt based build, simply add the required
-options to `Compile / scalacOptions` and do a clean compilation of your project.
-
-### Loss of formatting when cycling through syntax versions
-
-When formatting tools such as [scalafmt](https://scalameta.org/scalafmt) are used to apply customised formatting to your code, cycling back and forth between different Scala 3 syntax
-variants may result in differences when going full circle.
+> ### Loss of formatting when cycling through syntax versions
+>
+> When formatting tools such as [scalafmt](https://scalameta.org/scalafmt) are
+> used to apply customised formatting to your code, cycling back and forth between
+> different Scala 3 syntax variants may result in differences when going full circle.
