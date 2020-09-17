@@ -65,7 +65,7 @@ Let's have a look at how this works by using a small example.
 
 ## Rewriting to _SIB_ syntax & new Control Structure syntax
 
-Assume we the following source code that uses the classic syntax and classic
+Given the following source code that uses the classic syntax and classic
 control structures syntax:
 
 ```scala
