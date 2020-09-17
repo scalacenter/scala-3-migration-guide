@@ -66,7 +66,7 @@ Let's have a look at how this works by using a small example.
 ## Rewriting to _SIB_ syntax & new Control Structure syntax
 
 Given the following source code that uses the classic syntax and classic
-control structures syntax:
+control structure syntax:
 
 ```scala
 object Counter {
