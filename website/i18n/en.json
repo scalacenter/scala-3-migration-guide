@@ -14,6 +14,9 @@
       "dotty-rewrites": {
         "title": "Dotty Migration Mode"
       },
+      "dotty-syntax-rewriting": {
+        "title": "Dotty Syntax Rewriting"
+      },
       "get-started": {
         "title": "Introduction"
       },

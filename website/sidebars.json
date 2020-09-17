@@ -4,6 +4,7 @@
       "get-started",
       "compatibility",
       "dotty-rewrites",
+      "dotty-syntax-rewriting",
       "macros"
     ],
     "Incompatibilities": [
