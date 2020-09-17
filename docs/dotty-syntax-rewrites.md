@@ -58,8 +58,8 @@ where possible standard options include:
 <elided>
 ```
 
-We can combine one of four syntax related options:`-indent`, `-noindent`, `new-syntax`,
-and `old-syntax`, with the `-rewrite` option to rewrite source code.
+We can combine one of four syntax related options:`-indent`, `-noindent`, `-new-syntax`,
+and `-old-syntax`, with the `-rewrite` option to rewrite source code.
 
 Let's have a look at how this works by using a small example.
 
