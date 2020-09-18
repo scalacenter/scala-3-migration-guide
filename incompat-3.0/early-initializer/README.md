@@ -43,8 +43,8 @@ object Foo extends BarEarlyInit("Foo")
 In the case of a class, it would be also possible to use a secondary constructor, that would initiate the class by calling the private primary constructor, as shown by this example:
 
 ```scala
-class Fizz private (val name: String) extends Foo {
-  def this() = this("Fizz)
+class Fizz private (val name: String) extends Bar {
+  def this() = this("Fizz")
 }
 ```
 
