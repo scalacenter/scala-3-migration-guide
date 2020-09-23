@@ -13,9 +13,9 @@ do {
 } while (f(i) == 0)
 ```
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
-When compiled with `dotc` and the `-source:3.0-migration -rewrite` options it is rewritten into. 
+When compiled with Scala 3 and the `-source:3.0-migration -rewrite` options it is rewritten into. 
 
 ```scala
 while ({ {

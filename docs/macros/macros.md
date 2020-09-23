@@ -42,9 +42,9 @@ If you are already cross-compiling your macro for different versions of Scala 2 
 ## Additional Resources
 
 Documentation:
-- [Dotty Documentation](https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html)
+- [Scala 3 Documentation](https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html)
 - [Macros: The Plan For Scala 3](https://www.scala-lang.org/blog/2018/04/30/in-a-nutshell.html)
-- [Examples](https://github.com/lampepfl/dotty-macro-examples) - a repository with small, self-contained examples of various tasks done with Dotty macros.
+- [Examples](https://github.com/lampepfl/dotty-macro-examples) - a repository with small, self-contained examples of various tasks done with Scala 3 macros.
 
 Talks:
 * [Scala Days - Metaprogramming in Dotty](https://www.youtube.com/watch?v=ZfDS_gJyPTc)

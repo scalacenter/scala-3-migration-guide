@@ -25,9 +25,9 @@ In Scala 3, an unapplied method like this will be eta-expanded into a function.
   def toSeq: Seq[Byte] = bytes
 ```
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
-Compiling with `dotc -source:3.0-migration -rewrite` rewrites it into:
+Compiling with Scala 3 and the `-source:3.0-migration -rewrite` compilation options rewrites it into:
 
 ```scala
 trait Chunk {
@@ -36,7 +36,7 @@ trait Chunk {
 }
 ```
 
-Auto-application is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Dotty reference.
+Auto-application is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Scala 3 reference documentation.
 
 #### Scalafix rule
 

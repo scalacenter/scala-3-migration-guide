@@ -18,9 +18,9 @@ test("my test") {
 }
 ```
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
-The Dotty migration rewrite is rather to indent the first line of the block.
+The Scala 3 migration rewrite is to indent the first line of the block.
 
 ```scala
 test("my test")

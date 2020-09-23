@@ -14,7 +14,7 @@ def pretty[A](a: A)(implicit ev: A => Pretty): String = {
 }
 ```
 
-The Dotty compiler denies those conversions, except if the migration mode is on.
+The Scala 3 compiler denies those conversions, except if the migration mode is on.
 
 Be aware that, if you don't fix the incompatibility, the compiler would look for another conversion from the outer scope and it may find one.
 It would result in an undesired behavior at runtime.

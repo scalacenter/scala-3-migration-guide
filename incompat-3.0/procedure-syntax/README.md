@@ -27,9 +27,9 @@ src/main/scala/procedure-syntax.scala:6:15: procedure syntax is deprecated: inst
               ^
 ```
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
-When compiled with Dotty and the `-source:3.0-migration -rewrite` options, the code is rewritten into:
+When compiled with Scala 3 and the `-source:3.0-migration -rewrite` options, the code is rewritten into:
 
 ```scala
 trait Foo {

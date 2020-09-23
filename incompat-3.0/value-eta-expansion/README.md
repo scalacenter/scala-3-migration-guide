@@ -1,7 +1,7 @@
 ## Value eta-expansion
 
-Dotty introduces [automatic eta-expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html) which will deprecate the method value syntax `m _`.
-Furthermore Dotty does not allow eta-expansion of values to nullary functions anymore.
+Scala 3 introduces [automatic eta-expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html) which will deprecate the method value syntax `m _`.
+Furthermore Scala 3 does not allow eta-expansion of values to nullary functions anymore.
 Thus this piece of code is now illegal:
 
 ```scala
@@ -9,7 +9,7 @@ val x = 1
 val f: () => Int = x _
 ```
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
 Compiling with `dotc -source:3.0-migration -rewrite` can rewrite it to:
 
