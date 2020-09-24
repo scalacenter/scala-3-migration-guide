@@ -116,8 +116,8 @@ const MigrationMode = () => (
       {
         content:
           'The Dotty compiler is, in itself, a migration tool that can assist you while doing the migration.\n\n ' +
-          'No installation required, everything is in the compiler. ' + `Discover the [Dotty Migration Mode](${docUrl('dotty-rewrites.html')}).`,
-        title: `[Dotty Migration Mode](${docUrl('dotty-rewrites.html')})`,
+          'No installation required, everything is in the compiler. ' + `Discover the [Dotty Migration Mode](${docUrl('scala-3-migration-mode.html')}).`,
+        title: `[Dotty Migration Mode](${docUrl('scala-3-migration-mode.html')})`,
         image: `${imgUrl('tools-primary.svg')}`,
         imageAlt: 'Icon made by Maxime Kulikov from the Noun Project.',
         imageAlign: 'right',
@@ -134,9 +134,9 @@ const Metaprogramming = () => (
           'Scala 3 metaprogramming features are safer, more robust and much more stable than the Scala 2 macro mechanisms. ' +
           'Existing macro libraries will turn out to be much more simple. ' +
           'But it comes at the price of re-implementing the macro methods from the ground up.\n\n' +
-          `In the [Migrating Macros](${docUrl('macros/macros.html')}) section, ` + 
+          `In the [Migrating Macros](${docUrl('macros/migrating-macros.html')}) section, ` + 
           'you will find helpful content to port your macros code to Scala 3.',
-        title: `[Migrating Macros](${docUrl('macros/macros.html')})`,
+        title: `[Migrating Macros](${docUrl('macros/migrating-macros.html')})`,
         image: `${imgUrl('magnifying-primary.svg')}`,
         imageAlt: 'Icon made by Eucalyp from the Noun Project.',
         imageAlign: 'left',

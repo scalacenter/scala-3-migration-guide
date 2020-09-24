@@ -1,5 +1,5 @@
 ---
-id: status
+id: migration-status
 title: Migration Status
 ---
 

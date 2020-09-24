@@ -1,5 +1,5 @@
 ---
-id: dotty-rewrites
+id: scala-3-migration-mode
 title: Scala 3 Migration Mode
 ---
 

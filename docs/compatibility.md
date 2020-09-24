@@ -80,7 +80,7 @@ However, the Scala 2 compiler does not fully support TASTy and thus cannot run S
 
 In order to publish a common macro API for both languages you have to provide the two distinct implementations.
 A technique for having a declaration of Scala 2 macros in a single Scala 3 artifact is being experimented.
-This is exemplified down below and it will be further detailed in the [Macros Migration](macros/macros.md) section.
+This is exemplified down below and it will be further detailed in the [Macros Migration](macros/migrating-macros.md) section.
 
 ## Examples
 

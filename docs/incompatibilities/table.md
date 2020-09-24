@@ -10,7 +10,7 @@ On rare occasions we can also have runtime incompatibilities, that compile in Sc
 In this page we propose a classification and status of the known incompatibilities.
 The status of an incompatibility is comprised of:
  - Whether the Scala 2.13 compiler produces a deprecation or feature warning on it
- - The existence of a [Scala 3 migration](../dotty-rewrites.md) rule for it
+ - The existence of a [Scala 3 migration](../scala-3-migration-mode.md) rule for it
  - The existence of a Scalafix rule that can fix it
 
 > #### Scala 2.13 deprecations and feature warnings
@@ -113,7 +113,7 @@ This fundamental change in Scala 3 leads to a few incompatibilities:
 The Scala 3 compiler is not able to compile or consume a Scala 2 macro method.
 Under those circumstances it is necessary to re-implement the Scala 2 macro implementations by using the new Scala 3 metaprogramming features.
 
-You can redirect to the [Migrating Macros](../macros/macros.md) page to learn how to do so.
+You can redirect to the [Migrating Macros](../macros/migrating-macros.md) page to learn how to do so.
 
 Some of the most used metaprogramming libraries have already been migrated to Scala 3.
-Check their [migration status](../macros/status.md).
+Check their [migration status](../macros/migration-status.md).
