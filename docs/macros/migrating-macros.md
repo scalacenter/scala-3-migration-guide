@@ -1,5 +1,5 @@
 ---
-id: macros
+id: migrating-macros
 title: Migrating Macros
 ---
 The Scala 2 macros are compiler dependent by design.

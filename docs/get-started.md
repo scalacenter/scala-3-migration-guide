@@ -43,7 +43,7 @@ It comes with a migration mode that does its best at compiling Scala 2 code and 
 
 Even more than that, it is able to rewrite your code where necessary.
 
-You can learn more about it in the [`Scala 3 Migration Mode`](dotty-rewrites.md) section.
+You can learn more about it in the [`Scala 3 Migration Mode`](scala-3-migration-mode.md) section.
 
 Leveraging this tool, the community has already migrated a significant number of well-known libraries, forming the [_Scala 3 Community Build_](https://github.com/lampepfl/dotty/tree/master/community-build/community-projects).
 

@@ -3,9 +3,8 @@
     "General": [
       "get-started",
       "compatibility",
-      "dotty-rewrites",
-      "dotty-syntax-rewriting",
-      "macros"
+      "scala-3-migration-mode",
+      "scala-3-syntax-rewriting"
     ],
     "Incompatibilities": [
       "incompatibilities/table",
@@ -15,8 +14,8 @@
       "incompatibilities/other-changed-features"
     ],
     "Macros": [
-      "macros/status",
-      "macros/macros"
+      "macros/migration-status",
+      "macros/migrating-macros"
     ]
   }
 }

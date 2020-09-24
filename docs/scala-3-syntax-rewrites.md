@@ -1,5 +1,5 @@
 ---
-id: dotty-syntax-rewriting
+id: scala-3-syntax-rewriting
 title: Scala 3 Syntax Rewriting
 ---
 ## Introduction

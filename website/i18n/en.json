@@ -11,11 +11,8 @@
       "contributing": {
         "title": "Contributing"
       },
-      "dotty-rewrites": {
-        "title": "Dotty Migration Mode"
-      },
-      "dotty-syntax-rewriting": {
-        "title": "Dotty Syntax Rewriting"
+      "scala-3-syntax-rewriting": {
+        "title": "Scala 3 Syntax Rewriting"
       },
       "get-started": {
         "title": "Introduction"
@@ -38,11 +35,14 @@
       "incompatibilities/table": {
         "title": "Incompatibility Table"
       },
-      "macros/macros": {
+      "macros/migrating-macros": {
         "title": "Migrating Macros"
       },
-      "macros/status": {
+      "macros/migration-status": {
         "title": "Migration Status"
+      },
+      "scala-3-migration-mode": {
+        "title": "Scala 3 Migration Mode"
       },
       "upgrade": {
         "title": "Upgrading a Scala Application"
