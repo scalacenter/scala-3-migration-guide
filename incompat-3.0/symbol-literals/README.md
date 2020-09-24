@@ -19,9 +19,9 @@ It produces a deprecation warning message when compiled in Scala 2.13 and the `-
   val values: Map[Symbol, Int] = Map('abc -> 1)
 ```
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
-Compiling with Dotty and the `-source:3.0-migration -rewrite` options can rewrite the code into:
+Compiling with Scala 3 and the `-source:3.0-migration -rewrite` options can rewrite the code into:
 
 ```scala
 val values: Map[Symbol, Int] = Map(Symbol("abc") -> 1)

@@ -1,6 +1,6 @@
 ## Restricted Keywords
 
-Dotty introduces a number of [keywords](https://dotty.epfl.ch/docs/internals/syntax.html#keywords).
+Scala 3 introduces a number of [keywords](https://dotty.epfl.ch/docs/internals/syntax.html#keywords).
 Some are said _regular_ which means that you cannot use them as identifiers anymore.
 The others are said _soft_, meaning that they are not restricted.
 You can still use the `open` identifier, for instance.
@@ -25,9 +25,9 @@ object given {
 
 There is a straightforward solution which is to backquote the keywords when used as identifiers.
 
-#### Dotty migration rewrite
+#### Scala 3 migration rewrite
 
-The Dotty compiler can apply this simple rewrite by itself, with the `-source:3.0-migration -rewrite` options:
+The Scala 3 compiler can apply this simple rewrite by itself, with the `-source:3.0-migration -rewrite` options:
 
 ```scala
 object `given` {

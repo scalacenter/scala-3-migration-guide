@@ -10,7 +10,7 @@ On rare occasions we can also have runtime incompatibilities, that compile in Sc
 In this page we propose a classification and status of the known incompatibilities.
 The status of an incompatibility is comprised of:
  - Whether the Scala 2.13 compiler produces a deprecation or feature warning on it
- - The existence of a [Dotty migration](../dotty-rewrites.md) rule for it
+ - The existence of a [Scala 3 migration](../dotty-rewrites.md) rule for it
  - The existence of a Scalafix rule that can fix it
 
 > #### Scala 2.13 deprecations and feature warnings
@@ -19,8 +19,8 @@ The status of an incompatibility is comprised of:
 > - Add the `-deprecation` compiler option to locate the usage of deprecated APIs
 > - For locating the feature warnings, you can look for the feature specific `import` and/or add the `-feature` compiler option.
 
-> #### Dotty migration and Scalafix rewrites
-> The Dotty migration mode is fully integrated in the Dotty compiler.
+> #### Scala 3 migration and Scalafix rewrites
+> The Scala 3 migration mode is fully integrated in the Scala 3 compiler.
 > On the contrary, Scalafix is a tool that must be installed and manually configured in your project.
 > However Scalafix has its own advantages:
 > - It runs on Scala 2.13.
@@ -31,9 +31,9 @@ The status of an incompatibility is comprised of:
 
 Some of the old Scala syntax is not supported anymore.
 
-||Scala 2.13|Dotty Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Restricted keywords](syntactic-changes.md#restricted-keywords)||✅||The Dotty rule does not handle all cases|
+|[Restricted keywords](syntactic-changes.md#restricted-keywords)||✅||The Scala 3 rule does not handle all cases|
 |[Procedure syntax](syntactic-changes.md#procedure-syntax)|Deprecation|✅|✅||
 |[Parentheses around lambda parameter](syntactic-changes.md#parentheses-around-lambda-parameter)||✅|✅||
 |[Open brace indentation for passing an argument](syntactic-changes.md#open-brace-indentation-for-passing-an-argument)||✅|||
@@ -45,7 +45,7 @@ Some of the old Scala syntax is not supported anymore.
 
 Some features are dropped to simplify the language.
 
-||Scala 2.13|Dotty Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Symbol literals](dropped-features.md#symbol-literals)|Deprecation|✅|||
 |[`do`-`while` construct](dropped-features.md#do-while-construct)||✅|||
@@ -57,9 +57,9 @@ Some features are dropped to simplify the language.
 
 ## Contextual Abstractions
 
-The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) in Scala introduces the following incompatibilities:
+The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) in Scala 3 introduces the following incompatibilities:
 
-||Scala 2.13|Dotty Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Type of implicit def](contextual-abstractions.md#type-of-implicit-definition)|||✅||
 |[Implicit views](contextual-abstractions.md#implicit-views)||||Possible runtime incompatibility|
@@ -70,7 +70,7 @@ The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/c
 
 Some proven features are simplified or restricted to make the language easier and safer to use.
 
-||Scala 2.13|Dotty Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Inheritance shadowing](other-changed-features.md#inheritance-shadowing)||✅|||
 |[Abstract override](other-changed-features.md#abstract-override)|||||
@@ -95,7 +95,7 @@ However we believe these cases are rare or inexistent.
 
 The Scala 3 compiler uses a new type inference algorithm that is better than the old one.
 
-This fundamental change in Dotty leads to a few incompatibilities:
+This fundamental change in Scala 3 leads to a few incompatibilities:
 - The Scala 3 compiler can infer a different type than the one inferred by the Scala 2 compiler
 - The Scala 3 compiler can diagnose a type-checking error where the Scala 2 compiler does not
 

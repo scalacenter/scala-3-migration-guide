@@ -34,9 +34,9 @@ In Scala 2 the signatures are stored in a dedicated format called the Pickle for
 In Scala 3 the story is a bit different because it relies on the TASTy format which is a lot more than a signature layout.
 But, for the purpose of migrating from Scala 2 to Scala 3, only the signatures are useful.
 
-### The Dotty Unpicklers
+### The Scala 3 Unpicklers
 
-The first piece of good news is that the Dotty compiler is already able to read both formats, the Scala 2 Pickle format and the TASTy format, and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.
+The first piece of good news is that the Scala 3 compiler is already able to read both formats, the Scala 2 Pickle format and the TASTy format, and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.
 
 ### The Scala 2 TASTy Reader
 
@@ -72,7 +72,7 @@ A macro definition produces bytecode that will be executed at compile time.
 When you depend on a macro definition, the compiler loads the class file that contains it and then calls your macro method to produce the bytecode of your program, that will be executed at runtime.
 
 The Scala 2 macro mechanisms, which were so far available under the `-experimental` flag, are closely tied to the Scala 2 compiler internals.
-Therefore it is impossible to execute them in the Dotty compiler.
+Therefore it is impossible to execute them in the Scala 3 compiler.
 
 In contrast, the Scala 3 macros are based on the TASTy format which is designed for stability and compiler independence.
 We will most certainly have compatibility for the future Scala versions.

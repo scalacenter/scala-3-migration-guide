@@ -45,8 +45,8 @@ object B {
 
 To avoid any ambiguity you have to write `this.x` instead of `x`.
 
-#### Dotty migration rule
+#### Scala 3 migration rule
 
-The Dotty compiler can automatically disambiguate the code when called with the `-source:3.0-migration -rewrite` options.
+The Scala 3 compiler can automatically disambiguate the code when called with the `-source:3.0-migration -rewrite` options.
 
 In this case it replaces `println(x)` by `println(this.x)`.

@@ -1,6 +1,6 @@
 ---
 id: dotty-syntax-rewriting
-title: Dotty Syntax Rewriting
+title: Scala 3 Syntax Rewriting
 ---
 ## Introduction
 
@@ -18,10 +18,10 @@ Scala 3 also introduces a new syntax for control structures. The changes
 introduced with this new syntax apply to `if`-expressions, `while`-loops, and
 `for`-expressions.
 
-## Syntax rewriting with the Dotty compiler
+## Syntax rewriting with the Scala 3 compiler
 
 Converting existing code to use the new syntax by hand would be a tedious
-and error-prone task. The good news is that the Dotty compiler can do the
+and error-prone task. The good news is that the Scala 3 compiler can do the
 hard work for us!
 
 There are 4 possible combinations of the syntax options we covered so far,
@@ -169,7 +169,7 @@ case class State(n: Int, minValue: Int, maxValue: Int):
 
 > ### Converting code using a project build
 >
-> Converting source files one by one using the Dotty compiler, is time consuming
+> Converting source files one by one using the Scala 3 compiler, is time consuming
 > (and requires you to specify the class path which can be a hassle). A more
 > efficient way to do this in bulk is to recompile your code as part of your
 > build. For example, if you have an sbt based build, simply add the required

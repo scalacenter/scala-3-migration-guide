@@ -13,7 +13,7 @@ object Foo extends {
 } with Bar
 ```
 
-The Dotty compiler produces the following error messages:
+The Scala 3 compiler produces the following error messages:
 
 ```
 -- Error: src/main/scala/early-initializer.scala:6:19 
