@@ -115,9 +115,9 @@ const MigrationMode = () => (
     {[
       {
         content:
-          'The Dotty compiler is, in itself, a migration tool that can assist you while doing the migration.\n\n ' +
-          'No installation required, everything is in the compiler. ' + `Discover the [Dotty Migration Mode](${docUrl('scala-3-migration-mode.html')}).`,
-        title: `[Dotty Migration Mode](${docUrl('scala-3-migration-mode.html')})`,
+          'The Scala 3 compiler is, in itself, a migration tool that can assist you while doing the migration.\n\n ' +
+          'No installation required, everything is in the compiler. ' + `Discover the [Scala 3 Migration Mode](${docUrl('scala-3-migration-mode.html')}).`,
+        title: `[Scala 3 Migration Mode](${docUrl('scala-3-migration-mode.html')})`,
         image: `${imgUrl('tools-primary.svg')}`,
         imageAlt: 'Icon made by Maxime Kulikov from the Noun Project.',
         imageAlign: 'right',
