@@ -11,9 +11,6 @@
       "contributing": {
         "title": "Contributing"
       },
-      "scala-3-syntax-rewriting": {
-        "title": "Scala 3 Syntax Rewriting"
-      },
       "get-started": {
         "title": "Introduction"
       },
@@ -43,6 +40,9 @@
       },
       "scala-3-migration-mode": {
         "title": "Scala 3 Migration Mode"
+      },
+      "scala-3-syntax-rewriting": {
+        "title": "Scala 3 Syntax Rewriting"
       },
       "upgrade": {
         "title": "Upgrading a Scala Application"

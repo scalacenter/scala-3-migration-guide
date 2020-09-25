@@ -68,6 +68,14 @@ body {
   font-family: 'Lobster', 'Nimbus Sans', serif;
 }
 
+.fa-check {
+  color: #59a96a
+}
+
+.fa-times {
+  color: #ff0000
+}
+
 article a:hover {
   text-decoration: underline;
 }
