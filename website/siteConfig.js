@@ -54,6 +54,7 @@ const siteConfig = {
   */
 
   stylesheets: [
+    'https://use.fontawesome.com/releases/v5.14.0/css/all.css',
     'https://fonts.googleapis.com/css?family=Lobster&display=swap',
     'https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&display=fallback'
   ],
