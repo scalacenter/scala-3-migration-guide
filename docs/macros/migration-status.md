@@ -10,7 +10,7 @@ Identifying those library dependencies is key to establish that a project is rea
 
 > The Scala 3 compiler cannot execute Scala 2 macro definitions.
 > 
-> However, the handy `-Xigoner-scala2-macros` option can be used to ignore them and type check the rest of the code.
+> However, the handy `-Xignore-scala2-macros` option can be used to ignore them and type check the rest of the code.
 > 
 > ```scala
 > [error] -- Error: /src/main/scala/foo/Foo.scala:10:45 
