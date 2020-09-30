@@ -131,9 +131,9 @@ const Metaprogramming = () => (
     {[
       {
         content:
-          'Scala 3 metaprogramming features are safer, more robust and much more stable than the Scala 2 macro mechanisms. ' +
-          'Existing macro libraries will turn out to be much more simple. ' +
-          'But it comes at the price of re-implementing the macro methods from the ground up.\n\n' +
+          'Scala 3 provides a toolbox full of metaprogramming features, which are safer, more robust, and much more stable than their counterparts in Scala 2. ' +
+          'Implementing macro libraries in Scala 3 is simpler and the resulting libraries are easier to maintain across future versions of Scala. ' +
+          'The improvements come at a price: the metaprogramming facilities have been re-designed from the _ground up_. In consequence, existing macro libraries need to be ported to the new interfaces.\n\n' +
           `In the [Migrating Macros](${docUrl('macros/migrating-macros.html')}) section, ` + 
           'you will find helpful content to port your macros code to Scala 3.',
         title: `[Migrating Macros](${docUrl('macros/migrating-macros.html')})`,
