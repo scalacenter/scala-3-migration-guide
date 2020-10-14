@@ -20,5 +20,3 @@ This course guides you through a migration of a single-module Akka Typed Sudoku 
 - Opaque Type Aliases
 - Multiversal Equality
 
-The course materials are freely available for self-study. If you would like an instructor-led delivery, please send a request to [_info@lunatech.com_](mailto:info@lunatech.com).
-
