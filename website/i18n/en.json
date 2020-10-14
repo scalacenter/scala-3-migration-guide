@@ -11,6 +11,9 @@
       "contributing": {
         "title": "Contributing"
       },
+      "external-resources/moving-from-scala-2-to-scala-3": {
+        "title": "Moving from Scala 2 to Scala 3"
+      },
       "get-started": {
         "title": "Introduction"
       },
@@ -58,7 +61,7 @@
     },
     "categories": {
       "General": "General",
-      "Tutorials": "Tutorials",
+      "External Resources": "External Resources",
       "Incompatibilities": "Incompatibilities",
       "Macros": "Macros"
     }
