@@ -41,15 +41,32 @@ The first piece of good news is that the Scala 3 compiler is already able to rea
 ### The Scala 2 TASTy Reader
 
 The second piece of good news is that the Scala 2 TASTy reader, which enables consuming Scala 3 libraries in Scala 2.13, is well on track.
-It will most certainly be available in Scala 2.13.4 and it will support the following new language features:
-- Enums
+It will be available in Scala 2.13.4 and it will support the following new language features out of the box:
+- Enumerations
 - Intersection types
-- Higher-kinded type lambdas
-- Opaque type aliases
-- Scala 3 extension methods
-- New syntax for context abstraction
+- Type lambdas
+- New syntax for contextual abstractions
 - Inheritance of `open` classes and `super` traits
 - Exported definitions
+
+The following new features are not supported:
+- Context functions
+- Polymorphic function types
+- Trait parameters
+- `@static` annotation
+- `@alpha` annotation
+- Functions and Tuples larger than 22 parameters
+- Opaque type aliases
+- Match types
+- Union types
+- Multiversal equality constraints unless explicit
+- inline functions (including Scala 3 macros)
+- subtype kind polymorphism (upper bound `scala.AnyKind`)
+
+Limited support:
+- selecting top level definitions from the package
+- Extension methods
+
 
 You can have a Scala 2 module that depends on a Scala 3 module that uses the new features, and this Scala 3 module can even depend on another Scala 2 module.
 Cross-compatibility will not restrain you from using the exciting new features of Scala 3.
@@ -64,7 +81,7 @@ Scala 2 and Scala 3 share the same ABI.
 A piece of code, provided that the inferred types and implicit resolutions are the same, will produce the same bytecode and eventually have the same behavior at runtime.
 
 Sharing the ABI ensures that Scala 2 and Scala 3 class files can be loaded by the same JVM class loader, and that Scala 2 and Scala 3 `sjsir` files can be linked together by the Scala.js linker.
-Furthermore it relieves us from a lot of surprising behaviors at runtime.   
+Furthermore it relieves us from a lot of surprising behaviors at runtime.
 
 ## Metaprogramming
 
