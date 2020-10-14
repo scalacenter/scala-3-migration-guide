@@ -6,6 +6,9 @@
       "scala-3-migration-mode",
       "scala-3-syntax-rewriting"
     ],
+    "External Resources": [
+      "external-resources/moving-from-scala-2-to-scala-3"
+    ],
     "Incompatibilities": [
       "incompatibilities/table",
       "incompatibilities/syntactic-changes",
