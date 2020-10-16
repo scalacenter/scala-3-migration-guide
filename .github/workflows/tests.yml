@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Tests
 on:
  pull_request:
    branches: [master]
@@ -17,3 +17,13 @@ jobs:
         run: sbt '++0.27.0-RC1; incompat30 / test; ++2.13.3; incompat30 / test'
       - name: Test Incompatibilities 3.1
         run: sbt 'incompat31 / test'
+  macro:
+    name: Test Macros Migration
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - uses: olafurpg/setup-scala@v7
+      - name: Test Cross Compilation
+        run: sbt '++0.27.0-RC1; crossApp / run; ++2.13.3; crossApp / run'

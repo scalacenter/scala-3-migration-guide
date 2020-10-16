@@ -35,11 +35,14 @@
       "incompatibilities/table": {
         "title": "Incompatibility Table"
       },
-      "macros/migrating-macros": {
-        "title": "Migrating Macros"
+      "macros/metaprogramming-features": {
+        "title": "Scala 3 Metaprogramming Features"
       },
       "macros/migration-status": {
         "title": "Migration Status"
+      },
+      "macros/migration-tutorial": {
+        "title": "Migration Tutorial"
       },
       "scala-3-migration-mode": {
         "title": "Scala 3 Migration Mode"

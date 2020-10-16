@@ -17,8 +17,9 @@
       "incompatibilities/other-changed-features"
     ],
     "Macros": [
-      "macros/migration-status",
-      "macros/migrating-macros"
+      "macros/metaprogramming-features",
+      "macros/migration-tutorial",
+      "macros/migration-status"
     ]
   }
 }

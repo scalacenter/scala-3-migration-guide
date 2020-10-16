@@ -113,7 +113,8 @@ This fundamental change in Scala 3 leads to a few incompatibilities:
 The Scala 3 compiler is not able to compile or consume a Scala 2 macro method.
 Under those circumstances it is necessary to re-implement the Scala 2 macro implementations by using the new Scala 3 metaprogramming features.
 
-You can redirect to the [Migrating Macros](../macros/migrating-macros.md) page to learn how to do so.
+You can go to the [Metaprogramming Features](../macros/metaprogramming-features.md) page to learn about the new Scala 3 metaprogramming features.
+To learn how to make a macro library available in Scala 3 you should read the [Macro Migration Tutorial](../macros/migration-tutorial.md).
 
-Some of the most used metaprogramming libraries have already been migrated to Scala 3.
-Check their [migration status](../macros/migration-status.md).
+Some of the most used macro libraries have already been migrated to Scala 3.
+Check the macro ecosystem [migration status](../macros/migration-status.md).
