@@ -1,11 +1,11 @@
 ---
-id: migrating-macros
-title: Migrating Macros
+id: metaprogramming-features
+title: Metaprogramming Features
 ---
-The Scala 2 macros are compiler dependent by design.
-Therefore it is impossible to compile or even consume them in Scala 3.
 
-In this document, we provide guidelines to help you migrate your macro library to Scala 3.
+The Scala 2 macros are compiler-dependent by design. A macros compiled by a version of the compiler cannot be used by another version of the compiler.
+
+Scala 3 is overcoming this limitation by introducing a new principled approach of metaprogramming. While this is an uncontested improvement, it also means that previous macro implementations have to be rewritten from the ground up.
 
 ## Before rewriting a macro
 
@@ -25,19 +25,6 @@ Before getting deep into reimplementing a macro your should check if it can be s
   * [TASTy inspector](http://dotty.epfl.ch/docs/reference/metaprogramming/tasty-inspect.html)
 
 A good reference for this is [Shapeless 3](https://github.com/dotty-staging/shapeless/tree/shapeless-3). It uses Scala 3 features most of the time for a feature that would have been macros in Scala 2 and only uses macros where absolutely necessary.
-
-## Defining a project that cross compiles macros
-
-If you are already cross-compiling your macro for different versions of Scala 2 and you have sources folders for each version, then you can add an extra source folder for Scala 3.
-
-* SBT examples:
-  * *TODO find a simple example project*
-* Mill examples
-  * *TODO find a simple example project*
-  * [utest](https://github.com/dotty-staging/utest/tree/dotty)
-  * [sourcecode](https://github.com/dotty-staging/sourcecode/tree/dotty-community-build)
-
-[Contributors welcome!](../contributing.md)
 
 ## Additional Resources
 
