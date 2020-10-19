@@ -5,11 +5,11 @@ title: Compatibility Reference
 Scala 3 is a game changer in terms of compatibility in the Scala ecosystem that will greatly improve the day-to-day experience of the Scala programmers, starting from the migration.
 
 In this page you will learn about the compatibility between Scala 2.13 and Scala 3.0 at different levels of the program lifetime.
-You will then find how these levels of compatibility can be exploited in concrete examples of dependencies between Scala 2 and Scala 3.
+You will then find how these levels of compatibility can be benefited from in concrete examples of dependencies between Scala 2 and Scala 3.
 
 ## Language Level
 
-A large subset of the Scala 2.13 language is still compatible in Scala 3.
+A large subset of the Scala 2.13 language is still compatible in Scala 3.0.
 Not all of it though, some constructs have been simplified, restricted or dropped altogether.
 However those decisions were made for good reasons and by taking care that a good workaround is possible.
 
@@ -28,7 +28,7 @@ This is a breakthrough in the Scala programming history.
 ## Compile Time
 
 In your code you can use public types and terms, and call public methods that are defined in a different module or library.
-It works well as long as the type checker, which is the compiler phase that validates the semantic consistency of the code, is able to read the signatures of those types, terms and methods, from the class file containing them.
+It works well as long as the type checker, which is the compiler phase that validates the semantic consistency of the code, is able to read the signatures of those types, terms and methods, from the class files containing them.
 
 In Scala 2 the signatures are stored in a dedicated format called the Pickle format.
 In Scala 3 the story is a bit different because it relies on the TASTy format which is a lot more than a signature layout.
@@ -79,8 +79,7 @@ We will most certainly have compatibility for the future Scala versions.
 However, the Scala 2 compiler does not fully support TASTy and thus cannot run Scala 3 macros.
 
 In order to publish a common macro API for both languages you have to provide the two distinct implementations.
-A technique for having a declaration of Scala 2 macros in a single Scala 3 artifact is being experimented.
-This is exemplified down below and it is further detailed in the [Macro Migration Tutorial](macros/migration-tutorial.md) section.
+A technique for having declarations of Scala 2 macro in a Scala 3 artifact is exemplified down below and it is further detailed in the [Macro Migration Tutorial](macros/migration-tutorial.md) section.
 
 ## Examples
 
@@ -88,9 +87,11 @@ This is exemplified down below and it is further detailed in the [Macro Migratio
 
 A Scala 3 module can depend on a Scala 2 artifact.
 
-![Scala 3 module depending on a Scala 2 artifact](assets/compatibility/3to2.png)
+![Scala 3 module depending on a Scala 2 artifact](assets/compatibility/3to2.svg)
 
 This diagram can be translated into sbt:
+
+> sbt `1.4.+` is required
 
 ```scala
 val scala3 = "0.25.0"
@@ -101,13 +102,8 @@ lazy val foo = project.in.file("foo")
   .dependsOn(bar)
 
 lazy val bar = project.in(file("bar"))
-  .settings(
-    scalaVersion := scala2,
-    crossVersion := CrossVersion.constant("2.13")
-  )
+  .settings(scalaVersion := scala2)
 ```
-
-Note: Setting `crossVersion := CrossVersion.constant(scala3)` is a workaround of [this issue](https://github.com/sbt/sbt/issues/5369).
 
 Or, in case `bar` is a published Scala 2.13 library, we can have:
 
@@ -129,13 +125,13 @@ It could be, but it would be useless because, as we have seen, a Scala 3.0 modul
 
 Therefore the Scala 3 dependency on the standard library follows this exact same pattern.
 
-![Scala 3 library dependency](assets/compatibility/standardlib.png)
+![Scala 3 library dependency](assets/compatibility/standardlib.svg)
 
 ### A Scala 2 module depending on a Scala 3 artifact
 
 As of `2.13.4` a Scala 2 module will be able to depend on a Scala 3 library.
 
-![Scala 2 module depending on a Scala 3 artifact](assets/compatibility/2to3.png)
+![Scala 2 module depending on a Scala 3 artifact](assets/compatibility/2to3.svg)
 
 This diagram can be translated into sbt:
 
@@ -148,10 +144,7 @@ lazy val foo = project.in.file("foo")
   .dependsOn(bar)
 
 lazy val bar = project.in(file("bar"))
-  .settings(
-    scalaVersion := scala3,
-    crossVersion := CrossVersion.constant("0.25")
-  )
+  .settings(scalaVersion := scala3)
 ```
 
 Or, in case `bar` is a published Scala 3 library:
@@ -170,37 +163,36 @@ lazy val foo = project.in.file("foo")
 
 #### A Scala 3 module cannot depend on a Scala 2 macro
 
-The Scala 3 compiler cannot call a macro definition inside a Scala 2 artifact.
+The Scala 3 compiler cannot call a macro definition implemented in a Scala 2 artifact.
 
-![Not working](assets/compatibility/3toMacro2.png)
+![Not working](assets/compatibility/3toMacro2.svg)
 
-But a Scala 3 module can depend on a Scala 2 artifact whose compilation has involved a Scala 2 macro execution.
-The macro can be defined inside or outside the Scala 2 artifact.
+But a Scala 3.0 module can depend on a Scala 2.13 artifact whose compilation has involved a Scala 2 macro execution.
 
-![Transitive macro dependency](assets/compatibility/3toMacro2bis.png)
+![Transitive macro dependency](assets/compatibility/3toMacro2bis.svg)
 
 #### A Scala 2 module cannot depend on a Scala 3 macro
 
 The Scala 2 compiler cannot call a Scala 3 macro definition.
 
-![Not working](assets/compatibility/2toMacro3.png)
+![Not working](assets/compatibility/2toMacro3.svg)
 
 But a Scala 2 module can depend on Scala 3 artifact whose compilation has involved a Scala 3 macro execution.
-The macro can be defined inside or outside the Scala 3 artifact.
 
-![Transitive macro dependency](assets/compatibility/2toMacro3bis.png)
+![Transitive macro dependency](assets/compatibility/2toMacro3bis.svg)
+
+> The macro could have been defined inside the Scala 3 module that consumes it.
 
 #### A shared macro API in a Scala 3 artifact
 
-The solution being experimented is illustrated by this diagram.
-
-![Shared macro API in a Scala 3 artifact](assets/compatibility/sharedMacroAPI.png)
-
-A single Scala 3 module bears the macro declaration of both Scala 2 and Scala 3 next to one another.
+A Scala 3 artifact can bear the declaration of the Scala 2.13 and Scala 3.0 macros next to one another.
 The Scala 3 implementation can be provided in the same module.
 The Scala 2 implementation must be compiled by the Scala 2 compiler, and so it must be provided in an other module.
 
-This technique makes possible for the Scala 2 and Scala 3 compilers to load the same Scala 3 metaprogramming artifact.
+![Shared macro API in a Scala 3 artifact](assets/compatibility/sharedMacroAPI.svg)
+
+This technique makes possible for the Scala 2.13 and Scala 3.0 compilers to execute a macro defined in the same Scala 3.0 artifact.
 Yet, each will have its own execution path through the produced bytecode.
 
-A working example of this technique can be found in [this repository](https://github.com/scalacenter/mix-macros-scala-2-and-3).
+You can learn this technique in the [Macro Migration Tutorial](scala-3-migration-mode.md).
+Another working example can be found in [this repository](https://github.com/scalacenter/mix-macros-scala-2-and-3).
