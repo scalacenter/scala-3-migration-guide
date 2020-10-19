@@ -27,3 +27,5 @@ jobs:
       - uses: olafurpg/setup-scala@v7
       - name: Test Cross Compilation
         run: sbt '++0.27.0-RC1; crossApp / run; ++2.13.3; crossApp / run'
+      - name: Test Mixing Definitions
+        run: sbt '++0.27.0-RC1; mixApp / run; ++2.13.4-bin-8891679; mixApp / run'

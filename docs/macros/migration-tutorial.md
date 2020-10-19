@@ -271,4 +271,218 @@ It will create two artifacts: the `2.13` and the `3.0` versions.
 
 ## Mixing Macro Definitions
 
-TODO
+As it is explained in the [Compatibility Reference](../compatibility.md) page, the Scala 2 compiler can read the signatures of Scala 3 methods, and conversely the Scala 3 compiler can read the signatures of Scala 2 methods.
+
+A Scala 2 macro implementation cannot be compiled by the Scala 3 compiler.
+However, there is nothing preventing the Scala 3 compiler from type checking a Scala 2 macro definition.
+
+Suppose a Scala 2 macro is defined in a Scala 3 module and implemented in a Scala 2 module.
+Then the Scala 2 compiler would be able to find that definition in the Scala 3 artifact and execute its implementation in the Scala 2 binaries.
+
+This idea sets the ground to the mixing macros technique that we detail further below using the `location` example.
+It is compatible with any build tool that can mix Scala 2 and Scala 3 modules.
+
+> Mixing macro requires the TASTy reader that will be shipped in Scala 2.13.4
+
+### 1 - Creating the Scala 3 module
+
+Going back to the initial state of our `location` library we have:
+- A `lib` module that contains the Scala 2 definition of the `location` macro
+- A Scala 2 `app` module that calls the `location` macros
+
+```scala
+// build.sbt
+
+lazy val lib = project
+  .in(file("lib"))
+  .settings(
+    scalaVersion := "2.13.4",
+    libraryDependencies ++= Seq(
+      "org.scala-lang" % "scala-reflect" % scalaVersion.value
+    )
+  )
+
+lazy val app = project
+  .in(file("app"))
+  .settings(scalaVersion := "2.13.4")
+  .dependsOn(lib)
+```
+
+Let's create a new Scala 3 module in which we will move our macro definition.
+We call it `macroLib`.
+
+```scala
+lazy val macroLib = project
+  .in(file("macro-lib"))
+  .settings(
+    scalaVersion := "0.27.0-RC1"
+  )
+  .dependsOn(lib)
+```
+
+`macroLib` depends on `lib` in which we have our macro implementation.
+
+To test this new module, we make `app` depend on it. Also we make it cross compile.
+
+```scala
+lazy val app = project
+  .in(file("app"))
+  .settings(
+    scalaVersion := "2.13.4",
+    crossScalaVersion := Seq("2.13.4", "0.27.0-RC1")  
+  )
+  .dependsOn(macroLib)
+```
+
+We are ready to move our Scala 2 macro definition by creating a `Macros.scala` file in `macroLib` that contains the following:
+
+```scala
+// macro-lib/src/main/scala/location/Macros.scala
+package location
+
+import scala.language.experimental.macros
+
+object Macros:
+  def location: Location = macro Scala2Macros.locationImpl
+```
+
+The `locationImpl` is still in the `lib` module.
+Note that we moved it to a `Scala2Macros` object because we cannot have two `Macros` objects in the same package.
+
+```scala
+// lib/src/main/scala/location/Macros.scala
+package location
+
+import scala.reflect.macros.blackbox.Context
+
+case class Location(path: String, line: Int) {
+  override def toString(): String = s"Line $line in $path"
+}
+
+object Scala2Macros {
+  def locationImpl(c: Context): c.Tree =  {
+    import c.universe._
+    val location = typeOf[Location]
+    val line = Literal(Constant(c.enclosingPosition.line))
+    val path = Literal(Constant(c.enclosingPosition.source.path))
+    q"new $location($path, $line)"
+  }
+}
+```
+
+We try to compile our `macroLib` module.
+
+```shell
+sbt: location> macroLib / compile
+[error] -- Error: /location/macro-lib/src/main/scala/location/Macros.scala:6:6 
+[error] 6 |  def location: Location = macro Scala2Macros.locationImpl
+[error]   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[error]   |  No Scala 3 implementation found for this Scala 2 macro.
+[error] one error found
+```
+
+The compiler is telling us that a Scala 3 implementation is missing for the `location` macro.
+It makes sense because the Scala 2 implementation cannot be executed by the Scala 3 compiler.
+
+Let's add the most simple implementation possible:
+
+```scala
+// macro-lib/src/main/scala/location/Macros.scala
+package location
+
+import scala.language.experimental.macros
+
+object Macros:
+  def location: Location = macro Scala2Macros.locationImpl
+  inline def location: Location = ${locationImpl}
+
+  def locationImpl(using ctx: QuoteContext): Expr[Location] = ???
+```
+
+The `inline` keyword is required here to tell the compiler the method is the Scala 3 counterpart of the `location` macro definition.
+
+The `app` module can now be compiled and executed in Scala 2.
+
+```shell
+sbt: location> ++2.13.4; app / run
+[info] running app.Main 
+Line 6 in /location/app/src/main/scala/app/Main.scala
+[info] app / run completed
+```
+
+Can the `app` module be compiled in Scala 3?
+To answer this question we must remind ourselves that macros are executed at compile time.
+Here the Scala 3 implementation throws a `NotImplementedError`, hence the answer is no.
+We can try and see the exception being thrown at compile-time.
+
+```shell
+sbt: location> ++0.27.0-RC1; app / run
+[info] compiling 1 Scala source to /loaction/app/target/scala-0.27/classes ...
+[error] -- Error: /location/app/src/main/scala/app/Main.scala:6:10 
+[error] 6 |  println(location)
+[error]   |          ^^^^^^^^
+[error]   |          Exception occurred while executing macro expansion.
+[error]   |          scala.NotImplementedError: an implementation is missing
+[error]   |             at scala.Predef$.$qmark$qmark$qmark(Predef.scala:347)
+[error]   |             at location.Macros$.locationImpl(Macros.scala:15)
+[error]   |
+[error]   | This location contains code that was inlined from Main.scala:6
+...
+```
+
+### 2 - Providing the Scala 3 implementation
+
+Again, there is no magic formula to port a Scala 2 macro into Scala 3.
+One needs to learn about the available new metaprogramming features of Scala 3.
+You can have a look at the list of [available metaprogramming features](metaprogramming-features.md).
+
+We eventually come up with this implementation:
+
+```scala
+// macro-lib/src/main/scala/location/Macros.scala
+package location
+
+import scala.language.experimental.macros
+import scala.quoted.{QuoteContext, Expr}
+
+object Macros:
+  def location: Location = macro Scala2Macros.locationImpl
+  inline def location: Location = ${locationImpl}
+
+  def locationImpl(using ctx: QuoteContext): Expr[Location] =
+    import ctx.tasty.rootPosition
+    val file = Expr(rootPosition.sourceFile.jpath.toString)
+    val line = Expr(rootPosition.startLine + 1)
+    '{new Location($file, $line)}
+```
+
+The `app` module can now be compiled and executed in Scala 3:
+
+```
+sbt: location> ++0.27.0-RC1; app / run
+[info] running app.Main 
+Line 6 in /location/app/src/main/scala/app/Main.scala
+[info] app / run completed
+```
+
+### Solution Overview
+
+Our `location` library is now composed of two modules:
+- The Scala 2.13 `lib` module containing the `Location` data structure and the Scala 2 macro implementation
+- The Scala 3.0 `macroLib` module containing both the Scala 2 macro definition and the Scala 3 macro implementation
+
+![Mixing-macros Architecture](assets/macros/mix.svg)
+
+Publishing this library will create two artifacts.
+However we now have a single entry point for all projects.
+An application can depend on the `macroLib_3.0` artifact, no matter if its codebase is compiled in Scala 2.13 or Scala 3.0.
+
+## Conclusion
+
+We have learnt two different techniques to make a Scala 2 macro library available in Scala 3.
+
+When choosing between the two you must take the architecture into consideration:
+- When **cross building**, you have one module that produces two Scala version specific artifacts.
+The consumer project must find out the right binary version of the library depending on its own Scala version.
+- When **mixing macro definitions**, we have a Scala 3.0 module that depends on a Scala 2.13 module.
+The consumer project will always depend on the Scala 3.0 artifact irrespective of its own Scala version.
