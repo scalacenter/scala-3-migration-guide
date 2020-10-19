@@ -33,7 +33,7 @@
         "title": "Incompatibility Table"
       },
       "macros/metaprogramming-features": {
-        "title": "Scala 3 Metaprogramming Features"
+        "title": "Metaprogramming Features"
       },
       "macros/migration-status": {
         "title": "Migration Status"
