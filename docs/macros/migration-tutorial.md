@@ -267,7 +267,11 @@ Our `lib` project now contains the following files:
 - `src/main/scala-3/location/Macros.scala`: The Scala 3 implementation of the `location` macro method
 
 We are now ready to publish our `location` library using the [sbt `publish` task](https://www.scala-sbt.org/1.x/docs/Publishing.html).
-It will create two artifacts: the `2.13` and the `3.0` versions.
+It will create two artifacts: the `lib_2.13` and the `lib_3.0` artifacts.
+
+![Cross-building Architecture](assets/macros/cross.svg)
+
+A Scala 2.13 project must depend on the `lib_2.13` artifact whereas a Scala 3.0 project must depend on the `lib_3.0` artifact.
 
 ## Mixing Macro Definitions
 
@@ -319,8 +323,6 @@ lazy val macroLib = project
   )
   .dependsOn(lib)
 ```
-
-`macroLib` depends on `lib` in which we have our macro implementation.
 
 To test this new module, we make `app` depend on it. Also we make it cross compile.
 
@@ -475,7 +477,7 @@ Our `location` library is now composed of two modules:
 
 Publishing this library will create two artifacts.
 However we now have a single entry point for all projects.
-An application can depend on the `macroLib_3.0` artifact, no matter if its codebase is compiled in Scala 2.13 or Scala 3.0.
+An application can depend on the `macro-lib_3.0` artifact, no matter if its codebase is compiled in Scala 2.13 or Scala 3.0.
 
 ## Conclusion
 
