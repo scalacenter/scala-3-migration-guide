@@ -1,6 +1,6 @@
 ---
 id: migration-tutorial
-title: Migration Tutorial
+title: Porting a Macro Library
 ---
 
 In this tutorial we will learn two different approaches to migrate a macro library to Scala 3: cross-building and mixing macro definitions.
@@ -48,13 +48,12 @@ object Main extends App {
 }
 ```
 
-Running this application prints `Line 4 in src/main/scala/SimpleApp.scala`, since the call to `location` is made on the 4th line of the file.
+Running this application prints `Line 4 in app/src/main/scala/app/Main.scala`, since the call to `location` is made on the 4th line of the file.
 
 So far our sbt project looks like this:
 
 ```scala
 // build.sbt
-
 lazy val lib = project
   .in(file("lib"))
   .settings(
@@ -238,7 +237,7 @@ This alone should make our `app` module compile in Scala 3.
 
 There is no magic formula to port a Scala 2 macro into Scala 3.
 One needs to learn about the available new metaprogramming features of Scala 3.
-You can have a look at the list of [available metaprogramming features](metaprogramming-features.md).
+You can have a look at the list of [available metaprogramming features](metaprogramming.md).
 
 We eventually come up with this implementation:
 
@@ -436,7 +435,7 @@ sbt: location> ++0.27.0-RC1; app / run
 
 Again, there is no magic formula to port a Scala 2 macro into Scala 3.
 One needs to learn about the available new metaprogramming features of Scala 3.
-You can have a look at the list of [available metaprogramming features](metaprogramming-features.md).
+You can have a look at the list of [available metaprogramming features](metaprogramming.md).
 
 We eventually come up with this implementation:
 

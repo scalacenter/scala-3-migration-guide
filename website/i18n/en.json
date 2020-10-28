@@ -14,9 +14,6 @@
       "external-resources/moving-from-scala-2-to-scala-3": {
         "title": "Moving from Scala 2 to Scala 3"
       },
-      "get-started": {
-        "title": "Introduction"
-      },
       "incompat-3.1": {
         "title": "Dotty 3.1-migration Mode"
       },
@@ -35,23 +32,23 @@
       "incompatibilities/table": {
         "title": "Incompatibility Table"
       },
-      "macros/metaprogramming-features": {
-        "title": "Metaprogramming Features"
+      "macros/macro-libraries": {
+        "title": "Scala Macro Libraries"
       },
-      "macros/migration-status": {
-        "title": "Migration Status"
+      "macros/metaprogramming": {
+        "title": "Metaprogramming in Scala 3"
       },
       "macros/migration-tutorial": {
-        "title": "Migration Tutorial"
+        "title": "Porting a Macro Library"
+      },
+      "migration-tools": {
+        "title": "Tour of the Migration Tools"
       },
       "scala-3-migration-mode": {
         "title": "Scala 3 Migration Mode"
       },
       "scala-3-syntax-rewriting": {
         "title": "Scala 3 Syntax Rewriting"
-      },
-      "tutorials/moving-from-scala-2-to-scala-3": {
-        "title": "Moving from Scala 2 to Scala 3"
       },
       "upgrade": {
         "title": "Upgrading a Scala Application"
@@ -64,9 +61,9 @@
     },
     "categories": {
       "General": "General",
-      "External Resources": "External Resources",
       "Incompatibilities": "Incompatibilities",
-      "Macros": "Macros"
+      "Macros": "Macros",
+      "External Resources": "External Resources"
     }
   },
   "pages-strings": {

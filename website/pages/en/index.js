@@ -83,7 +83,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
-            <Button href={docUrl("get-started.html", language)}>
+            <Button href={docUrl("compatibility.html", language)}>
               Get started
             </Button>
           </PromoSection>
@@ -134,9 +134,9 @@ const Metaprogramming = () => (
           'Scala 3 provides a toolbox full of metaprogramming features, which are safer, more robust, and much more stable than their counterparts in Scala 2. ' +
           'Implementing macro libraries in Scala 3 is simpler and the resulting libraries are easier to maintain across future versions of Scala. ' +
           'The improvements come at a price: the metaprogramming facilities have been re-designed from the _ground up_. In consequence, existing macro libraries need to be ported to the new interfaces.\n\n' +
-          `In the [Macros](${docUrl('macros/metaprogramming-features.html')}) section, ` + 
+          `In the [Macros](${docUrl('macros/metaprogramming.html')}) section, ` + 
           'you will find helpful content to port your macros code to Scala 3.',
-        title: `[Migrating Macros](${docUrl('macros/migrating-macros.html')})`,
+        title: `[Porting Macros](${docUrl('macros/migration-tutorial.html')})`,
         image: `${imgUrl('magnifying-primary.svg')}`,
         imageAlt: 'Icon made by Eucalyp from the Noun Project.',
         imageAlign: 'left',

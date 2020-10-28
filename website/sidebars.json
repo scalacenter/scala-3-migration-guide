@@ -1,13 +1,10 @@
 {
   "docs": {
     "General": [
-      "get-started",
       "compatibility",
+      "migration-tools",
       "scala-3-migration-mode",
       "scala-3-syntax-rewriting"
-    ],
-    "External Resources": [
-      "external-resources/moving-from-scala-2-to-scala-3"
     ],
     "Incompatibilities": [
       "incompatibilities/table",
@@ -17,9 +14,12 @@
       "incompatibilities/other-changed-features"
     ],
     "Macros": [
-      "macros/metaprogramming-features",
-      "macros/migration-tutorial",
-      "macros/migration-status"
+      "macros/macro-libraries",
+      "macros/metaprogramming",
+      "macros/migration-tutorial"
+    ],
+    "External Resources": [
+      "external-resources/moving-from-scala-2-to-scala-3"
     ]
   }
 }

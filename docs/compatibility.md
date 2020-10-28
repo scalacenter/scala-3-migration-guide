@@ -5,9 +5,9 @@ title: Compatibility Reference
 Scala 3 is a game changer in terms of compatibility in the Scala ecosystem that will greatly improve the day-to-day experience of the Scala programmers, starting from the migration.
 
 In this page you will learn about the compatibility between Scala 2.13 and Scala 3.0 at different levels of the program lifetime.
-You will then find how these levels of compatibility can be benefited from in concrete examples of dependencies between Scala 2 and Scala 3.
+You will then find how to benefit from these levels of compatibility in concrete examples of dependencies between Scala 2 and Scala 3.
 
-## Language Level
+## Source Level
 
 A large subset of the Scala 2.13 language is still compatible in Scala 3.0.
 Not all of it though, some constructs have been simplified, restricted or dropped altogether.
