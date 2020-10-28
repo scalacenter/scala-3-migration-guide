@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Scala Macro Libraries · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="While being experimental, the Scala community has largely adopted the Scala 2 [Def Macro](https://docs.scala-lang.org/overviews/macros/overview.html) feature in multiple of ways: code generation, optimizations, ergonomic DSLs..."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Scala Macro Libraries · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="While being experimental, the Scala community has largely adopted the Scala 2 [Def Macro](https://docs.scala-lang.org/overviews/macros/overview.html) feature in multiple of ways: code generation, optimizations, ergonomic DSLs..."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Macros</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-migration-mode.html">Scala 3 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-syntax-rewriting.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Macros</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/metaprogramming.html">Metaprogramming in Scala 3</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/migration-tutorial.html">Porting a Macro Library</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">External Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/macros/macro-libraries.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Scala Macro Libraries</h1></header><article><div><span><p>While being experimental, the Scala community has largely adopted the Scala 2 <a href="https://docs.scala-lang.org/overviews/macros/overview.html">Def Macro</a> feature in multiple of ways: code generation, optimizations, ergonomic DSLs...</p>
+<p>A large part of the ecosystem now depends on Scala 2 macros defined in external libraries.
+Identifying those library dependencies is key to establish that a project is ready to be migrated to Scala 3.</p>
+<blockquote>
+<p>The Scala 3 compiler cannot execute Scala 2 macro definitions.</p>
+<p>However, the handy <code>-Xignore-scala2-macros</code> option can be used to ignore them and type check the rest of the code.</p>
+<pre><code class="hljs css language-scala">[error] -- <span class="hljs-type">Error</span>: /src/main/scala/foo/<span class="hljs-type">Foo</span>.scala:<span class="hljs-number">10</span>:<span class="hljs-number">45</span> 
+[error] <span class="hljs-number">10</span> |  <span class="hljs-keyword">implicit</span> <span class="hljs-keyword">val</span> foo: <span class="hljs-type">Foo</span>[<span class="hljs-type">List</span>[<span class="hljs-type">Int</span>]] = <span class="hljs-type">Foo</span>.make
+[error]    |                                             ^
+[error]    |<span class="hljs-type">Scala</span> <span class="hljs-number">2</span> macro cannot be used in <span class="hljs-type">Dotty</span>. <span class="hljs-type">See</span> https:<span class="hljs-comment">//dotty.epfl.ch/docs/reference/dropped-features/macros.html</span>
+[error]    |<span class="hljs-type">To</span> turn <span class="hljs-keyword">this</span> error into a warning, pass -<span class="hljs-type">Xignore</span>-scala2-macros to the compiler
+</code></pre>
+<p>Beware that <code>-Xignore-scala2-macros</code> will produce bytecode that will fail at runtime.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="macro-libraries"></a><a href="#macro-libraries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Macro Libraries</h2>
+<p>The following table contains an incomplete list of macro libraries and their migration status.</p>
+<table>
+<thead>
+<tr><th>Project</th><th>Status</th><th>Comments</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://index.scala-lang.org/adamw/scala-macro-debug">adamw/scala-macro-debug</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/ajozwik/quill-generic">ajozwik/quill-generic</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/argonaut-io/argonaut">argonaut-io/argonaut</a></td><td><i class="fas fa-times fa-lg"/></td><td>Argonaut macros not yet available</td></tr>
+<tr><td><a href="https://index.scala-lang.org/backuity/ansi-interpolator">backuity/ansi-interpolator</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/circe/circe">circe/circe</a></td><td><i class="fas fa-times fa-lg"/></td><td><code>circe-parser</code> and other modules not yet ported</td></tr>
+<tr><td><a href="https://index.scala-lang.org/dmytromitin/auxify">dmytromitin/auxify</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/fthomas/refined">fthomas/refined</a></td><td><img src="/scala-3-migration-guide/img/tilde.svg"/></td><td>refined macros not yet available</td></tr>
+<tr><td><a href="https://index.scala-lang.org/jokade/slogging">jokade/slogging</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/getquill/quill/">getquill/quill</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/giiita/refuel/">giiita/refuel</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/lightbend/scala-logging">lightbend/scala-logging</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/lihaoyi/autowire">lihaoyi/autowire</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/lihaoyi/pprint">lihaoyi/pprint</a></td><td><i class="fas fa-check  fa-lg"/></td><td>Since version <code>0.6.0</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/lihaoyi/sourcecode">lihaoyi/sourcecode</a></td><td><i class="fas fa-check  fa-lg"/></td><td>Since version <code>0.1.8</code></td></tr>
+<tr><td><a href="https://github.com/lihaoyi/upickle">lihaoyi/upickle</a></td><td><i class="fas fa-check  fa-lg"/></td><td>Since version <code>1.2.0</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/lihaoyi/utest">lihaoyi/utest</a></td><td><i class="fas fa-check  fa-lg"/></td><td>Since version <code>0.7.3</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/kmizu/macro_peg">macro-peg/macro_peg</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/milessabin/shapeless">milessabin/shapeless</a></td><td><img src="/scala-3-migration-guide/img/tilde.svg"/></td><td>Being rewritten into Shapeless 3<br/>Milestone available (<a href="https://github.com/milessabin/shapeless/tree/shapeless-3">Early Preview</a>)</td></tr>
+<tr><td><a href="https://index.scala-lang.org/monix/minitest">monix/minitest</a></td><td><img src="/scala-3-migration-guide/img/tilde.svg"/></td><td>Ported in the <em>Community Build</em> (<a href="https://github.com/dotty-staging/minitest">Staging Fork</a>)<br/>Not merged upstream</td></tr>
+<tr><td><a href="https://index.scala-lang.org/mpollmeier/gremlin-scala">mpollmeier/gremlin-scala</a></td><td><i class="fas fa-times fa-lg"/></td><td><code>macros</code> module not available for Scala 3</td></tr>
+<tr><td><a href="https://index.scala-lang.org/nevillelyh/parquet-avro-extra">nevillelyh/parquet-avro-extra</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/non/imp">non/imp</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/playframework/play-json">playframework/play-json</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/plokhotnyuk/expression-evaluator">plokhotnyuk/expression-evaluator</a></td><td><i class="fas fa-times fa-lg"/></td><td>No replacement for <code>Evals.eval</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator">plokhotnyuk/fast-string-interpolator</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/plokhotnyuk/jsoniter-scala">plokhotnyuk/jsoniter-scala</a></td><td><i class="fas fa-times fa-lg"/></td><td>No replacement for <code>Evals.eval</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/propensive/magnolia">propensive/magnolia</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/sangria-graphql/sangria">sangria-graphql/sangria</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/scalameta/munit">scalameta/munit</a></td><td><i class="fas fa-check fa-lg"/></td><td>Since <code>0.3.0</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/scalatest/scalatest">scalatest/scalatest</a></td><td><i class="fas fa-check fa-lg"/></td><td>Since version <code>3.1.0</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/scalatest/scalatestplus-junit">scalatest/scalatestplus-junit</a></td><td><i class="fas fa-check fa-lg"/></td><td>Since version <code>3.1.0</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/scodec/scodec-bits">scodec/scodec-bits</a></td><td><i class="fas fa-check fa-lg"/></td><td>Since version <code>1.1.18</code></td></tr>
+<tr><td><a href="https://index.scala-lang.org/sirthias/parboiled2">sirthias/parboiled2</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/softwaremill/macwire">softwaremill/macwire</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/thoughtworsinc/each">thoughtworksinc/each</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/typelevel/claimant">typelevel/claimant</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/typelevel/spire">typelevel/spire</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https://index.scala-lang.org/wix/accord">wix/accord</a></td><td><i class="fas fa-times fa-lg"/></td><td></td></tr>
+<tr><td><a href="https:://index.scala-lang.org/zio/izumi-reflect">zio/izumi-reflect</a></td><td><i class="fas fa-check fa-lg"/></td><td>Does not yet support path-dependent type</td></tr>
+<tr><td><a href="https://index.scala-lang.org/zio/zio">zio/zio</a></td><td><img src="/scala-3-migration-guide/img/tilde.svg"/></td><td>ZIO macros not yet available (<a href="https://zio.dev/docs/howto/howto_macros">documentation</a>)</td></tr>
+</tbody>
+</table>
+<p><a href="/scala-3-migration-guide/docs/contributing.html">Contributors welcome!</a></p>
+<h2><a class="anchor" aria-hidden="true" id="macro-annotations-libraries"></a><a href="#macro-annotations-libraries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Macro Annotations Libraries</h2>
+<p>Macro annotations are not supported in Scala 3.
+The following table contains a incomplete list of Scala 2 libraries that provide macro annotations.
+Scala 3 compatible alternatives are proposed when available.</p>
+<table>
+<thead>
+<tr><th>Project</th><th>Alternative Solutions</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="https://index.scala-lang.org/dmytromitin/auxify">dmytromitin/auxify</a></td><td><i class="fas fa-times fa-lg"/></td></tr>
+<tr><td><a href="https://index.scala-lang.org/julianpeeters/avro-scala-macro-annotations">julianpeeters/avro-scala-macro-annotations</a></td><td><i class="fas fa-times fa-lg"/></td></tr>
+<tr><td><a href="https://index.scala-lang.org/manatki/derevo">manatki/derevo</a></td><td><i class="fas fa-times fa-lg"/></td></tr>
+<tr><td><a href="https://index.scala-lang.org/typelevel/simulacrum">typelevel/simulacrum</a></td><td><i class="fas fa-check fa-lg"></i> Source generation using <a href="https://index.scala-lang.org/typelevel/simulacrum-scalafix/simulacrum-scalafix/0.5.0?target=_2.12">simulacrum-scalafix</a></td></tr>
+</tbody>
+</table>
+<p><a href="/scala-3-migration-guide/docs/contributing.html">Contributors welcome!</a></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html"><span class="arrow-prev">← </span><span>Other Changed Features</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/macros/metaprogramming.html"><span>Metaprogramming in Scala 3</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#macro-libraries">Macro Libraries</a></li><li><a href="#macro-annotations-libraries">Macro Annotations Libraries</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2020 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
