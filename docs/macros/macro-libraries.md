@@ -41,6 +41,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [giiita/refuel](https://index.scala-lang.org/giiita/refuel/) | <i class="fas fa-times fa-lg"/> | |
 | [lightbend/scala-logging](https://index.scala-lang.org/lightbend/scala-logging) |  <i class="fas fa-times fa-lg"/> | |
 | [lihaoyi/autowire](https://index.scala-lang.org/lihaoyi/autowire) |  <i class="fas fa-times fa-lg"/> | |
+| [lihaoyi/fastparse](https://index.scala-lang.org/lihaoyi/fastparse) |  <i class="fas fa-times fa-lg"/> | |
 | [lihaoyi/pprint](https://index.scala-lang.org/lihaoyi/pprint) | <i class="fas fa-check  fa-lg"/> | Since version `0.6.0` |
 | [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check  fa-lg"/> | Since version `0.1.8` |
 | [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check  fa-lg"/> | Since version `1.2.0` |
@@ -62,6 +63,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
 | [scodec/scodec-bits](https://index.scala-lang.org/scodec/scodec-bits) | <i class="fas fa-check fa-lg"/> | Since version `1.1.18` |
 | [sirthias/parboiled2](https://index.scala-lang.org/sirthias/parboiled2) | <i class="fas fa-times fa-lg"/> | |
+| [slick/slick](https://index.scala-lang.org/slick/slick) | <i class="fas fa-times fa-lg"/> | |
 | [softwaremill/macwire](https://index.scala-lang.org/softwaremill/macwire) | <i class="fas fa-times fa-lg"/> | |
 | [thoughtworksinc/each](https://index.scala-lang.org/thoughtworsinc/each) | <i class="fas fa-times fa-lg"/> | |
 | [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"/> | |
