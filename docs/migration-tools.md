@@ -41,7 +41,7 @@ Other build tools also support Scala 3 and cross-compilation with Scala 2, among
 
 Visual Studio Code has its own Scala 3 Language Server plugin that you can simply configure by running the `sbt launchIDE` task of the `sbt-dotty` plugin.
 
-Scala 3 support in Metals, including Scala 3 Worksheets, has made significant progress. For more detials, check the relevant [Scala Center Update](https://contributors.scala-lang.org/t/metals-and-scala-3/4274).
+Scala 3 support in Metals, including Scala 3 Worksheets, has made significant progress. For more details, check the relevant [Scala Center Update](https://contributors.scala-lang.org/t/metals-and-scala-3/4274).
 
 The latest version of the Scala plugin for Intellij Idea already has preliminary support, including Scala worksheets, for Scala 3.
 
