@@ -50,6 +50,9 @@
       "scala-3-syntax-rewriting": {
         "title": "Scala 3 Syntax Rewriting"
       },
+      "tutorials/sbt-migration": {
+        "title": "Porting an sbt Project"
+      },
       "upgrade": {
         "title": "Upgrading a Scala Application"
       }
@@ -61,6 +64,7 @@
     },
     "categories": {
       "General": "General",
+      "Tutorials": "Tutorials",
       "Incompatibilities": "Incompatibilities",
       "Macros": "Macros",
       "External Resources": "External Resources"

@@ -6,6 +6,9 @@
       "scala-3-migration-mode",
       "scala-3-syntax-rewriting"
     ],
+    "Tutorials": [
+      "tutorials/sbt-migration"
+    ],
     "Incompatibilities": [
       "incompatibilities/table",
       "incompatibilities/syntactic-changes",
