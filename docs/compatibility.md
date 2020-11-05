@@ -129,8 +129,7 @@ Therefore the Scala 3 dependency on the standard library follows this exact same
 
 ### A Scala 2 module depending on a Scala 3 artifact
 
-As of `2.13.4` a Scala 2 module will be able to depend on a Scala 3 library.
-
+As of `2.13.4` a Scala 2 module will be able to depend on a Scala 3 library by enabling the Tasty reader with `-Ytasty-reader`.
 ![Scala 2 module depending on a Scala 3 artifact](assets/compatibility/2to3.svg)
 
 This diagram can be translated into sbt:
@@ -140,7 +139,10 @@ val scala3 = "0.25.0"
 val scala2 = "2.13.4"
 
 lazy val foo = project.in.file("foo")
-  .settings(scalaVersion := scala2)
+  .settings(
+    scalaVersion := scala2,
+    scalacOptions += "-Ytasty-reader"
+  )
   .dependsOn(bar)
 
 lazy val bar = project.in(file("bar"))
@@ -155,6 +157,7 @@ val scala2 = "2.13.4"
 lazy val foo = project.in.file("foo")
   .settings(
     scalaVersion := scala3,
+    scalacOptions += "-Ytasty-reader",
     libraryDependencies += "org.bar" % "bar_0.25" % "1.0.0"
   )
 ```
