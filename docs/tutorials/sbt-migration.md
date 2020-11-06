@@ -4,19 +4,19 @@ title: Porting an sbt Project
 ---
 
 In this tutorial we are going to walk through the migration of an sbt project:
-1. Choose a module that is ready to migrate
-2. Configure sbt for Scala 3
-3. Prepare the dependencies
-4. Set up cross-building
-5. Configure the Scala 3 compiler
-6. Fix the incompatibilities
-7. Finalize the migration
+1. [Choose a module that is ready to migrate](#1---choose-a-module)
+2. [Configure sbt for Scala 3](#2---configure-sbt-for-scala-3)
+3. [Prepare the dependencies](#3---prepare-the-dependencies)
+4. [Set up cross-building](#4---set-up-cross-building)
+5. [Configure the Scala 3 compiler](#5---configure-the-scala-3-compiler)
+6. [Fix the incompatibilities](#6---solve-the-incompatibilities)
+7. [Finalize the migration](#7---finalize-the-migration)
 
 > The initial Scala version of the project must be 2.13.+
 > 
 > sbt version 1.4.+ is required.
 
-## 1. Choose a Module
+## 1 - Choose a Module
 
 The [Compatibility Reference](../compatibility.md) shows that the Scala 2.13 and Scala 3.0 binaries are compatible.
 Thanks to this we are able to migrate a project one module at a time, in any order.
@@ -34,9 +34,9 @@ There are a few requirements that a module must meet before being ported:
 
 The following paragraphs explain how to check those requirements and, in case they are unmet, what needs to be done.
 
-If you are ready to proceed with the migration you can jump straight to the next part: [Configure sbt for Scala 3](#2-configure-sbt-for-scala-3).
+If you are ready to proceed with the migration you can jump straight to the next part: [Configure sbt for Scala 3](#2---configure-sbt-for-scala-3).
 
-### Macro dependencies
+### 1.1 - Macro dependencies
 
 The usage of Scala macro libraries is widespread in the Scala 2 ecosystem.
 We can mention as examples the following libraries: 
@@ -53,7 +53,7 @@ That is why you should make sure the macro libraries on which your project depen
 You can print the list of direct and transitive dependencies of an sbt project by running the `dependencyTree` task in an sbt shell.
 
 ```shell
-> <module> / Test / dependencyTree
+sbt:example> <module> / Test / dependencyTree
 ```
 
 You can compare the printed result with the list of macro libraries in the [Scala Macro Libraries](../macros/macro-libraries.md) page.
@@ -75,7 +75,7 @@ We can upgrade it to version `3.2.2`, which is cross-published in Scala 2.13 and
 libraryDependency += "org.scalatest" %% "scalatest" % "3.2.2"
 ```
 
-### Compiler plugins
+### 1.2 - Compiler plugins
 
 The Scala 2 compiler plugins are not compatible with Scala 3.
 
@@ -95,7 +95,7 @@ Some compiler plugins may also be automatically added by an sbt plugin.
 
 You can find all configured compiler plugins by looking at the compiler options of your project.
 
-```scala
+```shell
 sbt:example> show example / Compile / scalacOptions
 [info] * -Xplugin:target/compiler_plugins/wartremover_2.13.3-2.4.12.jar
 [info] * -Xplugin:target/compiler_plugins/semanticdb-scalac_2.13.3-4.3.20.jar
@@ -145,7 +145,7 @@ However, Scala 3 introduces some features that makes `kind-projector` not needed
 
 Additionally, the `-Ykind-projector` compiler option allows the usage of `*` as a wildcard in type projections.
 
-### Run-time reflection
+### 1.3 - Run-time reflection
 
 `scala-reflect` will not be ported to Scala 3 because it exposes Scala 2 compiler internals that do not exist in Scala 3.
 
@@ -154,7 +154,7 @@ To remedy this situation, you can try to re-implement the corresponding parts of
 
 If `scala-reflect` is transitively added in the class path by a library, you probably need to upgrade that dependency to a Scala 3 compatible version of it.
 
-## 2. Configure sbt for Scala 3
+## 2 - Configure sbt for Scala 3
 
 Support for Scala 3 in sbt is brought by the `sbt-dotty` plugin.
 
@@ -169,7 +169,7 @@ addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.5")
 
 > Don't forget to `reload` the sbt shell after each change in the `sbt` configuration files.
 
-## 3. Prepare the dependencies
+## 3 - Prepare the dependencies
 
 The fact that a Scala 3.0 module can depend on a Scala 2.13 artifact, and vice versa, is unprecedented in the history of the Scala language.
 As we will see, it gives a lot more flexibility in terms of dependency management.
@@ -189,7 +189,7 @@ But suppose I switch the `scalaVersion` from `2.13.3` to `3.0.0-M1`.
 When I try to compile, sbt complains that `cats-core_3.0-2.1.1.jar` cannot be found.
 Of course it is right, yet I must be able to use `cats-core_2.13-2.1.1.jar` to compile to Scala 3.
 
-### A Scala 3.0 module depending on a Scala 2.13 artifact
+### 3.1 - A Scala 3.0 module depending on a Scala 2.13 artifact
 
 They are two ways to configure a Scala 3 module that depends on a Scala 2.13 artifact:
 
@@ -215,7 +215,7 @@ This method changes the behavior of the `%%` operator on Scala 3 versions only, 
 
 This is much useful in a repository that is cross-built on many versions.
 
-### A Scala 2.13 module depending on a Scala 3.0 artifact
+### 3.2 - A Scala 2.13 module depending on a Scala 3.0 artifact
 
 Conversely a Scala 2.13 module can depend on a Scala 3.0 artifact.
 
@@ -234,7 +234,7 @@ libraryDependencies += "org.typelevel" % "cats-core_3.0" % "2.2.0"
 
 Again you can notice that the `%%` is not used.
 
-### Macro dependencies
+### 3.3 - Macro dependencies
 
 Macro dependencies are still tied to a particular version of the compiler.
 In such case the `%%` operator is still very much relevant.
@@ -244,7 +244,7 @@ For instance, the `sourcecode` library is a cross-published macro library and th
 libraryDependency += "com.lihaoyi" %% "sourcecode" % "0.2.1"
 ```
 
-### What about Scala.js dependencies?
+### 3.4 - What about Scala.js dependencies?
 
 The `%%%` operator is used in Scala.js projects to automatically resolve artifacts, depending on the Scala and Scala.js versions.
 
@@ -260,7 +260,7 @@ libraryDependencies +=
   "org.typelevel" % "cats-core_sjs1_2.13" % "2.1.1"
 ```
 
-### Summing up
+### 3.5 - Summing up
 
 An sbt project can use different dependency resolution strategies, based on the binary version of the targeted libraries.
 
@@ -287,7 +287,7 @@ The table below shows which artifacts are resolved depending on the Scala versio
 | `2.13.3` | `_2.13` | `_3.0` | `_2.13` |
 | `3.0.0-M1` | `_2.13` | `_3.0` | `_3.0` |
 
-## 4. Set up cross-building
+## 4 - Set up cross-building
 
 The two main challenges of the codebase migration are:
 - Make the code compile
@@ -301,17 +301,167 @@ Cross-building is easy to configure in sbt.
 In the project configuration we add:
 
 ```scala
+scalaVersion = "3.0.0-M1"
 crossScalaVersion ++= Seq("2.13.3", "3.0.0-M1")
 ```
 
-## 5. Configure the Scala 3 compiler
+This configuration means:
+- The default version is `3.0.0-M1`.
+- The `2.13.3`  can be loaded by `++2.13.3`.
+- The `3.0.0-M1` can be loaded by `++3.0.0-M1`.
 
-TODO
+Beware that `reload` will always load the default version.
 
-## 6. Solve the Incompatibilties
+## 5 - Configure the Scala 3 compiler
 
-TODO
+Between Scala 2.13 and Scala 3.0, the available compiler options are different:
+- Some of the Scala 2.13 options are not supported by the Scala 3 compiler.
+- New options are available to enable new features of the Scala 3 compiler.
 
-## 7. Finalize the migration
+We basically need two lists of compiler options, one for Scala 2 and another one for Scala 3.
 
-TODO
+> A comparsion table for compiler options will soon be included in this guide. Stay tuned to [#60](https://github.com/scalacenter/scala-3-migration-guide/issues/60).
+> [Contributions welcomed](../contributing.md)
+
+The `isDotty` setting can be used to select the list of options corresponding to the current `scalaVersion`.
+Thus a typical `scalacOptions` configuration would look like this:
+```scala
+// build.sbt
+scalacOptions ++= {
+  if (isDotty.value) Seq(
+    "-encoding",
+    "UTF-8",
+    "-feature",
+    "-unchecked",
+    "-language:implicitConversions"
+    // "-Xfatal-warnings" will be added after the migration
+  ) else Seq(
+    "-encoding",
+    "UTF-8",
+    "-feature",
+    "-deprecation",
+    "-language:implicitConversions",
+    "-Xfatal-warnings",
+    "-Wunused:imports,privates,locals",
+    "-Wvalue-discard"
+  )
+}
+```
+
+### 5.1 - Migration mode
+
+The Scala 3 compiler has a migration mode that can assist us during the migration.
+It is described in details in the [Scala 3 Migration Mode](../scala-3-migration-mode.md) page.
+
+To enable it we can add the `-source:3.0-migration` option:
+```scala
+// build.sbt
+scalacOptions ++= { 
+  if (isDotty.value) Seq("-source:3.0-migration")
+  else Seq.empty
+}
+```
+
+> `-Xfatal-warnings` must be deactivated when in the migration mode
+
+## 6 - Solve the Incompatibilities
+
+### 6.1 - Compilation
+
+It is now time to try compiling in Scala 3:
+
+```shell
+sbt:example> ++3.0.0-M1
+[info] Setting Scala version to 3.0.0-M1 on 1 project.
+...
+sbt:example> <module> / Test / compile
+...
+```
+
+> The `<module> / compile` task only compiles the `main` code.
+> It is strictly equivalent to `<module> / Compile / compile`.
+>
+> To run the `main` and the `test` code, use the `<module> / Test / compile` task instead.
+
+The compiler produces different kind of diagnosis:
+- Error: Some valid pieces of Scala 2.13 code cannot be compiled anymore.
+There are various reasons for those errors, that are given in the [Incompatibility Table](../incompatibilities/table.md).
+- Migration Warning: In migration mode, the Scala 3 compiler detects that a valid Scala 2.13 code is not valid anymore.
+It does however compile it, and it will even able to patch the code, when invoked with the `-rewrite` option.
+- Warning: The Scala 3 compiler can emit more warnings than the Scala 2 compiler.
+
+For all kind of errors, except for macros, there exists a solution that cross-compiles in Scala 2.13 and Scala 3.0.
+The [Incompatibility Table](../incompatibilities/table.md) will help you to fix them.
+
+> The macros errors can be silented by the `-Xignore-scala2-macros` option.
+
+After fixing an incompatibility, you are advise to go back to Scala 2.13 to validate the solution against the tests.
+
+```shell
+sbt:example> ++2.13.3
+[info] Setting Scala version to 2.13.3 on 1 project.
+...
+sbt:example> <module> / test
+...
+[success]
+```
+
+Consider committing your changes regularly.
+
+Once you got no more errors you can ask the compiler to patch the migration warnings.
+Add the `-rewrite` compiler option, and compile one more time:
+
+```shell
+sbt:example> ++3.0.0-M1
+[info] Setting Scala version to 3.0.0-M1 on 1 project.
+...
+sbt:example> set <module> / scalacOptions += "-rewrite"
+[info] Defining <module> / scalacOptions
+...
+sbt:example> <module> / Test / compile
+...
+[info] [patched file /example/src/main/scala/app/Main.scala]
+[warn] two warnings found
+[success]
+```
+
+### 6.2 - Macro Re-implementation
+
+Scala 2 macros must be re-implemented in Scala 3.
+You can learn about the new Scala 3 metaprogramming features in the [Metaprogramming in Scala 3](../macros/metaprogramming.md) page.
+
+If you want to maintain the compatibility to Scala 2 you can follow the tutorial on [Porting a Macro Library](../macros/migration-tutorial.md).
+
+### 6.3 - Run Time
+
+On rare occasions, different implicit values could possibly be resolved and alter the runtime behavior of the program.
+Good tests are the only guarantee to prevent such bugs from going unnoticed.
+
+## 7 - Finalize the migration
+
+In the `build.sbt` remove the `-source:3.0-migration` configuration.
+You can also add the `-Xfatal-warnings` if you want to.
+
+Reload sbt and try to compile and test all projects.
+
+```shell
+sbt:example> reload
+...
+sbt:example> test
+...
+[success]
+```
+
+Congratulations! You have successfully ported a module to Scala 3.
+
+You can choose to keep the Scala 2.13 settings as a precaution, or you can remove the `crossScalaVersion` setting and the Scala 2.13 `scalacOptions`.
+
+Even if you drop the Scala 2.13 compilation in this module, others Scala 2.13 modules will still be able to depend on it by using the `-Ytasty-reader`.
+
+> `-Ytasty-reader` is yet to be released in Scala `2.13.4`.
+> 
+> The Tasty reader compatible features will soon be listed in this guide.
+> Stay tuned to [#77](https://github.com/scalacenter/scala-3-migration-guide/issues/77).
+
+Here ends our walk through the migration of a Scala module. 
+The process can be repeated for each modules, until the project is fully migrated to Scala 3.
