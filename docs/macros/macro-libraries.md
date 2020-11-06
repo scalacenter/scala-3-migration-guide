@@ -57,6 +57,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [plokhotnyuk/fast-string-interpolator](https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator) | <i class="fas fa-times fa-lg"/> | |
 | [plokhotnyuk/jsoniter-scala](https://index.scala-lang.org/plokhotnyuk/jsoniter-scala) | <i class="fas fa-times fa-lg"/> | No replacement for `Evals.eval` |
 | [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <i class="fas fa-times fa-lg"/> | |
+| [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-times fa-lg"/> | |
 | [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-times fa-lg"/> | |
 | [scalameta/munit](https://index.scala-lang.org/scalameta/munit) | <i class="fas fa-check fa-lg"/> | Since `0.3.0` |
 | [scalatest/scalatest](https://index.scala-lang.org/scalatest/scalatest) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
