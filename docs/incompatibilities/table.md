@@ -3,6 +3,9 @@ id: table
 title: Incompatibility Table
 ---
 
+> This table is built upon `0.27.0-RC1`.
+> Some changes might have occurred on more recent versions of the Scala 3 compiler.
+
 We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0.
 Migrating a codebase involves finding and fixing all the incompatibilities of the source code.
 On rare occasions we can also have runtime incompatibilities, that compile in Scala 3.0 but result in a different runtime behavior.
