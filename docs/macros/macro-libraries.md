@@ -33,6 +33,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [ajozwik/quill-generic](https://index.scala-lang.org/ajozwik/quill-generic) | <i class="fas fa-times fa-lg"/> | |
 | [argonaut-io/argonaut](https://index.scala-lang.org/argonaut-io/argonaut) | <i class="fas fa-times fa-lg"/> | Argonaut macros not yet available  |
 | [backuity/ansi-interpolator](https://index.scala-lang.org/backuity/ansi-interpolator) | <i class="fas fa-times fa-lg"/> | |
+| [christopherdavenport/log4cats](https://index.scala-lang.org/ChristopherDavenport/log4cats) | <i class="fas fa-times fa-lg"/> | |
 | [circe/circe](https://index.scala-lang.org/circe/circe) | <i class="fas fa-times fa-lg"/> | `circe-parser` and other modules not yet ported |
 | [dmytromitin/auxify](https://index.scala-lang.org/dmytromitin/auxify) | <i class="fas fa-times fa-lg"/> | |
 | [fthomas/refined](https://index.scala-lang.org/fthomas/refined) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | refined macros not yet available |
@@ -46,6 +47,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check  fa-lg"/> | Since version `0.1.8` |
 | [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check  fa-lg"/> | Since version `1.2.0` |
 | [lihaoyi/utest](https://index.scala-lang.org/lihaoyi/utest) | <i class="fas fa-check  fa-lg"/> | Since version `0.7.3` |
+| [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | [In progress](https://github.com/Log4s/log4s/pull/57) |
 | [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"/> | |
 | [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Shapeless 3<br/>Milestone available ([Early Preview](https://github.com/milessabin/shapeless/tree/shapeless-3)) |
 | [monix/minitest](https://index.scala-lang.org/monix/minitest) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Ported in the _Community Build_ ([Staging Fork](https://github.com/dotty-staging/minitest))<br/>Not merged upstream |
