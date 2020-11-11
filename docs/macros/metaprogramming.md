@@ -12,20 +12,21 @@ Scala 3 is overcoming this limitation by introducing a new principled approach o
 Before getting deep into reimplementing a macro your should check if it can be supported using Scala 3 new features.
 
 * Can I encode the logic of the macro using the new scala 3 features?
-  * [List of Scala 3 features](http://dotty.epfl.ch/docs/reference/overview.html)
 * Can I use *match types* to reimplement the interface of my macro?
-  * [Match Types](http://dotty.epfl.ch/docs/reference/new-types/match-types.html)
 * Can I use `inline` and the metaprogramming features in `scala.compiletime` to reimplement my logic?
-  * [Inline](http://dotty.epfl.ch/docs/reference/metaprogramming/inline.html)
-  * [`scala.compiletime`](http://dotty.epfl.ch/api/scala/compiletime/index.html)
 * Can I use the simpler and safer expression based macros to implement my macro?
-  * [Simple macros](http://dotty.epfl.ch/docs/reference/metaprogramming/macros.html)
-* I really need to have access to the raw AST trees
-  * [TASTy Reflect](http://dotty.epfl.ch/docs/reference/metaprogramming/tasty-reflect.html)
-  * [TASTy inspector](http://dotty.epfl.ch/docs/reference/metaprogramming/tasty-inspect.html)
+* Do I really need to have access to the raw AST trees?
 
-A good reference for this is [Shapeless 3](https://github.com/dotty-staging/shapeless/tree/shapeless-3). It uses Scala 3 features most of the time for a feature that would have been macros in Scala 2 and only uses macros where absolutely necessary.
+You can find references to these concepts in the _macro tutorial_.
 
+## Macro turorial
+
+* [Scala 3 Macro Tutorial](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/introduction.html)
+  * [Inline](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/inline.html)
+  * [Compile-time operations](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/compile-time-operations.html)
+  * [Macros](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/scala-3-macros.html)
+  * [Quoted code](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/quoted-code.html)
+  * [AST Reflection](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/tasty-reflection.html)
 ## Additional Resources
 
 Documentation:
