@@ -3,7 +3,7 @@ id: metaprogramming
 title: Metaprogramming in Scala 3
 ---
 
-The Scala 2 macros are compiler-dependent by design. A macros compiled by a version of the compiler cannot be used by another version of the compiler.
+The Scala 2 macros are compiler-dependent by design. A macro compiled by one version of the compiler cannot be used by another version of the compiler.
 
 Scala 3 is overcoming this limitation by introducing a new principled approach of metaprogramming. While this is an uncontested improvement, it also means that previous macro implementations have to be rewritten from the ground up.
 
