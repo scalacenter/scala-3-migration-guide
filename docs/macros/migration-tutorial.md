@@ -252,7 +252,7 @@ object Macros:
   inline def location: Location = ${locationImpl}
 
   def locationImpl(using ctx: QuoteContext): Expr[Location] =
-    import ctx.tasty.rootPosition
+    import ctx.reflect.rootPosition
     val file = Expr(rootPosition.sourceFile.jpath.toString)
     val line = Expr(rootPosition.startLine + 1)
     '{new Location($file, $line)}
@@ -451,7 +451,7 @@ object Macros:
   inline def location: Location = ${locationImpl}
 
   def locationImpl(using ctx: QuoteContext): Expr[Location] =
-    import ctx.tasty.rootPosition
+    import ctx.reflect.rootPosition
     val file = Expr(rootPosition.sourceFile.jpath.toString)
     val line = Expr(rootPosition.startLine + 1)
     '{new Location($file, $line)}
