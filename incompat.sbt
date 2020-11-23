@@ -275,7 +275,7 @@ lazy val incompat30Settings =
     },
 
     // scalafix configuration
-    semanticdbVersion := scalafixSemanticdb.revision,
+    semanticdbVersion := "4.4.0",
     semanticdbEnabled := !isDotty.value && scalafixRewrite.value,
     CompileBackward / scalafixConfig := Some(baseDirectory.value / ".scalafix.conf"),
     CompileBackward / scalafixOnCompile := !isDotty.value && scalafixRewrite.value,
