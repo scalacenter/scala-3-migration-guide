@@ -250,8 +250,8 @@ lazy val incompat30Settings =
   inConfig(CompileBackward)(Defaults.compileSettings) ++
   inConfig(CompileBackward)(ScalafixPlugin.autoImport.scalafixConfigSettings(CompileBackward)) ++
   Seq(
-    scalaVersion := dotty,
-    crossScalaVersions := List(scala213, dotty),
+    scalaVersion := scala30,
+    crossScalaVersions := List(scala213, scala30),
     
     scala213SourceDir := baseDirectory.value / s"src/main/scala-2.13",
     scala30SourceDir := baseDirectory.value / s"src/main/scala",  
@@ -325,7 +325,7 @@ lazy val runtimeIncompat30Settings = incompat30Settings :+ {
 
 lazy val incompat31Settings = inConfig(CompileBackward)(Defaults.compileSettings) ++
   Seq(
-    scalaVersion := dotty,
+    scalaVersion := scala30,
     
     scala30SourceDir := baseDirectory.value / s"src/main/scala-3.0",
     scala31SourceDir := baseDirectory.value / s"src/main/scala",  
