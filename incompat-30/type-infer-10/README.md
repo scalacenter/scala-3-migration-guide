@@ -11,7 +11,7 @@ As of `0.25.0-RC2` the error message is
 [error]    |                 where:    A$1 is a type in method test with bounds <: A
 ```
 
-In the proposed solution the Scala 3 compiler reports the following warning:
+In the proposed solution the Scala 3.0 compiler reports the following warning:
 ```
 [warn] -- Warning: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/type-infer-10/src/main/scala/type-infer.scala:11:21 
 [warn] 11 |      case Executing(observer: Callback[Option[A]]) => notify(observer)

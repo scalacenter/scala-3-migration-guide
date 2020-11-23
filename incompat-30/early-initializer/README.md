@@ -13,7 +13,7 @@ object Foo extends {
 } with Bar
 ```
 
-The Scala 3 compiler produces the following error messages:
+The Scala 3.0 compiler produces the following error messages:
 
 ```
 -- Error: src/main/scala/early-initializer.scala:6:19 
@@ -48,9 +48,9 @@ class Fizz private (val name: String) extends Bar {
 }
 ```
 
-#### Scala 2 deprecation
+#### Scala 2.13 deprecation
 
-The Scala 2 compiler emits a deprecation warning on early initializers:
+The Scala 2.13 compiler emits a deprecation warning on early initializers:
 
 ```
 src/main/scala/early-initializer.scala:6:20: early initializers are deprecated; they will be replaced by trait parameters in 3.0, see the migration guide on avoiding var/val in traits.

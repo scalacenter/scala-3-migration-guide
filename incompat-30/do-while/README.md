@@ -13,7 +13,7 @@ do {
 } while (f(i) == 0)
 ```
 
-#### Scala 3 migration rewrite
+#### Scala 3.0 migration rewrite
 
 When compiled with Scala 3 and the `-source:3.0-migration -rewrite` options it is rewritten into. 
 

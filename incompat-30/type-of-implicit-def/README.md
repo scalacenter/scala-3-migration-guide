@@ -1,9 +1,9 @@
 ## Type Of Implicit Definition
 
-Type of implicit definitions (`val` or `def`) are now required by the Scala 3 compiler.
+Type of implicit definitions (`val` or `def`) are now required by the Scala 3.0 compiler.
 They cannot be inferred.
 
-Wherever the type annotation of an implicit definition is missing, the Scala 3 compiler will print an error message of the form:
+Wherever the type annotation of an implicit definition is missing, the Scala 3.0 compiler will print an error message of the form:
 
 ```
 -- Error: src/main/scala/type-of-implicit-def.scala:4:15 

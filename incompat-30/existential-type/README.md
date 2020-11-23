@@ -19,7 +19,7 @@ def foo: Bar
 
 Note that using a wildcard argument is often simpler but is not always possible.
 
-#### Scala 2 feature warning
+#### Scala 2.13 feature warning
 
 Existential type is a Scala 2 feature that must be enabled explicitly by adding the import clause `import scala.language.existentials` or by setting the compiler option `-language:existentials`.
 

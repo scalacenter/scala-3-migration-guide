@@ -1,6 +1,6 @@
 ## `any2stringadd` conversion
 
-The implicit `Predef.any2stringadd` conversion is deprecated since `2.13` and dropped in Scala 3.
+The implicit `Predef.any2stringadd` conversion is deprecated since `2.13.0` and dropped in Scala 3.0.
 
 #### Scala 2.13 deprecation
 

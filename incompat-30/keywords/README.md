@@ -5,7 +5,7 @@ Some are said _regular_ which means that you cannot use them as identifiers anym
 The others are said _soft_, meaning that they are not restricted.
 You can still use the `open` identifier, for instance.
 
-For the matter of migrating from Scala 2 to Scala 3, the keywords that can cause compilation errors are:
+For the matter of migrating from Scala 2.13 to Scala 3.0, the keywords that can cause compilation errors are:
 - `enum`
 - `export`
 - `given`
@@ -25,9 +25,9 @@ object given {
 
 There is a straightforward solution which is to backquote the keywords when used as identifiers.
 
-#### Scala 3 migration rewrite
+#### Scala 3.0 migration rewrite
 
-The Scala 3 compiler can apply this simple rewrite by itself, with the `-source:3.0-migration -rewrite` options:
+The Scala 3.0 compiler can apply this simple rewrite by itself, with the `-source:3.0-migration -rewrite` options:
 
 ```scala
 object `given` {

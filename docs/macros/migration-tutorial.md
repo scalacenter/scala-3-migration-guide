@@ -3,12 +3,15 @@ id: migration-tutorial
 title: Porting a Macro Library
 ---
 
-In this tutorial we will learn two different approaches to migrate a macro library to Scala 3: cross-building and mixing macro definitions.
-Each approach makes the library available in Scala 3 while maintaining Scala 2 compatibility.
+In this tutorial we will learn two different approaches to migrate a macro library to Scala 3.0:
+- [Cross-Building](#cross-building)
+- [Mixing Macro Definitions in Scala 3.0](#mixing-macro-definitions)
+- 
+Each approach makes the library available in Scala 3.0 while maintaining Scala 2.13 compatibility.
 
 ## A Scala 2 Macro Definition
 
-Let's define a simple Scala 2 macro library that contains a single macro method called `location`.
+Let's define a simple Scala 2.13 macro library that contains a single macro method called `location`.
 
 ```scala
 // lib/src/main/scala/location/Location.scala
@@ -57,7 +60,7 @@ So far our sbt project looks like this:
 lazy val lib = project
   .in(file("lib"))
   .settings(
-    scalaVersion := "2.13.3",
+    scalaVersion := "@scala213@",
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     )
@@ -65,7 +68,7 @@ lazy val lib = project
 
 lazy val app = project
   .in(file("app"))
-  .settings(scalaVersion := "2.13.3")
+  .settings(scalaVersion := "@scala213@")
   .dependsOn(lib)
 ```
 
@@ -73,19 +76,19 @@ lazy val app = project
 
 > sbt `1.4.+` is required
 
-Let's try to compile our `app` module with Scala 3.
-First we add the `sbt-dotty` plugin in the `project/plugins.sbt` file, then we change the `scalaVersion` setting of `app` to `0.27.0-RC1`.
+Let's try to compile our `app` module with Scala 3.0.
+First we add the `sbt-dotty` plugin in the `project/plugins.sbt` file, then we change the `scalaVersion` setting of `app` to `@scala30@`.
 
 ```scala
 // project/plugins.sbt
-addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.2")
+addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "@sbtDotty@")
 ```
 
 ```scala
 // build.sbt
 lazy val app = project
   .in(file("app"))
-  .settings(scalaVersion := "0.27.0-RC1")
+  .settings(scalaVersion := "@scala30@")
   .dependsOn(lib)
 ```
 
@@ -114,11 +117,12 @@ sbt: location> app / compile
 
 Compilation is successful but the compiler warns us the `location` call will crash at runtime, and indeed it does.
 
-This little example shows that a macro definition must be implemented in Scala 3 to be consumed by Scala 3.
+This little example shows that a macro definition must be implemented in Scala 3 to be consumed by Scala 3.0.
 
-At the same time, we want our library to keep being available in Scala 2. There are two solutions for doing so:
+At the same time, we want our library to keep being available in Scala 2.13.
+There are two solutions for doing so:
 - Cross-building
-- Mixing macro definitions in Scala 3
+- Mixing macro definitions in Scala 3.0
 
 While the first technique has been known and proven useful for quite some time, the second approach is made possible by TASTy and the brand new Scala 2 TASTy reader.
 If you already know how to cross compile you might want to learn about mixing macro definitions by jumping straight to the [Mixing Macro Definition](#mixing-macro-definitions) part of this tutorial.
@@ -128,10 +132,10 @@ If you already know how to cross compile you might want to learn about mixing ma
 Cross-building is a well-known technique to build and publish a project against different Scala versions.
 
 It gives you the ability to:
-- load different binary versions of the same set of dependencies
-- organize your source code in Scala-version specific source directories
-- configure and call different instances of the Scala compiler
-- package and publish the different binaries of your project
+- Load different binary versions of the same set of dependencies.
+- Organize your source code in Scala-version specific source directories.
+- Configure and call different instances of the Scala compiler.
+- Package and publish the different binaries of your project.
 
 Similar cross-building mechanisms are provided by a number of build tools, among which sbt and Mill.
 You can go to the [sbt documentation](https://www.scala-sbt.org/1.x/docs/Cross-Build.html) or the [Mill documentation](https://www.lihaoyi.com/mill/page/cross-builds.html) to familiarize yourself with it.
@@ -139,8 +143,8 @@ You can go to the [sbt documentation](https://www.scala-sbt.org/1.x/docs/Cross-B
 As we have seen in the [Compatibility Reference](../compatibility.md) page, Scala 2.13 and Scala 3.0 binaries are generally compatible, making the cross-building approach not needed in many cases.
 
 However it is still useful in those two cases:
-  - maintain support for Scala 2.12 and older versions
-  - cross-building a macro library
+- Maintain support for Scala 2.12 and older versions
+- Cross-building a macro library
 
 ### 1 - Setting up cross-compilation
 
@@ -151,8 +155,8 @@ We define the desired scala versions of our cross-compiled location module in th
 lazy val lib = project
   .in(file("lib"))
   .settings(
-    scalaVersion := "2.13.3",
-    crossScalaVersions := Seq("2.13.3", "0.27.0-RC1"),
+    scalaVersion := "@scala213@",
+    crossScalaVersions := Seq("@scala213@", "@scala30@"),
     libraryDependencies ++= {
       if (isDotty(scalaVersion.value)) Seq()
       else Seq(
@@ -162,31 +166,31 @@ lazy val lib = project
   )
 ```
 
-Note the dependency to `scala-reflect` becomes useless in Scala 3.
+Note the dependency to `scala-reflect` becomes useless in Scala 3.0.
 We use the `isDotty` setting, provided by `sbt-dotty`, to create version specific list of dependencies.
 
-After reloading the sbt shell, we can easily load the Scala 3 version of the project by running `++0.27.0-RC1`.
-Then we can go back to the Scala 2.13 version by running `++2.13.3`.
+After reloading the sbt shell, we can easily load the Scala 3.0 version of the project by running `++@scala30@`.
+Then we can go back to the Scala 2.13 version by running `++@scala213@`.
 
 The sbt `show lib / unmanagedSourceDirectories` command prints the list of available source directories:
 ```shell
-> sbt: location> ++2.13.3; show lib / unmanagedSourceDirectories
+> sbt: location> ++@scala213@; show lib / unmanagedSourceDirectories
 [info] * /location/lib/src/main/scala
 [info] * /location/lib/src/main/scala-2.13
 [info] * /location/lib/src/main/scala-2
 [info] * /location/lib/src/main/java
-> sbt: location> ++0.27.0-RC1; show lib / unmanagedSourceDirectories
+> sbt: location> ++@scala30@; show lib / unmanagedSourceDirectories
 [info] * /location/lib/src/main/scala
-[info] * /location/lib/src/main/scala-0.27
+[info] * /location/lib/src/main/scala-@scala30Binary@
 [info] * /location/lib/src/main/scala-3
 [info] * /location/lib/src/main/java
 ```
 
 As we can see, an sbt project defines a shared `scala` source directory and some version-specific source directories.
-Some depend on the major version, `scala-2` and `scala-3`, and others depend on the precise binary version, `scala-2.13` and `scala-0.27`.
+Some depend on the major version, `scala-2` and `scala-3`, and others depend on the precise binary version, `scala-2.13` and `scala-@scala30Binary@`.
 
 Thus, we can organize our sources depending on their compatibility spectrum.
-A piece of code that is compatible and only compatible with Scala 2 versions of the compiler must go to the `scala-2` directory.
+A piece of code that is compatible and only compatible with all Scala 2 versions of the compiler must go to the `scala-2` directory.
 On the other hand, a piece of code that is specific to Scala 2.13 and does not compile with a Scala 2.12 version of the compiler must go to the `scala-2.13` directory.
 
 We are now ready to rearrange our `location` macro.
@@ -203,12 +207,12 @@ The `Location` class is perfectly compatible with all versions, we leave it in t
 > #### About the tests
 > 
 > While you are moving some implementations you may also want to move some tests.
-> The goal is to reach a state at which the `lib / Compile` and the `lib / Test` artifacts both compile in Scala 2 and Scala 3.
+> The goal is to reach a state at which the `lib / Compile` and the `lib / Test` artifacts both compile in Scala 2.13 and Scala 3.0.
 > 
-> Thus you will be able to write the Scala 3 code incrementally:
-> - Add the Scala 3 signature of the wanted method in the `scala-3` folder
+> Thus you will be able to write the Scala 3.0 code incrementally:
+> - Add the Scala 3.0 signature of the wanted method in the `scala-3` folder
 > - Move the tests of this method from the `scala-2` folder to the `scala` folder
-> - Make the tests pass in Scala 3 by providing the implementation
+> - Make the tests pass in Scala 3.0 by providing the implementation
 > - Iterate
 > 
 > You might also want to have some Scala version specific tests that are targeted at the implementation internals.
@@ -217,7 +221,7 @@ The `Location` class is perfectly compatible with all versions, we leave it in t
 
 We managed to make our `lib` project cross-compile in 2.13 and 3.0.
 But the produced Scala 3 binaries do not contain the `location` method.
-We can see that by trying to compile the `app` module in Scala 3.
+We can see that by trying to compile the `app` module in Scala 3.0.
 
 Let's add the Scala 3 `location` method.
 
@@ -233,11 +237,10 @@ object Macros:
   def location: Location = ???
 ```
 
-This alone should make our `app` module compile in Scala 3.
+This alone should make our `app` module compile in Scala 3.0.
 
 There is no magic formula to port a Scala 2 macro into Scala 3.
-One needs to learn about the available new metaprogramming features of Scala 3.
-You can have a look at the list of [available metaprogramming features](metaprogramming.md).
+One needs to learn about the available new [metaprogramming features](metaprogramming.md).
 
 We eventually come up with this implementation:
 
@@ -274,24 +277,22 @@ A Scala 2.13 project must depend on the `lib_2.13` artifact whereas a Scala 3.0 
 
 ## Mixing Macro Definitions
 
-As it is explained in the [Compatibility Reference](../compatibility.md) page, the Scala 2 compiler can read the signatures of Scala 3 methods, and conversely the Scala 3 compiler can read the signatures of Scala 2 methods.
+As it is explained in the [Compatibility Reference](../compatibility.md) page, the Scala 2.13 compiler can read the signatures of Scala 3.0 methods, and conversely the Scala 3.0 compiler can read the signatures of Scala 2.13 methods.
 
-A Scala 2 macro implementation cannot be compiled by the Scala 3 compiler.
-However, there is nothing preventing the Scala 3 compiler from type checking a Scala 2 macro definition.
+A Scala 2 macro implementation cannot be compiled by the Scala 3.0 compiler.
+However, there is nothing preventing the Scala 3.0 compiler from type checking a Scala 2 macro definition.
 
-Suppose a Scala 2 macro is defined in a Scala 3 module and implemented in a Scala 2 module.
-Then the Scala 2 compiler would be able to find that definition in the Scala 3 artifact and execute its implementation in the Scala 2 binaries.
+Suppose a Scala 2 macro is defined in a Scala 3.0 module and implemented in a Scala 2.13 module.
+Then the Scala 2.13 compiler would be able to find that definition in the Scala 3.0 artifact and execute its implementation in the Scala 2.13 binaries.
 
 This idea sets the ground to the mixing macros technique that we detail further below using the `location` example.
-It is compatible with any build tool that can mix Scala 2 and Scala 3 modules.
-
-> Mixing macro requires the TASTy reader that will be shipped in Scala 2.13.4
+It is compatible with any build tool that can mix Scala 2.13 and Scala 3.0 modules.
 
 ### 1 - Creating the Scala 3 module
 
 Going back to the initial state of our `location` library we have:
 - A `lib` module that contains the Scala 2 definition of the `location` macro
-- A Scala 2 `app` module that calls the `location` macros
+- A Scala 2.13 `app` module that calls the `location` macros
 
 ```scala
 // build.sbt
@@ -299,7 +300,7 @@ Going back to the initial state of our `location` library we have:
 lazy val lib = project
   .in(file("lib"))
   .settings(
-    scalaVersion := "2.13.4",
+    scalaVersion := "@scala213@",
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     )
@@ -307,18 +308,18 @@ lazy val lib = project
 
 lazy val app = project
   .in(file("app"))
-  .settings(scalaVersion := "2.13.4")
+  .settings(scalaVersion := "@scala213@")
   .dependsOn(lib)
 ```
 
-Let's create a new Scala 3 module in which we will move our macro definition.
+Let's create a new Scala 3.0 module in which we will move our macro definition.
 We call it `macroLib`.
 
 ```scala
 lazy val macroLib = project
   .in(file("macro-lib"))
   .settings(
-    scalaVersion := "0.27.0-RC1"
+    scalaVersion := "@scala30@"
   )
   .dependsOn(lib)
 ```
@@ -329,8 +330,8 @@ To test this new module, we make `app` depend on it. Also we make it cross compi
 lazy val app = project
   .in(file("app"))
   .settings(
-    scalaVersion := "2.13.4",
-    crossScalaVersion := Seq("2.13.4", "0.27.0-RC1")  
+    scalaVersion := "@scala213@",
+    crossScalaVersion := Seq("@scala213@", "@scala30@")  
   )
   .dependsOn(macroLib)
 ```
@@ -383,7 +384,7 @@ sbt: location> macroLib / compile
 ```
 
 The compiler is telling us that a Scala 3 implementation is missing for the `location` macro.
-It makes sense because the Scala 2 implementation cannot be executed by the Scala 3 compiler.
+It makes sense because the Scala 2 implementation cannot be executed by the Scala 3.0 compiler.
 
 Let's add the most simple implementation possible:
 
@@ -402,23 +403,23 @@ object Macros:
 
 The `inline` keyword is required here to tell the compiler the method is the Scala 3 counterpart of the `location` macro definition.
 
-The `app` module can now be compiled and executed in Scala 2.
+The `app` module can now be compiled and executed in Scala 2.13.
 
 ```shell
-sbt: location> ++2.13.4; app / run
+sbt: location> ++@scala213@; app / run
 [info] running app.Main 
 Line 6 in /location/app/src/main/scala/app/Main.scala
 [info] app / run completed
 ```
 
-Can the `app` module be compiled in Scala 3?
+Can the `app` module be compiled in Scala 3.0?
 To answer this question we must remind ourselves that macros are executed at compile time.
-Here the Scala 3 implementation throws a `NotImplementedError`, hence the answer is no.
+Here the Scala 3.0 implementation throws a `NotImplementedError`, hence the answer is no.
 We can try and see the exception being thrown at compile-time.
 
 ```shell
-sbt: location> ++0.27.0-RC1; app / run
-[info] compiling 1 Scala source to /loaction/app/target/scala-0.27/classes ...
+sbt: location> ++@scala30@; app / run
+[info] compiling 1 Scala source to /loaction/app/target/scala-@scala30Binary@/classes ...
 [error] -- Error: /location/app/src/main/scala/app/Main.scala:6:10 
 [error] 6 |  println(location)
 [error]   |          ^^^^^^^^
@@ -434,8 +435,7 @@ sbt: location> ++0.27.0-RC1; app / run
 ### 2 - Providing the Scala 3 implementation
 
 Again, there is no magic formula to port a Scala 2 macro into Scala 3.
-One needs to learn about the available new metaprogramming features of Scala 3.
-You can have a look at the list of [available metaprogramming features](metaprogramming.md).
+One needs to learn about the [new metaprogramming features](metaprogramming.md).
 
 We eventually come up with this implementation:
 
@@ -460,7 +460,7 @@ object Macros:
 The `app` module can now be compiled and executed in Scala 3:
 
 ```
-sbt: location> ++0.27.0-RC1; app / run
+sbt: location> ++@scala30@; app / run
 [info] running app.Main 
 Line 6 in /location/app/src/main/scala/app/Main.scala
 [info] app / run completed
@@ -480,7 +480,7 @@ An application can depend on the `macro-lib_3.0` artifact, no matter if its code
 
 ## Conclusion
 
-We have learnt two different techniques to make a Scala 2 macro library available in Scala 3.
+We have learnt two different techniques to make a Scala 2.13 macro library available in Scala 3.0.
 
 When choosing between the two you must take the architecture into consideration:
 - When **cross building**, you have one module that produces two Scala version specific artifacts.

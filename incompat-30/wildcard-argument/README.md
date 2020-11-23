@@ -12,10 +12,10 @@ trait Example {
 }
 ```
 
-Produces the following error when compiled with Scala 3:
+Produces the following error when compiled with Scala 3.0:
 
 ```
--- [E043] Type Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat-3.0/existential-type/wildcard-argument/target/src-managed/main/scala/wildcard-argument.scala:4:18 
+-- [E043] Type Error: /src/main/scala/wildcard-argument.scala:4:18 
 4 |  def f(foos: Seq[Foo[_]]): Unit
   |                  ^^^^^^
   |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments

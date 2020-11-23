@@ -1,6 +1,6 @@
 ## Wrong indentation
 
-The Scala 3 compiler now requires correct indentation.
+The Scala 3.0 compiler now requires correct indentation.
 
 The following pieces of code that compiled in Scala 2 does not compile anymore, because of the indentation.
 

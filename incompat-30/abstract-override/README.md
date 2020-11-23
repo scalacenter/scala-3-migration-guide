@@ -2,7 +2,7 @@
 
 In Scala 3, overriding a concrete def with an abstract def causes subclasses to consider the def abstract, whereas in Scala 2 it was considered as concrete.
 
-In the following piece of code, the `bar` method in `C` is considered concrete by the Scala 2 compiler but abstract by the Scala 3 compiler, causing the following error.
+In the following piece of code, the `bar` method in `C` is considered concrete by the Scala 2.13 compiler but abstract by the Scala 3.0 compiler, causing the following error.
 
 ```scala
 trait A {
