@@ -7,8 +7,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: olafurpg/setup-scala@v2
+      - uses: actions/checkout@v2
+      - uses: olafurpg/setup-scala@v10
       - name: Publish ${{ github.ref }}
         run: sbt website/docusaurusPublishGhpages
         env:
