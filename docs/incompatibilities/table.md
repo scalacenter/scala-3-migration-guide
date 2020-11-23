@@ -3,8 +3,8 @@ id: table
 title: Incompatibility Table
 ---
 
-> This table is built upon `0.27.0-RC1`.
-> Some changes might have occurred on more recent versions of the Scala 3 compiler.
+> This table is built upon @scala30@.
+> Some changes might have occurred on more recent versions of the Scala 3.0 compiler.
 
 We call incompatibility a piece of code that compiles in Scala 2.13 but does not compile in Scala 3.0.
 Migrating a codebase involves finding and fixing all the incompatibilities of the source code.
@@ -13,7 +13,7 @@ On rare occasions we can also have runtime incompatibilities, that compile in Sc
 In this page we propose a classification and status of the known incompatibilities.
 The status of an incompatibility is comprised of:
  - Whether the Scala 2.13 compiler produces a deprecation or feature warning on it
- - The existence of a [Scala 3 migration](../scala-3-migration-mode.md) rule for it
+ - The existence of a [Scala 3.0 migration](../scala-3-migration-mode.md) rule for it
  - The existence of a Scalafix rule that can fix it
 
 > #### Scala 2.13 deprecations and feature warnings
@@ -22,8 +22,8 @@ The status of an incompatibility is comprised of:
 > - Add the `-deprecation` compiler option to locate the usage of deprecated APIs
 > - For locating the feature warnings, you can look for the feature specific `import` and/or add the `-feature` compiler option.
 
-> #### Scala 3 migration and Scalafix rewrites
-> The Scala 3 migration mode is fully integrated in the Scala 3 compiler.
+> #### Scala 3.0 migration and Scalafix rewrites
+> The Scala 3.0 migration mode is fully integrated in the Scala 3.0 compiler.
 > On the contrary, Scalafix is a tool that must be installed and manually configured in your project.
 > However Scalafix has its own advantages:
 > - It runs on Scala 2.13.
@@ -34,9 +34,9 @@ The status of an incompatibility is comprised of:
 
 Some of the old Scala syntax is not supported anymore.
 
-||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3.0 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Restricted keywords](syntactic-changes.md#restricted-keywords)||✅||The Scala 3 rule does not handle all cases|
+|[Restricted keywords](syntactic-changes.md#restricted-keywords)||✅||The Scala 3.0 rule does not handle all cases|
 |[Procedure syntax](syntactic-changes.md#procedure-syntax)|Deprecation|✅|✅||
 |[Parentheses around lambda parameter](syntactic-changes.md#parentheses-around-lambda-parameter)||✅|✅||
 |[Open brace indentation for passing an argument](syntactic-changes.md#open-brace-indentation-for-passing-an-argument)||✅|||
@@ -48,7 +48,7 @@ Some of the old Scala syntax is not supported anymore.
 
 Some features are dropped to simplify the language.
 
-||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3.0 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Symbol literals](dropped-features.md#symbol-literals)|Deprecation|✅|||
 |[`do`-`while` construct](dropped-features.md#do-while-construct)||✅|||
@@ -62,7 +62,7 @@ Some features are dropped to simplify the language.
 
 The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) in Scala 3 introduces the following incompatibilities:
 
-||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3.0 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Type of implicit def](contextual-abstractions.md#type-of-implicit-definition)|||✅||
 |[Implicit views](contextual-abstractions.md#implicit-views)||||Possible runtime incompatibility|
@@ -73,7 +73,7 @@ The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/c
 
 Some proven features are simplified or restricted to make the language easier and safer to use.
 
-||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
+||Scala 2.13|Scala 3.0 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Inheritance shadowing](other-changed-features.md#inheritance-shadowing)||✅|||
 |[Abstract override](other-changed-features.md#abstract-override)|||||
@@ -90,19 +90,22 @@ Some proven features are simplified or restricted to make the language easier an
 
 The implicit resolution rules have been cleaned up to make them more useful and less surprising.
 
-Since the rules are different, Scala 3.0 can fail at resolving some implicit parameters of existing Scala 2 code.
-Even worse, it can resolve a different value than the one resolved by Scala 2.13, which would silently change the behavior of the program.
+Since the rules are different, Scala 3.0 can fail at resolving some implicit parameters of existing Scala 2.13 code.
+Even worse, it can resolve a different value than the one resolved by the Scala 2.13 compiler, which would silently change the behavior of the program.
 However we believe these cases are rare or inexistent.
 
 ## Type Inference
 
-The Scala 3 compiler uses a new type inference algorithm that is better than the old one.
+The Scala 3.0 compiler uses a new type inference algorithm that is better than the old one.
 
 This fundamental change in Scala 3 leads to a few incompatibilities:
-- The Scala 3 compiler can infer a different type than the one inferred by the Scala 2 compiler
-- The Scala 3 compiler can diagnose a type-checking error where the Scala 2 compiler does not
+- The Scala 3.0 compiler can infer a different type than the one inferred by the Scala 2.13 compiler
+- The Scala 3.0 compiler can diagnose a type-checking error where the Scala 2.13 compiler does not
 
-> #### From Scala 2 to Scala 3 Typer and Implicit resolver
+> It is good practice to write the result types of all public values and methods explicitly.
+> It indeed prevents the API from changing, from a Scala version to another, because of a different inferred type.
+
+> #### From Scala 2.13 to Scala 3.0 Typer and Implicit Resolver
 > 
 > Given the complexity of the type inference and implicit resolution algorithms it is hard to predict the incompatibilities.
 > 
@@ -113,11 +116,11 @@ This fundamental change in Scala 3 leads to a few incompatibilities:
 
 ## Macros
 
-The Scala 3 compiler is not able to compile or consume a Scala 2 macro method.
-Under those circumstances it is necessary to re-implement the Scala 2 macro implementations by using the new Scala 3 metaprogramming features.
+The Scala 3.0 compiler is not able to compile or consume Scala 2.13 macro methods.
+Under those circumstances it is necessary to re-implement the Scala 2.13 macros by using the new Scala 3.0 metaprogramming features.
 
-You can go to the [Metaprogramming in Scala 3](../macros/metaprogramming.md) page to learn about the new Scala 3 metaprogramming features.
-To learn how to make a macro library available in Scala 3 you should read the [Migrating a Macro Library](../macros/migration-tutorial.md) tutorial.
+You can go to the [Metaprogramming in Scala 3](../macros/metaprogramming.md) page to learn about the new metaprogramming features.
+To learn how to make a macro library available in Scala 3.0 you can read the [Migrating a Macro Library](../macros/migration-tutorial.md) tutorial.
 
-Some of the most used macro libraries have already been migrated to Scala 3.
+Some of the most used macro libraries have already been migrated to Scala 3.0.
 Check the list of [Scala macro libraries](../macros/macro-libraries.md).

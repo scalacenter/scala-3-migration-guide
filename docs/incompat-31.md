@@ -1,5 +1,5 @@
 ---
-id: incompat-3.1
+id: incompat-31
 title: Dotty 3.1-migration Mode
 ---
 ## Looking ahead to Scala 3.1

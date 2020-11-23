@@ -4,7 +4,7 @@ title: Scala 3 Syntax Rewriting
 ---
 ## Introduction
 
-Scala 3 gives a Scala developer the option to adopt the new (and optional)
+Scala 3 gives Scala developers the option to adopt the new (and optional)
 _significant indentation based syntax_ (_SIB_ syntax). The existing syntax which
 uses curly braces to group expressions remains fully supported, and we will
 refer to this syntax as _Classic syntax_.

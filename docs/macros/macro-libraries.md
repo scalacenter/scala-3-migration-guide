@@ -5,10 +5,10 @@ title: Scala Macro Libraries
 
 While being experimental, the Scala community has largely adopted the Scala 2 [Def Macro](https://docs.scala-lang.org/overviews/macros/overview.html) feature in multiple of ways: code generation, optimizations, ergonomic DSLs...
 
-A large part of the ecosystem now depends on Scala 2 macros defined in external libraries.
-Identifying those library dependencies is key to establish that a project is ready to be migrated to Scala 3.
+A large part of the ecosystem now depends on Scala 2.13 macros defined in external libraries.
+Identifying those library dependencies is key to establish that a project is ready to be migrated to Scala 3.0.
 
-> The Scala 3 compiler cannot execute Scala 2 macro definitions.
+> The Scala 3.0 compiler cannot execute Scala 2.13 macro definitions.
 > 
 > However, the handy `-Xignore-scala2-macros` option can be used to ignore them and type check the rest of the code.
 > 
@@ -16,7 +16,7 @@ Identifying those library dependencies is key to establish that a project is rea
 > [error] -- Error: /src/main/scala/foo/Foo.scala:10:45 
 > [error] 10 |  implicit val foo: Foo[List[Int]] = Foo.make
 > [error]    |                                             ^
-> [error]    |Scala 2 macro cannot be used in Dotty. See https://dotty.epfl.ch/docs/reference/dropped-features/macros.html
+> [error]    |Scala 2 macro cannot be used in Scala 3. See https://dotty.epfl.ch/docs/reference/dropped-features/macros.html
 > [error]    |To turn this error into a warning, pass -Xignore-scala2-macros to the compiler
 > ```
 >
@@ -51,7 +51,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"/> | |
 | [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Shapeless 3<br/>Milestone available ([Early Preview](https://github.com/milessabin/shapeless/tree/shapeless-3)) |
 | [monix/minitest](https://index.scala-lang.org/monix/minitest) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Ported in the _Community Build_ ([Staging Fork](https://github.com/dotty-staging/minitest))<br/>Not merged upstream |
-| [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"/> | `macros` module not available for Scala 3 |
+| [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"/> | `macros` module not available for Scala 3.0 |
 | [nevillelyh/parquet-avro-extra](https://index.scala-lang.org/nevillelyh/parquet-avro-extra) |  <i class="fas fa-times fa-lg"/> | |
 | [non/imp](https://index.scala-lang.org/non/imp) |  <i class="fas fa-times fa-lg"/> | |
 | [playframework/play-json](https://index.scala-lang.org/playframework/play-json) | <i class="fas fa-times fa-lg"/> | |
@@ -80,8 +80,8 @@ The following table contains an incomplete list of macro libraries and their mig
 ## Macro Annotations Libraries
 
 Macro annotations are not supported in Scala 3.
-The following table contains a incomplete list of Scala 2 libraries that provide macro annotations.
-Scala 3 compatible alternatives are proposed when available.
+The following table contains a incomplete list of Scala 2.13 libraries that provide macro annotations.
+Scala 3.0 compatible alternatives are proposed when available.
 
 | Project | Alternative Solutions |
 |-|-|

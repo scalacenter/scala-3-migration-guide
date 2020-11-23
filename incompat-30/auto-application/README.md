@@ -2,7 +2,7 @@
 
 Auto-application is the syntax of calling a nullary method without passing an empty argument list.
 
-In Scala 3, when calling a method defined in Scala 3, this syntax is forbidden.
+In Scala 3.0, when calling a method defined in Scala 3.0, this syntax is forbidden.
 
 The following code is now illegal:
 
@@ -27,7 +27,7 @@ In Scala 3, an unapplied method like this will be eta-expanded into a function.
 
 #### Scala 3 migration rewrite
 
-Compiling with Scala 3 and the `-source:3.0-migration -rewrite` compilation options rewrites it into:
+Compiling with Scala 3.0 and the `-source:3.0-migration -rewrite` compilation options rewrites it into:
 
 ```scala
 trait Chunk {
@@ -36,7 +36,7 @@ trait Chunk {
 }
 ```
 
-Auto-application is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Scala 3 reference documentation.
+Auto-application is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Scala 3.0 reference documentation.
 
 #### Scalafix rule
 

@@ -16,7 +16,7 @@ object Bar {
 
 #### Scala 2.13 deprecation
 
-When compiled in Scala 2 with the `-deprecation` option it produces the following warnings:
+When compiled in Scala 2.13 with the `-deprecation` option it produces the following warnings:
 
 ```shell
 src/main/scala/procedure-syntax.scala:2:14: procedure syntax is deprecated: instead, add `: Unit` to explicitly declare `print`'s return type
@@ -27,9 +27,9 @@ src/main/scala/procedure-syntax.scala:6:15: procedure syntax is deprecated: inst
               ^
 ```
 
-#### Scala 3 migration rewrite
+#### Scala 3.0 migration rewrite
 
-When compiled with Scala 3 and the `-source:3.0-migration -rewrite` options, the code is rewritten into:
+When compiled with Scala 3.0 and the `-source:3.0-migration -rewrite` options, the code is rewritten into:
 
 ```scala
 trait Foo {

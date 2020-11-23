@@ -6,9 +6,9 @@ When followed by its type, the parameter of a lambda is now required to be enclo
 val f = { x: Int => x * x }
 ```
 
-#### Scala 3 migration rewrite
+#### Scala 3.0 migration rewrite
 
-When compiled with Scala 3 and the `-source:3.0-migration -rewrite` option it is rewritten into:
+When compiled with Scala 3.0 and the `-source:3.0-migration -rewrite` option it is rewritten into:
 
 ```scala
 val f = { (x: Int) => x * x }

@@ -9,7 +9,7 @@ val x = 1
 val f: () => Int = x _
 ```
 
-#### Scala 3 migration rewrite
+#### Scala 3.0 migration rewrite
 
 Compiling with `dotc -source:3.0-migration -rewrite` can rewrite it to:
 

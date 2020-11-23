@@ -14,7 +14,7 @@
       "external-resources/moving-from-scala-2-to-scala-3": {
         "title": "Moving from Scala 2 to Scala 3"
       },
-      "incompat-3.1": {
+      "incompat-31": {
         "title": "Dotty 3.1-migration Mode"
       },
       "incompatibilities/contextual-abstractions": {
@@ -45,7 +45,7 @@
         "title": "Tour of the Migration Tools"
       },
       "scala-3-migration-mode": {
-        "title": "Scala 3 Migration Mode"
+        "title": "Scala 3.0 Migration Mode"
       },
       "scala-3-syntax-rewriting": {
         "title": "Scala 3 Syntax Rewriting"

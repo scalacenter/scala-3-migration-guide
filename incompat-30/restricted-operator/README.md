@@ -4,7 +4,7 @@ This incompatibility is inspired by [this commit](https://github.com/scalaz/scal
 
 As of `0.25.0-RC2` the error message is
 ```
-[error] -- [E040] Syntax Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/restricted-operator/src/main/scala-2.13/restricted-operator.scala:2:6 
+[error] -- [E040] Syntax Error: /src/main/scala/restricted-operator.scala:2:6 
 [error] 2 |  def =>> : Unit
 [error]   |      ^^^
 [error]   |      an identifier expected, but '=>>' found

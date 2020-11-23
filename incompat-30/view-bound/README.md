@@ -22,9 +22,9 @@ However, in the context of the migration, it may be easier to write the implicit
 def foo[A](a: A)(implicit ev: A => Long): Long = ev(a)
 ```
 
-#### Scala 2 deprecation
+#### Scala 2.13 deprecation
 
-You can locate the usage of the view bound feature by using the `-deprecation` option of the Scala 2 compiler.
+You can locate the usage of the view bound feature by using the `-deprecation` option of the Scala 2.13 compiler.
 It produces messages of the form:
 
 ```
