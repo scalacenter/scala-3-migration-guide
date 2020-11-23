@@ -5,8 +5,8 @@ Global / resolvers += "scala-integration".at("https://scala-ci.typesafe.com/arti
 lazy val `macro-cross-lib` = project
   .in(file("macro-migration-tutorial/cross/lib"))
   .settings(
-    scalaVersion := dotty,
-    crossScalaVersions := Seq(scala213, dotty),
+    scalaVersion := scala30,
+    crossScalaVersions := Seq(scala213, scala30),
     libraryDependencies ++= {
       if (isDotty.value) Seq()
       else Seq(
@@ -18,8 +18,8 @@ lazy val `macro-cross-lib` = project
 lazy val `macro-cross-app` = project
   .in(file("macro-migration-tutorial/cross/app"))
   .settings(
-    scalaVersion := dotty,
-    crossScalaVersions := Seq(scala213, dotty)
+    scalaVersion := scala30,
+    crossScalaVersions := Seq(scala213, scala30)
   )
   .dependsOn(`macro-cross-lib`)
 
@@ -36,14 +36,18 @@ lazy val `macro-mix-lib` = project
 lazy val `macro-mix-macro-lib` = project
   .in(file("macro-migration-tutorial/mix/macro-lib"))
   .settings(
-    scalaVersion := dotty
+    scalaVersion := scala30
   )
   .dependsOn(`macro-mix-lib`)
 
 lazy val `macro-mix-app` = project
   .in(file("macro-migration-tutorial/mix/app"))
   .settings(
-    scalaVersion := dotty,
-    crossScalaVersions := Seq(`scala-2.13.4`, dotty)
+    scalaVersion := scala30,
+    crossScalaVersions := Seq(`scala-2.13.4`, scala30),
+    scalacOptions ++= {
+      if (isDotty.value) Seq()
+      else Seq("-Ytasty-reader")
+    }
   )
   .dependsOn(`macro-mix-macro-lib`)
