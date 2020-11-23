@@ -10,6 +10,7 @@ val scalafixRewrite = settingKey[Boolean]("Does this incompatibility have a Scal
 val rewriteDir = settingKey[File]("Directory where the sources are rewritten by either Dotty or Scalafix")
 
 // scalafix configuration
+Global / excludeLintKeys += CompileBackward / scalafixConfig
 inThisBuild(
   Seq(
     scalaVersion := scala213,
@@ -248,7 +249,7 @@ lazy val wildcard =
 
 lazy val incompat30Settings = 
   inConfig(CompileBackward)(Defaults.compileSettings) ++
-  inConfig(CompileBackward)(ScalafixPlugin.autoImport.scalafixConfigSettings(CompileBackward)) ++
+  inConfig(CompileBackward)(scalafixConfigSettings(CompileBackward)) ++
   Seq(
     scalaVersion := scala30,
     crossScalaVersions := List(scala213, scala30),
