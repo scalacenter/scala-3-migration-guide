@@ -44,7 +44,7 @@ lazy val `macro-mix-app` = project
   .in(file("macro-migration-tutorial/mix/app"))
   .settings(
     scalaVersion := scala30,
-    crossScalaVersions := Seq(`scala-2.13.4`, scala30),
+    crossScalaVersions := Seq(scala213, scala30),
     scalacOptions ++= {
       if (isDotty.value) Seq()
       else Seq("-Ytasty-reader")
