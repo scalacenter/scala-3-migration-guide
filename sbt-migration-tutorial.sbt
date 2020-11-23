@@ -1,4 +1,4 @@
-import Version._
+import Versions._
 
 lazy val `sbt-migration-tutorial` = project
   .in(file("sbt-migration-tutorial"))
