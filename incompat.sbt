@@ -263,6 +263,7 @@ lazy val incompat30Settings =
     // we copy the scala213 sources into the target folder
     // because it might be rewritten by dotc or scalafix
     CompileBackward / sourceGenerators += Def.task {
+      val _ = clean.value // clean to force recompilation and rewrite
       copySources(scala213SourceDir.value, rewriteDir.value)
     },
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
@@ -335,8 +336,10 @@ lazy val incompat31Settings = inConfig(CompileBackward)(Defaults.compileSettings
     Compile / unmanagedSourceDirectories := Seq(scala31SourceDir.value),
     // we copy the scala30 sources into the target folder
     // because they might be rewritten by dotc or scalafix
-    CompileBackward / sourceGenerators += 
-      Def.task { copySources(scala30SourceDir.value, rewriteDir.value) },
+    CompileBackward / sourceGenerators += Def.task {
+      val _ = clean.value // clean to force recompilation and rewrite
+      copySources(scala30SourceDir.value, rewriteDir.value)
+    },
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
     CompileBackward / scalacOptions ++= {
       if (dottyRewrite.value)
