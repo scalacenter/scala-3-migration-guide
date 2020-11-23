@@ -1,9 +1,9 @@
-import Version._
+import Versions._
 
 Global / resolvers += "scala-integration".at("https://scala-ci.typesafe.com/artifactory/scala-integration/")
 
-lazy val crossLib = project
-  .in(file("macro/cross/lib"))
+lazy val `macro-cross-lib` = project
+  .in(file("macro-migration-tutorial/cross/lib"))
   .settings(
     scalaVersion := dotty,
     crossScalaVersions := Seq(scala213, dotty),
@@ -15,17 +15,17 @@ lazy val crossLib = project
     }
   )
 
-lazy val crossApp = project
-  .in(file("macro/cross/app"))
+lazy val `macro-cross-app` = project
+  .in(file("macro-migration-tutorial/cross/app"))
   .settings(
     scalaVersion := dotty,
     crossScalaVersions := Seq(scala213, dotty)
   )
-  .dependsOn(crossLib)
+  .dependsOn(`macro-cross-lib`)
 
 
-lazy val mixLib = project
-  .in(file("macro/mix/lib"))
+lazy val `macro-mix-lib` = project
+  .in(file("macro-migration-tutorial/mix/lib"))
   .settings(
     scalaVersion := scala213,
     libraryDependencies ++= Seq(
@@ -33,17 +33,17 @@ lazy val mixLib = project
     )
   )
 
-lazy val mixMacroLib = project
-  .in(file("macro/mix/macro-lib"))
+lazy val `macro-mix-macro-lib` = project
+  .in(file("macro-migration-tutorial/mix/macro-lib"))
   .settings(
     scalaVersion := dotty
   )
-  .dependsOn(mixLib)
+  .dependsOn(`macro-mix-lib`)
 
-lazy val mixApp = project
-  .in(file("macro/mix/app"))
+lazy val `macro-mix-app` = project
+  .in(file("macro-migration-tutorial/mix/app"))
   .settings(
     scalaVersion := dotty,
     crossScalaVersions := Seq(`scala-2.13.4`, dotty)
   )
-  .dependsOn(mixMacroLib)
+  .dependsOn(`macro-mix-macro-lib`)
