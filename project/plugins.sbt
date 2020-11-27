@@ -1,6 +1,6 @@
 addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.6")
 addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.13")
-addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.23")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.24")
 
 ThisBuild / libraryDependencies ++= Seq(
   "org.apache.commons" % "commons-io" % "1.3.2",
