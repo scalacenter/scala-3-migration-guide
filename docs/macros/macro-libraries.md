@@ -72,6 +72,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"/> | |
 | [typelevel/spire](https://index.scala-lang.org/typelevel/spire) |  <i class="fas fa-times fa-lg"/> | |
 | [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"/> | |
+| [wvlet/airframe-log](https://index.scala-lang.org/wvlet/airframe) |  <i class="fas fa-check fa-lg"/> | Since version [`20.12.1`](https://wvlet.org/airframe/docs/release-notes#20121) |
 | [zio/izumi-reflect](https:://index.scala-lang.org/zio/izumi-reflect) | <i class="fas fa-check fa-lg"/> | Does not yet support path-dependent type  |
 | [zio/zio](https://index.scala-lang.org/zio/zio) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | ZIO macros not yet available ([documentation](https://zio.dev/docs/howto/howto_macros)) |
 
