@@ -31,7 +31,7 @@ The following table contains an incomplete list of macro libraries and their mig
 |-|-|-|
 | [adamw/scala-macro-debug](https://index.scala-lang.org/adamw/scala-macro-debug) | <i class="fas fa-times fa-lg"/> | |
 | [ajozwik/quill-generic](https://index.scala-lang.org/ajozwik/quill-generic) | <i class="fas fa-times fa-lg"/> | |
-| [argonaut-io/argonaut](https://index.scala-lang.org/argonaut-io/argonaut) | <i class="fas fa-times fa-lg"/> | Argonaut macros not yet available  |
+| [argonaut-io/argonaut](https://index.scala-lang.org/argonaut-io/argonaut) | <i class="fas fa-check  fa-lg"/> | Since version `6.3.2` |
 | [backuity/ansi-interpolator](https://index.scala-lang.org/backuity/ansi-interpolator) | <i class="fas fa-times fa-lg"/> | |
 | [christopherdavenport/log4cats](https://index.scala-lang.org/ChristopherDavenport/log4cats) | <i class="fas fa-times fa-lg"/> | |
 | [circe/circe](https://index.scala-lang.org/circe/circe) | <i class="fas fa-times fa-lg"/> | `circe-parser` and other modules not yet ported |
