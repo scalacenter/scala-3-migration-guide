@@ -302,7 +302,7 @@ Cross-building is easy to configure in sbt.
 In the project configuration we add:
 
 ```scala
-scalaVersion = "@scala30@"
+scalaVersion := "@scala30@"
 crossScalaVersions ++= Seq("@scala213@", "@scala30@")
 ```
 
