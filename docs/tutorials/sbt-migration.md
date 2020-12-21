@@ -303,7 +303,7 @@ In the project configuration we add:
 
 ```scala
 scalaVersion = "@scala30@"
-crossScalaVersion ++= Seq("@scala213@", "@scala30@")
+crossScalaVersions ++= Seq("@scala213@", "@scala30@")
 ```
 
 This configuration means:
@@ -457,7 +457,7 @@ sbt:example> test
 
 Congratulations! You have successfully ported a module to Scala 3.0.
 
-You can choose to keep the Scala 2.13 settings as a precaution, or you can remove the `crossScalaVersion` setting and the Scala 2.13 `scalacOptions`.
+You can choose to keep the Scala 2.13 settings as a precaution, or you can remove the `crossScalaVersions` setting and the Scala 2.13 `scalacOptions`.
 
 Even if you drop the Scala 2.13 compilation in this module, others Scala 2.13 modules will still be able to depend on it by using the `-Ytasty-reader`.
 
