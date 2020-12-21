@@ -284,7 +284,7 @@ That way we can fix the incompatibilities one at a time and be confident that th
 <p>Cross-building is easy to configure in sbt.
 In the project configuration we add:</p>
 <pre><code class="hljs css language-scala">scalaVersion = <span class="hljs-string">"3.0.0-M1"</span>
-crossScalaVersion ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.4"</span>, <span class="hljs-string">"3.0.0-M1"</span>)
+crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.4"</span>, <span class="hljs-string">"3.0.0-M1"</span>)
 </code></pre>
 <p>This configuration means:</p>
 <ul>
@@ -409,7 +409,7 @@ sbt:example&gt; test
 [success]
 </code></pre>
 <p>Congratulations! You have successfully ported a module to Scala 3.0.</p>
-<p>You can choose to keep the Scala 2.13 settings as a precaution, or you can remove the <code>crossScalaVersion</code> setting and the Scala 2.13 <code>scalacOptions</code>.</p>
+<p>You can choose to keep the Scala 2.13 settings as a precaution, or you can remove the <code>crossScalaVersions</code> setting and the Scala 2.13 <code>scalacOptions</code>.</p>
 <p>Even if you drop the Scala 2.13 compilation in this module, others Scala 2.13 modules will still be able to depend on it by using the <code>-Ytasty-reader</code>.</p>
 <blockquote>
 <p>The Tasty reader compatible features will soon be listed in this guide.
