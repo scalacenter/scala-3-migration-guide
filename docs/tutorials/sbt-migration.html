@@ -305,6 +305,16 @@ crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-stri
 Stay tuned to <a href="https://github.com/scalacenter/scala-3-migration-guide/issues/60">#60</a>.</p>
 <p><a href="/scala-3-migration-guide/docs/contributing.html">Contributions welcomed</a></p>
 </blockquote>
+<table>
+<thead>
+<tr><th>scalaVersion</th><th>binary version</th></tr>
+</thead>
+<tbody>
+<tr><td><code>2.12.x</code></td><td><code>_2.12</code></td></tr>
+<tr><td><code>2.13.x</code></td><td><code>_2.13</code></td></tr>
+<tr><td><code>3.0.x</code></td><td><code>_2.13</code></td></tr>
+</tbody>
+</table>
 <p>The <code>isDotty</code> setting can be used to select the list of options corresponding to the current <code>scalaVersion</code>.
 Thus a typical <code>scalacOptions</code> configuration would look like this:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>

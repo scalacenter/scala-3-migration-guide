@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Macros Migration · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Scala 2 macros are compiler dependent by design."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Macros Migration · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="The Scala 2 macros are compiler dependent by design."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/scala-3-migration-guide/docs/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/macros.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Macros Migration</h1></header><article><div><span><p>The Scala 2 macros are compiler dependent by design.
+Therefore it is impossible to compile or even consume them in Scala 3.</p>
+<p>In this document, we provide guidelines to help you migrate your macro library to Scala 3.</p>
+<h2><a class="anchor" aria-hidden="true" id="migration-status"></a><a href="#migration-status" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migration status</h2>
+<p>While being experimental, the Scala community has largely adopted the Scala 2 <a href="https://docs.scala-lang.org/overviews/macros/overview.html">Def Macro</a> feature in multiple of ways: code generation, optimizations, ergonomic DSLs...</p>
+<p>Here is an incomplete list of libraries that use Scala 2 macros and their migration status:</p>
+<ul>
+<li><a href="https://github.com/lihaoyi/sourcecode">sourcecode</a> – cross-compiles to Scala 2 and Scala 3</li>
+<li><a href="https://github.com/lihaoyi/utest">utest</a> – cross-compiles to Scala 2 and Scala 3</li>
+<li><a href="https://github.com/factor10/intent">intent</a> - compiles to Scala 3</li>
+<li><a href="https://github.com/lampepfl/xml-interpolator">xml-interpolator</a> - compiles to Scala 3</li>
+<li><a href="https://github.com/plokhotnyuk/expression-evaluator">expression-evaluator</a> - not migrated, no replacement for <code>Evals.eval</code></li>
+<li><a href="https://github.com/plokhotnyuk/jsoniter-scala">jsoniter-scala</a> - not migrated, no replacement for <code>Evals.eval</code></li>
+<li><a href="https://github.com/dotty-staging/minitest">minitest</a> - ported to Scala 3 in the Dotty community build but not merged to upstream</li>
+<li><a href="https://github.com/dotty-staging/munit">munit</a> - ported to Scala 3 in the Dotty community build but not merged to upstream</li>
+<li><a href="https://github.com/dotty-staging/scalatest">scalatest</a> - ported to Scala 3 in the Dotty community build but not merged to upstream</li>
+<li><a href="https://github.com/dotty-staging/scodec">scodec-bits</a> - ported to Scala 3 in the Dotty community build but not merged to upstream</li>
+</ul>
+<p><a href="/scala-3-migration-guide/docs/contributing.html">Contributors welcome!</a></p>
+<h2><a class="anchor" aria-hidden="true" id="how-to"></a><a href="#how-to" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How to?</h2>
+<h3><a class="anchor" aria-hidden="true" id="before-rewriting-a-macro"></a><a href="#before-rewriting-a-macro" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Before rewriting a macro</h3>
+<p>Before getting deep into reimplementing a macro your should check if it can be supported using Scala 3 new features.</p>
+<ul>
+<li>Can I encode the logic of the macro using the new scala 3 features?
+<ul>
+<li><a href="http://dotty.epfl.ch/docs/reference/overview.html">List of Scala 3 features</a></li>
+</ul></li>
+<li>Can I use <em>match types</em> to reimplement the interface of my macro?
+<ul>
+<li><a href="http://dotty.epfl.ch/docs/reference/new-types/match-types.html">Match Types</a></li>
+</ul></li>
+<li>Can I use <code>inline</code> and the metaprogramming features in <code>scala.compiletime</code> to reimplement my logic?
+<ul>
+<li><a href="http://dotty.epfl.ch/docs/reference/metaprogramming/inline.html">Inline</a></li>
+<li><a href="http://dotty.epfl.ch/api/scala/compiletime/index.html"><code>scala.compiletime</code></a></li>
+</ul></li>
+<li>Can I use the simpler and safer expression based macros to implement my macro?
+<ul>
+<li><a href="http://dotty.epfl.ch/docs/reference/metaprogramming/macros.html">Simple macros</a></li>
+</ul></li>
+<li>I really need to have access to the raw AST trees
+<ul>
+<li><a href="http://dotty.epfl.ch/docs/reference/metaprogramming/tasty-reflect.html">TASTy Reflect</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/metaprogramming/tasty-inspect.html">TASTy inspector</a></li>
+</ul></li>
+</ul>
+<p>A good reference for this is <a href="https://github.com/dotty-staging/shapeless/tree/shapeless-3">Shapeless 3</a>. It uses Scala 3 features most of the time for a feature that would have been macros in Scala 2 and only uses macros where absolutely necessary.</p>
+<h3><a class="anchor" aria-hidden="true" id="defining-a-project-that-cross-compiles-macros"></a><a href="#defining-a-project-that-cross-compiles-macros" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defining a project that cross compiles macros</h3>
+<p>If you are already cross-compiling your macro for different versions of Scala 2 and you have sources folders for each version, then you can add an extra source folder for Scala 3.</p>
+<ul>
+<li>SBT examples:
+<ul>
+<li><em>TODO find a simple example project</em></li>
+</ul></li>
+<li>Mill examples
+<ul>
+<li><em>TODO find a simple example project</em></li>
+<li><a href="https://github.com/dotty-staging/utest/tree/dotty">utest</a></li>
+<li><a href="https://github.com/dotty-staging/sourcecode/tree/dotty-community-build">sourcecode</a></li>
+</ul></li>
+</ul>
+<p><a href="/scala-3-migration-guide/docs/contributing.html">Contributors welcome!</a></p>
+<h2><a class="anchor" aria-hidden="true" id="additional-resources"></a><a href="#additional-resources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Additional Resources</h2>
+<p>Documentation:</p>
+<ul>
+<li><a href="https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html">Dotty Documentation</a></li>
+<li><a href="https://www.scala-lang.org/blog/2018/04/30/in-a-nutshell.html">Macros: The Plan For Scala 3</a></li>
+<li><a href="https://github.com/lampepfl/dotty-macro-examples">Examples</a> - a repository with small, self-contained examples of various tasks done with Dotty macros.</li>
+</ul>
+<p>Talks:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=ZfDS_gJyPTc">Scala Days - Metaprogramming in Dotty</a></li>
+</ul>
+<p>Projects:</p>
+<ul>
+<li><a href="https://github.com/dotty-staging/xml-interpolator/tree/master">XML Interpolator</a></li>
+<li><a href="https://github.com/dotty-staging/shapeless/tree/shapeless-3">Shapeless 3</a></li>
+</ul>
+<p><a href="/scala-3-migration-guide/docs/contributing.html">Contributors welcome!</a></p>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#migration-status">Migration status</a></li><li><a href="#how-to">How to?</a><ul class="toc-headings"><li><a href="#before-rewriting-a-macro">Before rewriting a macro</a></li><li><a href="#defining-a-project-that-cross-compiles-macros">Defining a project that cross compiles macros</a></li></ul></li><li><a href="#additional-resources">Additional Resources</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
