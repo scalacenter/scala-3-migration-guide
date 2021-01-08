@@ -335,6 +335,10 @@ Stay tuned to <a href="https://github.com/scalacenter/scala-3-migration-guide/is
 <tr><td>-explaintypes</td><td>-explain-types</td></tr>
 <tr><td>-language:<features></td><td>Same</td></tr>
 <tr><td>-print</td><td>-Xprint</td></tr>
+<tr><td>-Xcheckinit</td><td>-Ycheck-init</td></tr>
+<tr><td>-target</td><td>-Xtarget</td></tr>
+<tr><td>-source</td><td>-Xsource</td></tr>
+<tr><td>-Xverify</td><td>-Xverify-signatures</td></tr>
 </tbody>
 </table>
 <p>Scalac options that no longer exist</p>
@@ -357,126 +361,92 @@ Stay tuned to <a href="https://github.com/scalacenter/scala-3-migration-guide/is
 <tr><td>-opt:<optimizations></td><td>?</td></tr>
 <tr><td>-optimize</td><td>?</td></tr>
 <tr><td>-rootdir</td><td>?</td></tr>
-<tr><td>-target:<target></td><td>?</td></tr>
 <tr><td>-toolcp</td><td>?</td></tr>
 <tr><td>-usemanifestcp</td><td>?</td></tr>
+<tr><td>-Ycheck</td><td>?</td></tr>
+<tr><td>-Ycheck-all-patmat</td><td>?</td></tr>
+<tr><td>-Ycheck-init</td><td>?</td></tr>
+<tr><td>-Ycheck-mods</td><td>?</td></tr>
+<tr><td>-Ycheck-reentrant</td><td>?</td></tr>
+<tr><td>-Ycook-comments</td><td>?</td></tr>
+<tr><td>-Ydebug</td><td>?</td></tr>
+<tr><td>-Ydebug-error</td><td>?</td></tr>
+<tr><td>-Ydebug-flags</td><td>?</td></tr>
+<tr><td>-Ydebug-missing-refs</td><td>?</td></tr>
+<tr><td>-Ydebug-names</td><td>?</td></tr>
+<tr><td>-Ydebug-pos</td><td>?</td></tr>
+<tr><td>-Ydebug-trace</td><td>?</td></tr>
+<tr><td>-Ydebug-tree-with-id</td><td>?</td></tr>
+<tr><td>-Ydebug-type-error</td><td>?</td></tr>
+<tr><td>-Ydetailed-stats</td><td>?</td></tr>
+<tr><td>-YdisableFlatCpCaching</td><td>?</td></tr>
+<tr><td>-Ydrop-comments</td><td>?</td></tr>
+<tr><td>-Ydump-sbt-inc</td><td>?</td></tr>
+<tr><td>-Yerased-terms</td><td>?</td></tr>
+<tr><td>-Yexplain-lowlevel</td><td>?</td></tr>
+<tr><td>-Yexplicit-nulls</td><td>?</td></tr>
+<tr><td>-Yforce-sbt-phases</td><td>?</td></tr>
+<tr><td>-Yfrom-tasty-ignore-list</td><td>?</td></tr>
+<tr><td>-Yindent-colons</td><td>?</td></tr>
+<tr><td>-Yinstrument</td><td>?</td></tr>
+<tr><td>-Yinstrument-defs</td><td>?</td></tr>
+<tr><td>-Ykind-projector</td><td>?</td></tr>
+<tr><td>-Ylog</td><td>?</td></tr>
+<tr><td>-Ylog-classpath</td><td>?</td></tr>
+<tr><td>-Yno-decode-stacktraces</td><td>?</td></tr>
+<tr><td>-Yno-deep-subtypes</td><td>?</td></tr>
+<tr><td>-Yno-double-bindings</td><td>?</td></tr>
+<tr><td>-Yno-kind-polymorphism</td><td>?</td></tr>
+<tr><td>-Yno-patmat-opt</td><td>?</td></tr>
+<tr><td>-Yplain-printer</td><td>?</td></tr>
+<tr><td>-Yprint-debug</td><td>?</td></tr>
+<tr><td>-Yprint-debug-owners</td><td>?</td></tr>
+<tr><td>-Yprint-pos</td><td>?</td></tr>
+<tr><td>-Yprint-pos-syms</td><td>?</td></tr>
+<tr><td>-Yprint-syms</td><td>?</td></tr>
+<tr><td>-Yprofile-external-tool</td><td>?</td></tr>
+<tr><td>-Yprofile-run-gc</td><td>?</td></tr>
+<tr><td>-Yrequire-targetName</td><td>?</td></tr>
+<tr><td>-Yresolve-term-conflict</td><td>?</td></tr>
+<tr><td>-Yresolve-term-conflict:<strategy></td><td>?</td></tr>
+<tr><td>-Yretain-trees</td><td>?</td></tr>
+<tr><td>-Yscala2-unpickler</td><td>?</td></tr>
+<tr><td>-Yscriptrunner</td><td>?</td></tr>
+<tr><td>-Yshow-print-errors</td><td>?</td></tr>
+<tr><td>-Yshow-suppressed-errors</td><td>?</td></tr>
+<tr><td>-Yshow-tree-ids</td><td>?</td></tr>
+<tr><td>-Yshow-var-bounds</td><td>?</td></tr>
+<tr><td>-Yskip</td><td>?</td></tr>
+<tr><td>-Yskip:<phases></td><td>?</td></tr>
+<tr><td>-Ystop-after</td><td>?</td></tr>
+<tr><td>-Ystop-after:<phases></td><td>?</td></tr>
+<tr><td>-Ystop-before</td><td>?</td></tr>
+<tr><td>-Ystop-before:<phases></td><td>?</td></tr>
+<tr><td>-Ytest-pickler</td><td>?</td></tr>
+<tr><td>-Yunsound-match-types</td><td>?</td></tr>
+<tr><td>-Yvalidate-pos:<phases></td><td>?</td></tr>
+<tr><td>-Xdisable-assertions</td><td>?</td></tr>
+<tr><td>-Xelide-below</td><td>?</td></tr>
+<tr><td>-Xgenerate-phase-graph</td><td>?</td></tr>
+<tr><td>-Xjline</td><td>?</td></tr>
+<tr><td>-Xlint:<warnings></td><td>?</td></tr>
+<tr><td>-Xmacro-settings</td><td>?</td></tr>
+<tr><td>-Xmain-class</td><td>?</td></tr>
+<tr><td>-Xmaxerrs</td><td>?</td></tr>
+<tr><td>-Xmaxwarns</td><td>?</td></tr>
+<tr><td>-Xno-patmat-analysis</td><td>?</td></tr>
+<tr><td>-Xreporter</td><td>?</td></tr>
+<tr><td>-Xresident</td><td>?</td></tr>
+<tr><td>-Xscript</td><td>?</td></tr>
+<tr><td>-Xsource-reader</td><td>?</td></tr>
+<tr><td>-Xxml:<propertys></td><td>?</td></tr>
+<tr><td>-Xexperimental</td><td>?</td></tr>
+<tr><td>-Xfuture</td><td>?</td></tr>
+<tr><td>-Xnojline</td><td>?</td></tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr><th>2.13.x</th><th>3.0.x</th></tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-<p>| -target | -Xtarget |
-| -explainTypes | -explain-types |
-| -print | -Xprint |
-| -source| -Xsource |
-| -Dproperty=value | ? |
-| -J | ? |
-| -V | ? |
-| -W | ? |
-| -Werror | ? |
-| -dependencyfile | ? |
-| -g | ? |
-| -no-specialization | ? |
-| -nobootcp | ? |
-| -opt | ? |
-| -opt-inline-from | ? |
-| -opt-warnings | ? |
-| -rootdir | ? |
-| -toolcp | ? |
-| -usemanifestcp | ? |
-| -optimize | ? |
-<a href="" title="options with -help">comment</a>: &lt;&gt; (options with -X)
-| -Xcheckinit | -Ycheck-init |
-| -Xdisable-assertions  | ? |
-| -Xelide-below | ? |
-| -Xgenerate-phase-graph | ? |
-| -Xjline | ? |
-| -Xlint:<warnings> | ? |
-| -Xmacro-settings | ? |
-| -Xmain-class | ? |
-| -Xmaxerrs | ? |
-| -Xmaxwarns | ? |
-| -Xno-patmat-analysis | ? |
-| -Xreporter | ? |
-| -Xresident | ? |
-| -Xscript | ? |
-| -Xsource | ? |
-| -Xsource-reader | ? |
-| -Xverify | -Xverify-signatures |
-| -Xxml:<propertys> | ? |
-| -Xexperimental | ? |
-| -Xfuture | ? |
-| -Xnojline | ? |
-<a href="" title="options with -help">comment</a>: &lt;&gt; (Warning options -W and -Xlint)
-| -W | ? |
-| -Xlint | ? |
-<a href="" title="options with -help">comment</a>: &lt;&gt; (options with -Y)
-| -Ycheck | ? |
-| -Ycheck-all-patmat | ? |
-| -Ycheck-init | ? |
-| -Ycheck-mods | ? |
-| -Ycheck-reentrant | ? |
-| -Ycook-comments | ? |
-| -Ydebug | ? |
-| -Ydebug-error | ? |
-| -Ydebug-flags | ? |
-| -Ydebug-missing-refs | ? |
-| -Ydebug-names | ? |
-| -Ydebug-pos | ? |
-| -Ydebug-trace | ? |
-| -Ydebug-tree-with-id | ? |
-| -Ydebug-type-error | ? |
-| -Ydetailed-stats | ? |
-| -YdisableFlatCpCaching | ? |
-| -Ydrop-comments | ? |
-| -Ydump-sbt-inc | ? |
-| -Yerased-terms | ? |
-| -Yexplain-lowlevel | ? |
-| -Yexplicit-nulls | ? |
-| -Yforce-sbt-phases | ? |
-| -Yfrom-tasty-ignore-list | ? |
-| -Yindent-colons | ? |
-| -Yinstrument | ? |
-| -Yinstrument-defs | ? |
-| -Ykind-projector | ? |
-| -Ylog | ? |
-| -Ylog-classpath | ? |
-| -Yno-decode-stacktraces | ? |
-| -Yno-deep-subtypes | ? |
-| -Yno-double-bindings | ? |
-| -Yno-kind-polymorphism | ? |
-| -Yno-patmat-opt | ? |
-| -Yplain-printer | ? |
-| -Yprint-debug | ? |
-| -Yprint-debug-owners | ? |
-| -Yprint-pos | ? |
-| -Yprint-pos-syms | ? |
-| -Yprint-syms | ? |
-| -Yprofile-external-tool | ? |
-| -Yprofile-run-gc | ? |
-| -Yrequire-targetName | ? |
-| -Yresolve-term-conflict | ? |
-| -Yresolve-term-conflict:<strategy> | ? |
-| -Yretain-trees | ? |
-| -Yscala2-unpickler | ? |
-| -Yscriptrunner | ? |
-| -Yshow-print-errors | ? |
-| -Yshow-suppressed-errors | ? |
-| -Yshow-tree-ids | ? |
-| -Yshow-var-bounds | ? |
-| -Yskip | ? |
-| -Yskip:<phases> | ? |
-| -Ystop-after | ? |
-| -Ystop-after:<phases> | ? |
-| -Ystop-before | ? |
-| -Ystop-before:<phases> | ? |
-| -Ytest-pickler | ? |
-| -Yunsound-match-types | ? |
-| -Yvalidate-pos:<phases> | ? |</p>
+<p>| -W | ? |
+| -Xlint | ? |</p>
 <p>The <code>isDotty</code> setting can be used to select the list of options corresponding to the current <code>scalaVersion</code>.
 Thus a typical <code>scalacOptions</code> configuration would look like this:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
