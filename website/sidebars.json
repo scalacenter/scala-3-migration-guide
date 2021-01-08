@@ -7,7 +7,8 @@
       "scala-3-syntax-rewriting"
     ],
     "Tutorials": [
-      "tutorials/sbt-migration"
+      "tutorials/sbt-migration",
+      "tutorials/scalacoptions-migration"
     ],
     "Incompatibilities": [
       "incompatibilities/table",
