@@ -316,15 +316,14 @@ Beware that `reload` will always load the default version.
 ## 5 - Configure the Scala 3.0 compiler
 
 Between Scala 2.13 and Scala 3.0, the available compiler options are different:
-- Some of the Scala 2.13 options are not supported by the Scala 3.0 compiler.
+- Some Scala 2.13 options are not supported by the Scala 3.0 compiler.
 - New options are available to enable new features of the Scala 3.0 compiler.
 
 We basically need two lists of compiler options, one for Scala 2.13 and another one for Scala 3.0.
 
-> A comparsion table for compiler options will soon be included in this guide.
-> Stay tuned to [#60](https://github.com/scalacenter/scala-3-migration-guide/issues/60).
+>
+> Follow [this comparison table](scalacoptions-migration.md) in order to adapt the list of scalacOptions
 > 
-> [Contributions welcomed](../contributing.md)
 
 The `isDotty` setting can be used to select the list of options corresponding to the current `scalaVersion`.
 Thus a typical `scalacOptions` configuration would look like this:
