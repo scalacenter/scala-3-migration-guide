@@ -305,16 +305,178 @@ crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-stri
 Stay tuned to <a href="https://github.com/scalacenter/scala-3-migration-guide/issues/60">#60</a>.</p>
 <p><a href="/scala-3-migration-guide/docs/contributing.html">Contributions welcomed</a></p>
 </blockquote>
+<p>Scalac Options shared between scala 3 and scala 2.13</p>
 <table>
 <thead>
-<tr><th>scalaVersion</th><th>binary version</th></tr>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
 </thead>
 <tbody>
-<tr><td><code>2.12.x</code></td><td><code>_2.12</code></td></tr>
-<tr><td><code>2.13.x</code></td><td><code>_2.13</code></td></tr>
-<tr><td><code>3.0.x</code></td><td><code>_2.13</code></td></tr>
+<tr><td>-X</td><td>Same</td></tr>
+<tr><td>-Y</td><td>Same</td></tr>
+<tr><td>-bootclasspath</td><td>Same</td></tr>
+<tr><td>-classpath</td><td>Same</td></tr>
+<tr><td>-d</td><td>Same</td></tr>
+<tr><td>-deprecation</td><td>Same</td></tr>
+<tr><td>-encoding</td><td>Same</td></tr>
+<tr><td>-extdirs</td><td>Same</td></tr>
+<tr><td>-feature</td><td>Same</td></tr>
+<tr><td>-help</td><td>Same</td></tr>
+<tr><td>-javabootclasspath</td><td>Same</td></tr>
+<tr><td>-javaextdirs</td><td>Same</td></tr>
+<tr><td>-nowarn</td><td>Same</td></tr>
+<tr><td>-release</td><td>Same</td></tr>
+<tr><td>-sourcepath</td><td>Same</td></tr>
+<tr><td>-unchecked</td><td>Same</td></tr>
+<tr><td>-uniqid</td><td>Same</td></tr>
+<tr><td>-usejavacp</td><td>Same</td></tr>
+<tr><td>-verbose</td><td>Same</td></tr>
+<tr><td>-version</td><td>Same</td></tr>
+<tr><td>-P:<plugin>:<opt></td><td>Same</td></tr>
+<tr><td>-explaintypes</td><td>-explain-types</td></tr>
+<tr><td>-language:<features></td><td>Same</td></tr>
+<tr><td>-print</td><td>-Xprint</td></tr>
 </tbody>
 </table>
+<p>Scalac options that no longer exist</p>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td>-Dproperty=value</td><td>?</td></tr>
+<tr><td>-J<flag></td><td>?</td></tr>
+<tr><td>-V</td><td>?</td></tr>
+<tr><td>-W</td><td>?</td></tr>
+<tr><td>-Werror</td><td>?</td></tr>
+<tr><td>-dependencyfile</td><td>?</td></tr>
+<tr><td>-g:<level></td><td>?</td></tr>
+<tr><td>-no-specialization</td><td>?</td></tr>
+<tr><td>-nobootcp</td><td>?</td></tr>
+<tr><td>-opt-inline-from:<patterns></td><td>?</td></tr>
+<tr><td>-opt-warnings:<warnings></td><td>?</td></tr>
+<tr><td>-opt:<optimizations></td><td>?</td></tr>
+<tr><td>-optimize</td><td>?</td></tr>
+<tr><td>-rootdir</td><td>?</td></tr>
+<tr><td>-target:<target></td><td>?</td></tr>
+<tr><td>-toolcp</td><td>?</td></tr>
+<tr><td>-usemanifestcp</td><td>?</td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>| -target | -Xtarget |
+| -explainTypes | -explain-types |
+| -print | -Xprint |
+| -source| -Xsource |
+| -Dproperty=value | ? |
+| -J | ? |
+| -V | ? |
+| -W | ? |
+| -Werror | ? |
+| -dependencyfile | ? |
+| -g | ? |
+| -no-specialization | ? |
+| -nobootcp | ? |
+| -opt | ? |
+| -opt-inline-from | ? |
+| -opt-warnings | ? |
+| -rootdir | ? |
+| -toolcp | ? |
+| -usemanifestcp | ? |
+| -optimize | ? |
+<a href="" title="options with -help">comment</a>: &lt;&gt; (options with -X)
+| -Xcheckinit | -Ycheck-init |
+| -Xdisable-assertions  | ? |
+| -Xelide-below | ? |
+| -Xgenerate-phase-graph | ? |
+| -Xjline | ? |
+| -Xlint:<warnings> | ? |
+| -Xmacro-settings | ? |
+| -Xmain-class | ? |
+| -Xmaxerrs | ? |
+| -Xmaxwarns | ? |
+| -Xno-patmat-analysis | ? |
+| -Xreporter | ? |
+| -Xresident | ? |
+| -Xscript | ? |
+| -Xsource | ? |
+| -Xsource-reader | ? |
+| -Xverify | -Xverify-signatures |
+| -Xxml:<propertys> | ? |
+| -Xexperimental | ? |
+| -Xfuture | ? |
+| -Xnojline | ? |
+<a href="" title="options with -help">comment</a>: &lt;&gt; (Warning options -W and -Xlint)
+| -W | ? |
+| -Xlint | ? |
+<a href="" title="options with -help">comment</a>: &lt;&gt; (options with -Y)
+| -Ycheck | ? |
+| -Ycheck-all-patmat | ? |
+| -Ycheck-init | ? |
+| -Ycheck-mods | ? |
+| -Ycheck-reentrant | ? |
+| -Ycook-comments | ? |
+| -Ydebug | ? |
+| -Ydebug-error | ? |
+| -Ydebug-flags | ? |
+| -Ydebug-missing-refs | ? |
+| -Ydebug-names | ? |
+| -Ydebug-pos | ? |
+| -Ydebug-trace | ? |
+| -Ydebug-tree-with-id | ? |
+| -Ydebug-type-error | ? |
+| -Ydetailed-stats | ? |
+| -YdisableFlatCpCaching | ? |
+| -Ydrop-comments | ? |
+| -Ydump-sbt-inc | ? |
+| -Yerased-terms | ? |
+| -Yexplain-lowlevel | ? |
+| -Yexplicit-nulls | ? |
+| -Yforce-sbt-phases | ? |
+| -Yfrom-tasty-ignore-list | ? |
+| -Yindent-colons | ? |
+| -Yinstrument | ? |
+| -Yinstrument-defs | ? |
+| -Ykind-projector | ? |
+| -Ylog | ? |
+| -Ylog-classpath | ? |
+| -Yno-decode-stacktraces | ? |
+| -Yno-deep-subtypes | ? |
+| -Yno-double-bindings | ? |
+| -Yno-kind-polymorphism | ? |
+| -Yno-patmat-opt | ? |
+| -Yplain-printer | ? |
+| -Yprint-debug | ? |
+| -Yprint-debug-owners | ? |
+| -Yprint-pos | ? |
+| -Yprint-pos-syms | ? |
+| -Yprint-syms | ? |
+| -Yprofile-external-tool | ? |
+| -Yprofile-run-gc | ? |
+| -Yrequire-targetName | ? |
+| -Yresolve-term-conflict | ? |
+| -Yresolve-term-conflict:<strategy> | ? |
+| -Yretain-trees | ? |
+| -Yscala2-unpickler | ? |
+| -Yscriptrunner | ? |
+| -Yshow-print-errors | ? |
+| -Yshow-suppressed-errors | ? |
+| -Yshow-tree-ids | ? |
+| -Yshow-var-bounds | ? |
+| -Yskip | ? |
+| -Yskip:<phases> | ? |
+| -Ystop-after | ? |
+| -Ystop-after:<phases> | ? |
+| -Ystop-before | ? |
+| -Ystop-before:<phases> | ? |
+| -Ytest-pickler | ? |
+| -Yunsound-match-types | ? |
+| -Yvalidate-pos:<phases> | ? |</p>
 <p>The <code>isDotty</code> setting can be used to select the list of options corresponding to the current <code>scalaVersion</code>.
 Thus a typical <code>scalacOptions</code> configuration would look like this:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
