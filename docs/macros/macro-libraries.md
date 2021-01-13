@@ -47,10 +47,10 @@ The following table contains an incomplete list of macro libraries and their mig
 | [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check  fa-lg"/> | Since version `0.1.8` |
 | [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check  fa-lg"/> | Since version `1.2.0` |
 | [lihaoyi/utest](https://index.scala-lang.org/lihaoyi/utest) | <i class="fas fa-check  fa-lg"/> | Since version `0.7.3` |
-| [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | [In progress](https://github.com/Log4s/log4s/pull/57) |
+| [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <i class="fas fa-check  fa-lg"/> | Since version `1.10.0-M1` |
 | [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"/> | |
 | [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Shapeless 3<br/>Milestone available ([Early Preview](https://github.com/milessabin/shapeless/tree/shapeless-3)) |
-| [monix/minitest](https://index.scala-lang.org/monix/minitest) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Ported in the _Community Build_ ([Staging Fork](https://github.com/dotty-staging/minitest))<br/>Not merged upstream |
+| [monix/minitest](https://index.scala-lang.org/monix/minitest) | <i class="fas fa-check  fa-lg"/> | Since `2.9.0` |
 | [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"/> | `macros` module not available for Scala 3.0 |
 | [nevillelyh/parquet-avro-extra](https://index.scala-lang.org/nevillelyh/parquet-avro-extra) |  <i class="fas fa-times fa-lg"/> | |
 | [non/imp](https://index.scala-lang.org/non/imp) |  <i class="fas fa-times fa-lg"/> | |
@@ -72,9 +72,9 @@ The following table contains an incomplete list of macro libraries and their mig
 | [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"/> | |
 | [typelevel/spire](https://index.scala-lang.org/typelevel/spire) |  <i class="fas fa-times fa-lg"/> | |
 | [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"/> | |
-| [wvlet/airframe-log](https://index.scala-lang.org/wvlet/airframe) |  <i class="fas fa-check fa-lg"/> | Since version [`20.12.1`](https://wvlet.org/airframe/docs/release-notes#20121) |
+| [wvlet/airframe](https://index.scala-lang.org/wvlet/airframe) |  <i class="fas fa-check fa-lg"/> | Since version [`20.12.1`](https://wvlet.org/airframe/docs/release-notes#20121) |
 | [zio/izumi-reflect](https:://index.scala-lang.org/zio/izumi-reflect) | <i class="fas fa-check fa-lg"/> | Does not yet support path-dependent type  |
-| [zio/zio](https://index.scala-lang.org/zio/zio) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | ZIO macros not yet available ([documentation](https://zio.dev/docs/howto/howto_macros)) |
+| [zio/zio](https://index.scala-lang.org/zio/zio) | <i class="fas fa-times fa-lg"/> | ZIO macros not yet available ([documentation](https://zio.dev/docs/howto/howto_macros)) |
 
 [Contributors welcome!](../contributing.md)
 
