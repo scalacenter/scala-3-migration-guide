@@ -321,9 +321,7 @@ Between Scala 2.13 and Scala 3.0, the available compiler options are different:
 
 We basically need two lists of compiler options, one for Scala 2.13 and another one for Scala 3.0.
 
->
-> Follow [this comparison table](scalacoptions-migration.md) in order to adapt the list of scalacOptions
-> 
+Follow [this comparison table](scalacoptions-migration.md) in order to adapt the list of scalacOptions.
 
 The `isDotty` setting can be used to select the list of options corresponding to the current `scalaVersion`.
 Thus a typical `scalacOptions` configuration would look like this:
