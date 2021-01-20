@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Porting the scalacOptions · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="As part of migrating the build (`build.sbt`), you will need to adapt the scalacOptions"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Porting the scalacOptions · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="As part of migrating the build (`build.sbt`), you will need to adapt the scalacOptions"/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Tutorials</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-migration-mode.html">Scala 3.0 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-syntax-rewriting.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">Porting an sbt Project</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">Porting the scalacOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Macros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/metaprogramming.html">Metaprogramming in Scala 3</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/migration-tutorial.html">Porting a Macro Library</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">External Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/tutorials/scalacoptions-migration.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Porting the scalacOptions</h1></header><article><div><span><p>As part of migrating the build (<code>build.sbt</code>), you will need to adapt the scalacOptions
+for Scala 3. In fact, between Scala 2.13 and Scala 3.0, the available compiler options are different:</p>
+<ul>
+<li>Some Scala 2.13 options are not supported by the Scala 3.0 compiler.</li>
+<li>New options are available to enable new features of the Scala 3.0 compiler.</li>
+</ul>
+<p>The goal is to end up with a configuration that will look like this:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
+scalacOptions ++= {
+  <span class="hljs-keyword">if</span> (isDotty.value) <span class="hljs-type">Seq</span>(
+    <span class="hljs-string">"-encoding"</span>,
+    <span class="hljs-string">"UTF-8"</span>,
+    <span class="hljs-string">"-feature"</span>,
+    <span class="hljs-string">"-unchecked"</span>,
+    <span class="hljs-string">"-language:implicitConversions"</span>
+    <span class="hljs-comment">// "-Xfatal-warnings" will be added after the migration</span>
+  ) <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>(
+    <span class="hljs-string">"-encoding"</span>,
+    <span class="hljs-string">"UTF-8"</span>,
+    <span class="hljs-string">"-feature"</span>,
+    <span class="hljs-string">"-deprecation"</span>,
+    <span class="hljs-string">"-language:implicitConversions"</span>,
+    <span class="hljs-string">"-Xfatal-warnings"</span>,
+    <span class="hljs-string">"-Wunused:imports,privates,locals"</span>,
+    <span class="hljs-string">"-Wvalue-discard"</span>
+  )
+}
+</code></pre>
+<blockquote>
+<p>The comparison is based on Scala 2.13.4 and 3.0.0-M3</p>
+</blockquote>
+<p>Go through the following sections to discover which scalacOptions are shared, new, or unavailable in Scala 3</p>
+<ol>
+<li><a href="#1---shared-scalacoptions-between-scala-2-and-scala-3">Shared scalacOptions between Scala 2 and scala 3</a></li>
+<li><a href="#2---unavailable-scalacoptions-in-scala-3">Unavailable scalacOptions in Scala 3</a></li>
+<li><a href="#3---new-scalacoptions-in-scala-3">New scalacOptions in Scala 3</a></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="1---shared-scalacoptions-between-scala-2-and-scala-3"></a><a href="#1---shared-scalacoptions-between-scala-2-and-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1 - Shared scalacOptions between Scala 2 and scala 3</h2>
+<p>This is the list of scalacOptions shared between Scala 2 and Scala 3.
+Some of them have been renamed as indicated in the table below.</p>
+<h3><a class="anchor" aria-hidden="true" id="1-standard-settings"></a><a href="#1-standard-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Standard settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-P:&lt;plugin&gt;:&lt;opt&gt;</code></td><td>Same</td></tr>
+<tr><td><code>-bootclasspath</code></td><td>Same</td></tr>
+<tr><td><code>-classpath</code></td><td>Same</td></tr>
+<tr><td><code>-d</code></td><td>Same</td></tr>
+<tr><td><code>-deprecation</code></td><td>Same</td></tr>
+<tr><td><code>-encoding</code></td><td>Same</td></tr>
+<tr><td><code>-explaintypes</code></td><td><code>-explain-types</code></td></tr>
+<tr><td><code>-extdirs</code></td><td>Same</td></tr>
+<tr><td><code>-feature</code></td><td>Same</td></tr>
+<tr><td><code>-help</code></td><td>Same</td></tr>
+<tr><td><code>-javabootclasspath</code></td><td>Same</td></tr>
+<tr><td><code>-javaextdirs</code></td><td>Same</td></tr>
+<tr><td><code>-language</code></td><td>Same</td></tr>
+<tr><td><code>-nowarn</code></td><td>Same</td></tr>
+<tr><td><code>-print</code></td><td>Same</td></tr>
+<tr><td><code>-release</code></td><td>Same</td></tr>
+<tr><td><code>-Xsource</code></td><td><code>-source</code></td></tr>
+<tr><td><code>-sourcepath</code></td><td>Same</td></tr>
+<tr><td><code>-target</code></td><td><code>-Xtarget</code></td></tr>
+<tr><td><code>-unchecked</code></td><td>Same</td></tr>
+<tr><td><code>-uniqid</code></td><td>Same</td></tr>
+<tr><td><code>-usejavacp</code></td><td>Same</td></tr>
+<tr><td><code>-verbose</code></td><td>Same</td></tr>
+<tr><td><code>-version</code></td><td>Same</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="2-advanced-settings"></a><a href="#2-advanced-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Advanced settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-X</code></td><td>Same</td></tr>
+<tr><td><code>-Xcheckinit</code></td><td><code>-Ycheck-init</code></td></tr>
+<tr><td><code>-Xmigration</code></td><td>Same</td></tr>
+<tr><td><code>-Xmixin-force-forwarders</code></td><td>Same</td></tr>
+<tr><td><code>-Xno-forwarders</code></td><td>Same</td></tr>
+<tr><td><code>-Xplugin</code></td><td>Same</td></tr>
+<tr><td><code>-Xplugin-disable</code></td><td>Same</td></tr>
+<tr><td><code>-Xplugin-list</code></td><td>Same</td></tr>
+<tr><td><code>-Xplugin-require</code></td><td>Same</td></tr>
+<tr><td><code>-Xpluginsdir</code></td><td>Same</td></tr>
+<tr><td><code>-Xprompt</code></td><td>Same</td></tr>
+<tr><td><code>-Xverify</code></td><td><code>-Xverify-signatures</code></td></tr>
+<tr><td><code>-Vprint-types</code></td><td><code>-Xprint-types</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="3-private-settings"></a><a href="#3-private-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Private settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Y</code></td><td>Same</td></tr>
+<tr><td><code>-Ycheck</code></td><td>Same</td></tr>
+<tr><td><code>-Ydump-classes</code></td><td>Same</td></tr>
+<tr><td><code>-Yno-generic-signatures</code></td><td>Same</td></tr>
+<tr><td><code>-Yno-imports</code></td><td>Same</td></tr>
+<tr><td><code>-Yno-predef</code></td><td>Same</td></tr>
+<tr><td><code>-Yprofile-destination</code></td><td>Same</td></tr>
+<tr><td><code>-Yprofile-enabled</code></td><td>Same</td></tr>
+<tr><td><code>-Yresolve-term-conflict</code></td><td>Same</td></tr>
+<tr><td><code>-Yskip</code></td><td>Same</td></tr>
+<tr><td><code>-Ystop-after</code></td><td>Same</td></tr>
+<tr><td><code>-Ystop-before</code></td><td>Same</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="4-scalajs-settings"></a><a href="#4-scalajs-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Scala.js settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-P:scalajs:genStaticForwardersForNonTopLevelObjects</code></td><td><code>-scalajs-genStaticForwardersForNonTopLevelObjects</code></td></tr>
+<tr><td><code>-P:scalajs:mapSourceURI</code></td><td><code>-scalajs-mapSourceURI</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="5-warning-and-verbose-settings"></a><a href="#5-warning-and-verbose-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Warning and verbose settings</h3>
+<p>Warning and verbose settings have been introduced in 2.13. They are not yet implemented in Scala 3.0.x except</p>
+<table>
+<thead>
+<tr><th>2.13.4</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Werror</code></td><td><code>-Xfatal-warnings</code></td></tr>
+<tr><td><code>-Xlint:deprecation</code></td><td><code>-deprecation</code></td></tr>
+<tr><td><code>-Vprint:_</code></td><td><code>-Xprin:all</code></td></tr>
+<tr><td><code>-Vphases</code></td><td><code>-Xshow-phases</code></td></tr>
+<tr><td><code>-Vclasspath</code></td><td><code>-Ylog-classpath</code></td></tr>
+<tr><td><code>-Vlog:&lt;phases&gt;</code> or <code>-Ylog</code></td><td><code>-Ylog:&lt;phases&gt;</code></td></tr>
+<tr><td><code>-Vdebug</code></td><td><code>-Ydebug</code></td></tr>
+<tr><td><code>-Vprint-pos</code></td><td><code>-Yprint-pos</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="2---unavailable-scalacoptions-in-scala-3"></a><a href="#2---unavailable-scalacoptions-in-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2 - Unavailable scalacOptions in Scala 3</h2>
+<p>Some scalacOptions no longer exist in scala 3. If those scalacOptions are added it produces a warning message
+<code>bad option 'Option' was ignored</code>. It won't prevent from starting the compilation, but the options are ignored.</p>
+<h3><a class="anchor" aria-hidden="true" id="1-unavailable-standard-settings"></a><a href="#1-unavailable-standard-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Unavailable standard settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Dproperty=value</code></td></tr>
+<tr><td><code>-J&lt;flag&gt;</code></td></tr>
+<tr><td><code>-dependencyfile</code></td></tr>
+<tr><td><code>-g</code></td></tr>
+<tr><td><code>-no-specialization</code></td></tr>
+<tr><td><code>-nobootcp</code></td></tr>
+<tr><td><code>-opt</code></td></tr>
+<tr><td><code>-opt-inline-from</code></td></tr>
+<tr><td><code>-opt-warnings</code></td></tr>
+<tr><td><code>-optimize</code></td></tr>
+<tr><td><code>-rootdir</code></td></tr>
+<tr><td><code>-toolcp</code></td></tr>
+<tr><td><code>-usemanifestc</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="2-unavailable-warning-and-verbose-settings"></a><a href="#2-unavailable-warning-and-verbose-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Unavailable warning and verbose settings</h3>
+<p>Warning and verbose settings have been introduced in 2.13. They are not yet implemented in Scala 3.0.x</p>
+<table>
+<thead>
+<tr><th>2.13.4</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-W</code></td></tr>
+<tr><td><code>-Wconf</code></td></tr>
+<tr><td><code>-Wdead-code</code></td></tr>
+<tr><td><code>-Wextra-implicit</code></td></tr>
+<tr><td><code>-Wmacros:&lt;mode&gt;</code></td></tr>
+<tr><td><code>-Wnumeric-widen</code></td></tr>
+<tr><td><code>-Woctal-literal</code></td></tr>
+<tr><td><code>-Wunused:WARNING1,WARNING2</code> or <code>-Ywarn-unused:WARNING1,WARNING2</code></td></tr>
+<tr><td><code>-Wvalue-discard</code> or <code>-Ywarn-value-discard</code></td></tr>
+<tr><td><code>-Xlint:WARNING1,WARNING2</code></td></tr>
+<tr><td><code>-Wself-implicit</code></td></tr>
+<tr><td><code>-V</code></td></tr>
+<tr><td><code>-Vbrowse:&lt;phases&gt;</code></td></tr>
+<tr><td><code>-Vdebug-tasty</code></td></tr>
+<tr><td><code>-Vdoc</code></td></tr>
+<tr><td><code>-Vfree-terms</code></td></tr>
+<tr><td><code>-Vfree-types</code></td></tr>
+<tr><td><code>-Vhot-statistics</code> or <code>-Yhot-statistics</code></td></tr>
+<tr><td><code>-Vide</code> or <code>-Yide-debug</code></td></tr>
+<tr><td><code>-Vimplicit-conversions</code> or <code>-Xlog-implicit-conversion</code></td></tr>
+<tr><td><code>-Vimplicits</code> or <code>-Xlog-implicits</code></td></tr>
+<tr><td><code>-Vinline &lt;package/Class.method&gt;</code> or <code>-Yopt-log-inline &lt;package/Class.method&gt;</code></td></tr>
+<tr><td><code>-Vissue</code>  or <code>-Yissue-debug</code></td></tr>
+<tr><td><code>-Vmacro</code> or <code>-Ymacro-debug-verbose</code></td></tr>
+<tr><td><code>-Vmacro-lite</code> or <code>-Ymacro-debug-lite</code></td></tr>
+<tr><td><code>-Vopt &lt;package/Class.method&gt;</code> or <code>-Yopt-trace &lt;package/Class.method&gt;</code></td></tr>
+<tr><td><code>-Vpatmat</code> or <code>-Ypatmat-debug</code></td></tr>
+<tr><td><code>-Vpos</code> or <code>-Ypos-debug</code></td></tr>
+<tr><td><code>-Vprint-args &lt;file&gt;</code> or <code>-Xprint-args</code></td></tr>
+<tr><td><code>-Vquasiquote</code> or <code>Yquasiquote-debug</code></td></tr>
+<tr><td><code>-Vreflective-calls</code> or <code>-Xlog-reflective-calls</code></td></tr>
+<tr><td><code>-Vreify</code> or <code>-Yreify-debug</code></td></tr>
+<tr><td><code>-Vshow:&lt;phases&gt;</code> or <code>-Yshow:&lt;phases&gt;</code></td></tr>
+<tr><td><code>-Vshow-class &lt;class&gt;</code> or <code>-Xshow-class &lt;class&gt;</code></td></tr>
+<tr><td><code>-Vshow-member-pos &lt;output style&gt;</code> or <code>-Yshow-member-pos &lt;output style&gt;</code></td></tr>
+<tr><td><code>-Vshow-object &lt;object&gt;</code> or <code>-Xshow-object &lt;object&gt;</code></td></tr>
+<tr><td><code>-Vshow-symkinds</code> or <code>-Yshow-symkinds</code></td></tr>
+<tr><td><code>-Vshow-symowners</code> or <code>-Yshow-symowners</code></td></tr>
+<tr><td><code>-Vstatistics &lt;phases&gt; -Ystatistics &lt;phases&gt;</code></td></tr>
+<tr><td><code>-Vsymbols</code> or <code>-Yshow-syms</code></td></tr>
+<tr><td><code>-Vtyper</code> or <code>-Ytyper-debug</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="3-unavailable-advanced-settings"></a><a href="#3-unavailable-advanced-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Unavailable advanced settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xdev</code></td></tr>
+<tr><td><code>-Xdisable-assertions</code></td></tr>
+<tr><td><code>-Xelide-below</code></td></tr>
+<tr><td><code>-Xexperimental</code></td></tr>
+<tr><td><code>-Xfuture</code></td></tr>
+<tr><td><code>-Xgenerate-phase-graph</code></td></tr>
+<tr><td><code>-Xjline</code></td></tr>
+<tr><td><code>-Xmacro-settings</code></td></tr>
+<tr><td><code>-Xmain-class</code></td></tr>
+<tr><td><code>-Xmaxerrs</code></td></tr>
+<tr><td><code>-Xmaxwarns</code></td></tr>
+<tr><td><code>-Xno-patmat-analysis</code></td></tr>
+<tr><td><code>-Xnojline</code></td></tr>
+<tr><td><code>-Xreporter</code></td></tr>
+<tr><td><code>-Xresident</code></td></tr>
+<tr><td><code>-Xscript</code></td></tr>
+<tr><td><code>-Xsource-reader</code></td></tr>
+<tr><td><code>-Xxml</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="4-unavailable-private-settings"></a><a href="#4-unavailable-private-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Unavailable private settings</h3>
+<table>
+<thead>
+<tr><th>2.13.4</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Ybackend-parallelism</code></td></tr>
+<tr><td><code>-Ybackend-worker-queue</code></td></tr>
+<tr><td><code>-Ybreak-cycles</code></td></tr>
+<tr><td><code>-Ycache-macro-class-loader</code></td></tr>
+<tr><td><code>-Ycache-plugin-class-loader</code></td></tr>
+<tr><td><code>-Ycompact-trees</code></td></tr>
+<tr><td><code>-Ydelambdafy</code></td></tr>
+<tr><td><code>-Ygen-asmp</code></td></tr>
+<tr><td><code>-Yimports</code></td></tr>
+<tr><td><code>-Yjar-compression-level</code></td></tr>
+<tr><td><code>-YjarFactory</code></td></tr>
+<tr><td><code>-Ymacro-annotations</code></td></tr>
+<tr><td><code>-Ymacro-classpath</code></td></tr>
+<tr><td><code>-Ymacro-expand</code></td></tr>
+<tr><td><code>-Ymacro-global-fresh-names</code></td></tr>
+<tr><td><code>-Yno-completion</code></td></tr>
+<tr><td><code>-Yno-flat-classpath-cache</code></td></tr>
+<tr><td><code>-Yopt-inline-heuristics</code></td></tr>
+<tr><td><code>-Ypatmat-exhaust-depth</code></td></tr>
+<tr><td><code>-Ypresentation-any-thread</code></td></tr>
+<tr><td><code>-Ypresentation-debug</code></td></tr>
+<tr><td><code>-Ypresentation-delay</code></td></tr>
+<tr><td><code>-Ypresentation-locate-source-file</code></td></tr>
+<tr><td><code>-Ypresentation-log</code></td></tr>
+<tr><td><code>-Ypresentation-strict</code></td></tr>
+<tr><td><code>-Ypresentation-verbose</code></td></tr>
+<tr><td><code>-Yprint-trees</code></td></tr>
+<tr><td><code>-Yprofile-trace</code></td></tr>
+<tr><td><code>-Yrangepos</code></td></tr>
+<tr><td><code>-Yrecursion</code></td></tr>
+<tr><td><code>-Yreify-copypaste</code></td></tr>
+<tr><td><code>-Yrepl-class-based</code></td></tr>
+<tr><td><code>-Yrepl-outdir</code></td></tr>
+<tr><td><code>-Yrepl-use-magic-imports</code></td></tr>
+<tr><td><code>-Yscriptrunner</code></td></tr>
+<tr><td><code>-Yvalidate-pos</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="3---new-scalacoptions-in-scala-3"></a><a href="#3---new-scalacoptions-in-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3 - New scalacOptions in Scala 3</h2>
+<h3><a class="anchor" aria-hidden="true" id="1-standard-settings-1"></a><a href="#1-standard-settings-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Standard settings</h3>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-color</code></td><td>Colored output Default: always.</td></tr>
+<tr><td><code>-doc-snapshot</code></td><td>Generate a documentation snapshot for the current Dotty version</td></tr>
+<tr><td><code>-explain</code></td><td>Explain errors in more detail.</td></tr>
+<tr><td><code>-from-tasty</code></td><td>Compile classes from tasty files. The arguments are .tasty or .jar files.</td></tr>
+<tr><td><code>-indent</code></td><td>Together with -rewrite, remove {...} syntax when possible due to significant indentation.</td></tr>
+<tr><td><code>-new-syntax</code></td><td>Require <code>then</code> and <code>do</code> in control expressions.</td></tr>
+<tr><td><code>-noindent</code></td><td>Require classical {...} syntax, indentation is not significant.</td></tr>
+<tr><td><code>-old-syntax</code></td><td>Require <code>(...)</code> around conditions.</td></tr>
+<tr><td><code>-pagewidth</code></td><td>Set page width Default: 80.</td></tr>
+<tr><td><code>-print-lines</code></td><td>Show source code line numbers.</td></tr>
+<tr><td><code>-print-tasty</code></td><td>Prints the raw tasty.</td></tr>
+<tr><td><code>-project</code></td><td>The name of the project.</td></tr>
+<tr><td><code>-project-logo</code></td><td>The file that contains the project's logo (in /images).</td></tr>
+<tr><td><code>-project-url</code></td><td>The source repository of your project.</td></tr>
+<tr><td><code>-project-version</code></td><td>The current version of your project.</td></tr>
+<tr><td><code>-rewrite</code></td><td>When used in conjunction with a <code>...-migration</code> source version, rewrites sources to migrate to new version.</td></tr>
+<tr><td><code>-semanticdb-target</code></td><td>Specify an alternative output directory for SemanticDB files.</td></tr>
+<tr><td><code>-siteroot</code></td><td>A directory containing static files from which to generate documentation. Default: ./docs.</td></tr>
+<tr><td><code>-sourceroot</code></td><td>Specify workspace root directory. Default: ..</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="2-compiler-plugins"></a><a href="#2-compiler-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Compiler plugins</h3>
+<p>There are two settings in Scala 3 that replace two compiler plugins in Scala 2.13.4.
+Read this <a href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html#12---compiler-plugins">section</a> for more information.</p>
+<table>
+<thead>
+<tr><th>2.13.4</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xplugin:semanticdb-scalac_2.13.4-4.4.0.jar</code></td><td><code>-Xsemanticdb</code></td></tr>
+<tr><td><code>-Xplugin:kind-projector_2.13.4-0.11.2.jar</code></td><td><code>-Ykind-projector</code></td></tr>
+</tbody>
+</table>
+<p>Usually a compiler plugin is added with <code>addCompilerPlugin</code> invocation in builds
+and not as a scalacOption as in the following example.</p>
+<pre><code class="hljs css language-scala">addCompilerPlugin(<span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"kind-projector"</span> % <span class="hljs-string">"4.4.0"</span>)
+</code></pre>
+<p>For those two particular compiler plugins, you will need to remove the <code>addCompilerPlugin</code>
+and replace it with the corresponding scalacOption</p>
+<pre><code class="hljs css language-scala">scalacOptions ++= (<span class="hljs-keyword">if</span> (isDotty.value) <span class="hljs-type">Seq</span>(<span class="hljs-string">"-Ykind-projector"</span>) <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>())
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="3-advanced-settings"></a><a href="#3-advanced-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Advanced settings</h3>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xignore-scala2-macros</code></td><td>Ignore errors when compiling code that calls Scala2 macros, these will fail at runtime.</td></tr>
+<tr><td><code>-Ximport-suggestion-timeout</code></td><td>Timeout (in ms) for searching for import suggestions when errors are reported.</td></tr>
+<tr><td><code>-Xmax-inlined-trees</code></td><td>Maximal number of inlined trees. Default: 2000000</td></tr>
+<tr><td><code>-Xmax-inlines</code></td><td>Maximal number of successive inlines. Default: 32.</td></tr>
+<tr><td><code>-Xprint-diff</code></td><td>Print changed parts of the tree since last print.</td></tr>
+<tr><td><code>-Xprint-diff-del</code></td><td>Print changed parts of the tree since last print including deleted parts.</td></tr>
+<tr><td><code>-Xprint-inline</code></td><td>Show where inlined code comes from.</td></tr>
+<tr><td><code>-Xprint-suspension</code></td><td>Show when code is suspended until macros are compiled.</td></tr>
+<tr><td><code>-Xrepl-disable-display</code></td><td>Do not display definitions in REPL.</td></tr>
+<tr><td><code>-Xwiki-syntax</code></td><td>Retains the Scala2 behavior of using Wiki Syntax in Scaladoc.</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="4-private-settings"></a><a href="#4-private-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Private settings</h3>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Ycheck-all-patmat</code></td><td>Check exhaustivity and redundancy of all pattern matching (used for testing the algorithm).</td></tr>
+<tr><td><code>-Ycheck-mods</code></td><td>Check that symbols and their defining trees have modifiers in sync.</td></tr>
+<tr><td><code>-Ycheck-reentrant</code></td><td>Check that compiled program does not contain vars that can be accessed from a global root.</td></tr>
+<tr><td><code>-Ycook-comments</code></td><td>Cook the comments (type check <code>@usecase</code>, etc.)</td></tr>
+<tr><td><code>-Ydebug-error</code></td><td>Print the stack trace when any error is caught.</td></tr>
+<tr><td><code>-Ydebug-flags</code></td><td>Print all flags of definitions.</td></tr>
+<tr><td><code>-Ydebug-missing-refs</code></td><td>Print a stacktrace when a required symbol is missing.</td></tr>
+<tr><td><code>-Ydebug-names</code></td><td>Show internal representation of names.</td></tr>
+<tr><td><code>-Ydebug-pos</code></td><td>Show full source positions including spans.</td></tr>
+<tr><td><code>-Ydebug-trace</code></td><td>Trace core operations.</td></tr>
+<tr><td><code>-Ydebug-tree-with-id</code></td><td>Print the stack trace when the tree with the given id is created. Default: -2147483648.</td></tr>
+<tr><td><code>-Ydebug-type-error</code></td><td>Print the stack trace when a TypeError is caught</td></tr>
+<tr><td><code>-Ydetailed-stats</code></td><td>Show detailed internal compiler stats (needs Stats.enabled to be set to true).</td></tr>
+<tr><td><code>-YdisableFlatCpCaching</code></td><td>Do not cache flat classpath representation of classpath elements from jars across compiler instances.</td></tr>
+<tr><td><code>-Ydrop-comments</code></td><td>Drop comments when scanning source files.</td></tr>
+<tr><td><code>-Ydump-sbt-inc</code></td><td>For every compiled foo.scala, output the API representation and dependencies used for sbt incremental compilation in foo.inc, implies -Yforce-sbt-phases.</td></tr>
+<tr><td><code>-Yerased-terms</code></td><td>Allows the use of erased terms.</td></tr>
+<tr><td><code>-Yexplain-lowlevel</code></td><td>When explaining type errors, show types at a lower level.</td></tr>
+<tr><td><code>-Yexplicit-nulls</code></td><td>Make reference types non-nullable. Nullable types can be expressed with unions: e.g. String|Null.</td></tr>
+<tr><td><code>-Yforce-sbt-phases</code></td><td>Run the phases used by sbt for incremental compilation (ExtractDependencies and ExtractAPI) even if the compiler is ran outside of sbt, for debugging.</td></tr>
+<tr><td><code>-Yfrom-tasty-ignore-list</code></td><td>List of <code>tasty</code> files in jar files that will not be loaded when using -from-tasty</td></tr>
+<tr><td><code>-Yindent-colons</code></td><td>Allow colons at ends-of-lines to start indentation blocks.</td></tr>
+<tr><td><code>-Yinstrument</code></td><td>Add instrumentation code that counts allocations and closure creations.</td></tr>
+<tr><td><code>-Yinstrument-defs</code></td><td>Add instrumentation code that counts method calls; needs -Yinstrument to be set, too.</td></tr>
+<tr><td><code>-Yno-decode-stacktraces</code></td><td>how raw StackOverflow stacktraces, instead of decoding them into triggering operations.</td></tr>
+<tr><td><code>-Yno-deep-subtypes</code></td><td>Throw an exception on deep subtyping call stacks.</td></tr>
+<tr><td><code>-Yno-double-bindings</code></td><td>Assert no namedtype is bound twice (should be enabled only if program is error-free).</td></tr>
+<tr><td><code>-Yno-kind-polymorphism</code></td><td>Disable kind polymorphism.</td></tr>
+<tr><td><code>-Yno-patmat-opt</code></td><td>Disable all pattern matching optimizations.</td></tr>
+<tr><td><code>-Yplain-printer</code></td><td>Pretty-print using a plain printer.</td></tr>
+<tr><td><code>-Yprint-debug</code></td><td>When printing trees, print some extra information useful for debugging.</td></tr>
+<tr><td><code>-Yprint-debug-owners</code></td><td>When printing trees, print owners of definitions.</td></tr>
+<tr><td><code>-Yprint-pos</code></td><td>Show tree positions.</td></tr>
+<tr><td><code>-Yprint-pos-syms</code></td><td>Show symbol definitions positions.</td></tr>
+<tr><td><code>-Yprint-syms</code></td><td>When printing trees print info in symbols instead of corresponding info in trees.</td></tr>
+<tr><td><code>-Yrequire-targetName</code></td><td>Warn if an operator is defined without a @targetName annotation</td></tr>
+<tr><td><code>-Yretain-trees</code></td><td>Retain trees for top-level classes, accessible from ClassSymbol#tree</td></tr>
+<tr><td><code>-Yscala2-unpickler</code></td><td>Control where we may get Scala 2 symbols from. This is either &quot;always&quot;, &quot;never&quot;, or a classpath. Default: always.</td></tr>
+<tr><td><code>-Yshow-print-errors</code></td><td>Don't suppress exceptions thrown during tree printing.</td></tr>
+<tr><td><code>-Yshow-suppressed-errors</code></td><td>Also show follow-on errors and warnings that are normally suppressed.</td></tr>
+<tr><td><code>-Yshow-tree-ids</code></td><td>Uniquely tag all tree nodes in debugging output.</td></tr>
+<tr><td><code>-Yshow-var-bounds</code></td><td>Print type variables with their bounds.</td></tr>
+<tr><td><code>-Ytest-pickler</code></td><td>Self-test for pickling functionality; should be used with -Ystop-after:pickler.</td></tr>
+<tr><td><code>-Yunsound-match-types</code></td><td>Use unsound match type reduction algorithm.</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html"><span class="arrow-prev">← </span><span>Porting an sbt Project</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/table.html"><span>Incompatibility Table</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#1---shared-scalacoptions-between-scala-2-and-scala-3">1 - Shared scalacOptions between Scala 2 and scala 3</a><ul class="toc-headings"><li><a href="#1-standard-settings">1. Standard settings</a></li><li><a href="#2-advanced-settings">2. Advanced settings</a></li><li><a href="#3-private-settings">3. Private settings</a></li><li><a href="#4-scalajs-settings">4. Scala.js settings</a></li><li><a href="#5-warning-and-verbose-settings">5. Warning and verbose settings</a></li></ul></li><li><a href="#2---unavailable-scalacoptions-in-scala-3">2 - Unavailable scalacOptions in Scala 3</a><ul class="toc-headings"><li><a href="#1-unavailable-standard-settings">1. Unavailable standard settings</a></li><li><a href="#2-unavailable-warning-and-verbose-settings">2. Unavailable warning and verbose settings</a></li><li><a href="#3-unavailable-advanced-settings">3. Unavailable advanced settings</a></li><li><a href="#4-unavailable-private-settings">4. Unavailable private settings</a></li></ul></li><li><a href="#3---new-scalacoptions-in-scala-3">3 - New scalacOptions in Scala 3</a><ul class="toc-headings"><li><a href="#1-standard-settings-1">1. Standard settings</a></li><li><a href="#2-compiler-plugins">2. Compiler plugins</a></li><li><a href="#3-advanced-settings">3. Advanced settings</a></li><li><a href="#4-private-settings">4. Private settings</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
