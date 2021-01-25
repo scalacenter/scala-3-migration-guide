@@ -126,10 +126,10 @@ Warning and verbose settings have been introduced in 2.13. They are not yet impl
 |-|-|
 | `-Werror` | `-Xfatal-warnings` |
 | `-Xlint:deprecation` | `-deprecation` |
-| `-Vprint:_` | `-Xprin:all` |
+| `-Vprint:<phases>` | `-Xprint:<phases>` |
 | `-Vphases` | `-Xshow-phases` |
 | `-Vclasspath` | `-Ylog-classpath` |
-| `-Vlog:<phases>` or `-Ylog` | `-Ylog:<phases>`|
+| `-Vlog:<phases>` | `-Ylog:<phases>`|
 | `-Vdebug` | `-Ydebug` |
 | `-Vprint-pos` | `-Yprint-pos` |
 
@@ -163,7 +163,7 @@ Warning and verbose settings have been introduced in 2.13. They are not yet impl
 |-|
 | `-W` |
 | `-Wconf` |
-| `-Wdead-code` |
+| `-Wdead-code` or `-Ywarn-dead-code` |
 | `-Wextra-implicit` |
 | `-Wmacros:<mode>` |
 | `-Wnumeric-widen` |
