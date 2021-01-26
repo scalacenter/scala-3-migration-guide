@@ -1,4 +1,4 @@
-addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.5.1")
+addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.5.2")
 addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.16")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.25")
 
