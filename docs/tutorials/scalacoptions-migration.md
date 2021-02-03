@@ -166,7 +166,7 @@ Warning and verbose settings have been introduced in 2.13. They are not yet impl
 | `-Wdead-code` or `-Ywarn-dead-code` |
 | `-Wextra-implicit` |
 | `-Wmacros:<mode>` |
-| `-Wnumeric-widen` |
+| `-Wnumeric-widen`  or `-Ywarn-numeric-widen`|
 | `-Woctal-literal` |
 | `-Wunused:WARNING1,WARNING2` or `-Ywarn-unused:WARNING1,WARNING2`|
 | `-Wvalue-discard` or `-Ywarn-value-discard`|
