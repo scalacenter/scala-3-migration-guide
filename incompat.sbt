@@ -32,8 +32,8 @@ inThisBuild(
 */
 lazy val `incompat-30` = project.in(file("incompat-30"))
   .configs(CompileBackward)
-  .aggregate(dotty30MigrationRewrites: _*)
-  .aggregate(typeInferIncompats: _*)
+  // .aggregate(dotty30MigrationRewrites: _*)
+  // .aggregate(typeInferIncompats: _*)
   .aggregate(otherIncompats: _*)
 
 /*
@@ -139,25 +139,25 @@ lazy val typeInfer10 = project.in(file("incompat-30/type-infer-10")).settings(in
   They all are compile time incompatibilities, except `implicitView`
 */
 lazy val otherIncompats = Seq[ProjectReference](
-  anonymousTypeParam,
-  indentation1,
-  indentation2,
-  restrictedOperator,
-  typeParamIdentifier,
-  abstractOverride,
-  any2stringaddConversion,
-  byNameParamTypeInfer,
-  defaultParamVariance,
-  earlyInitializer,
-  existentialType,
-  wildcardArgument,
-  explicitCallToUnapply,
-  javaLangEnum,
-  reflectiveCall,
-  ambiguousConversion,
+  // anonymousTypeParam,
+  // indentation1,
+  // indentation2,
+  // restrictedOperator,
+  // typeParamIdentifier,
+  // abstractOverride,
+  // any2stringaddConversion,
+  // byNameParamTypeInfer,
+  // defaultParamVariance,
+  // earlyInitializer,
+  // existentialType,
+  // wildcardArgument,
+  // explicitCallToUnapply,
+  // javaLangEnum,
+  // reflectiveCall,
+  // ambiguousConversion,
   implicitView,
-  typeOfImplicitDef,
-  viewBound
+  // typeOfImplicitDef,
+  // viewBound
 )
 
 // Syntactic incompatibilities
