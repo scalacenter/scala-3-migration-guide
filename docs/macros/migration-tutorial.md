@@ -6,7 +6,7 @@ title: Porting a Macro Library
 In this tutorial we will learn two different approaches to migrate a macro library to Scala 3.0:
 - [Cross-Building](#cross-building)
 - [Mixing Macro Definitions in Scala 3.0](#mixing-macro-definitions)
-- 
+
 Each approach makes the library available in Scala 3.0 while maintaining Scala 2.13 compatibility.
 
 ## A Scala 2 Macro Definition
@@ -249,15 +249,16 @@ We eventually come up with this implementation:
 
 package location
 
-import scala.quoted.{QuoteContext, Expr}
+import scala.quoted.{Quotes, Expr}
 
 object Macros:
   inline def location: Location = ${locationImpl}
 
-  def locationImpl(using ctx: QuoteContext): Expr[Location] =
-    import ctx.reflect.rootPosition
-    val file = Expr(rootPosition.sourceFile.jpath.toString)
-    val line = Expr(rootPosition.startLine + 1)
+  private def locationImpl(using ctx: Quotes): Expr[Location] =
+    import ctx.reflect.Position
+    val pos = Position.ofMacroExpansion
+    val file = Expr(pos.sourceFile.jpath.toString)
+    val line = Expr(pos.startLine + 1)
     '{new Location($file, $line)}
 ```
 
@@ -287,6 +288,8 @@ Then the Scala 2.13 compiler would be able to find that definition in the Scala 
 
 This idea sets the ground to the mixing macros technique that we detail further below using the `location` example.
 It is compatible with any build tool that can mix Scala 2.13 and Scala 3.0 modules.
+
+> This part of the tutorial is written for @scala3M1@ because it is the only Tasty Reader compatible version at the time of writing.
 
 ### 1 - Creating the Scala 3 module
 
@@ -319,7 +322,7 @@ We call it `macroLib`.
 lazy val macroLib = project
   .in(file("macro-lib"))
   .settings(
-    scalaVersion := "@scala30@"
+    scalaVersion := "@scala3M1@"
   )
   .dependsOn(lib)
 ```
@@ -331,7 +334,11 @@ lazy val app = project
   .in(file("app"))
   .settings(
     scalaVersion := "@scala213@",
-    crossScalaVersion := Seq("@scala213@", "@scala30@")  
+    crossScalaVersion := Seq("@scala213@", "@scala3M1@") ,
+    scalacOptions ++= {
+      if (isDotty.value) Seq()
+      else Seq("-Ytasty-reader")
+    }
   )
   .dependsOn(macroLib)
 ```
@@ -353,6 +360,7 @@ Note that we moved it to a `Scala2Macros` object because we cannot have two `Mac
 
 ```scala
 // lib/src/main/scala/location/Macros.scala
+
 package location
 
 import scala.reflect.macros.blackbox.Context
@@ -418,8 +426,8 @@ Here the Scala 3.0 implementation throws a `NotImplementedError`, hence the answ
 We can try and see the exception being thrown at compile-time.
 
 ```shell
-sbt: location> ++@scala30@; app / run
-[info] compiling 1 Scala source to /loaction/app/target/scala-@scala30Binary@/classes ...
+sbt: location> ++@scala3M1@; app / run
+[info] compiling 1 Scala source to /loaction/app/target/scala-@scala3M1Binary@/classes ...
 [error] -- Error: /location/app/src/main/scala/app/Main.scala:6:10 
 [error] 6 |  println(location)
 [error]   |          ^^^^^^^^
@@ -460,7 +468,7 @@ object Macros:
 The `app` module can now be compiled and executed in Scala 3:
 
 ```
-sbt: location> ++@scala30@; app / run
+sbt: location> ++@scala3M1@; app / run
 [info] running app.Main 
 Line 6 in /location/app/src/main/scala/app/Main.scala
 [info] app / run completed
