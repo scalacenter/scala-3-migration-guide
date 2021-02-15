@@ -1,6 +1,6 @@
 ## Auto-application
 
-Auto-application is the syntax of calling a nullary method without passing an empty argument list.
+Auto-application is the syntax of calling an empty-paren method such as `def f(): Int` without passing an empty argument list.
 
 In Scala 3.0, when calling a method defined in Scala 3.0, this syntax is forbidden.
 
