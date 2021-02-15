@@ -26,3 +26,6 @@ title: Other Changed Features
 
 ```scala mdoc:file:incompat-30/wildcard-argument/README.md
 ```
+
+```scala mdoc:file:incompat-30/case-class-companion/README.md
+```

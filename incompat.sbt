@@ -152,7 +152,8 @@ lazy val otherIncompats = Seq[ProjectReference](
   ambiguousConversion,
   implicitView,
   typeOfImplicitDef,
-  viewBound
+  viewBound,
+  caseClassCompanion
 )
 
 // Syntactic incompatibilities
@@ -172,6 +173,7 @@ lazy val existentialType = project.in(file("incompat-30/existential-type")).sett
 lazy val wildcardArgument = project.in(file("incompat-30/wildcard-argument")).settings(incompat30Settings)
 lazy val explicitCallToUnapply = project.in(file("incompat-30/explicit-call-to-unapply")).settings(incompat30Settings)
 lazy val reflectiveCall = project.in(file("incompat-30/reflective-call")).settings(incompat30Settings)
+lazy val caseClassCompanion = project.in(file("incompat-30/case-class-companion")).settings(incompat30Settings)
 
 // Contextual abstraction incompatibilities
 lazy val ambiguousConversion =
