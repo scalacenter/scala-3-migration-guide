@@ -264,7 +264,7 @@ lazy val incompat30Settings =
     // we copy the scala213 sources into the target folder
     // because it might be rewritten by dotc or scalafix
     CompileBackward / sourceGenerators += Def.task {
-      val _ = clean.value // clean to force recompilation and rewrite
+      val _ = (CompileBackward / clean).value // clean to force recompilation and rewrite
       copySources(scala213SourceDir.value, rewriteDir.value)
     },
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
@@ -317,7 +317,7 @@ lazy val runtimeIncompat30Settings = incompat30Settings :+ {
     val logger = streams.value.log
     val _ = (Compile / run).toTask("").value
     val runBwd = (CompileBackward / run).toTask("").result.value
-    
+
     if (isDotty.value)
       Assert.runtimeIncompatibility(name.value, scalaVersion.value, runBwd, logger)
     else
@@ -338,7 +338,7 @@ lazy val incompat31Settings = inConfig(CompileBackward)(Defaults.compileSettings
     // we copy the scala30 sources into the target folder
     // because they might be rewritten by dotc or scalafix
     CompileBackward / sourceGenerators += Def.task {
-      val _ = clean.value // clean to force recompilation and rewrite
+      val _ = (CompileBackward / clean).value // clean to force recompilation and rewrite
       copySources(scala30SourceDir.value, rewriteDir.value)
     },
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
