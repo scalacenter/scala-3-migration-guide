@@ -116,9 +116,7 @@ lazy val typeInferIncompats = Seq[ProjectReference](
   typeInfer3,
   typeInfer4,
   typeInfer5,
-  typeInfer6,
   typeInfer7,
-  typeInfer8,
   typeInfer9,
   typeInfer10
 ) 
@@ -128,9 +126,7 @@ lazy val typeInfer2 = project.in(file("incompat-30/type-infer-2")).settings(inco
 lazy val typeInfer3 = project.in(file("incompat-30/type-infer-3")).settings(incompat30Settings)
 lazy val typeInfer4 = project.in(file("incompat-30/type-infer-4")).settings(incompat30Settings)
 lazy val typeInfer5 = project.in(file("incompat-30/type-infer-5")).settings(incompat30Settings)
-lazy val typeInfer6 = project.in(file("incompat-30/type-infer-6")).settings(incompat30Settings)
 lazy val typeInfer7 = project.in(file("incompat-30/type-infer-7")).settings(incompat30Settings)
-lazy val typeInfer8 = project.in(file("incompat-30/type-infer-8")).settings(incompat30Settings)
 lazy val typeInfer9 = project.in(file("incompat-30/type-infer-9")).settings(incompat30Settings)
 lazy val typeInfer10 = project.in(file("incompat-30/type-infer-10")).settings(incompat30Settings)
 
@@ -152,7 +148,6 @@ lazy val otherIncompats = Seq[ProjectReference](
   existentialType,
   wildcardArgument,
   explicitCallToUnapply,
-  javaLangEnum,
   reflectiveCall,
   ambiguousConversion,
   implicitView,
@@ -176,7 +171,6 @@ lazy val earlyInitializer = project.in(file("incompat-30/early-initializer")).se
 lazy val existentialType = project.in(file("incompat-30/existential-type")).settings(incompat30Settings)
 lazy val wildcardArgument = project.in(file("incompat-30/wildcard-argument")).settings(incompat30Settings)
 lazy val explicitCallToUnapply = project.in(file("incompat-30/explicit-call-to-unapply")).settings(incompat30Settings)
-lazy val javaLangEnum = project.in(file("incompat-30/java-lang-enum")).settings(incompat30Settings)
 lazy val reflectiveCall = project.in(file("incompat-30/reflective-call")).settings(incompat30Settings)
 
 // Contextual abstraction incompatibilities

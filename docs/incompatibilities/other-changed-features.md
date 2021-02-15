@@ -18,9 +18,6 @@ title: Other Changed Features
 ```scala mdoc:file:incompat-30/explicit-call-to-unapply/README.md
 ```
 
-```scala mdoc:file:incompat-30/java-lang-enum/README.md
-```
-
 ```scala mdoc:file:incompat-30/reflective-call/README.md
 ```
 

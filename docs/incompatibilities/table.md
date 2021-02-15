@@ -80,7 +80,6 @@ Some proven features are simplified or restricted to make the language easier an
 |[`ExprType` as value type](other-changed-features.md#exprtype-as-value-type)|||||
 |[Variance of default parameters](other-changed-features.md#variance-of-default-parameters)|||||
 |[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
-|[`java.lang.Enum`](other-changed-features.md#javalangenum)|||||
 |[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
 |[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
