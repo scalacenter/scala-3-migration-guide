@@ -83,7 +83,7 @@ Some proven features are simplified or restricted to make the language easier an
 |[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
 |[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
-
+|[Case class companion](other-changed-features.md#case-class-companion)|||||
 
 ## Implicit Resolution
 
