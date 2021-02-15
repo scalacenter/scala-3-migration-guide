@@ -66,6 +66,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
 | [scodec/scodec-bits](https://index.scala-lang.org/scodec/scodec-bits) | <i class="fas fa-check fa-lg"/> | Since version `1.1.18` |
 | [sirthias/parboiled2](https://index.scala-lang.org/sirthias/parboiled2) | <i class="fas fa-times fa-lg"/> | |
+| [sirthias/borer](https://index.scala-lang.org/sirthias/borer) | <i class="fas fa-times fa-lg"/> | |
 | [slick/slick](https://index.scala-lang.org/slick/slick) | <i class="fas fa-times fa-lg"/> | |
 | [softwaremill/macwire](https://index.scala-lang.org/softwaremill/macwire) | <i class="fas fa-times fa-lg"/> | |
 | [thoughtworksinc/each](https://index.scala-lang.org/thoughtworsinc/each) | <i class="fas fa-times fa-lg"/> | |
