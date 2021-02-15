@@ -3,8 +3,8 @@ import Versions._
 lazy val `sbt-migration-tutorial` = project
   .in(file("sbt-migration-tutorial"))
   .settings(
-    scalaVersion := dotty,
-    crossScalaVersions := Seq(scala213, dotty),
+    scalaVersion := scala30,
+    crossScalaVersions := Seq(scala213, scala30),
     libraryDependencies ++= Seq(
       "org.typelevel" % "cats-core_2.13" % "2.1.1",
       "com.lihaoyi" %% "os-lib" % osLib, // TODO use "os-lib_3.0"
