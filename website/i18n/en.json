@@ -11,17 +11,8 @@
       "contributing": {
         "title": "Contributing"
       },
-      "cross-build": {
-        "title": "Cross-building"
-      },
-      "dotty-rewrites": {
-        "title": "Dotty Migration Mode"
-      },
       "external-resources/moving-from-scala-2-to-scala-3": {
         "title": "Moving from Scala 2 to Scala 3"
-      },
-      "get-started": {
-        "title": "Introduction"
       },
       "incompat-31": {
         "title": "Dotty 3.1-migration Mode"
@@ -40,9 +31,6 @@
       },
       "incompatibilities/table": {
         "title": "Incompatibility Table"
-      },
-      "macros": {
-        "title": "Macros Migration"
       },
       "macros/macro-libraries": {
         "title": "Scala Macro Libraries"
@@ -67,9 +55,6 @@
       },
       "tutorials/scalacoptions-migration": {
         "title": "Porting the scalacOptions"
-      },
-      "upgrade": {
-        "title": "Upgrading a Scala Application"
       }
     },
     "links": {
