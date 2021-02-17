@@ -1,5 +1,5 @@
 addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.5.3")
-addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.17")
+addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.18")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.25")
 
 ThisBuild / libraryDependencies ++= Seq(
