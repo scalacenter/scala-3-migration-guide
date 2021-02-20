@@ -11,8 +11,8 @@ It comes with a handful of utilities to support you while porting a Scala 2.13 c
 Try running `scalac` to have a glimpse of those utilities:
 
 ``` bash
-$ dotc
-Usage: dotc <options> <source files>
+$ scalac
+Usage: scalac <options> <source files>
 where possible standard options include:
 
 ...
