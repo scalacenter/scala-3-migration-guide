@@ -84,6 +84,7 @@ Some proven features are simplified or restricted to make the language easier an
 |[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
+|[Unsoundess fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
 
 ## Implicit Resolution
 
