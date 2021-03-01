@@ -11,7 +11,7 @@ While this is an uncontested improvement, it also means that previous macro impl
 
 ## Before rewriting a macro
 
-Before getting deep into reimplementing a macro your should check if it can be supported using Scala 3.0 new features.
+Before getting deep into reimplementing a macro you should check if it can be supported using Scala 3.0 new features.
 
 * Can I encode the logic of the macro using the new scala 3 features?
 * Can I use *match types* to reimplement the interface of my macro?
