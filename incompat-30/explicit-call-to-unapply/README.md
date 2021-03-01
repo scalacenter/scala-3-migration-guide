@@ -24,7 +24,7 @@ object Location {
 Whereas the Scala 3.0 compiler produces the following `unapply` method.
 
 ``` scala
-object User {
+object Location {
   def unapply(location: Location): Location = location
 }
 ```
