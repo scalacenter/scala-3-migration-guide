@@ -112,7 +112,6 @@ lazy val valueEtaExpansion =
 */
 lazy val typeInferIncompats = Seq[ProjectReference](
   typeInfer1,
-  typeInfer2,
   typeInfer3,
   typeInfer4,
   typeInfer5,
@@ -122,7 +121,6 @@ lazy val typeInferIncompats = Seq[ProjectReference](
 ) 
 
 lazy val typeInfer1 = project.in(file("incompat-30/type-infer-1")).settings(incompat30Settings)
-lazy val typeInfer2 = project.in(file("incompat-30/type-infer-2")).settings(incompat30Settings)
 lazy val typeInfer3 = project.in(file("incompat-30/type-infer-3")).settings(incompat30Settings)
 lazy val typeInfer4 = project.in(file("incompat-30/type-infer-4")).settings(incompat30Settings)
 lazy val typeInfer5 = project.in(file("incompat-30/type-infer-5")).settings(incompat30Settings)
