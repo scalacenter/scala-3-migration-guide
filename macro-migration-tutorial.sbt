@@ -1,7 +1,5 @@
 import Versions._
 
-Global / resolvers += "scala-integration".at("https://scala-ci.typesafe.com/artifactory/scala-integration/")
-
 lazy val `macro-cross-lib` = project
   .in(file("macro-migration-tutorial/cross/lib"))
   .settings(
