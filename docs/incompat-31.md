@@ -1,6 +1,6 @@
 ---
 id: incompat-31
-title: Dotty 3.1-migration Mode
+title: Dotty future-migration Mode
 ---
 ## Looking ahead to Scala 3.1
 
@@ -8,13 +8,13 @@ Some deprecations have been postponed to 3.1 to facilitate the migration from 2.
 However some of the migration rules are already available and you are likely to be able to apply them in your codebase.
 In this way you get accustomed to the new syntax and prepared for 3.1.
 
-Beware though that some of the `3.1-migration` rewrites break the source compatibility with Scala 2.13.
+Beware though that some of the `future-migration` rewrites break the source compatibility with Scala 2.13.
 
 ### Rule 1 - Replace wildcard type argument '_' with '?'
 
 The deprecation of the `_` syntax for wildcard type arguments has be postponed to Scala 3.1 and it will be replaced by the `?` syntax. You can find the motivation for this in the [Dotty reference](https://dotty.epfl.ch/docs/reference/changed-features/wildcards.html).
 
-However there already is a migration rule that you can apply using some slightly different options than before: `dotc -source:3.1-migration -rewrite`. Note the `3.1` version mentioned here.
+However there already is a migration rule that you can apply using some slightly different options than before: `dotc -source:future-migration -rewrite`. Note the `3.1` version mentioned here.
 
 For example:
 
@@ -42,7 +42,7 @@ Starting from Scala 3.1, it will be required to enclose the implicit parameter o
 val f = { implicit x: Context => ??? }
 ```
 
-Compiling with `dotc -source:3.1-migration -rewrite` rewrites it into:
+Compiling with `dotc -source:future-migration -rewrite` rewrites it into:
 
 ```scala
 val f = { (implicit x: Context) => ??? }
@@ -90,7 +90,7 @@ val head :: _ = list
 ```
 
 You can use the `@unchecked` annotation to tell the compiler to ignore that the binding can fail.
-Compiling with `dotc -source:3.1-migration -rewrite` can write it automatically.
+Compiling with `dotc -source:future-migration -rewrite` can write it automatically.
 
 ```scala
 val list: List[Int] = List(1)
@@ -108,7 +108,7 @@ In Scala 2 and Scala 3.0, the elements of `listOpt` are filtered to retain only 
 
 In Scala 3.1, this syntax does not induce filtering, but the binding is type checked to prevent runtime errors.
 You can still have the same behavior than Scala 2 by adding the `case` keyword.
-Compiling with `dotc -source:3.1-migration -rewrite` can add it for you automatically.
+Compiling with `dotc -source:future-migration -rewrite` can add it for you automatically.
 
 ```scala
 val listOpt: List[Option[Int]] = List(Some(1), None)
@@ -122,7 +122,7 @@ for (case Some(value) <- listOpt) println(value)
 The method value syntax `m _` will no longer be supported in Scala 3.1, since we now have [automatic eta-expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html).
 
 In general you can simply drop the `_` symbol.
-Compiling with `dotc -source:3.1-migration -rewrite` rewrites
+Compiling with `dotc -source:future-migration -rewrite` rewrites
 
 ```scala
 def foo(x: Int)(y: Int): Int = x + y
@@ -157,7 +157,7 @@ val g = (() => bar())
 From Scala 3.1 on, context bounds will map to context parameters.
 Thus a `using` clause is needed to pass explicit arguments to them.
 
-Compiling with `dotc -source:3.1-migration -rewrite` rewrites
+Compiling with `dotc -source:future-migration -rewrite` rewrites
 
 ```scala
 def show[T: Show](value: T): String = ???

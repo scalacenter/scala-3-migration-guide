@@ -23,7 +23,7 @@ where possible standard options include:
 ...
 -source            source version
                    Default: 3.0.
-                   Choices: 3.0, 3.1, 3.0-migration, 3.1-migration.
+                   Choices: 3.0, future, 3.0-migration, future-migration.
 ...
 ```
 

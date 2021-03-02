@@ -38,7 +38,7 @@ lazy val `incompat-30` = project.in(file("incompat-30"))
 
 /*
   List of all incompatibilities between Scala 3.0 and Scala 3.1
-  It only contains the already existing 3.1-migration rewrites in Dotty
+  It only contains the already existing future-migration rewrites in Dotty
 
   You can run:
     - `++0.26.0; <incompat> / test` to validate the Dotty rewrite
@@ -200,7 +200,7 @@ lazy val implicitView =
 
 /*
   Dotty migration rewrites between 3.0 and 3.1
-  `dotc -source:3.1-migration -rewrite`
+  `dotc -source:future-migration -rewrite`
 */
 lazy val dotty31MigrationRewrites = Seq[ProjectReference](
   alphanumericInfix,
@@ -214,13 +214,13 @@ lazy val dotty31MigrationRewrites = Seq[ProjectReference](
 lazy val dotty31MigrationRewriteSettings = incompat31Settings ++ Seq(dottyRewrite := true)
 
 // This one is not a migration rewrite but a 3.1 deprecation rewrite
-// `dotc -source:3.1 -deprecation -rewrite`
+// `dotc -source:future -deprecation -rewrite`
 lazy val alphanumericInfix =
   project.in(file("incompat-31/alphanumeric-infix"))
     .settings(dotty31MigrationRewriteSettings)
     .settings(
-      scalacOptions -= "-source:3.1-migration", 
-      scalacOptions ++=  Seq("-source:3.1", "-deprecation") 
+      scalacOptions -= "-source:future-migration", 
+      scalacOptions ++=  Seq("-source:future", "-deprecation") 
     )
 
 lazy val contextBoundArg =
@@ -340,7 +340,7 @@ lazy val incompat31Settings = inConfig(CompileBackward)(Defaults.compileSettings
     CompileBackward / managedClasspath := (managedClasspath in Compile).value,
     CompileBackward / scalacOptions ++= {
       if (dottyRewrite.value)
-        Seq(s"-source:3.1-migration", "-rewrite")
+        Seq(s"-source:future-migration", "-rewrite")
       else Seq.empty
     },
     Test / test := {
