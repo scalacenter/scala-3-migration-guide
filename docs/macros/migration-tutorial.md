@@ -254,8 +254,8 @@ import scala.quoted.{Quotes, Expr}
 object Macros:
   inline def location: Location = ${locationImpl}
 
-  private def locationImpl(using ctx: Quotes): Expr[Location] =
-    import ctx.reflect.Position
+  private def locationImpl(using quotes: Quotes): Expr[Location] =
+    import quotes.reflect.Position
     val pos = Position.ofMacroExpansion
     val file = Expr(pos.sourceFile.jpath.toString)
     val line = Expr(pos.startLine + 1)
@@ -289,8 +289,6 @@ Then the Scala 2.13 compiler would be able to find that definition in the Scala 
 This idea sets the ground to the mixing macros technique that we detail further below using the `location` example.
 It is compatible with any build tool that can mix Scala 2.13 and Scala 3.0 modules.
 
-> This part of the tutorial is written for @scala3M1@ because it is the only Tasty Reader compatible version at the time of writing.
-
 ### 1 - Creating the Scala 3 module
 
 Going back to the initial state of our `location` library we have:
@@ -322,7 +320,7 @@ We call it `macroLib`.
 lazy val macroLib = project
   .in(file("macro-lib"))
   .settings(
-    scalaVersion := "@scala3M1@"
+    scalaVersion := "@scala30@"
   )
   .dependsOn(lib)
 ```
@@ -334,7 +332,7 @@ lazy val app = project
   .in(file("app"))
   .settings(
     scalaVersion := "@scala213@",
-    crossScalaVersion := Seq("@scala213@", "@scala3M1@") ,
+    crossScalaVersion := Seq("@scala213@", "@scala30@") ,
     scalacOptions ++= {
       if (isDotty.value) Seq()
       else Seq("-Ytasty-reader")
@@ -426,8 +424,8 @@ Here the Scala 3.0 implementation throws a `NotImplementedError`, hence the answ
 We can try and see the exception being thrown at compile-time.
 
 ```shell
-sbt: location> ++@scala3M1@; app / run
-[info] compiling 1 Scala source to /loaction/app/target/scala-@scala3M1Binary@/classes ...
+sbt: location> ++@scala30@; app / run
+[info] compiling 1 Scala source to /loaction/app/target/scala-@scala30Binary@/classes ...
 [error] -- Error: /location/app/src/main/scala/app/Main.scala:6:10 
 [error] 6 |  println(location)
 [error]   |          ^^^^^^^^
@@ -452,23 +450,23 @@ We eventually come up with this implementation:
 package location
 
 import scala.language.experimental.macros
-import scala.quoted.{QuoteContext, Expr}
+import scala.quoted.{Quotes, Expr}
 
 object Macros:
   def location: Location = macro Scala2Macros.locationImpl
   inline def location: Location = ${locationImpl}
 
-  def locationImpl(using ctx: QuoteContext): Expr[Location] =
-    import ctx.reflect.rootPosition
-    val file = Expr(rootPosition.sourceFile.jpath.toString)
-    val line = Expr(rootPosition.startLine + 1)
+  def locationImpl(using quotes: Quotes): Expr[Location] =
+    import quotes.reflect.Position
+    val file = Expr(Position.ofMacroExpansion.sourceFile.jpath.toString)
+    val line = Expr(Position.ofMacroExpansion.startLine + 1)
     '{new Location($file, $line)}
 ```
 
 The `app` module can now be compiled and executed in Scala 3:
 
 ```
-sbt: location> ++@scala3M1@; app / run
+sbt: location> ++@scala30@; app / run
 [info] running app.Main 
 Line 6 in /location/app/src/main/scala/app/Main.scala
 [info] app / run completed
