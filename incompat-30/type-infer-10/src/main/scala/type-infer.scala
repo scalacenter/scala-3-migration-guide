@@ -8,7 +8,7 @@ class Test[A](state: State[A]) {
 
   def test(): Unit = {
     state match {
-      case Executing(observer: Callback[Option[A]]) => notify(observer)
+      case executing: Executing[A] => notify(executing.observer)
     }
   }
 }
