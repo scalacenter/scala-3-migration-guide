@@ -15,7 +15,7 @@
         "title": "Moving from Scala 2 to Scala 3"
       },
       "incompat-31": {
-        "title": "Dotty 3.1-migration Mode"
+        "title": "Dotty future-migration Mode"
       },
       "incompatibilities/contextual-abstractions": {
         "title": "Contextual Abstractions"
