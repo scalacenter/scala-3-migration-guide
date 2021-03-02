@@ -101,7 +101,7 @@ We can try it by creating an <code>app</code> module that calls the <code>locati
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> lib = project
   .in(file(<span class="hljs-string">"lib"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.4"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
     libraryDependencies ++= <span class="hljs-type">Seq</span>(
       <span class="hljs-string">"org.scala-lang"</span> % <span class="hljs-string">"scala-reflect"</span> % scalaVersion.value
     )
@@ -109,7 +109,7 @@ We can try it by creating an <code>app</code> module that calls the <code>locati
 
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> app = project
   .in(file(<span class="hljs-string">"app"</span>))
-  .settings(scalaVersion := <span class="hljs-string">"2.13.4"</span>)
+  .settings(scalaVersion := <span class="hljs-string">"2.13.5"</span>)
   .dependsOn(lib)
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="moving-to-scala-3"></a><a href="#moving-to-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Moving to Scala 3</h2>
@@ -117,14 +117,14 @@ We can try it by creating an <code>app</code> module that calls the <code>locati
 <p>sbt <code>1.4.+</code> is required</p>
 </blockquote>
 <p>Let's try to compile our <code>app</code> module with Scala 3.0.
-First we add the <code>sbt-dotty</code> plugin in the <code>project/plugins.sbt</code> file, then we change the <code>scalaVersion</code> setting of <code>app</code> to <code>3.0.0-M3</code>.</p>
+First we add the <code>sbt-dotty</code> plugin in the <code>project/plugins.sbt</code> file, then we change the <code>scalaVersion</code> setting of <code>app</code> to <code>3.0.0-RC1</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// project/plugins.sbt</span>
 addSbtPlugin(<span class="hljs-string">"ch.epfl.lamp"</span> % <span class="hljs-string">"sbt-dotty"</span> % <span class="hljs-string">"0.4.7"</span>)
 </code></pre>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> app = project
   .in(file(<span class="hljs-string">"app"</span>))
-  .settings(scalaVersion := <span class="hljs-string">"3.0.0-M3"</span>)
+  .settings(scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>)
   .dependsOn(lib)
 </code></pre>
 <p>We reload our project and we try to compile.
@@ -176,8 +176,8 @@ You can go to the <a href="https://www.scala-sbt.org/1.x/docs/Cross-Build.html">
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> lib = project
   .in(file(<span class="hljs-string">"lib"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.4"</span>,
-    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.4"</span>, <span class="hljs-string">"3.0.0-M3"</span>),
+    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC1"</span>),
     libraryDependencies ++= {
       <span class="hljs-keyword">if</span> (isDotty(scalaVersion.value)) <span class="hljs-type">Seq</span>()
       <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>(
@@ -188,22 +188,22 @@ You can go to the <a href="https://www.scala-sbt.org/1.x/docs/Cross-Build.html">
 </code></pre>
 <p>Note the dependency to <code>scala-reflect</code> becomes useless in Scala 3.0.
 We use the <code>isDotty</code> setting, provided by <code>sbt-dotty</code>, to create version specific list of dependencies.</p>
-<p>After reloading the sbt shell, we can easily load the Scala 3.0 version of the project by running <code>++3.0.0-M3</code>.
-Then we can go back to the Scala 2.13 version by running <code>++2.13.4</code>.</p>
+<p>After reloading the sbt shell, we can easily load the Scala 3.0 version of the project by running <code>++3.0.0-RC1</code>.
+Then we can go back to the Scala 2.13 version by running <code>++2.13.5</code>.</p>
 <p>The sbt <code>show lib / unmanagedSourceDirectories</code> command prints the list of available source directories:</p>
-<pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++2.13.4; show lib / unmanagedSourceDirectories</span>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++2.13.5; show lib / unmanagedSourceDirectories</span>
 [info] * /location/lib/src/main/scala
 [info] * /location/lib/src/main/scala-2.13
 [info] * /location/lib/src/main/scala-2
 [info] * /location/lib/src/main/java
-<span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++3.0.0-M3; show lib / unmanagedSourceDirectories</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++3.0.0-RC1; show lib / unmanagedSourceDirectories</span>
 [info] * /location/lib/src/main/scala
-[info] * /location/lib/src/main/scala-3.0.0-M3
+[info] * /location/lib/src/main/scala-3.0.0-RC1
 [info] * /location/lib/src/main/scala-3
 [info] * /location/lib/src/main/java
 </code></pre>
 <p>As we can see, an sbt project defines a shared <code>scala</code> source directory and some version-specific source directories.
-Some depend on the major version, <code>scala-2</code> and <code>scala-3</code>, and others depend on the precise binary version, <code>scala-2.13</code> and <code>scala-3.0.0-M3</code>.</p>
+Some depend on the major version, <code>scala-2</code> and <code>scala-3</code>, and others depend on the precise binary version, <code>scala-2.13</code> and <code>scala-3.0.0-RC1</code>.</p>
 <p>Thus, we can organize our sources depending on their compatibility spectrum.
 A piece of code that is compatible and only compatible with all Scala 2 versions of the compiler must go to the <code>scala-2</code> directory.
 On the other hand, a piece of code that is specific to Scala 2.13 and does not compile with a Scala 2.12 version of the compiler must go to the <code>scala-2.13</code> directory.</p>
@@ -253,8 +253,8 @@ One needs to learn about the available new <a href="/scala-3-migration-guide/doc
 <span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Macros</span></span>:
   inline <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = ${locationImpl}
 
-  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(using ctx: <span class="hljs-type">Quotes</span>): <span class="hljs-type">Expr</span>[<span class="hljs-type">Location</span>] =
-    <span class="hljs-keyword">import</span> ctx.reflect.<span class="hljs-type">Position</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(using quotes: <span class="hljs-type">Quotes</span>): <span class="hljs-type">Expr</span>[<span class="hljs-type">Location</span>] =
+    <span class="hljs-keyword">import</span> quotes.reflect.<span class="hljs-type">Position</span>
     <span class="hljs-keyword">val</span> pos = <span class="hljs-type">Position</span>.ofMacroExpansion
     <span class="hljs-keyword">val</span> file = <span class="hljs-type">Expr</span>(pos.sourceFile.jpath.toString)
     <span class="hljs-keyword">val</span> line = <span class="hljs-type">Expr</span>(pos.startLine + <span class="hljs-number">1</span>)
@@ -279,9 +279,6 @@ However, there is nothing preventing the Scala 3.0 compiler from type checking a
 Then the Scala 2.13 compiler would be able to find that definition in the Scala 3.0 artifact and execute its implementation in the Scala 2.13 binaries.</p>
 <p>This idea sets the ground to the mixing macros technique that we detail further below using the <code>location</code> example.
 It is compatible with any build tool that can mix Scala 2.13 and Scala 3.0 modules.</p>
-<blockquote>
-<p>This part of the tutorial is written for 3.0.0-M1 because it is the only Tasty Reader compatible version at the time of writing.</p>
-</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="1---creating-the-scala-3-module"></a><a href="#1---creating-the-scala-3-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1 - Creating the Scala 3 module</h3>
 <p>Going back to the initial state of our <code>location</code> library we have:</p>
 <ul>
@@ -293,7 +290,7 @@ It is compatible with any build tool that can mix Scala 2.13 and Scala 3.0 modul
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> lib = project
   .in(file(<span class="hljs-string">"lib"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.4"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
     libraryDependencies ++= <span class="hljs-type">Seq</span>(
       <span class="hljs-string">"org.scala-lang"</span> % <span class="hljs-string">"scala-reflect"</span> % scalaVersion.value
     )
@@ -301,7 +298,7 @@ It is compatible with any build tool that can mix Scala 2.13 and Scala 3.0 modul
 
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> app = project
   .in(file(<span class="hljs-string">"app"</span>))
-  .settings(scalaVersion := <span class="hljs-string">"2.13.4"</span>)
+  .settings(scalaVersion := <span class="hljs-string">"2.13.5"</span>)
   .dependsOn(lib)
 </code></pre>
 <p>Let's create a new Scala 3.0 module in which we will move our macro definition.
@@ -309,7 +306,7 @@ We call it <code>macroLib</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> macroLib = project
   .in(file(<span class="hljs-string">"macro-lib"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-M1"</span>
+    scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>
   )
   .dependsOn(lib)
 </code></pre>
@@ -317,8 +314,8 @@ We call it <code>macroLib</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> app = project
   .in(file(<span class="hljs-string">"app"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.4"</span>,
-    crossScalaVersion := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.4"</span>, <span class="hljs-string">"3.0.0-M1"</span>) ,
+    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    crossScalaVersion := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC1"</span>) ,
     scalacOptions ++= {
       <span class="hljs-keyword">if</span> (isDotty.value) <span class="hljs-type">Seq</span>()
       <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>(<span class="hljs-string">"-Ytasty-reader"</span>)
@@ -381,7 +378,7 @@ It makes sense because the Scala 2 implementation cannot be executed by the Scal
 </code></pre>
 <p>The <code>inline</code> keyword is required here to tell the compiler the method is the Scala 3 counterpart of the <code>location</code> macro definition.</p>
 <p>The <code>app</code> module can now be compiled and executed in Scala 2.13.</p>
-<pre><code class="hljs css language-shell">sbt: location&gt; ++2.13.4; app / run
+<pre><code class="hljs css language-shell">sbt: location&gt; ++2.13.5; app / run
 [info] running app.Main 
 Line 6 in /location/app/src/main/scala/app/Main.scala
 [info] app / run completed
@@ -390,8 +387,8 @@ Line 6 in /location/app/src/main/scala/app/Main.scala
 To answer this question we must remind ourselves that macros are executed at compile time.
 Here the Scala 3.0 implementation throws a <code>NotImplementedError</code>, hence the answer is no.
 We can try and see the exception being thrown at compile-time.</p>
-<pre><code class="hljs css language-shell">sbt: location&gt; ++3.0.0-M1; app / run
-[info] compiling 1 Scala source to /loaction/app/target/scala-3.0.0-M1/classes ...
+<pre><code class="hljs css language-shell">sbt: location&gt; ++3.0.0-RC1; app / run
+[info] compiling 1 Scala source to /loaction/app/target/scala-3.0.0-RC1/classes ...
 [error] -- Error: /location/app/src/main/scala/app/Main.scala:6:10 
 [error] 6 |  println(location)
 [error]   |          ^^^^^^^^
@@ -411,20 +408,20 @@ One needs to learn about the <a href="/scala-3-migration-guide/docs/macros/metap
 <span class="hljs-keyword">package</span> location
 
 <span class="hljs-keyword">import</span> scala.language.experimental.macros
-<span class="hljs-keyword">import</span> scala.quoted.{<span class="hljs-type">QuoteContext</span>, <span class="hljs-type">Expr</span>}
+<span class="hljs-keyword">import</span> scala.quoted.{<span class="hljs-type">Quotes</span>, <span class="hljs-type">Expr</span>}
 
 <span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Macros</span></span>:
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = macro <span class="hljs-type">Scala2Macros</span>.locationImpl
   inline <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = ${locationImpl}
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(using ctx: <span class="hljs-type">QuoteContext</span>): <span class="hljs-type">Expr</span>[<span class="hljs-type">Location</span>] =
-    <span class="hljs-keyword">import</span> ctx.reflect.rootPosition
-    <span class="hljs-keyword">val</span> file = <span class="hljs-type">Expr</span>(rootPosition.sourceFile.jpath.toString)
-    <span class="hljs-keyword">val</span> line = <span class="hljs-type">Expr</span>(rootPosition.startLine + <span class="hljs-number">1</span>)
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(using quotes: <span class="hljs-type">Quotes</span>): <span class="hljs-type">Expr</span>[<span class="hljs-type">Location</span>] =
+    <span class="hljs-keyword">import</span> quotes.reflect.<span class="hljs-type">Position</span>
+    <span class="hljs-keyword">val</span> file = <span class="hljs-type">Expr</span>(<span class="hljs-type">Position</span>.ofMacroExpansion.sourceFile.jpath.toString)
+    <span class="hljs-keyword">val</span> line = <span class="hljs-type">Expr</span>(<span class="hljs-type">Position</span>.ofMacroExpansion.startLine + <span class="hljs-number">1</span>)
     '{<span class="hljs-keyword">new</span> <span class="hljs-type">Location</span>($file, $line)}
 </code></pre>
 <p>The <code>app</code> module can now be compiled and executed in Scala 3:</p>
-<pre><code class="hljs">sbt: location&gt; ++3.0.0-M1; <span class="hljs-keyword">app</span> / <span class="hljs-keyword">run</span>
+<pre><code class="hljs">sbt: location&gt; ++3.0.0-RC1; <span class="hljs-keyword">app</span> / <span class="hljs-keyword">run</span>
 [info] running <span class="hljs-keyword">app</span>.Main 
 <span class="hljs-keyword">Line</span> 6 <span class="hljs-keyword">in</span> /location/<span class="hljs-keyword">app</span>/src/main/<span class="hljs-keyword">scala</span>/<span class="hljs-keyword">app</span>/Main.<span class="hljs-keyword">scala</span>
 [info] <span class="hljs-keyword">app</span> / <span class="hljs-keyword">run</span> completed
