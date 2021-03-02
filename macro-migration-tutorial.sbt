@@ -36,15 +36,15 @@ lazy val `macro-mix-lib` = project
 lazy val `macro-mix-macro-lib` = project
   .in(file("macro-migration-tutorial/mix/macro-lib"))
   .settings(
-    scalaVersion := scala3M1
+    scalaVersion := scala30
   )
   .dependsOn(`macro-mix-lib`)
 
 lazy val `macro-mix-app` = project
   .in(file("macro-migration-tutorial/mix/app"))
   .settings(
-    scalaVersion := scala3M1,
-    crossScalaVersions := Seq(scala213, scala3M1),
+    scalaVersion := scala30,
+    crossScalaVersions := Seq(scala213, scala30),
     scalacOptions ++= {
       if (isDotty.value) Seq()
       else Seq("-Ytasty-reader")

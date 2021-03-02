@@ -8,8 +8,6 @@ lazy val website = project
     mdocVariables := Map(
       "scala30" -> scala30,
       "scala30Binary" -> scala30,
-      "scala3M1" -> scala3M1,
-      "scala3M1Binary" -> scala3M1,
       "scala213" -> scala213,
       "sbtDotty" -> sbtDotty,
       "catsCore" -> "2.3.0-M2",
