@@ -4,5 +4,5 @@ object Versions {
   // required for testing the Tasty reader
   val sbtDotty = "0.4.7"
   val osLib = "0.7.3"
-  val sourcecode = "0.2.3"
+  val sourcecode = "0.2.4"
 }
