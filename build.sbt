@@ -10,6 +10,7 @@ lazy val website = project
       "scala30Binary" -> scala30,
       "scala213" -> scala213,
       "sbtDotty" -> sbtDotty,
+      "scala3Migrate" -> scala3Migrate,
       "catsCore" -> "2.3.0-M2",
       "osLib" -> osLib,
       "sourcecode" -> sourcecode
