@@ -15,6 +15,18 @@ You can learn more about it in the [`Scala 3 Migration Mode`](scala-3-migration-
 
 Leveraging this tool, the community has already migrated a significant number of well-known libraries, forming the [_Scala 3 Community Build_](https://github.com/lampepfl/dotty/tree/master/community-build/community-projects).
 
+## The Scala 2 compiler
+
+The Scala 2 compiler supports `-Xsource:3`, an option that enables some Scala 3 syntax and behavior.
+
+Most deprecated syntax generates an error.
+
+Infix operators can start a line in the middle of a multiline expression.
+
+Implicit search and overload resolution follow Scala 3 handling of contravariance when checking specificity.
+
+The `-Xsource:3` option is intended to encourage early migration.
+
 ## Scalafix
 
 [Scalafix](https://scalacenter.github.io/scalafix/) is a refactoring tool for Scala.
