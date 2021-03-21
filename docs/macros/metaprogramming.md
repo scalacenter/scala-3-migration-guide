@@ -21,7 +21,7 @@ Before getting deep into reimplementing a macro you should check if it can be su
 
 You can find references to these concepts in the _macro tutorial_.
 
-## Macro turorial
+## Macro tutorial
 
 * [Scala 3 Macro Tutorial](https://docs.scala-lang.org/scala3/guides/macros/)
   * [Inline](https://docs.scala-lang.org/scala3/guides/macros/inline.html)
