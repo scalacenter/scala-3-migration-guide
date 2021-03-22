@@ -21,14 +21,15 @@ Before getting deep into reimplementing a macro you should check if it can be su
 
 You can find references to these concepts in the _macro tutorial_.
 
-## Macro turorial
+## Macro tutorial
 
-* [Scala 3 Macro Tutorial](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/introduction.html)
-  * [Inline](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/inline.html)
-  * [Compile-time operations](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/compile-time-operations.html)
-  * [Macros](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/scala-3-macros.html)
-  * [Quoted code](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/quoted-code.html)
-  * [AST Reflection](https://lampepfl.github.io/scala3-macro-tutorial/docs/tutorial/tasty-reflection.html)
+* [Scala 3 Macro Tutorial](https://docs.scala-lang.org/scala3/guides/macros/)
+  * [Inline](https://docs.scala-lang.org/scala3/guides/macros/inline.html)
+  * [Compile-time operations](https://docs.scala-lang.org/scala3/guides/macros/compiletime.html)
+  * [Macros](https://docs.scala-lang.org/scala3/guides/macros/macros.html)
+  * [Quoted code](https://docs.scala-lang.org/scala3/guides/macros/quotes.html)
+  * [AST Reflection](https://docs.scala-lang.org/scala3/guides/macros/reflection.html)
+
 ## Additional Resources
 
 Documentation:

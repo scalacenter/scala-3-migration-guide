@@ -15,6 +15,34 @@ You can learn more about it in the [`Scala 3 Migration Mode`](scala-3-migration-
 
 Leveraging this tool, the community has already migrated a significant number of well-known libraries, forming the [_Scala 3 Community Build_](https://github.com/lampepfl/dotty/tree/master/community-build/community-projects).
 
+## The Scala 2 compiler
+
+The Scala 2 compiler supports `-Xsource:3`, an option that enables some Scala 3 syntax and behavior.
+
+Most deprecated syntax generates an error.
+
+Infix operators can start a line in the middle of a multiline expression.
+
+Implicit search and overload resolution follow Scala 3 handling of contravariance when checking specificity.
+
+The `-Xsource:3` option is intended to encourage early migration.
+
+## Scala3-migrate
+
+[Scala3-migrate](Scala3-migrate-tool.md) has been designed to make the migration to scala 3 easier.
+
+It proposes an incremental approach that can be described as follows:
+- Migrating the library dependencies: using Coursier, it checks, 
+  for every library dependency, if there are versions available for Scala 3.
+- Migrating the Scala compiler options (`scalacOptions`): some compiler options of Scala 2 have been removed 
+  in Scala 3, others have been renamed, and some remain the same. 
+  This step helps you find how to evolve the compiler options of your project.
+- Migrating the syntax: this step relies on Scalafix and on existing rules to fix deprecated 
+  syntax that no longer compiles in Scala 3
+- Migrating the code: as explained in [the section of type-inference](incompatibilities/table.md#type-inference),
+Scala 3 has a new type inference algorithm that may infer a different type than the one inferred 
+  by the Scala 2 compiler. This last step tries to find the minimum set of 
+  types to explicitly annotate in order to make the Scala 3 compiler work on a project without changing its meaning.
 ## Scalafix
 
 [Scalafix](https://scalacenter.github.io/scalafix/) is a refactoring tool for Scala.
