@@ -120,7 +120,7 @@ the `2.13` for `2.13` and `2.12` for `2.12`.
 
 if the sbt's version is higher than 1.5:
 ```scala
-"ch.epfl.scala"%% "scalafix-rules" % "0.9.26" % Test cross CrossVersion.for3Use2_13)
+"ch.epfl.scala"%% "scalafix-rules" % "0.9.26" % Test cross CrossVersion.for3Use2_13
 ```
 if the sbt's version is 1.3, or 1.4:
 ```scala
