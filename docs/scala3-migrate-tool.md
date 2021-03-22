@@ -203,7 +203,7 @@ This command rely directly on this [section](tutorials/scalacoptions-migration.m
 ```
 - `-Yrangepos`: As explained in the output of this command, some scalacOptions **are not set by you in the build file**, but by
 some sbt plugins. For example `scala3-migrate` tool enables semanticdb in Scala 2, which adds `-Yrangepos`. 
-Here sbt will adapt its the semanticdb options in Scala 3 and therefore there is no need to take any action.
+Here sbt will adapt the semanticdb options in Scala 3 and therefore there is no need to take any action.
 - `-Wunused`: This scalacOption needs to be removed
 
 ### Renamed scalacOptions
