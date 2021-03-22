@@ -170,6 +170,7 @@ for Scala 3.
 First run the command `migrate-scalacOptions`.
 This command rely directly on this [section](tutorials/scalacoptions-migration.md).
 ```scala
+> migrate-scalacOptions main
 [info]
 [info] Starting to migrate the scalacOptions for main
 [warn] Some scalacOptions are set by sbt plugins and don't need to be modified, removed or added.
