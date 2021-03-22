@@ -217,7 +217,7 @@ You just need to rename this scalacOption
 [info] -P:semanticdb:failures:warning 
 ```
 With the previous command `migrate-libs`, we have already adapted `kind-projector` and removed `better-monadic-for` 
-for Scala 3. If the previous step is done correctly, you should no need to change anything.
+for Scala 3. If the previous step is done correctly, you should not need to change anything.
 
 #### Details
 - If you have set one of the options above in your build, for example `-P:semanticdb:synthetics:on`, 
