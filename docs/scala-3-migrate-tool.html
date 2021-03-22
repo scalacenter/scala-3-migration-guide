@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Scala3-migrate · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Context"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Scala3-migrate · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="## Context"/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Tools</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-migration-mode.html">Scala 3.0 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-syntax-rewriting.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">Porting an sbt Project</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">Porting the scalacOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Macros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/metaprogramming.html">Metaprogramming in Scala 3</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/migration-tutorial.html">Porting a Macro Library</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tools</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/scala-3-migrate-tool.html">Scala3-migrate</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">External Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/master/docs/scala3-migrate-tool.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Scala3-migrate</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="context"></a><a href="#context" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Context</h2>
+<p>Scala3-migrate tool is part of a series of initiatives to make the migration to Scala 3 as easy as possible.
+The goal is to provide a tool that will help you both migrate your build and your code to Scala 3.
+The solution consists of 3 independent steps that is packaged in an sbt plugin:</p>
+<ul>
+<li>migrate-libs: helps you update the list of <code>libraryDependencies</code></li>
+<li>migrate-scalacOptions: helps you update the list <code>scalacOptions</code></li>
+<li>migrate-syntax: fixes a number of syntax incompatibilites in scala 2.13 code</li>
+<li>migrate: tries compiling your code in scala 3 by adding the minimum required inferred types and implicits.</li>
+</ul>
+<p>Each of this step is an sbt command that will be described in details in the following sections.</p>
+<blockquote>
+<h4><a class="anchor" aria-hidden="true" id="requirements"></a><a href="#requirements" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Requirements</h4>
+<ul>
+<li>scala 2.13, preferred 2.13.5</li>
+<li>sbt 1.4 or higher</li>
+<li><strong>Disclaimer:</strong> This tool cannot migrate libraries containing macros.</li>
+<li><strong>Not implemented yet:</strong> All commands right now work on Compile scope. Other configurations like <code>Test</code> still need to be supported</li>
+</ul>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
+<p>Currently, you can use scala3-migrate via an sbt plugin. You can add it as follows to your build.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// project/plugins.sbt</span>
+addSbtPlugin(<span class="hljs-string">"ch.epfl.scala"</span> % <span class="hljs-string">"sbt-scala3-migrate"</span> % <span class="hljs-string">"0.2.0"</span>)
+<span class="hljs-comment">// sbt-dotty is not required since sbt 1.5.0-M1</span>
+addSbtPlugin(<span class="hljs-string">"ch.epfl.lamp"</span> % <span class="hljs-string">"sbt-dotty"</span> % <span class="hljs-string">"0.4.7"</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="choose-a-module"></a><a href="#choose-a-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Choose a module</h2>
+<p>If your project contains more than one module, the first step is to choose which module to migrate first.</p>
+<blockquote>
+<p>Scala3-migrate operates on one module at a time.
+Make sure the module you choose is not an aggregate of projects.</p>
+</blockquote>
+<p>Follow <a href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html#1---choose-a-module">this section to choose the first module</a></p>
+<h2><a class="anchor" aria-hidden="true" id="migrate-library-dependencies"></a><a href="#migrate-library-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migrate library dependencies</h2>
+<blockquote>
+<p>All the commands will be run in an sbt shell</p>
+</blockquote>
+<p><strong>Usage:</strong> <code>migrate-libs projectId</code> where projectId is the name of the module chosen to be migrated.</p>
+<p>Let's migrate the following sbt build.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">//build.sbt</span>
+<span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> main = project
+  .in(file(<span class="hljs-string">"."</span>))
+  .settings(
+    name := <span class="hljs-string">"main"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    semanticdbEnabled := <span class="hljs-literal">true</span>,
+    scalacOptions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"-explaintypes"</span>, <span class="hljs-string">"-Wunused"</span>),
+    libraryDependencies ++= <span class="hljs-type">Seq</span>(
+      <span class="hljs-string">"org.typelevel"</span>                    %% <span class="hljs-string">"cats-core"</span>           % <span class="hljs-string">"2.2.0"</span>,
+      <span class="hljs-string">"ch.epfl.scala"</span>                     % <span class="hljs-string">"scalafix-interfaces"</span> % <span class="hljs-string">"0.9.26"</span>,
+      <span class="hljs-string">"com.softwaremill.scalamacrodebug"</span> %% <span class="hljs-string">"macros"</span>              % <span class="hljs-string">"0.4.1"</span> % <span class="hljs-type">Test</span>,
+      <span class="hljs-string">"ch.epfl.scala"</span>                    %% <span class="hljs-string">"scalafix-rules"</span>      % <span class="hljs-string">"0.9.26"</span> % <span class="hljs-type">Test</span>,
+      compilerPlugin(<span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"kind-projector"</span> % <span class="hljs-string">"0.11.0"</span> cross <span class="hljs-type">CrossVersion</span>.full),
+      compilerPlugin(<span class="hljs-string">"com.olegpy"</span> %% <span class="hljs-string">"better-monadic-for"</span> % <span class="hljs-string">"0.3.1"</span>)
+    )
+  )
+</code></pre>
+<p>First, let's run the command and see the result.</p>
+<pre><code class="hljs css language-scala">&gt; migrate-libs main
+[info] <span class="hljs-type">Starting</span> to migrate libDependencies <span class="hljs-keyword">for</span> main
+[info]
+[info] <span class="hljs-type">X</span>             : <span class="hljs-type">Cannot</span> be updated to scala <span class="hljs-number">3</span>
+[info] <span class="hljs-type">Valid</span>         : <span class="hljs-type">Already</span> a valid version <span class="hljs-keyword">for</span> <span class="hljs-type">Scala</span> <span class="hljs-number">3</span>
+[info] <span class="hljs-type">To</span> be updated : <span class="hljs-type">Need</span> to be updated to the following version
+[info]
+[info] com.softwaremill.scalamacrodebug:macros:<span class="hljs-number">0.4</span><span class="hljs-number">.1</span>:test           -&gt; <span class="hljs-type">X</span> : <span class="hljs-type">Contains</span> <span class="hljs-type">Macros</span> and is not yet published <span class="hljs-keyword">for</span> <span class="hljs-number">3.0</span><span class="hljs-number">.0</span>-<span class="hljs-type">RC1</span>
+[info] com.olegpy:better-monadic-<span class="hljs-keyword">for</span>:<span class="hljs-number">0.3</span><span class="hljs-number">.1</span>:plugin-&gt;<span class="hljs-keyword">default</span>(compile) -&gt; <span class="hljs-type">X</span> : <span class="hljs-type">Scala</span> <span class="hljs-number">2</span> compiler plugins are not supported in scala <span class="hljs-number">3.0</span><span class="hljs-number">.0</span>-<span class="hljs-type">RC1</span>. <span class="hljs-type">You</span> need to find an alternative
+[info] ch.epfl.scala:scalafix-interfaces:<span class="hljs-number">0.9</span><span class="hljs-number">.26</span>                     -&gt; <span class="hljs-type">Valid</span>
+[info] org.typelevel:cats-core:<span class="hljs-number">2.2</span><span class="hljs-number">.0</span>                                -&gt; <span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"cats-core"</span> % <span class="hljs-string">"2.4.2"</span>
+[info] ch.epfl.scala:scalafix-rules:<span class="hljs-number">0.9</span><span class="hljs-number">.26</span>:test                     -&gt; <span class="hljs-string">"ch.epfl.scala"</span> % <span class="hljs-string">"scalafix-rules_2.13"</span> % <span class="hljs-string">"0.9.26"</span> % <span class="hljs-string">"test"</span>
+[info] org.typelevel:kind-projector:<span class="hljs-number">0.11</span><span class="hljs-number">.0</span>:plugin-&gt;<span class="hljs-keyword">default</span>(compile) -&gt; -<span class="hljs-type">Ykind</span>-projector : <span class="hljs-type">This</span> compiler plugin has a scalacOption equivalent. <span class="hljs-type">Add</span> it to your scalacOptions
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="macro-library"></a><a href="#macro-library" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Macro library</h3>
+<pre><code class="hljs css language-shell">[info] com.softwaremill.scalamacrodebug:macros:0.4.1:test -&gt; X : Contains Macros and is not yet published for 3.0.0-RC1
+</code></pre>
+<p>Scala 2 macros cannot be executed by the Scala 3 compiler.
+So if you depend on a macro lib, you will need to wait until this library is published for Scala 3.</p>
+<h3><a class="anchor" aria-hidden="true" id="compiler-plugins"></a><a href="#compiler-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compiler plugins</h3>
+<pre><code class="hljs css language-shell">[info] com.olegpy:better-monadic-for:0.3.1:plugin-&gt;default(compile) -&gt; X : Scala 2 compiler plugins are not supported in scala 3.0.0-RC1. You need to find an alternative
+[info] org.typelevel:kind-projector:0.11.0:plugin-&gt;default(compile) -&gt; -Ykind-projector : This compiler plugin has a scalacOption equivalent. Add it to your scalacOptions
+</code></pre>
+<p><code>better-monadic-for</code> is a Scala 2 compiler plugin.
+As explained in this <a href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html#12---compiler-plugins">section</a>, Scala 2 compiler plugins are not
+supported in Scala 3.
+In this case, we need to remove <code>better-monadic-for</code> and fix the code to make it compile without the compiler plugin.</p>
+<p>For <code>kind-projector</code>, which is also a Scala 2 compiler plugin, there is an equivalent scalacOption that
+can be added in your <code>scalacOptions</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="libraries-that-can-be-updated"></a><a href="#libraries-that-can-be-updated" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Libraries that can be updated</h3>
+<pre><code class="hljs css language-shell">[info] org.typelevel:cats-core:2.2.0            -&gt; "org.typelevel" %% "cats-core" % "2.4.2"
+[info] ch.epfl.scala:scalafix-rules:0.9.26:test -&gt; "ch.epfl.scala" % "scalafix-rules_2.13" % "0.9.26" % "test"
+</code></pre>
+<ul>
+<li><p>For <code>cats-core</code> there is an available version that has been published for <code>3.0.0-RC1</code>
+which is the proposed version <code>2.4.2</code>. We can then update the build with this new version.</p></li>
+<li><p>For <code>scalafix-rules</code>, there is no available version for Scala 3, but the library doesn't contain macro
+and therefore the 2.13 version can be used as it is in scala 3. The syntax still needs to be updated from
+<code>ch.epfl.scala&quot;</code><strong>%%</strong><code>&quot;scalafix-rules&quot; % &quot;0.9.26&quot; % &quot;test&quot;</code> to <code>ch.epfl.scala&quot;</code><strong>%</strong><code>&quot;scalafix-rules_2.13&quot; % &quot;0.9.26&quot; % &quot;test&quot;</code>
+where we explicitly specify the Scala version.</p></li>
+</ul>
+<p>There are other syntaxes to express that we want to use the <code>_2.13</code> artifact for <code>3.0.x</code> code, but keep using
+<code>_2.13</code> for <code>2.13.x</code> and  <code>_2.12</code> for <code>2.12.x</code>.</p>
+<p>if the sbt's version is higher than 1.5:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-string">"ch.epfl.scala"</span>%% <span class="hljs-string">"scalafix-rules"</span> % <span class="hljs-string">"0.9.26"</span> % <span class="hljs-type">Test</span> cross <span class="hljs-type">CrossVersion</span>.for3Use2_13
+</code></pre>
+<p>if the sbt's version is 1.3, or 1.4:</p>
+<pre><code class="hljs css language-scala">(<span class="hljs-string">"ch.epfl.scala"</span>%% <span class="hljs-string">"scalafix-rules"</span> % <span class="hljs-string">"0.9.26"</span> % <span class="hljs-type">Test</span>).withDottyCompat(scalaVersion.value)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="valid-libraries"></a><a href="#valid-libraries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Valid libraries</h3>
+<pre><code class="hljs"><span class="hljs-selector-attr">[info]</span> <span class="hljs-selector-tag">ch</span><span class="hljs-selector-class">.epfl</span><span class="hljs-selector-class">.scala</span><span class="hljs-selector-pseudo">:scalafix-interfaces</span><span class="hljs-selector-pseudo">:0.9.26</span> <span class="hljs-selector-tag">-</span>&gt; <span class="hljs-selector-tag">Valid</span>
+</code></pre>
+<p>Valid libraries are libraries than can be kept as they are. Those libraries are either already in the correct
+version, because they are published in scala 3.0.0-RC1, or they are Java libraries.</p>
+<h3><a class="anchor" aria-hidden="true" id="the-new-build-after-migrate-libs"></a><a href="#the-new-build-after-migrate-libs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The new build after migrate-libs</h3>
+<p>We use sbt <code>1.5.0-RC1</code> and we removed the macro library <code>&quot;com.softwaremill.scalamacrodebug:macros&quot;</code> from the libraryDependencies.
+When depending on a macro library, you won't be able to migrate to Scala 3, until this library is published
+for Scala 3.</p>
+<pre><code class="hljs css language-diff">//build.sbt
+<span class="hljs-deletion">- scalacOptions ++= Seq("-explaintypes", "-Wunused"),</span>
+<span class="hljs-addition">+ scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explaintypes", "-Wunused", "-Ykind-projector")</span>
+                     else Seq("-explaintypes", "-Wunused"))
+ libraryDependencies ++= Seq(
+<span class="hljs-deletion">-  "org.typelevel"                    %% "cats-core"           % "2.2.0",</span>
+<span class="hljs-addition">+  "org.typelevel"                    %% "cats-core"           % "2.4.2",</span>
+  "ch.epfl.scala"                     % "scalafix-interfaces" % "0.9.26",
+<span class="hljs-deletion">-  "com.softwaremill.scalamacrodebug" %% "macros"              % "0.4.1" % Test,</span>
+<span class="hljs-deletion">-  "ch.epfl.scala"                    %% "scalafix-rules"      % "0.9.26" % Test,</span>
+<span class="hljs-addition">+  ("ch.epfl.scala"                    %% "scalafix-rules"      % "0.9.26" % Test).cross(CrossVersion.for3Use2_13),</span>
+<span class="hljs-deletion">-  compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full),</span>
+<span class="hljs-deletion">-  compilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1")     </span>
+<span class="hljs-addition">+  ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {</span>
+<span class="hljs-addition">+          case Some((2, 13)) =&gt;</span>
+<span class="hljs-addition">+            Seq(compilerPlugin(("org.typelevel" %% "kind-projector" % V.kindProjector).cross(CrossVersion.full)))</span>
+<span class="hljs-addition">+          case Some((3, _)) =&gt; Seq()</span>
+<span class="hljs-addition">+          case _            =&gt; Seq()</span>
+  })              
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="migrate-scalacoptions"></a><a href="#migrate-scalacoptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migrate scalacOptions</h2>
+<p><strong>Usage:</strong> <code>migrate-scalacOptions projectId</code> where projectId is the name of the module chosen to be migrated.</p>
+<p>First run the command <code>migrate-scalacOptions</code>.
+This command rely directly on this <a href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">section</a>.</p>
+<pre><code class="hljs css language-scala">&gt; migrate-scalacOptions main
+[info]
+[info] <span class="hljs-type">Starting</span> to migrate the scalacOptions <span class="hljs-keyword">for</span> main
+[warn] <span class="hljs-type">Some</span> scalacOptions are set by sbt plugins and don<span class="hljs-symbol">'t</span> need to be modified, removed or added.
+[warn] <span class="hljs-type">The</span> sbt plugin should adapt its own scalacOptions <span class="hljs-keyword">for</span> <span class="hljs-type">Scala</span> <span class="hljs-number">3</span>
+[info]
+[info] <span class="hljs-type">X</span>       : <span class="hljs-type">The</span> following scalacOption is specific to <span class="hljs-type">Scala</span> <span class="hljs-number">2</span> and doesn<span class="hljs-symbol">'t</span> have an equivalent in <span class="hljs-type">Scala</span> <span class="hljs-number">3</span>
+[info] <span class="hljs-type">Renamed</span> : <span class="hljs-type">The</span> following scalacOption has been renamed in <span class="hljs-type">Scala3</span>
+[info] <span class="hljs-type">Valid</span>   : <span class="hljs-type">The</span> following scalacOption is a valid <span class="hljs-type">Scala</span> <span class="hljs-number">3</span> option
+[info]
+[info] -<span class="hljs-type">Wunused</span>      -&gt; <span class="hljs-type">X</span>
+[info] -<span class="hljs-type">Yrangepos</span>    -&gt; <span class="hljs-type">X</span>
+[info] -explaintypes -&gt; -explain-types
+[info]
+[info] <span class="hljs-type">The</span> following scalacOption are specific to compiler plugins, usually added through `compilerPlugin` or `addCompilerPlugin`.
+[info] <span class="hljs-type">In</span> the previous step `migrate-libs`, you should have removed/fixed compiler plugins and <span class="hljs-keyword">for</span> the remaining plugins and settings, they can be kept as they are.
+[info]
+[info] -<span class="hljs-type">Xplugin</span>:/<span class="hljs-type">Users</span>/meriamlachkar/<span class="hljs-type">Library</span>/<span class="hljs-type">Caches</span>/<span class="hljs-type">Coursier</span>/v1/https/repo1.maven.org/maven2/org/typelevel/kind-projector_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span>/<span class="hljs-number">0.11</span><span class="hljs-number">.0</span>/kind-projector_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span><span class="hljs-number">-0.11</span><span class="hljs-number">.0</span>.jar     -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">Xplugin</span>:/<span class="hljs-type">Users</span>/meriamlachkar/<span class="hljs-type">Library</span>/<span class="hljs-type">Caches</span>/<span class="hljs-type">Coursier</span>/v1/https/repo1.maven.org/maven2/com/olegpy/better-monadic-for_2<span class="hljs-number">.13</span>/<span class="hljs-number">0.3</span><span class="hljs-number">.1</span>/better-monadic-for_2<span class="hljs-number">.13</span><span class="hljs-number">-0.3</span><span class="hljs-number">.1</span>.jar      -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">Xplugin</span>:/<span class="hljs-type">Users</span>/meriamlachkar/<span class="hljs-type">Library</span>/<span class="hljs-type">Caches</span>/<span class="hljs-type">Coursier</span>/v1/https/repo1.maven.org/maven2/org/scalameta/semanticdb-scalac_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span>/<span class="hljs-number">4.4</span><span class="hljs-number">.0</span>/semanticdb-scalac_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span><span class="hljs-number">-4.4</span><span class="hljs-number">.0</span>.jar -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:synthetics:on                                                                                                                                           -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:targetroot:/<span class="hljs-type">Users</span>/meriamlachkar/perso/plugin-test/target/scala<span class="hljs-number">-2.13</span>/meta                                                                                -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:sourceroot:/<span class="hljs-type">Users</span>/meriamlachkar/perso/plugin-test                                                                                                       -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:failures:warning                                                                                                                                        -&gt; <span class="hljs-type">Valid</span>
+[success]
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="non-existing-scalacoptions-in-scala-3"></a><a href="#non-existing-scalacoptions-in-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-existing scalacOptions in Scala 3</h3>
+<pre><code class="hljs css language-scala">[info] -<span class="hljs-type">Wunused</span>      -&gt; <span class="hljs-type">X</span>
+[info] -<span class="hljs-type">Yrangepos</span>    -&gt; <span class="hljs-type">X</span>
+</code></pre>
+<ul>
+<li><code>-Yrangepos</code>: As explained in the output of this command, some scalacOptions <strong>are not set by you in the build file</strong>, but by
+some sbt plugins. For example <code>scala3-migrate</code> tool enables semanticdb in Scala 2, which adds <code>-Yrangepos</code>.
+Here sbt will adapt the semanticdb options in Scala 3 and therefore there is no need to take any action.</li>
+<li><code>-Wunused</code>: This scalacOption needs to be removed</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="renamed-scalacoptions"></a><a href="#renamed-scalacoptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Renamed scalacOptions</h3>
+<pre><code class="hljs css language-scala">-explaintypes -&gt; -explain-types
+</code></pre>
+<p>You just need to rename this scalacOption</p>
+<h3><a class="anchor" aria-hidden="true" id="plugins-specific-scalacoptions"></a><a href="#plugins-specific-scalacoptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Plugins specific scalacOptions</h3>
+<pre><code class="hljs css language-scala">[info] -<span class="hljs-type">Xplugin</span>:/<span class="hljs-type">Users</span>/meriamlachkar/<span class="hljs-type">Library</span>/<span class="hljs-type">Caches</span>/<span class="hljs-type">Coursier</span>/v1/https/repo1.maven.org/maven2/org/typelevel/kind-projector_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span>/<span class="hljs-number">0.11</span><span class="hljs-number">.0</span>/kind-projector_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span><span class="hljs-number">-0.11</span><span class="hljs-number">.0</span>.jar     -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">Xplugin</span>:/<span class="hljs-type">Users</span>/meriamlachkar/<span class="hljs-type">Library</span>/<span class="hljs-type">Caches</span>/<span class="hljs-type">Coursier</span>/v1/https/repo1.maven.org/maven2/com/olegpy/better-monadic-for_2<span class="hljs-number">.13</span>/<span class="hljs-number">0.3</span><span class="hljs-number">.1</span>/better-monadic-for_2<span class="hljs-number">.13</span><span class="hljs-number">-0.3</span><span class="hljs-number">.1</span>.jar      -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">Xplugin</span>:/<span class="hljs-type">Users</span>/meriamlachkar/<span class="hljs-type">Library</span>/<span class="hljs-type">Caches</span>/<span class="hljs-type">Coursier</span>/v1/https/repo1.maven.org/maven2/org/scalameta/semanticdb-scalac_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span>/<span class="hljs-number">4.4</span><span class="hljs-number">.0</span>/semanticdb-scalac_2<span class="hljs-number">.13</span><span class="hljs-number">.3</span><span class="hljs-number">-4.4</span><span class="hljs-number">.0</span>.jar -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:synthetics:on                                                                                                                                           -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:targetroot:/<span class="hljs-type">Users</span>/meriamlachkar/perso/plugin-test/target/scala<span class="hljs-number">-2.13</span>/meta                                                                                -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:sourceroot:/<span class="hljs-type">Users</span>/meriamlachkar/perso/plugin-test                                                                                                       -&gt; <span class="hljs-type">Valid</span>
+[info] -<span class="hljs-type">P</span>:semanticdb:failures:warning 
+</code></pre>
+<p>With the previous command <code>migrate-libs</code>, we have already adapted <code>kind-projector</code> and removed <code>better-monadic-for</code>
+for Scala 3. If the previous step is done correctly, you should not need to change anything.</p>
+<h4><a class="anchor" aria-hidden="true" id="details"></a><a href="#details" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Details</h4>
+<ul>
+<li>If you have set one of the options above in your build, for example <code>-P:semanticdb:synthetics:on</code>,
+you need to check if this option still exist for the scala 3 version of this plugin. In this case, <code>-P:semanticdb:synthetics:on</code>
+has not been yet implemented in Scala 3 and need to be removed.</li>
+<li><code>better-monadic-for</code> plugin is in the previous list because we haven't yet <code>reload</code> the build.</li>
+<li><code>migrate-scalacOptions</code>: in the previous step, <code>kind-projector</code> plugin has been replaced by a scalacOption when it's Scala 3, but
+<code>migrate-scalacOptions</code> retrieves scalacOptions as seen in Scala 2.13. This is why we won't see this scalacOption in
+the list above when we execute <code>migrate-scalacOptions</code>. The same way, we will still see the plugin being added through <code>-Xplugin</code>.</li>
+<li><code>-Xplugin:semanticdb</code> is added here through an sbt setting <code>semanticdbEnabled := true</code> that is set by
+scala3-migrate (this tool). If semanticdb is added through <code>compilerPlugin</code> or <code>addCompilerPlugin</code>, it will
+be listed as a <code>libraryDependencies</code> when we execute <code>migrate-libs</code>. The support of SemanticDB is now shipped
+into the Scala 3 compiler, and will be configured with the same setting: <code>semanticdbEnabled := true</code>.
+Scala3-migrate doesn't enable SemanticDB in scala 3 unless it's configured in the build.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="the-new-build-after-migrate-scalacoptions"></a><a href="#the-new-build-after-migrate-scalacoptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The new build after migrate-scalacOptions</h3>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">- scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explaintypes", "-Wunused", "-Ykind-projector")</span>
+                     else Seq("-explaintypes", "-Wunused"))
+<span class="hljs-addition">+ scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explain-types", "-Wunused", "-Ykind-projector")</span>
+                     else Seq("-explaintypes", "-Wunused"))                     
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="migrate-the-syntax"></a><a href="#migrate-the-syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migrate the syntax</h1>
+<p><strong>Usage:</strong> <code>migrate-syntax projectId</code> where projectId is the name of the module chosen to be migrated.</p>
+<p>The command <code>migrate-syntax</code> fixes some incompatibilities by applying the following Scalafix rules:</p>
+<ul>
+<li>ProcedureSyntax</li>
+<li>fix.scala213.ConstructorProcedureSyntax</li>
+<li>fix.scala213.ExplicitNullaryEtaExpansion</li>
+<li>fix.scala213.ParensAroundLambda</li>
+<li>fix.scala213.ExplicitNonNullaryApply</li>
+<li>fix.scala213.Any2StringAdd</li>
+</ul>
+<p>For more information on the incompatibilities fixed, please read the <a href="/scala-3-migration-guide/docs/incompatibilities/table.html">incomatibility section</a>.</p>
+<p>Let's run the command <code>migrate-syntax</code>. If there are changes after this command, it's better if you <strong>create a commit for those.</strong></p>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> migrate-syntax main</span>
+[success] Total time: 0 s, completed 12 Mar 2021, 20:55:51
+[info] We are going to fix some syntax incompatibilities
+[INFO ] migrate.Scala3Migrate.previewSyntaxMigration:80 - Successfully run fixSyntaxForScala3  in 8839 milliseconds
+[INFO ] migrate.utils.ScalafixService.fixInPlace:40 - Syntax fixed for Incompat13.scala)
+[INFO ] migrate.utils.ScalafixService.fixInPlace:40 - Syntax fixed for Cats6.scala)
+[INFO ] migrate.utils.ScalafixService.fixInPlace:40 - Syntax fixed for Cats5.scala)
+[info]
+[info] The syntax incompatibilities have been fixed on the project main
+[info] You can now commit the change!
+[info] You can also execute the next command to try to migrate to 3.0.0-RC1
+[info]
+[info] migrate main
+[success]
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="migrate-the-code-last-command"></a><a href="#migrate-the-code-last-command" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migrate the code: last command</h1>
+<blockquote>
+<p>First <code>reload</code> the build to take into account the modifications in scalacOptions and libraryDependencies.</p>
+</blockquote>
+<p><strong>Usage:</strong> <code>migrate projectId</code> where projectId is the name of the module chosen to be migrated</p>
+<p>Scala 3 uses a new type inference algorithm, therefore the Scala 3.0 compiler can infer a different
+type than the one inferred by the Scala 2.13 (for more information, read <a href="/scala-3-migration-guide/docs/incompatibilities/table.html#type-inference">the type inference section</a>).
+This command goal is to find the necessary types to add in order to make you code compiles.</p>
+<p>If the libraries has not been ported correctly, running <code>migrage projectId</code> will fail reporting the problematic libraries.</p>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> migrate main</span>
+[info] We are going to migrate your project main to scala 3
+[INFO ] migrate.ScalaMigrat.buildMigrationFiles:140 - Found 20 patch candidate(s) in 7 file(s)after 1254 milliseconds
+[INFO ] migrate.ScalaMigrat.compileInScala3:115 - Successfully compiled with scala 3 in 5997 milliseconds
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 5 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 2 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in Incompat7.scala after 4385 milliseconds ms
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 2 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in Incompat5.scala after 2243 milliseconds ms
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 2 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in Incompat3.scala after 302 milliseconds ms
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in ReflectiveCall.scala after 773 milliseconds ms
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 4 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 2 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in Incompat9.scala after 1951 milliseconds ms
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 3 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in PrivateLocalImplicitWithoutType.scala after 313 milliseconds ms
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 3 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.loopUntilNoCandidates:41 - 1 remaining candidate(s)
+[INFO ] migrate.internal.FileMigration.migrate:24 - Found 1 required patch(es) in Incompat4.scala after 1225 milliseconds ms
+[INFO ] migrate.ScalaMigrat.x$11:67 - Incompat7.scala has been successfully migrated
+[INFO ] migrate.ScalaMigrat.x$11:67 - Incompat5.scala has been successfully migrated
+[INFO ] migrate.ScalaMigrat.x$11:67 - Incompat9.scala has been successfully migrated
+[INFO ] migrate.ScalaMigrat.x$11:67 - PrivateLocalImplicitWithoutType.scala has been successfully migrated
+[INFO ] migrate.ScalaMigrat.x$11:67 - Incompat4.scala has been successfully migrated
+[INFO ] migrate.ScalaMigrat.x$11:67 - ReflectiveCall.scala has been successfully migrated
+[INFO ] migrate.ScalaMigrat.x$11:67 - Incompat3.scala has been successfully migrated
+[INFO ] migrate.Scala3Migrate.compileWithRewrite:108 - Finalizing the migration: compiling in scala 3 with -rewrite option
+[info]
+[info]
+[info] main project has successfully been migrated to scala 3.0.0-RC1
+[info] You can now commit the change!
+[info] You can also execute the compile command:
+[info]
+[info] main / compile
+[success]
+</code></pre>
+<p>In this example, 7 files were modified by adding either implicit parameters, implicit conversions or a explicit result types.
+Then the tool compiles one last time in Scala 3  with <code>-rewrite</code> scalacOption.</p>
+<h2><a class="anchor" aria-hidden="true" id="what-to-do-next-"></a><a href="#what-to-do-next-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What to do next ?</h2>
+<p>You can start again with another module <code>MODULE2</code>. If <code>MODULE2</code> depends on the last module migrated, you need
+either to add <code>-Ytasty-reader</code> to <code>MODULE2</code> scalacOptions, or <code>reload</code> or <code>set MODULE-MIGRATED/scalaVersion := &quot;2.13.5&quot;</code></p>
+<p>Once you're done, you can remove <code>scala3-migrate</code> from your plugins.</p>
+<h2><a class="anchor" aria-hidden="true" id="contributions-and-feedbacks-are-welcome"></a><a href="#contributions-and-feedbacks-are-welcome" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contributions and feedbacks are welcome</h2>
+<p>The tool is still under development, and <strong>we would love to hear from you.</strong>
+Every feedback will help us build a better tool: typos, clearer log messages, better documentation, bug reports, ideas of features,
+so please open <a href="https://github.com/scalacenter/scala3-migrate">GitHub issues</a> or contact us on <a href="https://gitter.im/scala/center">gitter</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/macros/migration-tutorial.html"><span class="arrow-prev">← </span><span>Porting a Macro Library</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html"><span>Moving from Scala 2 to Scala 3</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#context">Context</a></li><li><a href="#installation">Installation</a></li><li><a href="#choose-a-module">Choose a module</a></li><li><a href="#migrate-library-dependencies">Migrate library dependencies</a><ul class="toc-headings"><li><a href="#macro-library">Macro library</a></li><li><a href="#compiler-plugins">Compiler plugins</a></li><li><a href="#libraries-that-can-be-updated">Libraries that can be updated</a></li><li><a href="#valid-libraries">Valid libraries</a></li><li><a href="#the-new-build-after-migrate-libs">The new build after migrate-libs</a></li></ul></li><li><a href="#migrate-scalacoptions">Migrate scalacOptions</a><ul class="toc-headings"><li><a href="#non-existing-scalacoptions-in-scala-3">Non-existing scalacOptions in Scala 3</a></li><li><a href="#renamed-scalacoptions">Renamed scalacOptions</a></li><li><a href="#plugins-specific-scalacoptions">Plugins specific scalacOptions</a></li><li><a href="#the-new-build-after-migrate-scalacoptions">The new build after migrate-scalacOptions</a></li></ul></li><li><a href="#what-to-do-next-">What to do next ?</a></li><li><a href="#contributions-and-feedbacks-are-welcome">Contributions and feedbacks are welcome</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
