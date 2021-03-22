@@ -18,8 +18,9 @@ Each of this step is an sbt command that will be described in details in the fol
 
 > #### Requirements
 > - scala 2.13, preferred 2.13.5
-> - sbt 1.3 or higher
-> - Disclaimer: This tool cannot migrate libraries containing macros.
+> - sbt 1.4 or higher
+> - **Disclaimer:** This tool cannot migrate libraries containing macros.
+> - **Not implemented yet:** All commands right now work on Compile scope. Other configurations like `Test` still need to be supported
 
 ## Installation
 
@@ -41,6 +42,8 @@ Follow [this section to choose the first module](tutorials/sbt-migration.md#1---
 
 ## Migrate library dependencies
 > All the commands will be run in an sbt shell
+
+**Usage:** `migrate-libs projectId` where projectId is the name of the module chosen to be migrated.
 
 Let's migrate the following sbt build.
 ```scala
@@ -162,6 +165,8 @@ for Scala 3.
 ```
 
 ## Migrate scalacOptions
+**Usage:** `migrate-scalacOption projectId` where projectId is the name of the module chosen to be migrated.
+
 First run the command `migrate-scalacOption`.
 This command rely directly on this [section](tutorials/scalacoptions-migration.md).
 ```scala
@@ -195,10 +200,10 @@ This command rely directly on this [section](tutorials/scalacoptions-migration.m
 [info] -Wunused      -> X
 [info] -Yrangepos    -> X
 ```
-- `-Yrangepos` : As explained in the output of this command, some scalacOptions **are not set by you in the build file**, but by
+- `-Yrangepos`: As explained in the output of this command, some scalacOptions **are not set by you in the build file**, but by
 some sbt plugins. For example `scala3-migrate` tool enables semanticdb in Scala 2, which adds `-Yrangepos`. 
 Here sbt will adapt its the semanticdb options in Scala 3 and therefore there is no need to take any action.
-- `-Wunused` : This scalacOption needs to be removed
+- `-Wunused`: This scalacOption needs to be removed
 
 ### Renamed scalacOptions
 ```scala
@@ -230,7 +235,7 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
 - `-Xplugin:semanticdb` is added here through an sbt setting `semanticdbEnabled := true` that is set by
   scala3-migrate (this tool). If semanticdb is added through `compilerPlugin` or `addCompilerPlugin`, it will
   be listed as a libraryDependencies when we execute `migrate-libs`. The support of SemanticDB is now shipped 
-  into the Scala 3 compiler, and will be configured with the same setting : `semanticdbEnabled := true`. 
+  into the Scala 3 compiler, and will be configured with the same setting: `semanticdbEnabled := true`. 
   Scala3-migrate doesn't enable semanticdb in scala 3 unless it's configured in the build.
   
 
@@ -243,6 +248,8 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
 ```
 
 # Migrate the syntax
+**Usage:** `migrate-syntax projectId` where projectId is the name of the module chosen to be migrated.
+
 The command `migrate-syntax` fixes some incompatibilities by applying the following Scalafix rules:
 
 - ProcedureSyntax
@@ -274,7 +281,9 @@ Let's run the command `migrate-syntax`. If there are changes after this command,
 
 # Migrate the code: last command
 > First `reload` the build to take into account the modifications in scalacOptions and libraryDependencies.
-> 
+>
+
+**Usage:** `migrate projectId` where projectId is the name of the module chosen to be migrated
 
 Scala 3 uses a new type inference algorithm, therefore the Scala 3.0 compiler can infer a different
 type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](incompatibilities/table.md#type-inference)). 
