@@ -343,3 +343,8 @@ You can start again with another module `MODULE2`. If `MODULE2` depends on the l
 either to add `-Ytasty-reader` to `MODULE2` scalacOptions, or `reload` or `set MODULE-MIGRATED/scalaVersion := "2.13.5"` 
 
 Once you're done, you can remove `scala3-migrate` from your plugins. 
+
+## Contributions and feedbacks are welcome
+The tool is still under development, and **we would love to hear from you.**
+Every feedback will help us build a better tool: typos, clearer log messages, better documentation, bug reports, ideas of features,
+so please open [GitHub issues](https://github.com/scalacenter/scala3-migrate) or contact us on [gitter](https://gitter.im/scala/center).
