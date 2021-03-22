@@ -231,7 +231,7 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
 - `better-monadic-for` plugin is in the previous list because we haven't yet `reload` the build.
 - `migrate-scalacOptions`: in the previous step, `kind-projector` plugin has been replaced by a scalacOption when it's Scala 3, but 
   `migrate-scalacOptions` retrieves scalacOptions as seen in Scala 2.13. This is why we won't see this scalacOption in
-  the list above when we execute `migrate-scalacOption`. The same way, we will still see the plugin being added through `-Xplugin`.
+  the list above when we execute `migrate-scalacOptions`. The same way, we will still see the plugin being added through `-Xplugin`.
 - `-Xplugin:semanticdb` is added here through an sbt setting `semanticdbEnabled := true` that is set by
   scala3-migrate (this tool). If semanticdb is added through `compilerPlugin` or `addCompilerPlugin`, it will
   be listed as a libraryDependencies when we execute `migrate-libs`. The support of SemanticDB is now shipped 
