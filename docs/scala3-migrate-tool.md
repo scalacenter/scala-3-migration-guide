@@ -167,7 +167,7 @@ for Scala 3.
 ## Migrate scalacOptions
 **Usage:** `migrate-scalacOptions projectId` where projectId is the name of the module chosen to be migrated.
 
-First run the command `migrate-scalacOption`.
+First run the command `migrate-scalacOptions`.
 This command rely directly on this [section](tutorials/scalacoptions-migration.md).
 ```scala
 [info]
