@@ -24,7 +24,7 @@ Each of this step is an sbt command that will be described in details in the fol
 
 ## Installation
 
-Currently, only an sbt plugin is provided. You can add it as follows to your build.
+Currently, you can use scala3-migrate via an sbt plugin. You can add it as follows to your build.
 ```scala
 // project/plugins.sbt
 addSbtPlugin("ch.epfl.scala" % "sbt-scala3-migrate" % "@scala3Migrate@")
