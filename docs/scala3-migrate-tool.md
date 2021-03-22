@@ -235,7 +235,7 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
   the list above when we execute `migrate-scalacOptions`. The same way, we will still see the plugin being added through `-Xplugin`.
 - `-Xplugin:semanticdb` is added here through an sbt setting `semanticdbEnabled := true` that is set by
   scala3-migrate (this tool). If semanticdb is added through `compilerPlugin` or `addCompilerPlugin`, it will
-  be listed as a libraryDependencies when we execute `migrate-libs`. The support of SemanticDB is now shipped 
+  be listed as a `libraryDependencies` when we execute `migrate-libs`. The support of SemanticDB is now shipped 
   into the Scala 3 compiler, and will be configured with the same setting: `semanticdbEnabled := true`. 
   Scala3-migrate doesn't enable SemanticDB in scala 3 unless it's configured in the build.
   
