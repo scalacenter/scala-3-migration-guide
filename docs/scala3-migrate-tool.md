@@ -272,7 +272,7 @@ Let's run the command `migrate-syntax`. If there are changes after this command,
 [success]
 ```
 
-## Migrate the code: last command
+# Migrate the code: last command
 > First `reload` the build to take into account the modifications in scalacOptions and libraryDependencies.
 > 
 
