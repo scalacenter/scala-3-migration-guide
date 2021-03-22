@@ -112,7 +112,7 @@ can be added in your `scalacOptions`.
   
 - For `scalafix-rules`, there is no available version for Scala 3, but the library doesn't contain macro
   and therefore the 2.13 version can be used as it is in scala 3. The syntax still needs to be updated from
- `ch.epfl.scala" `**%%**` "scalafix-rules" % "0.9.26" % "test"` to `ch.epfl.scala" `**% **`"scalafix-rules_2.13" % "0.9.26" % "test"`
+ `ch.epfl.scala" `**%%**` "scalafix-rules" % "0.9.26" % "test"` to `ch.epfl.scala" `**%**`"scalafix-rules_2.13" % "0.9.26" % "test"`
   where we explicitly specify the Scala version.
   
 There are other syntaxes to express that we want to use the `2.13` version for `3.0.x` code, but keep using
