@@ -290,7 +290,7 @@ Scala 3 uses a new type inference algorithm, therefore the Scala 3.0 compiler ca
 type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](incompatibilities/table.md#type-inference)). 
 This command goal is to find the necessary types to add in order to make you code compiles.
 
-If the libraries has not been ported correctly, running `migrage projectId` would fail with the failing libraries.
+If the libraries has not been ported correctly, running `migrage projectId` will fail reporting the problematic libraries.
 ```shell
 > migrate main
 [info] We are going to migrate your project main to scala 3
