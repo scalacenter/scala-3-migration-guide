@@ -115,8 +115,8 @@ can be added in your `scalacOptions`.
  `ch.epfl.scala" `**%%**` "scalafix-rules" % "0.9.26" % "test"` to `ch.epfl.scala" `**%**`"scalafix-rules_2.13" % "0.9.26" % "test"`
   where we explicitly specify the Scala version.
   
-There are other syntaxes to express that we want to use the `2.13` version for `3.0.x` code, but keep using
-the `2.13` for `2.13` and `2.12` for `2.12`.
+There are other syntaxes to express that we want to use the `_2.13` artifact for `3.0.x` code, but keep using
+`_2.13` for `2.13.x` and  `_2.12` for `2.12.x`.
 
 if the sbt's version is higher than 1.5:
 ```scala
@@ -135,7 +135,7 @@ Valid libraries are libraries than can be kept as they are. Those libraries are 
 version, because they are published in scala 3.0.0-RC1, or they are Java libraries. 
 
 ### The new build after migrate-libs
-We use sbt `1.5.0-M2` and we removed the macro library `"com.softwaremill.scalamacrodebug:macros"` from the libraryDependencies.
+We use sbt `1.5.0-RC1` and we removed the macro library `"com.softwaremill.scalamacrodebug:macros"` from the libraryDependencies.
 When depending on a macro library, you won't be able to migrate to Scala 3, until this library is published 
 for Scala 3.
 
