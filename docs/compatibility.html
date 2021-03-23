@@ -67,9 +67,9 @@ You can find a corpus of incompatibilities associated with their solutions in th
 Further explanations are given down below.</p>
 <p>Setting metaprogramming aside, a Scala 2.13 source code can rather easily be translated into a Scala 3 source code.
 Once you have it, you will be able to use the new powerful features of Scala 3, which have no equivalent in Scala 2.
-Obviously you will lose the source code forward compatibility by doing so.
-But amazingly, you can still have compatibility at compile time thanks to the TASTy reader.
-As we will see in more details, it permits forward compatibility on many new features, except the most exotic ones.
+Obviously by doing so you will exceed the limits of Scala 2.13 forward compatibility with Scala 3 source code.
+But, amazingly, you can still have compatibility at compile time thanks to the TASTy reader.
+As we will see in more detail, it permits forward compatibility on many new features, except the most exotic ones.
 This is a breakthrough in the Scala programming history.</p>
 <h2><a class="anchor" aria-hidden="true" id="compile-time"></a><a href="#compile-time" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compile Time</h2>
 <p>In your code you can use public types and terms, and call public methods that are defined in a different module or library.
@@ -78,7 +78,7 @@ It works well as long as the type checker, which is the compiler phase that vali
 In Scala 3 the story is a bit different because it relies on the TASTy format which is a lot more than a signature layout.
 But, for the purpose of migrating from Scala 2 to Scala 3, only the signatures are useful.</p>
 <h3><a class="anchor" aria-hidden="true" id="the-scala-30-unpicklers"></a><a href="#the-scala-30-unpicklers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Scala 3.0 Unpicklers</h3>
-<p>The first piece of good news is that the Scala 3.0 compiler is already able to read both formats, the Scala 2.13 Pickle format and the TASTy format, and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.0.</p>
+<p>The first piece of good news is that the Scala 3.0 compiler is already able to read both formats (the Scala 2.13 Pickle format and the TASTy format) and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.0.</p>
 <h3><a class="anchor" aria-hidden="true" id="the-scala-213-tasty-reader"></a><a href="#the-scala-213-tasty-reader" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Scala 2.13 TASTy Reader</h3>
 <p>The second piece of good news is that the Scala 2.13 TASTy reader, which enables consuming Scala 3.0 libraries in Scala 2.13 has been shipped into <code>2.13.4</code>.
 It supports all the traditional features as well as the following new features:</p>
@@ -108,7 +108,7 @@ When you depend on a macro definition, the compiler loads the class file that co
 Therefore it is not possible for the Scala 3.0 compiler to execute them.</p>
 <p>In contrast, the Scala 3.0 macros are based on the TASTy format which is designed for stability and compiler independence.
 They will stay compatible with the future versions of the Scala 3 compiler.
-But they are not compatible with the Scala 2.13 compiler, which it does no fully support TASTy.</p>
+But they are not compatible with the Scala 2.13 compiler, which does not fully support TASTy.</p>
 <p>In order to publish a common macro API for both languages you must provide both implementations.
 A technique for declaring a Scala 2.13 macro in a Scala 3.0 artifact is exemplified down below and it is further detailed in the <a href="/scala-3-migration-guide/docs/macros/migration-tutorial.html#mixing-macro-definitions">Macro Migration Tutorial</a> section.</p>
 <h2><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h2>
@@ -135,7 +135,7 @@ lazy val bar = project.in(file("bar"))
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="the-scala-standard-library"></a><a href="#the-scala-standard-library" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Scala Standard Library</h4>
 <p>The official standard library for Scala 3.0 is the Scala 2.13 library.
-Not only the source code is unchanged but it is even not compiled and published under 3.0.
+Not only is its source code unchanged but it is even not compiled and published under 3.0.
 It could be, but it would be useless because, as we have seen, a Scala 3.0 module can depend on a Scala 2.13 artifact.</p>
 <p>Therefore the Scala 3.0 dependency on the standard library follows this exact same pattern.</p>
 <p><img src="/scala-3-migration-guide/docs/assets/compatibility/standardlib.svg" alt="Scala 3 library dependency"></p>
@@ -180,7 +180,7 @@ It could be, but it would be useless because, as we have seen, a Scala 3.0 modul
 The Scala 3.0 implementation can be provided in the same module.
 The Scala 2.13 implementation must be compiled by the Scala 2.13 compiler, and so it must be provided by an other module.</p>
 <p><img src="/scala-3-migration-guide/docs/assets/compatibility/sharedMacroAPI.svg" alt="Shared macro API in a Scala 3 artifact"></p>
-<p>This technique makes possible for the Scala 2.13 and Scala 3.0 compilers to execute a macro defined in the same Scala 3.0 artifact.
+<p>This technique makes it possible for the Scala 2.13 and Scala 3.0 compilers to execute a macro defined in the same Scala 3.0 artifact.
 Yet, each will have its own execution path through the produced bytecode.</p>
 <p>You can learn this technique in the <a href="/scala-3-migration-guide/docs/macros/migration-tutorial.html#mixing-macro-definitions">Macro Migration Tutorial</a>.
 Another working example can be found in <a href="https://github.com/scalacenter/mix-macros-scala-2-and-3">this repository</a>.</p>
