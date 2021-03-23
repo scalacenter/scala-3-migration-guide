@@ -21,9 +21,9 @@ Further explanations are given down below.
 
 Setting metaprogramming aside, a Scala 2.13 source code can rather easily be translated into a Scala 3 source code.
 Once you have it, you will be able to use the new powerful features of Scala 3, which have no equivalent in Scala 2.
-Obviously you will lose the source code forward compatibility by doing so.
-But amazingly, you can still have compatibility at compile time thanks to the TASTy reader.
-As we will see in more details, it permits forward compatibility on many new features, except the most exotic ones.
+Obviously by doing so you will exceed the limits of Scala 2.13 forward compatibility with Scala 3 source code.
+But, amazingly, you can still have compatibility at compile time thanks to the TASTy reader.
+As we will see in more detail, it permits forward compatibility on many new features, except the most exotic ones.
 This is a breakthrough in the Scala programming history.
 
 ## Compile Time
@@ -37,7 +37,7 @@ But, for the purpose of migrating from Scala 2 to Scala 3, only the signatures a
 
 ### The Scala 3.0 Unpicklers
 
-The first piece of good news is that the Scala 3.0 compiler is already able to read both formats, the Scala 2.13 Pickle format and the TASTy format, and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.0.
+The first piece of good news is that the Scala 3.0 compiler is already able to read both formats (the Scala 2.13 Pickle format and the TASTy format) and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.0.
 
 ### The Scala 2.13 TASTy Reader
 
@@ -76,7 +76,7 @@ Therefore it is not possible for the Scala 3.0 compiler to execute them.
 
 In contrast, the Scala 3.0 macros are based on the TASTy format which is designed for stability and compiler independence.
 They will stay compatible with the future versions of the Scala 3 compiler.
-But they are not compatible with the Scala 2.13 compiler, which it does no fully support TASTy.
+But they are not compatible with the Scala 2.13 compiler, which does not fully support TASTy.
 
 In order to publish a common macro API for both languages you must provide both implementations.
 A technique for declaring a Scala 2.13 macro in a Scala 3.0 artifact is exemplified down below and it is further detailed in the [Macro Migration Tutorial](macros/migration-tutorial.md#mixing-macro-definitions) section.
@@ -115,7 +115,7 @@ lazy val foo = project.in.file("foo")
 #### The Scala Standard Library
 
 The official standard library for Scala 3.0 is the Scala 2.13 library.
-Not only the source code is unchanged but it is even not compiled and published under 3.0.
+Not only is its source code unchanged but it is even not compiled and published under 3.0.
 It could be, but it would be useless because, as we have seen, a Scala 3.0 module can depend on a Scala 2.13 artifact.
 
 Therefore the Scala 3.0 dependency on the standard library follows this exact same pattern.
@@ -184,7 +184,7 @@ The Scala 2.13 implementation must be compiled by the Scala 2.13 compiler, and s
 
 ![Shared macro API in a Scala 3 artifact](assets/compatibility/sharedMacroAPI.svg)
 
-This technique makes possible for the Scala 2.13 and Scala 3.0 compilers to execute a macro defined in the same Scala 3.0 artifact.
+This technique makes it possible for the Scala 2.13 and Scala 3.0 compilers to execute a macro defined in the same Scala 3.0 artifact.
 Yet, each will have its own execution path through the produced bytecode.
 
 You can learn this technique in the [Macro Migration Tutorial](macros/migration-tutorial.md#mixing-macro-definitions).
