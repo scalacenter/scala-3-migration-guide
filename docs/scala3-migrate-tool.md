@@ -244,7 +244,7 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
 ```diff
 - scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explaintypes", "-Wunused", "-Ykind-projector")
                      else Seq("-explaintypes", "-Wunused"))
-+ scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explain-types", "-Wunused", "-Ykind-projector")
++ scalacOptions ++= (if (scalaVersion.value.startsWith("3")) Seq("-explain-types", "-Ykind-projector")
                      else Seq("-explaintypes", "-Wunused"))                     
 ```
 
