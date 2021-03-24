@@ -1,9 +1,9 @@
 name: Tests
 on:
  pull_request:
-   branches: [master]
+   branches: [main]
  push:
-   branches: [master]
+   branches: [main]
 jobs:
   incompat:
     name: Test Incompatibilities
