@@ -33,30 +33,33 @@ and they are all valid.
 | **Classic control structures**| ✅ | ✅ |
 | **New control structures**| ✅ | ✅ |
 
-Let's start with showing the compiler options we have available to achieve our goal. 
+Let's start with showing the compiler options we have available to achieve our goal.
+If we simply type `scalac` on the command line it shows the usage, including all the options.
+With the Scala 3 compiler you will find the following five among those options:
 
-```bash
-$ dotc
-Usage: dotc <options> <source files>
+<pre>bash
+$ scalac
+Usage: scalac <options> <source files>
 where possible standard options include:
-
-<elided>
-
--indent            Allow significant indentation
--new-syntax        Require `then` and `do` in control expressions.
--noindent          Require classical {...} syntax, indentation is not significant.
--old-syntax        Require `(...)` around conditions.
-
-<elided>
-
--rewrite           When used in conjunction with a `...-migration` source version,
+...
+<b>-indent</b>            Allow significant indentation
+...
+<b>-new-syntax</b>        Require `then` and `do` in control expressions.
+<b>-noindent</b>          Require classical {...} syntax, indentation is not significant.
+...
+<b>-old-syntax</b>        Require `(...)` around conditions.
+...
+<b>-rewrite</b>           When used in conjunction with a `...-migration` source version,
                    rewrites sources to migrate to new version.
+...
 
-<elided>
-```
+</pre>
 
 We can combine one of four syntax related options:`-indent`, `-noindent`, `-new-syntax`,
 and `-old-syntax`, with the `-rewrite` option to rewrite source code.
+
+To apply these options in an sbt project, set `compileOptions`, for example by adding the line:<br>
+`scalacOptions ++= Seq("-indent","-rewrite")`
 
 Let's have a look at how this works by using a small example.
 
@@ -96,14 +99,16 @@ case class State(n: Int, minValue: Int, maxValue: Int) {
 
 Assume that we want to convert this piece of code to _SIB_ syntax & the new control syntax.
 Note that we cannot do this in a single step as the compiler disallows simultaneous rewrites of control syntax and _SIB_/Classic syntax. In other words, the following
-combinations of compiler options are not allowed:
+combinations of compiler options are not allowed and each results in an error like the one shown:
 
-- `-indent -old-syntax -rewrite`
-- `-no-indent -old-syntax -rewrite`
-- `-indent -new-syntax -rewrite`
-- `-noindent -new-syntax -rewrite`
+<pre>
+<del>-indent -old-syntax</del> -rewrite
+<del>-no-indent -old-syntax</del> -rewrite
+<del>-indent -new-syntax</del> -rewrite
+<del>-noindent -new-syntax</del> -rewrite
+<b>[error]   |illegal combination of -rewrite targets: -new-syntax and -indent</b></pre>
 
-So, we have to rewrite syntax one step at a time.
+Instead we have to rewrite syntax one step at a time.
 
 Let's start by moving to _SIB_ syntax. We compile the code with options `-indent -rewrite` and the result looks as follows:
 
