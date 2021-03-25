@@ -78,7 +78,7 @@ const siteConfig = {
   ogImage: "img/scalacenter2x.png",
   twitterImage: "img/scalacenter2x.png",
 
-  editUrl: `${repoUrl}/edit/master/docs/`,
+  editUrl: `${repoUrl}/edit/main/docs/`,
 
   repoUrl
 };
