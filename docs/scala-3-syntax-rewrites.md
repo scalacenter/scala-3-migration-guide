@@ -58,7 +58,7 @@ where possible standard options include:
 We can combine one of four syntax related options:`-indent`, `-noindent`, `-new-syntax`,
 and `-old-syntax`, with the `-rewrite` option to rewrite source code.
 
-To apply these options in an sbt project, set `compileOptions`, for example by adding the line:<br>
+To apply these options in an sbt project, set `scalacOptions`, for example by adding the line:<br>
 `scalacOptions ++= Seq("-indent","-rewrite")`
 
 Let's have a look at how this works by using a small example.
