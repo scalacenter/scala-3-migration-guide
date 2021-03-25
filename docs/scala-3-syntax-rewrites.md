@@ -37,23 +37,23 @@ Let's start with showing the compiler options we have available to achieve our g
 If we simply type `scalac` on the command line it shows the usage, including all the options.
 With the Scala 3 compiler you will find the following five among those options:
 
-<pre>bash
+```bash
 $ scalac
 Usage: scalac <options> <source files>
 where possible standard options include:
 ...
-<b>-indent</b>            Allow significant indentation
+-indent</b>            Allow significant indentation
 ...
-<b>-new-syntax</b>        Require `then` and `do` in control expressions.
-<b>-noindent</b>          Require classical {...} syntax, indentation is not significant.
+-new-syntax</b>        Require `then` and `do` in control expressions.
+-noindent</b>          Require classical {...} syntax, indentation is not significant.
 ...
-<b>-old-syntax</b>        Require `(...)` around conditions.
+-old-syntax</b>        Require `(...)` around conditions.
 ...
-<b>-rewrite</b>           When used in conjunction with a `...-migration` source version,
+-rewrite</b>           When used in conjunction with a `...-migration` source version,
                    rewrites sources to migrate to new version.
 ...
 
-</pre>
+```
 
 We can combine one of four syntax related options:`-indent`, `-noindent`, `-new-syntax`,
 and `-old-syntax`, with the `-rewrite` option to rewrite source code.
@@ -100,13 +100,19 @@ case class State(n: Int, minValue: Int, maxValue: Int) {
 Assume that we want to convert this piece of code to _SIB_ syntax & the new control syntax.
 Note that we cannot do this in a single step as the compiler disallows simultaneous rewrites of control syntax and _SIB_/Classic syntax. In other words, the following
 combinations of compiler options are not allowed and each results in an error like the one shown:
+- <del>-indent -old-syntax</del> -rewrite
+- <del>-no-indent -old-syntax</del> -rewrite
+- <del>-indent -new-syntax</del> -rewrite
+- <del>-noindent -new-syntax</del> -rewrite
 
-<pre>
-<del>-indent -old-syntax</del> -rewrite
-<del>-no-indent -old-syntax</del> -rewrite
-<del>-indent -new-syntax</del> -rewrite
-<del>-noindent -new-syntax</del> -rewrite
-<b>[error]   |illegal combination of -rewrite targets: -new-syntax and -indent</b></pre>
+``` bash
+$ scalac -indent -old-syntax -rewrite hello.scala
+-- Error: hello.scala:1:0 ------------------------------------------------------
+1 |
+  |^
+  |illegal combination of -rewrite targets: -old-syntax and -indent
+1 error found
+```
 
 Instead we have to rewrite syntax one step at a time.
 
