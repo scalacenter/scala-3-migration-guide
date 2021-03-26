@@ -3,8 +3,8 @@ import Versions._
 lazy val website = project
   .in(file("mdoc"))
   .settings(
-    skip.in(publish) := true,
-    mdoc := run.in(Compile).evaluated,
+    publish / skip := true,
+    mdoc := (Compile / run).evaluated,
     mdocVariables := Map(
       "scala30" -> scala30,
       "scala30Binary" -> scala30,
