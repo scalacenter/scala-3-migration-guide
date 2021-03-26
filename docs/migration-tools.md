@@ -29,7 +29,7 @@ The `-Xsource:3` option is intended to encourage early migration.
 
 ## Scala3-migrate
 
-[Scala3-migrate](Scala3-migrate-tool.md) has been designed to make the migration to scala 3 easier.
+[Scala3-migrate](scala3-migrate-tool.md) has been designed to make the migration to scala 3 easier.
 
 It proposes an incremental approach that can be described as follows:
 - Migrating the library dependencies: using Coursier, it checks, 
