@@ -6,7 +6,7 @@ lazy val `macro-cross-lib` = project
     scalaVersion := scala30,
     crossScalaVersions := Seq(scala213, scala30),
     libraryDependencies ++= {
-      if (isDotty.value) Seq()
+      if (scalaVersion.value.startsWith("3")) Seq()
       else Seq(
         "org.scala-lang" % "scala-reflect" % scalaVersion.value
       )
@@ -44,7 +44,7 @@ lazy val `macro-mix-app` = project
     scalaVersion := scala30,
     crossScalaVersions := Seq(scala213, scala30),
     scalacOptions ++= {
-      if (isDotty.value) Seq()
+      if (scalaVersion.value.startsWith("3")) Seq()
       else Seq("-Ytasty-reader")
     }
   )

@@ -11,7 +11,7 @@ lazy val `sbt-migration-tutorial` = project
       "com.lihaoyi" %% "sourcecode" % sourcecode
     ),
     scalacOptions ++= {
-      if (isDotty.value) Seq(
+      if (scalaVersion.value.startsWith("3")) Seq(
         "-encoding",
         "UTF-8",
         "-feature",
@@ -31,7 +31,7 @@ lazy val `sbt-migration-tutorial` = project
       )
     },
     scalacOptions ++= { 
-      if (isDotty.value) Seq("-source:3.0-migration")
+      if (scalaVersion.value.startsWith("3")) Seq("-source:3.0-migration")
       else Seq.empty
     }
   )
