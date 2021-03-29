@@ -4,8 +4,8 @@ title: Compatibility Reference
 ---
 Scala 3 is a game changer in terms of compatibility in the Scala ecosystem that will greatly improve the day-to-day experience of every Scala programmer, starting from the migration.
 
-In this page you will learn about the compatibility between Scala 2.13 and Scala 3 at different levels of the program lifetime.
-You will then find how to benefit from these levels of compatibility in concrete examples of dependencies between the two versions.
+In this page you will learn about the compatibility between Scala 2.13 and Scala 3 at different stages of the program lifetime.
+You will then find out how to benefit from these levels of compatibility in concrete examples of dependencies.
 
 ## Source Level
 
@@ -19,10 +19,11 @@ You can find a corpus of incompatibilities associated with their solutions in th
 There is an exception though, which is the new metaprogramming framework that replaces the Scala 2 experimental macros.
 Further explanations are given down below.
 
-Setting metaprogramming aside, a Scala 2.13 source code can rather easily be translated into Scala 3.
-Once you have it, you will be able to use the new powerful features of Scala 3, which have no equivalent in Scala 2.
-Obviously, by doing so the sources won't compiled in Scala 2.13 anymore.
-But amazingly, once compiled by Scala 3, this new module can be consumed as a dependency by the Scala 2.13 compiler.
+Metaprogramming aside, a Scala 2.13 source code can rather easily be ported to Scala 3.
+Once done, you will be able to use the new powerful features of Scala 3, which have no equivalent in Scala 2.
+The downside is those sources won't compile in Scala 2.13 anymore.
+But amazingly, this new Scala 3 artifact can be consumed as a dependency in Scala 2.13.
+
 As we will see in more detail, it permits forward compatibility on many new features, except the most exotic ones.
 This is a breakthrough in the Scala programming history.
 
@@ -77,7 +78,8 @@ More exotic features are not supported:
 
 You can have a Scala `@scala213@` module that depends on a Scala `@scala30@` module, and the latter can even depend on another Scala `@scala213@` module.
 
-In short, we have backward and forward compatibility and so **migration can happen gradually**: an application can jump to Scala 3 even if its dependencies are not fully ported to Scala 3.
+In short, we have backward and forward compatibility and so **migration can happen gradually**.
+An application can jump to Scala 3 even if its dependencies are not fully ported to Scala 3.
 
 > Using the intercompatibility between 2.13 and 3 is useful during the transition period of an application.
 > 
