@@ -53,6 +53,18 @@
       "scala-3-migrate-tool": {
         "title": "Scala3-migrate"
       },
+      "tooling/migration-tools": {
+        "title": "A Tour of the Migration Tools"
+      },
+      "tooling/scala-3-migrate-plugin": {
+        "title": "Scala 3 Migrate Plugin"
+      },
+      "tooling/scala-3-migration-mode": {
+        "title": "Scala 3 Migration Mode"
+      },
+      "tooling/scala-3-syntax-rewrites": {
+        "title": "Scala 3 Syntax Rewriting"
+      },
       "tutorials/sbt-migration": {
         "title": "Porting an sbt Project"
       },
@@ -66,11 +78,11 @@
       "GitHub": "GitHub"
     },
     "categories": {
-      "General": "General",
+      "Reference": "Reference",
+      "Tooling": "Tooling",
       "Tutorials": "Tutorials",
       "Incompatibilities": "Incompatibilities",
       "Macros": "Macros",
-      "Tools": "Tools",
       "External Resources": "External Resources"
     }
   },

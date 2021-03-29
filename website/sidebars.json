@@ -1,10 +1,13 @@
 {
   "docs": {
-    "General": [
-      "compatibility",
-      "migration-tools",
-      "scala-3-migration-mode",
-      "scala-3-syntax-rewriting"
+    "Reference": [
+      "compatibility"
+    ],
+    "Tooling": [
+      "tooling/migration-tools",
+      "tooling/scala-3-migration-mode",
+      "tooling/scala-3-migrate-plugin",
+      "tooling/scala-3-syntax-rewrites"
     ],
     "Tutorials": [
       "tutorials/sbt-migration",
@@ -21,9 +24,6 @@
       "macros/macro-libraries",
       "macros/metaprogramming",
       "macros/migration-tutorial"
-    ],
-    "Tools": [
-      "scala-3-migrate-tool"
     ],
     "External Resources": [
       "external-resources/moving-from-scala-2-to-scala-3"

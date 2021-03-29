@@ -1,14 +1,15 @@
 ---
 id: scala-3-migration-mode
-title: Scala 3.0 Migration Mode
+title: Scala 3 Migration Mode
 ---
 
-The Scala 3.0 compiler, has been carefully designed to ease the migration from Scala 2.13 to Scala 3.0.
-It comes with a handful of utilities to support you while porting a Scala 2.13 codebase to Scala 3.0.
-
-> The Scala 3.0 compiler binaries, containing the `scalac` command, can be downloaded from [Github](https://github.com/lampepfl/dotty/releases/).
+The Scala 3 compiler provides some helpful utilities to ease the migration from Scala 2.13 to Scala 3.
 
 Try running `scalac` to have a glimpse of those utilities:
+
+> The compiler binaries, containing the `scalac` command, can be downloaded from [Github](https://github.com/lampepfl/dotty/releases/).
+> 
+> It can also be installed using Coursier with `cs install scala3-compiler`, in which case the `scalac` command becomes `scala3-compiler`.
 
 ``` bash
 $ scalac
@@ -46,12 +47,12 @@ To do so you just need to compile again, this time with the `-source:3.0-migrati
 > - The rewrites are not applied if the code compiles in error.
 > - You cannot choose which rules are applied, the compiler runs all of them.
 
-You can refer to the [incompatibility table](incompatibilities/table.md) to see the list of Scala 3.0 migration rewrites.
+You can refer to the [incompatibility table](../incompatibilities/table.md) to see the list of Scala 3 migration rewrites.
 
 ## Error explanations
 
 The `-source:3.0-migration` mode handles many of the changed features but not all of them.
-In some cases you can have remaining errors due to incompatibilities between Scala 2.13 and Scala 3.0.
+In some cases you can have remaining errors due to incompatibilities between Scala 2.13 and Scala 3.
 The Scala 3 compiler can assist you by providing detailed explanations on them.
 You can enable this by using `-source:3.0-migration` in combination with `-explain` and/or `-explain-types`.
 

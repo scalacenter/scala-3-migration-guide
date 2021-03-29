@@ -1,26 +1,28 @@
 ---
-id: scala-3-migrate-tool
-title: Scala3-migrate
+id: scala-3-migrate-plugin
+title: Scala 3 Migrate Plugin
 ---
 
 ## Context
 
-Scala3-migrate tool is part of a series of initiatives to make the migration to Scala 3 as easy as possible.
-The goal is to provide a tool that will help you both migrate your build and your code to Scala 3.
-The solution consists of 3 independent steps that is packaged in an sbt plugin:
+The Scala 3 Migrate plugin is an initiative to make the migration to Scala 3 as easy as possible.
+The goal is to help you migrate your build and your code to Scala 3.
+The solution consists of 3 independent steps that are packaged in an sbt plugin:
 
-- migrate-libs: helps you update the list of `libraryDependencies`
-- migrate-scalacOptions: helps you update the list `scalacOptions`
-- migrate-syntax: fixes a number of syntax incompatibilites in scala 2.13 code
-- migrate: tries compiling your code in scala 3 by adding the minimum required inferred types and implicits.
+- `migrate-libs`: helps you update the list of `libraryDependencies`
+- `migrate-scalacOptions`: helps you update the list `scalacOptions`
+- `migrate-syntax`: fixes a number of syntax incompatibilites in Scala 2.13 code
+- `migrate`: tries compiling your code in Scala 3 by adding the minimum required inferred types and implicits.
 
 Each of this step is an sbt command that will be described in details in the following sections.
 
 > #### Requirements
-> - scala 2.13, preferred 2.13.5
+> - Scala 2.13, preferred 2.13.5
 > - sbt 1.4 or higher
 > - **Disclaimer:** This tool cannot migrate libraries containing macros.
-> - **Not implemented yet:** All commands right now work on Compile scope. Other configurations like `Test` still need to be supported
+> - **Not implemented yet:**
+>   All commands right now work on the `Compile` configuration.
+>   Other configurations like `Test` still need to be supported
 
 ## Installation
 
@@ -38,10 +40,11 @@ If your project contains more than one module, the first step is to choose which
 > Scala3-migrate operates on one module at a time. 
 > Make sure the module you choose is not an aggregate of projects. 
 
-Follow [this section to choose the first module](tutorials/sbt-migration.md#1---choose-a-module)
+Follow [this section to choose the first module](../tutorials/sbt-migration.md#1---choose-a-module)
 
 ## Migrate library dependencies
-> All the commands will be run in an sbt shell
+
+> All the commands must be run in an sbt shell
 
 **Usage:** `migrate-libs projectId` where projectId is the name of the module chosen to be migrated.
 
@@ -87,7 +90,7 @@ First, let's run the command and see the result.
 ```shell
 [info] com.softwaremill.scalamacrodebug:macros:0.4.1:test -> X : Contains Macros and is not yet published for 3.0.0-RC1
 ```
-Scala 2 macros cannot be executed by the Scala 3 compiler.
+Scala 2.13 macros cannot be executed by the Scala 3 compiler.
 So if you depend on a macro lib, you will need to wait until this library is published for Scala 3.
 
 ### Compiler plugins
@@ -96,13 +99,11 @@ So if you depend on a macro lib, you will need to wait until this library is pub
 [info] org.typelevel:kind-projector:0.11.0:plugin->default(compile) -> -Ykind-projector : This compiler plugin has a scalacOption equivalent. Add it to your scalacOptions
 ```
 
-`better-monadic-for` is a Scala 2 compiler plugin. 
-As explained in this [section](tutorials/sbt-migration.md#12---compiler-plugins), Scala 2 compiler plugins are not
-supported in Scala 3.
+`better-monadic-for` is a Scala 2.13 compiler plugin. 
+As explained [here](../tutorials/sbt-migration.md#12---compiler-plugins), Scala 2.13 compiler plugins are not supported in Scala 3.
 In this case, we need to remove `better-monadic-for` and fix the code to make it compile without the compiler plugin. 
 
-For `kind-projector`, which is also a Scala 2 compiler plugin, there is an equivalent scalacOption that
-can be added in your `scalacOptions`.
+For `kind-projector`, which is also a Scala 2.13 compiler plugin, there is an equivalent scalac option that can be added to your `scalacOptions`.
 
 ### Libraries that can be updated
 ```shell
@@ -114,7 +115,7 @@ can be added in your `scalacOptions`.
   which is the proposed version `2.4.2`. We can then update the build with this new version.
   
 - For `scalafix-rules`, there is no available version for Scala 3, but the library doesn't contain macro
-  and therefore the 2.13 version can be used as it is in scala 3. The syntax still needs to be updated from
+  and therefore the 2.13 version can be used as it is in Scala 3. The syntax still needs to be updated from
  `ch.epfl.scala" `**%%**` "scalafix-rules" % "0.9.26" % "test"` to `ch.epfl.scala" `**%**`"scalafix-rules_2.13" % "0.9.26" % "test"`
   where we explicitly specify the Scala version.
   
@@ -135,7 +136,7 @@ if the sbt's version is 1.3, or 1.4:
 [info] ch.epfl.scala:scalafix-interfaces:0.9.26 -> Valid
 ```
 Valid libraries are libraries than can be kept as they are. Those libraries are either already in the correct 
-version, because they are published in scala 3.0.0-RC1, or they are Java libraries. 
+version, because they are published in Scala 3.0.0-RC1, or they are Java libraries. 
 
 ### The new build after migrate-libs
 We use sbt `1.5.0-RC1` and we removed the macro library `"com.softwaremill.scalamacrodebug:macros"` from the libraryDependencies.
@@ -168,7 +169,7 @@ for Scala 3.
 **Usage:** `migrate-scalacOptions projectId` where projectId is the name of the module chosen to be migrated.
 
 First run the command `migrate-scalacOptions`.
-This command rely directly on this [section](tutorials/scalacoptions-migration.md).
+This command rely directly on this [section](../tutorials/scalacoptions-migration.md).
 ```scala
 > migrate-scalacOptions main
 [info]
@@ -227,7 +228,7 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
 
 #### Details
 - If you have set one of the options above in your build, for example `-P:semanticdb:synthetics:on`, 
-  you need to check if this option still exist for the scala 3 version of this plugin. In this case, `-P:semanticdb:synthetics:on`
+  you need to check if this option still exist for the Scala 3 version of this plugin. In this case, `-P:semanticdb:synthetics:on`
   has not been yet implemented in Scala 3 and need to be removed. 
 - `better-monadic-for` plugin is in the previous list because we haven't yet `reload` the build.
 - `migrate-scalacOptions`: in the previous step, `kind-projector` plugin has been replaced by a scalacOption when it's Scala 3, but 
@@ -237,7 +238,7 @@ for Scala 3. If the previous step is done correctly, you should not need to chan
   scala3-migrate (this tool). If semanticdb is added through `compilerPlugin` or `addCompilerPlugin`, it will
   be listed as a `libraryDependencies` when we execute `migrate-libs`. The support of SemanticDB is now shipped 
   into the Scala 3 compiler, and will be configured with the same setting: `semanticdbEnabled := true`. 
-  Scala3-migrate doesn't enable SemanticDB in scala 3 unless it's configured in the build.
+  Scala3-migrate doesn't enable SemanticDB in Scala 3 unless it's configured in the build.
   
 
 ### The new build after migrate-scalacOptions
@@ -260,7 +261,7 @@ The command `migrate-syntax` fixes some incompatibilities by applying the follow
 - fix.scala213.ExplicitNonNullaryApply
 - fix.scala213.Any2StringAdd
 
-For more information on the incompatibilities fixed, please read the [incomatibility section](incompatibilities/table.md).
+For more information on the incompatibilities fixed, please read the [incomatibility section](../incompatibilities/table.md).
 
 Let's run the command `migrate-syntax`. If there are changes after this command, it's better if you **create a commit for those.** 
 ```shell
@@ -287,7 +288,7 @@ Let's run the command `migrate-syntax`. If there are changes after this command,
 **Usage:** `migrate projectId` where projectId is the name of the module chosen to be migrated
 
 Scala 3 uses a new type inference algorithm, therefore the Scala 3.0 compiler can infer a different
-type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](incompatibilities/table.md#type-inference)). 
+type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](../incompatibilities/table.md#type-inference)). 
 This command goal is to find the necessary types to add in order to make you code compiles.
 
 If the libraries has not been ported correctly, running `migrage projectId` will fail reporting the problematic libraries.
