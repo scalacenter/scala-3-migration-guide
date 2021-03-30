@@ -1,4 +1,4 @@
-addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.18")
+addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.2.19")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.26")
 
 libraryDependencies ++= Seq(
