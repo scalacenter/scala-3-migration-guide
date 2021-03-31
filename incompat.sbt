@@ -109,7 +109,7 @@ lazy val otherIncompats = Seq[ProjectReference](
   abstractOverride,
   any2stringaddConversion,
   byNameParamTypeInfer,
-  defaultParamVariance,
+  variance,
   earlyInitializer,
   existentialType,
   wildcardArgument,
@@ -134,7 +134,7 @@ lazy val typeParamIdentifier = project.in(file("incompat-30/type-param-identifie
 lazy val abstractOverride = project.in(file("incompat-30/abstract-override")).incompat30Settings
 lazy val any2stringaddConversion = project.in(file("incompat-30/any2stringadd-conversion")).incompat30Settings
 lazy val byNameParamTypeInfer = project.in(file("incompat-30/by-name-param-type-infer")).incompat30Settings
-lazy val defaultParamVariance = project.in(file("incompat-30/default-param-variance")).incompat30Settings
+lazy val variance = project.in(file("incompat-30/variance")).incompat30Settings
 lazy val earlyInitializer = project.in(file("incompat-30/early-initializer")).incompat30Settings
 lazy val existentialType = project.in(file("incompat-30/existential-type")).incompat30Settings
 lazy val wildcardArgument = project.in(file("incompat-30/wildcard-argument")).incompat30Settings

@@ -12,9 +12,6 @@ title: Other Changed Features
 ```scala mdoc:file:incompat-30/by-name-param-type-infer/README.md
 ```
 
-```scala mdoc:file:incompat-30/default-param-variance/README.md
-```
-
 ```scala mdoc:file:incompat-30/explicit-call-to-unapply/README.md
 ```
 
@@ -28,6 +25,9 @@ title: Other Changed Features
 ```
 
 ```scala mdoc:file:incompat-30/case-class-companion/README.md
+```
+
+```scala mdoc:file:incompat-30/variance/README.md
 ```
 
 ```scala mdoc:file:incompat-30/pattern-match/README.md
