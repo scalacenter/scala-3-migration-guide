@@ -78,13 +78,13 @@ Some proven features are simplified or restricted to make the language easier an
 |[Inheritance shadowing](other-changed-features.md#inheritance-shadowing)||✅|||
 |[Abstract override](other-changed-features.md#abstract-override)|||||
 |[`ExprType` as value type](other-changed-features.md#exprtype-as-value-type)|||||
-|[Variance of default parameters](other-changed-features.md#variance-of-default-parameters)|||||
 |[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
 |[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
 |[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
-|[Unsoundess fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
+|[Unsoundness fixes in variance checks](other-changed-features.md#unsoundness-fixes-variance-checks)|||||
+|[Unsoundness fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
 
 ## Implicit Resolution
 
