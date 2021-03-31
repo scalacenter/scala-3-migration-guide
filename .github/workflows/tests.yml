@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
       - name: Test Incompatibilities 3.0
-        run: sbt '++3.0.0-RC1; incompat-30 / test; ++2.13.5; incompat-30 / test'
+        run: sbt '++3.0.0-RC2; incompat-30 / test; ++2.13.5; incompat-30 / test'
       - name: Test Incompatibilities 3.1
         run: sbt 'incompat-31 / test'
   macro:
@@ -26,9 +26,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
       - name: Test Cross Compilation
-        run: sbt '++3.0.0-RC1; macro-cross-app / run; ++2.13.5; macro-cross-app / run'
+        run: sbt '++3.0.0-RC2; macro-cross-app / run; ++2.13.5; macro-cross-app / run'
       - name: Test Mixing Definitions
-        run: sbt '++3.0.0-RC1; macro-mix-app / run; ++2.13.5; macro-mix-app / run'
+        run: sbt '++3.0.0-RC2; macro-mix-app / run; ++2.13.5; macro-mix-app / run'
   sbt-migration:
     name: Test sbt Migration
     runs-on: ubuntu-latest
@@ -38,4 +38,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
       - name: Test Cross Compilation
-        run: sbt '++3.0.0-RC1; sbt-migration-tutorial / run; ++2.13.5; sbt-migration-tutorial / run'
+        run: sbt '++3.0.0-RC2; sbt-migration-tutorial / run; ++2.13.5; sbt-migration-tutorial / run'
