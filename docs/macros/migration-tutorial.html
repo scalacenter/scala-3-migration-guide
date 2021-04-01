@@ -117,14 +117,14 @@ We can try it by creating an <code>app</code> module that calls the <code>locati
 <p>sbt <code>1.4.+</code> is required</p>
 </blockquote>
 <p>Let's try to compile our <code>app</code> module with Scala 3.0.
-First we add the <code>sbt-dotty</code> plugin in the <code>project/plugins.sbt</code> file, then we change the <code>scalaVersion</code> setting of <code>app</code> to <code>3.0.0-RC1</code>.</p>
+First we add the <code>sbt-dotty</code> plugin in the <code>project/plugins.sbt</code> file, then we change the <code>scalaVersion</code> setting of <code>app</code> to <code>3.0.0-RC2</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// project/plugins.sbt</span>
 addSbtPlugin(<span class="hljs-string">"ch.epfl.lamp"</span> % <span class="hljs-string">"sbt-dotty"</span> % <span class="hljs-string">"0.5.3"</span>)
 </code></pre>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> app = project
   .in(file(<span class="hljs-string">"app"</span>))
-  .settings(scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>)
+  .settings(scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>)
   .dependsOn(lib)
 </code></pre>
 <p>We reload our project and we try to compile.
@@ -177,7 +177,7 @@ You can go to the <a href="https://www.scala-sbt.org/1.x/docs/Cross-Build.html">
   .in(file(<span class="hljs-string">"lib"</span>))
   .settings(
     scalaVersion := <span class="hljs-string">"2.13.5"</span>,
-    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC1"</span>),
+    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC2"</span>),
     libraryDependencies ++= {
       <span class="hljs-keyword">if</span> (isDotty(scalaVersion.value)) <span class="hljs-type">Seq</span>()
       <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>(
@@ -188,7 +188,7 @@ You can go to the <a href="https://www.scala-sbt.org/1.x/docs/Cross-Build.html">
 </code></pre>
 <p>Note the dependency to <code>scala-reflect</code> becomes useless in Scala 3.0.
 We use the <code>isDotty</code> setting, provided by <code>sbt-dotty</code>, to create version specific list of dependencies.</p>
-<p>After reloading the sbt shell, we can easily load the Scala 3.0 version of the project by running <code>++3.0.0-RC1</code>.
+<p>After reloading the sbt shell, we can easily load the Scala 3.0 version of the project by running <code>++3.0.0-RC2</code>.
 Then we can go back to the Scala 2.13 version by running <code>++2.13.5</code>.</p>
 <p>The sbt <code>show lib / unmanagedSourceDirectories</code> command prints the list of available source directories:</p>
 <pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++2.13.5; show lib / unmanagedSourceDirectories</span>
@@ -196,14 +196,14 @@ Then we can go back to the Scala 2.13 version by running <code>++2.13.5</code>.<
 [info] * /location/lib/src/main/scala-2.13
 [info] * /location/lib/src/main/scala-2
 [info] * /location/lib/src/main/java
-<span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++3.0.0-RC1; show lib / unmanagedSourceDirectories</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> sbt: location&gt; ++3.0.0-RC2; show lib / unmanagedSourceDirectories</span>
 [info] * /location/lib/src/main/scala
-[info] * /location/lib/src/main/scala-3.0.0-RC1
+[info] * /location/lib/src/main/scala-3.0.0-RC2
 [info] * /location/lib/src/main/scala-3
 [info] * /location/lib/src/main/java
 </code></pre>
 <p>As we can see, an sbt project defines a shared <code>scala</code> source directory and some version-specific source directories.
-Some depend on the major version, <code>scala-2</code> and <code>scala-3</code>, and others depend on the precise binary version, <code>scala-2.13</code> and <code>scala-3.0.0-RC1</code>.</p>
+Some depend on the major version, <code>scala-2</code> and <code>scala-3</code>, and others depend on the precise binary version, <code>scala-2.13</code> and <code>scala-3.0.0-RC2</code>.</p>
 <p>Thus, we can organize our sources depending on their compatibility spectrum.
 A piece of code that is compatible and only compatible with all Scala 2 versions of the compiler must go to the <code>scala-2</code> directory.
 On the other hand, a piece of code that is specific to Scala 2.13 and does not compile with a Scala 2.12 version of the compiler must go to the <code>scala-2.13</code> directory.</p>
@@ -306,7 +306,7 @@ We call it <code>macroLib</code>.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> macroLib = project
   .in(file(<span class="hljs-string">"macro-lib"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>
+    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>
   )
   .dependsOn(lib)
 </code></pre>
@@ -315,7 +315,7 @@ We call it <code>macroLib</code>.</p>
   .in(file(<span class="hljs-string">"app"</span>))
   .settings(
     scalaVersion := <span class="hljs-string">"2.13.5"</span>,
-    crossScalaVersion := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC1"</span>) ,
+    crossScalaVersion := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC2"</span>) ,
     scalacOptions ++= {
       <span class="hljs-keyword">if</span> (isDotty.value) <span class="hljs-type">Seq</span>()
       <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>(<span class="hljs-string">"-Ytasty-reader"</span>)
@@ -387,8 +387,8 @@ Line 6 in /location/app/src/main/scala/app/Main.scala
 To answer this question we must remind ourselves that macros are executed at compile time.
 Here the Scala 3.0 implementation throws a <code>NotImplementedError</code>, hence the answer is no.
 We can try and see the exception being thrown at compile-time.</p>
-<pre><code class="hljs css language-shell">sbt: location&gt; ++3.0.0-RC1; app / run
-[info] compiling 1 Scala source to /loaction/app/target/scala-3.0.0-RC1/classes ...
+<pre><code class="hljs css language-shell">sbt: location&gt; ++3.0.0-RC2; app / run
+[info] compiling 1 Scala source to /loaction/app/target/scala-3.0.0-RC2/classes ...
 [error] -- Error: /location/app/src/main/scala/app/Main.scala:6:10 
 [error] 6 |  println(location)
 [error]   |          ^^^^^^^^
@@ -421,7 +421,7 @@ One needs to learn about the <a href="/scala-3-migration-guide/docs/macros/metap
     '{<span class="hljs-keyword">new</span> <span class="hljs-type">Location</span>($file, $line)}
 </code></pre>
 <p>The <code>app</code> module can now be compiled and executed in Scala 3:</p>
-<pre><code class="hljs">sbt: location&gt; ++3.0.0-RC1; <span class="hljs-keyword">app</span> / <span class="hljs-keyword">run</span>
+<pre><code class="hljs">sbt: location&gt; ++3.0.0-RC2; <span class="hljs-keyword">app</span> / <span class="hljs-keyword">run</span>
 [info] running <span class="hljs-keyword">app</span>.Main 
 <span class="hljs-keyword">Line</span> 6 <span class="hljs-keyword">in</span> /location/<span class="hljs-keyword">app</span>/src/main/<span class="hljs-keyword">scala</span>/<span class="hljs-keyword">app</span>/Main.<span class="hljs-keyword">scala</span>
 [info] <span class="hljs-keyword">app</span> / <span class="hljs-keyword">run</span> completed

@@ -117,7 +117,7 @@ But, for the purpose of migrating from Scala 2.13 to Scala 3, only the signature
 <li>Inline functions (including Scala 3 macros)</li>
 <li>Subtype kind polymorphism (upper bound <code>scala.AnyKind</code>)</li>
 </ul>
-<p>You can have a Scala <code>2.13.5</code> module that depends on a Scala <code>3.0.0-RC1</code> module, and the latter can even depend on another Scala <code>2.13.5</code> module.</p>
+<p>You can have a Scala <code>2.13.5</code> module that depends on a Scala <code>3.0.0-RC2</code> module, and the latter can even depend on another Scala <code>2.13.5</code> module.</p>
 <p>In short, we have backward and forward compatibility and so <strong>migration can happen gradually</strong>.
 An application can jump to Scala 3 even if its dependencies are not fully ported to Scala 3.</p>
 <blockquote>
@@ -152,7 +152,7 @@ A technique for declaring a Scala 2.13 macro in a Scala 3 artifact is exemplifie
 <p><img src="/scala-3-migration-guide/docs/assets/compatibility/3to2.svg" alt="Scala 3 module depending on a Scala 2.13 artifact"></p>
 <p>This diagram can be translated into sbt:</p>
 <pre><code class="hljs css language-scala">lazy val foo = project.in.file("foo")
-  .settings(scalaVersion := "3.0.0-RC1")
+  .settings(scalaVersion := "3.0.0-RC2")
   .dependsOn(bar)
 
 lazy val bar = project.in(file("bar"))
@@ -161,7 +161,7 @@ lazy val bar = project.in(file("bar"))
 <p>Or, in case <code>bar</code> is a published Scala 2.13 library, we can have:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> foo = project.in.file(<span class="hljs-string">"foo"</span>)
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>,
+    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>,
     libraryDependencies += (<span class="hljs-string">"org.bar"</span> %% <span class="hljs-string">"bar"</span> % <span class="hljs-string">"1.0.0"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
   )
 </code></pre>
@@ -182,12 +182,12 @@ It could be but it would be useless because, as we have seen, a Scala 3 module c
   .dependsOn(bar)
 
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> bar = project.in(file(<span class="hljs-string">"bar"</span>))
-  .settings(scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>)
+  .settings(scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>)
 </code></pre>
 <p>Or, in case <code>bar</code> is a published Scala 3 library:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> foo = project.in.file(<span class="hljs-string">"foo"</span>)
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC1"</span>,
+    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>,
     scalacOptions += <span class="hljs-string">"-Ytasty-reader"</span>,
     libraryDependencies += (<span class="hljs-string">"org.bar"</span> %% <span class="hljs-string">"bar"</span> % <span class="hljs-string">"1.0.0"</span>).cross(<span class="hljs-type">CrossVersion</span>.for2_13Use3)
   )
