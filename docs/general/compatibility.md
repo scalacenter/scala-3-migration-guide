@@ -14,7 +14,7 @@ Not all of it though, some constructs have been simplified, restricted or droppe
 However those decisions were made for good reasons and by taking care that a good workaround is possible.
 
 In general there is a straightforward cross-compiling solution for every incompatibility, so that the migration from Scala 2.13 to Scala 3 is easy and smooth.
-You can find a corpus of incompatibilities associated with their solutions in the [Incompatibility Table](incompatibilities/table.md).
+You can find a corpus of incompatibilities in the [next page](incompatibility-table.md).
 
 There is an exception though, which is the new metaprogramming framework that replaces the Scala 2 experimental macros.
 Further explanations are given down below.
@@ -110,7 +110,7 @@ It will stay compatible with the future versions of the Scala 3 compiler.
 But it is not compatible with the Scala 2.13 compiler, which does not fully support TASTy.
 
 In order to publish a common macro API for both languages you must provide both implementations.
-A technique for declaring a Scala 2.13 macro in a Scala 3 artifact is exemplified down below and it is further detailed in the [Macro Migration Tutorial](macros/migration-tutorial.md#mixing-macro-definitions) section.
+A technique for declaring a Scala 2.13 macro in a Scala 3 artifact is exemplified down below and it is further detailed in the [Macro Migration Tutorial](../macros/migration-tutorial.md#mixing-macro-definitions) section.
 
 ## Examples
 
@@ -209,7 +209,7 @@ But a Scala 2.13 module can depend on a Scala 3 artifact whose compilation has i
 
 A Scala 3 artifact can bear the declarations of a Scala 3 macro **and** its Scala 2.13 counterpart, next to one another.
 
-![Shared macro API in a Scala 3 artifact](assets/compatibility/sharedMacroAPI.svg)
+![Shared macro API in a Scala 3 artifact](../assets/compatibility/sharedMacroAPI.svg)
 
-You can learn this technique in the [Macro Migration Tutorial](macros/migration-tutorial.md#mixing-macro-definitions).
+You can learn this technique in the [Macro Migration Tutorial](../macros/migration-tutorial.md#mixing-macro-definitions).
 Another working example can be found in [this repository](https://github.com/scalacenter/mix-macros-scala-2-and-3).

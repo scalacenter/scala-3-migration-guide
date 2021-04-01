@@ -10,7 +10,7 @@ The goal is to help you migrate your build and your code to Scala 3.
 The solution consists of 3 independent steps that are packaged in an sbt plugin:
 
 - `migrate-libs`: helps you update the list of `libraryDependencies`
-- `migrate-scalacOptions`: helps you update the list `scalacOptions`
+- `migrate-scalacOptions`: helps you update the list of `scalacOptions`
 - `migrate-syntax`: fixes a number of syntax incompatibilites in Scala 2.13 code
 - `migrate`: tries compiling your code in Scala 3 by adding the minimum required inferred types and implicits.
 

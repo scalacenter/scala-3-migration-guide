@@ -99,12 +99,12 @@ const Compatibility = () => (
       {
         content:
           'Scala 3 has been carefully designed to improve the backward and forward compatibility of the Scala programming language.\n\n' +
-          `In the [Compatibility Reference](${docUrl('compatibility.html')}) ` +
-          'you will learn about the compatibility between Scala 2.13 and Scala 3.0 in the context of the migration.',
+          `In the [Compatibility Reference](${docUrl('general/compatibility.html')}) ` +
+          'you will learn about the compatibility between Scala 2.13 and Scala 3 in the context of the migration.',
         image: `${imgUrl('puzzle-primary.svg')}`,
         imageAlt: 'Icon made by Nikita Kozin from the Noun Project',
         imageAlign: 'left',
-        title: `[Compatibility Reference](${docUrl('compatibility.html')})`,
+        title: `[Compatibility](${docUrl('general/compatibility.html')})`,
       },
     ]}
   </Block>
@@ -115,9 +115,9 @@ const MigrationMode = () => (
     {[
       {
         content:
-          'The Scala 3 compiler is, in itself, a migration tool that can assist you while doing the migration.\n\n ' +
-          'No installation required, everything is in the compiler. ' + `Discover the [Scala 3 Migration Mode](${docUrl('scala-3-migration-mode.html')}).`,
-        title: `[Scala 3 Migration Mode](${docUrl('scala-3-migration-mode.html')})`,
+          'The Scala 3 compiler is, in itself, a powerfull migration tool that can assist you during the transition from Scala 2.13 to Scala 3.\n\n ' +
+          `Learn about the migration features of the tooling ecosystem in the [Migration Tools](${docUrl('tooling/migration-tools.html')}) section`,
+        title: `[Migration Tools](${docUrl('tooling/migration-tools.html')})`,
         image: `${imgUrl('tools-primary.svg')}`,
         imageAlt: 'Icon made by Maxime Kulikov from the Noun Project.',
         imageAlign: 'right',
@@ -133,10 +133,8 @@ const Metaprogramming = () => (
         content:
           'Scala 3 provides a toolbox full of metaprogramming features, which are safer, more robust, and much more stable than their counterparts in Scala 2. ' +
           'Implementing macro libraries in Scala 3 is simpler and the resulting libraries are easier to maintain across future versions of Scala. ' +
-          'The improvements come at a price: the metaprogramming facilities have been re-designed from the _ground up_. In consequence, existing macro libraries need to be ported to the new interfaces.\n\n' +
-          `In the [Macros](${docUrl('macros/metaprogramming.html')}) section, ` + 
-          'you will find helpful content to port your macros code to Scala 3.',
-        title: `[Porting Macros](${docUrl('macros/migration-tutorial.html')})`,
+          'The improvements come at a price: existing macro libraries need to be re-implemented.',
+        title: `[Metaprogramming](${docUrl('general/metaprogramming.html')})`,
         image: `${imgUrl('magnifying-primary.svg')}`,
         imageAlt: 'Icon made by Eucalyp from the Noun Project.',
         imageAlign: 'left',

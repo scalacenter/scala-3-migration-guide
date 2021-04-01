@@ -92,7 +92,7 @@ It proposes an incremental approach that can be described as follows:
   Scala 3 has a new type inference algorithm that may infer slightly different types than the Scala 2 inference.
   This last step explicits a minimum set of types to make the project compiles in Scala 3 without changing its runtime behavior.
 
-You can learn more in the [Scala 3 Migrate Plugin In Depth](scala-3-migrate-plugin.md) page.
+You can learn more in the [Scala 3 Migrate Plugin](scala-3-migrate-plugin.md) page.
 
 ## Scaladex
 

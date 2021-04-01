@@ -1,7 +1,9 @@
 {
   "docs": {
-    "Reference": [
-      "compatibility"
+    "General": [
+      "general/compatibility",
+      "general/incompatibility-table",
+      "general/metaprogramming"
     ],
     "Tooling": [
       "tooling/migration-tools",
@@ -14,7 +16,6 @@
       "tutorials/scalacoptions-migration"
     ],
     "Incompatibilities": [
-      "incompatibilities/table",
       "incompatibilities/syntactic-changes",
       "incompatibilities/dropped-features",
       "incompatibilities/contextual-abstractions",
@@ -22,7 +23,6 @@
     ],
     "Macros": [
       "macros/macro-libraries",
-      "macros/metaprogramming",
       "macros/migration-tutorial"
     ],
     "External Resources": [
