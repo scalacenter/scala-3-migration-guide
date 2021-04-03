@@ -47,7 +47,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check  fa-lg"/> | Since version `0.1.8` |
 | [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check  fa-lg"/> | Since version `1.2.0` |
 | [lihaoyi/utest](https://index.scala-lang.org/lihaoyi/utest) | <i class="fas fa-check  fa-lg"/> | Since version `0.7.3` |
-| [lloydmeta/enumeratum](https://github.com/lloydmeta/enumeratum) | <i class="fas fa-times fa-lg"/> | |
+| [lloydmeta/enumeratum](https://index.scala-lang.org/lloydmeta/enumeratum) | <i class="fas fa-times fa-lg"/> | |
 | [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <i class="fas fa-check  fa-lg"/> | Since version `1.10.0-M1` |
 | [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"/> | |
 | [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Shapeless 3<br/>Milestone available ([Early Preview](https://github.com/milessabin/shapeless/tree/shapeless-3)) |
@@ -62,7 +62,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <i class="fas fa-times fa-lg"/> | |
 | [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-times fa-lg"/> | |
 | [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-times fa-lg"/> | |
-| [scalalandio/chimney](https://github.com/scalalandio/chimney) | <i class="fas fa-times fa-lg"/> | |
+| [scalalandio/chimney](https://index.scala-lang.org//scalalandio/chimney) | <i class="fas fa-times fa-lg"/> | |
 | [scalameta/munit](https://index.scala-lang.org/scalameta/munit) | <i class="fas fa-check fa-lg"/> | Since `0.3.0` |
 | [scalatest/scalatest](https://index.scala-lang.org/scalatest/scalatest) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
 | [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
