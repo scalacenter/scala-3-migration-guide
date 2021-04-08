@@ -40,7 +40,7 @@ If your project contains more than one module, the first step is to choose which
 > Scala3-migrate operates on one module at a time. 
 > Make sure the module you choose is not an aggregate of projects. 
 
-Follow [this section to choose the first module](../tutorials/sbt-migration.md#1---choose-a-module)
+Follow [this section to choose the first module](../tutorials/sbt-migration.md#2-choose-a-module)
 
 ## Migrate library dependencies
 
@@ -100,7 +100,7 @@ So if you depend on a macro lib, you will need to wait until this library is pub
 ```
 
 `better-monadic-for` is a Scala 2.13 compiler plugin. 
-As explained [here](../tutorials/sbt-migration.md#12---compiler-plugins), Scala 2.13 compiler plugins are not supported in Scala 3.
+As explained [here](../tutorials/prerequisites.md#compiler-plugins), Scala 2.13 compiler plugins are not supported in Scala 3.
 In this case, we need to remove `better-monadic-for` and fix the code to make it compile without the compiler plugin. 
 
 For `kind-projector`, which is also a Scala 2.13 compiler plugin, there is an equivalent scalac option that can be added to your `scalacOptions`.
@@ -261,7 +261,7 @@ The command `migrate-syntax` fixes some incompatibilities by applying the follow
 - fix.scala213.ExplicitNonNullaryApply
 - fix.scala213.Any2StringAdd
 
-For more information on the incompatibilities fixed, please read the [incomatibility section](../incompatibilities/table.md).
+For more information on the fixed incompatibilities, please refer to the [incomatibility table](../general/incompatibility-table.md).
 
 Let's run the command `migrate-syntax`. If there are changes after this command, it's better if you **create a commit for those.** 
 ```shell
@@ -288,7 +288,7 @@ Let's run the command `migrate-syntax`. If there are changes after this command,
 **Usage:** `migrate projectId` where projectId is the name of the module chosen to be migrated
 
 Scala 3 uses a new type inference algorithm, therefore the Scala 3.0 compiler can infer a different
-type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](../incompatibilities/table.md#type-inference)). 
+type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](../general/incompatibility-table.md#type-inference)). 
 This command goal is to find the necessary types to add in order to make you code compiles.
 
 If the libraries has not been ported correctly, running `migrage projectId` will fail reporting the problematic libraries.

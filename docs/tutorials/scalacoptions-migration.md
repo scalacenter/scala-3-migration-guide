@@ -296,7 +296,7 @@ Warning and verbose settings have been introduced in 2.13. They are not yet impl
 
 ### 2. Compiler plugins
 There are two settings in Scala 3 that replace two compiler plugins in Scala 2.13.4.
-Read this [section](sbt-migration.md#12---compiler-plugins) for more information.
+Read this [section](prerequisites.md#compiler-plugins) for more information.
 
 | 2.13.4 | 3.0.x |
 |-|-|
