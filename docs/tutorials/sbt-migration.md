@@ -4,7 +4,7 @@ title: sbt Migration Tutorial
 ---
 
 > This tutorial is written for sbt.
-> Yet the approach is very similar for any other build tool, as long as it support Scala 3.
+> Yet the approach is very similar for any other build tool, as long as it supports Scala 3.
 
 Before jumping to Scala 3, make sure you are on the latest Scala 2.13.x and sbt 1.5.x versions.
 
