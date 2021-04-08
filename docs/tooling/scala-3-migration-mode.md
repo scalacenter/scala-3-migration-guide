@@ -47,7 +47,7 @@ To do so you just need to compile again, this time with the `-source:3.0-migrati
 > - The rewrites are not applied if the code compiles in error.
 > - You cannot choose which rules are applied, the compiler runs all of them.
 
-You can refer to the [incompatibility table](../incompatibilities/table.md) to see the list of Scala 3 migration rewrites.
+You can refer to the [incompatibility table](../general/incompatibility-table.md) to see the list of Scala 3 migration rewrites.
 
 ## Error explanations
 

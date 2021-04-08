@@ -11,7 +11,7 @@ In this page we propose a classification of the known incompatibilities.
 Each incompatibility is described by the following pieces of information:
  - Its short name with a link towards the detailed description and proposed solutions
  - Whether the Scala 2.13 compiler produces a deprecation or a feature warning
- - The existence of a [Scala 3 migration](../scala-3-migration-mode.md) rule for it
+ - The existence of a [Scala 3 migration](../tooling/scala-3-migration-mode.md) rule for it
  - The existence of a Scalafix rule that can fix it
 
 > #### Scala 2.13 deprecations and feature warnings
@@ -80,7 +80,7 @@ Some features are simplified or restricted to make the language easier and safer
 |[Reflective call](../incompatibilities/other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](../incompatibilities/other-changed-features.md#wildcard-type-argument)|||||
 |[Case class companion](../incompatibilities/other-changed-features.md#case-class-companion)|||||
-|[Unsoundness fixes in variance checks](other-changed-features.md#unsoundness-fixes-variance-checks)|||||
+|[Unsoundness fixes in variance checks](../incompatibilities/other-changed-features.md#unsoundness-fixes-in-variance-checks)|||||
 |[Unsoundness fixes in pattern matching](../incompatibilities/other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
 
 ### Implicit Resolution
@@ -107,7 +107,7 @@ This fundamental change in Scala 3 leads to a few incompatibilities:
 The Scala 3 compiler is not able to consume the Scala 2.13 macros.
 Under those circumstances it is necessary to re-implement the Scala 2.13 macros using the new Scala 3 metaprogramming features.
 
-You can go to the [Metaprogramming](../macros/metaprogramming.md) page to learn about the new metaprogramming features.
+You can go to the [Metaprogramming](metaprogramming.md) page to learn about the new metaprogramming features.
 To learn how to make a macro library available in Scala 3 you can follow the [Porting a Macro Library](../macros/migration-tutorial.md) tutorial.
 
 Some of the most used macro libraries have already been migrated to Scala 3.

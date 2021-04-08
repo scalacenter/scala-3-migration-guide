@@ -12,6 +12,7 @@
       "tooling/scala-3-syntax-rewrites"
     ],
     "Tutorials": [
+      "tutorials/prerequisites",
       "tutorials/sbt-migration",
       "tutorials/scalacoptions-migration"
     ],

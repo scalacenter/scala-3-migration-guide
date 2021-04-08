@@ -77,7 +77,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [zio/izumi-reflect](https:://index.scala-lang.org/zio/izumi-reflect) | <i class="fas fa-check fa-lg"/> | Does not yet support path-dependent type  |
 | [zio/zio](https://index.scala-lang.org/zio/zio) | <i class="fas fa-check fa-lg"/> | Since version [`1.0.4`](https://github.com/zio/zio/releases/tag/v1.0.4) |
 
-[Contributors welcome!](../contributing.md)
+If you find any macro library that is not listed here you are invited to [open an issue](https://github.com/scalacenter/scala-3-migration-guide/issues).
 
 ## Macro Annotations Libraries
 

@@ -140,7 +140,7 @@ It gives you the ability to:
 Similar cross-building mechanisms are provided by a number of build tools, among which sbt and Mill.
 You can go to the [sbt documentation](https://www.scala-sbt.org/1.x/docs/Cross-Build.html) or the [Mill documentation](https://www.lihaoyi.com/mill/page/cross-builds.html) to familiarize yourself with it.
 
-As we have seen in the [Compatibility Reference](../compatibility.md) page, Scala 2.13 and Scala 3.0 binaries are generally compatible, making the cross-building approach not needed in many cases.
+As we have seen in the [Compatibility Reference](../general/compatibility.md) page, Scala 2.13 and Scala 3.0 binaries are generally compatible, making the cross-building approach not needed in many cases.
 
 However it is still useful in those two cases:
 - Maintain support for Scala 2.12 and older versions
@@ -240,7 +240,7 @@ object Macros:
 This alone should make our `app` module compile in Scala 3.0.
 
 There is no magic formula to port a Scala 2 macro into Scala 3.
-One needs to learn about the available new [metaprogramming features](metaprogramming.md).
+One needs to learn about the available new [metaprogramming features](../general/metaprogramming.md).
 
 We eventually come up with this implementation:
 
@@ -278,7 +278,7 @@ A Scala 2.13 project must depend on the `lib_2.13` artifact whereas a Scala 3.0 
 
 ## Mixing Macro Definitions
 
-As it is explained in the [Compatibility Reference](../compatibility.md) page, the Scala 2.13 compiler can read the signatures of Scala 3.0 methods, and conversely the Scala 3.0 compiler can read the signatures of Scala 2.13 methods.
+As it is explained in the [Compatibility Reference](../general/compatibility.md) page, the Scala 2.13 compiler can read the signatures of Scala 3.0 methods, and conversely the Scala 3.0 compiler can read the signatures of Scala 2.13 methods.
 
 A Scala 2 macro implementation cannot be compiled by the Scala 3.0 compiler.
 However, there is nothing preventing the Scala 3.0 compiler from type checking a Scala 2 macro definition.
@@ -441,7 +441,7 @@ sbt: location> ++@scala30@; app / run
 ### 2 - Providing the Scala 3 implementation
 
 Again, there is no magic formula to port a Scala 2 macro into Scala 3.
-One needs to learn about the [new metaprogramming features](metaprogramming.md).
+One needs to learn about the [new metaprogramming features](../general/metaprogramming.md).
 
 We eventually come up with this implementation:
 
