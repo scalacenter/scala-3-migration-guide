@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Porting an sbt Project · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="In this tutorial we are going to walk through the migration of an sbt project:"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Porting an sbt Project · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="In this tutorial we are going to walk through the migration of an sbt project:"/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/general/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Tutorials</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/incompatibility-table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/metaprogramming.html">Metaprogramming</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tooling</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migrate-plugin.html">Scala 3 Migrate Plugin</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-syntax-rewrites.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">Porting an sbt Project</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">Porting the scalacOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Macros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/migration-tutorial.html">Porting a Macro Library</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">External Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>sbt Migration Tutorial · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; This tutorial is written for sbt."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="sbt Migration Tutorial · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="&gt; This tutorial is written for sbt."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/general/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Tutorials</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/incompatibility-table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/metaprogramming.html">Metaprogramming</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tooling</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migrate-plugin.html">Scala 3 Migrate Plugin</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-syntax-rewrites.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/prerequisites.html">Project Prerequisites</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">sbt Migration Tutorial</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">Porting the scalacOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Macros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/migration-tutorial.html">Porting a Macro Library</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">External Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,366 +54,180 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/tutorials/sbt-migration.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Porting an sbt Project</h1></header><article><div><span><p>In this tutorial we are going to walk through the migration of an sbt project:</p>
-<ol>
-<li><a href="#1---choose-a-module">Choose a module that is ready to migrate</a></li>
-<li><a href="#2---configure-sbt-for-scala-3">Configure sbt for Scala 3</a></li>
-<li><a href="#3---prepare-the-dependencies">Prepare the dependencies</a></li>
-<li><a href="#4---set-up-cross-building">Set up cross-building</a></li>
-<li><a href="#5---configure-the-scala-30-compiler">Configure the Scala 3 compiler</a></li>
-<li><a href="#6---solve-the-incompatibilities">Fix the incompatibilities</a></li>
-<li><a href="#7---finalize-the-migration">Finalize the migration</a></li>
-</ol>
-<blockquote>
-<p>The initial Scala version of the project must be 2.13.+</p>
-<p>sbt version 1.4.+ is required.</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/tutorials/sbt-migration.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">sbt Migration Tutorial</h1></header><article><div><span><blockquote>
+<p>This tutorial is written for sbt.
+Yet the approach is very similar for any other build tool, as long as it support Scala 3.</p>
 </blockquote>
-<h2><a class="anchor" aria-hidden="true" id="1---choose-a-module"></a><a href="#1---choose-a-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1 - Choose a Module</h2>
-<p>The <a href="../compatibility.md">Compatibility Reference</a> shows that the Scala 2.13 and Scala 3.0 binaries are compatible.
-Thanks to this we are able to migrate a project one module at a time, in any order.</p>
-<p>Therefore, the first step of the migration is to choose a single module that is going to be ported first.
-We will proceed with its migration then we will start again with another module.</p>
-<p>For some reason, we can even decide to partially migrate the project and let some parts be compiled by Scala 2.13.
-It would make no difference at runtime, since the Scala 2.13 and Scala 3 binary representations are the same.</p>
-<p>There are a few requirements that a module must meet before being ported:</p>
+<p>Before jumping to Scala 3, make sure you are on the latest Scala 2.13.x and sbt 1.5.x versions.</p>
+<p>We are going to walk through the required steps to port an entire project to Scala 3.</p>
 <ul>
-<li>It must not depend on a Scala 2 macro library that has not yet been ported to Scala 3.</li>
+<li><a href="#1-check-the-project-prerequisites">1. Check the project prerequisites</a></li>
+<li><a href="#2-choose-a-module">2. Choose a module</a></li>
+<li><a href="#3-set-up-cross-building">3. Set up cross-building</a></li>
+<li><a href="#4-prepare-the-dependencies">4. Prepare the dependencies</a></li>
+<li><a href="#5-configure-the-scala-3-compiler">5. Configure the Scala 3 Compiler</a></li>
+<li><a href="#6-solve-the-incompatibilities">6. Solve the Incompatibilities</a></li>
+<li><a href="#7-validate-the-migration">7. Validate the migration</a></li>
+<li><a href="#8-finalize-the-migration">8. Finalize the migration</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="1-check-the-project-prerequisites"></a><a href="#1-check-the-project-prerequisites" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Check the project prerequisites</h2>
+<p>Make sure your project is ready to be ported:</p>
+<ul>
+<li>It must not depend on a macro library that has not yet been ported to Scala 3.</li>
 <li>It must not use a compiler plugin that has no equivalent in Scala 3.</li>
 <li>It must not depend on <code>scala-reflect</code>.</li>
 </ul>
-<p>The following paragraphs explain how to check those requirements and, in case they are unmet, what needs to be done.</p>
-<p>If you are ready to proceed with the migration you can jump straight to the next part: <a href="#2---configure-sbt-for-scala-3">Configure sbt for Scala 3</a>.</p>
-<h3><a class="anchor" aria-hidden="true" id="11---macro-dependencies"></a><a href="#11---macro-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1.1 - Macro dependencies</h3>
-<p>The usage of Scala macro libraries is widespread in the Scala 2 ecosystem.
-We can mention as examples the following libraries:</p>
-<ul>
-<li><a href="https://index.scala-lang.org/lightbend/scala-logging">lightbend/scala-logging</a></li>
-<li><a href="https://index.scala-lang.org/milessabin/shapeless">milessabin/shapeless</a></li>
-<li><a href="https://index.scala-lang.org/playframework/play-json">playframework/play-json</a></li>
-<li><a href="https://index.scala-lang.org/scalatest/scalatest">scalatest/scalatest</a></li>
-</ul>
-<p>Many more macro libraries are listed in the <a href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a> page.</p>
-<p>When it comes to the migration to Scala 3, Scala 2 macros are problematic because they cannot be executed by the Scala 3 compiler.
-That is why you should make sure the macro libraries on which your project depend have been re-implemented in Scala 3.</p>
-<p>You can print the list of direct and transitive dependencies of an sbt project by running the <code>dependencyTree</code> task in an sbt shell.</p>
-<pre><code class="hljs css language-shell">sbt:example&gt; &lt;module&gt; / Test / dependencyTree
-</code></pre>
-<p>You can compare the printed result with the list of macro libraries in the <a href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a> page.</p>
-<p>Each macro library should be upgraded to a Scala 3 compatible version.
-If there is no such version, you are encouraged to get in touch with the macro library maintainers.</p>
-<p>If you find any macro library that is not listed in the present guide you are invited to <a href="https://github.com/scalacenter/scala-3-migration-guide/issues">open an issue</a>.
-By doing so you will help many others to migrate their projects.</p>
-<h4><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h4>
-<p>The dependency to <code>&quot;scalatest&quot; %% &quot;scalatest&quot; % &quot;3.0.9&quot;</code> must be upgraded because:</p>
-<ul>
-<li>The <code>scalatest</code> API is based on some macro definitions.</li>
-<li>The <code>3.0.9</code> version is not published for Scala 3.0.</li>
-</ul>
-<p>We can upgrade it to version <code>3.2.2</code>, which is cross-published in Scala 2.13 and Scala 3.0.</p>
-<pre><code class="hljs css language-scala">libraryDependency += <span class="hljs-string">"org.scalatest"</span> %% <span class="hljs-string">"scalatest"</span> % <span class="hljs-string">"3.2.2"</span>
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="12---compiler-plugins"></a><a href="#12---compiler-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1.2 - Compiler plugins</h3>
-<p>The Scala 2 compiler plugins are not compatible with Scala 3.</p>
-<p>Compiler plugins are generally configured in the build.sbt file by one of these settings:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
-libraryDependencies +=
-  compilerPlugin(<span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"kind-projector"</span> % <span class="hljs-string">"0.11.0"</span> cross <span class="hljs-type">CrossVersion</span>.full)
-
-addCompilerPlugin(<span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"kind-projector"</span> % <span class="hljs-string">"0.11.0"</span> cross <span class="hljs-type">CrossVersion</span>.full)
-
-scalacOptions += <span class="hljs-string">"-Xplugin:&lt;path-to-sxr&gt;/kind-projector_2.13.3-0.11.0.jar"</span>
-</code></pre>
-<p>Some compiler plugins may also be automatically added by an sbt plugin.</p>
-<p>You can find all configured compiler plugins by looking at the compiler options of your project.</p>
-<pre><code class="hljs css language-shell">sbt:example&gt; show example / Compile / scalacOptions
-[info] * -Xplugin:target/compiler_plugins/wartremover_2.13.5-2.4.12.jar
-[info] * -Xplugin:target/compiler_plugins/semanticdb-scalac_2.13.5-4.3.20.jar
-[info] * -Yrangepos
-[info] * -P:semanticdb:targetroot:/example/target/scala-2.13/meta
-</code></pre>
-<p>In the above example we can see that two compiler plugins are used: wartremover and semanticdb.
-To be able to compile to Scala 3 we must find alternatives or deactivate conditionally on Scala 3.
-Alternatives to some common compiler plugins are given below.</p>
-<h4><a class="anchor" aria-hidden="true" id="semanticdbhttpsscalametaorgdocssemanticdbguidehtml"></a><a href="#semanticdbhttpsscalametaorgdocssemanticdbguidehtml" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><a href="https://scalameta.org/docs/semanticdb/guide.html">SemanticDB</a></h4>
-<p>The support of SemanticDB is now shipped into the Scala 3 compiler:</p>
-<ul>
-<li>The <code>-Ysemanticdb</code> option activates the generation of semanticDB files.</li>
-<li>The <code>-semanticdb-target</code> option can be used to specify the output directory of semanticDB files.</li>
-</ul>
-<p>sbt is able to configure SemanticDB automatically, in accordance with the Scala version of the module.
-For doing so it takes only one setting: <code>semanticdbEnabled := true</code>.</p>
-<h4><a class="anchor" aria-hidden="true" id="scalajshttpswwwscala-jsorg"></a><a href="#scalajshttpswwwscala-jsorg" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><a href="https://www.scala-js.org/">Scala.js</a></h4>
-<p>The Scala.js compilation on Scala 3 does not rely on a compiler plugin anymore.</p>
-<p>To compile your Scala.js project in Scala 3 you need the <code>sbt-scalajs</code> plugin version <code>1.3.0</code> or higher.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// project/plugins.sbt</span>
-addSbtPlugin(<span class="hljs-string">"org.scala-js"</span> % <span class="hljs-string">"sbt-scalajs"</span> % <span class="hljs-string">"1.3.0"</span>)
-</code></pre>
-<h4><a class="anchor" aria-hidden="true" id="scala-nativehttpsscala-nativereadthedocsioenv039-docs"></a><a href="#scala-nativehttpsscala-nativereadthedocsioenv039-docs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><a href="https://scala-native.readthedocs.io/en/v0.3.9-docs/">Scala Native</a></h4>
-<p>Scala 3 does not yet support Scala Native.</p>
-<p>If you project is cross-built to Scala Native, you can still migrate it to Scala 3 but you have to deactivate the Scala Native compilation on Scala 3.
-How to? <a href="/scala-3-migration-guide/docs/contributing.html">Contribution welcome!</a></p>
-<h4><a class="anchor" aria-hidden="true" id="kind-projectorhttpsgithubcomtypelevelkind-projector"></a><a href="#kind-projectorhttpsgithubcomtypelevelkind-projector" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><a href="https://github.com/typelevel/kind-projector">Kind Projector</a></h4>
-<p>The <code>kind-projector</code> plugin is not available in Scala 3.</p>
-<p>However, Scala 3 introduces some features that makes <code>kind-projector</code> not needed in many cases:</p>
-<ul>
-<li><a href="http://dotty.epfl.ch/docs/reference/new-types/type-lambdas.html">Type Lambdas</a></li>
-<li><a href="http://dotty.epfl.ch/docs/reference/other-new-features/kind-polymorphism.html">Kind Polymorphism</a></li>
-<li>Poly Function</li>
-</ul>
-<p>Additionally, the <code>-Ykind-projector</code> compiler option allows the usage of <code>*</code> as a wildcard in type projections.</p>
-<h3><a class="anchor" aria-hidden="true" id="13---run-time-reflection"></a><a href="#13---run-time-reflection" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1.3 - Run-time reflection</h3>
-<p><code>scala-reflect</code> will not be ported to Scala 3 because it exposes Scala 2 compiler internals that do not exist in Scala 3.</p>
-<p>If your project depends on <code>scala-reflect</code>, or consumes instances of the <code>Manifest</code> class, it cannot be compiled by the Scala 3 compiler.
-To remedy this situation, you can try to re-implement the corresponding parts of the code, using Java reflection or the <a href="../macros/metaprogramming.md">Scala 3 metaprogramming features</a>.</p>
-<p>If <code>scala-reflect</code> is transitively added in the class path by a library, you probably need to upgrade that dependency to a Scala 3 compatible version of it.</p>
-<h2><a class="anchor" aria-hidden="true" id="2---configure-sbt-for-scala-3"></a><a href="#2---configure-sbt-for-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2 - Configure sbt for Scala 3</h2>
-<p>Support for Scala 3 in sbt is brought by the <code>sbt-dotty</code> plugin.</p>
-<p>This plugin provides sbt with the ability to invoke the Scala 3.0 compiler.</p>
-<p>To configure the plugin, we add this line in the <code>project/plugins.sbt</code> file.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// project/plugins.sbt</span>
-addSbtPlugin(<span class="hljs-string">"ch.epfl.lamp"</span> % <span class="hljs-string">"sbt-dotty"</span> % <span class="hljs-string">"0.5.3"</span>)
-</code></pre>
-<blockquote>
-<p>Don't forget to <code>reload</code> the sbt shell after each change in the <code>sbt</code> configuration files.</p>
-</blockquote>
-<h2><a class="anchor" aria-hidden="true" id="3---prepare-the-dependencies"></a><a href="#3---prepare-the-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3 - Prepare the dependencies</h2>
-<p>The fact that a Scala 3.0 module can depend on a Scala 2.13 artifact, and vice versa, is unprecedented in the history of the Scala language.
-As we will see, it gives a lot more flexibility in terms of dependency management.</p>
-<p>Using <code>%%</code> for dealing with Scala dependencies has been the norm for quite some time.
-A dependency on a Scala library is traditionally written:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
-libraryDependencies += <span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"cats-core"</span> % <span class="hljs-string">"2.1.1"</span>
-</code></pre>
-<p>The <code>%%</code> operator means that the library is dependent on the Scala version:</p>
-<ul>
-<li>if the Scala version is 2.12, the <code>cats-core_2.12-2.1.1.jar</code> artifact will be resolved</li>
-<li>if the Scala version is 2.13, the <code>cats-core_2.13-2.1.1.jar</code> artifact will be resolved</li>
-</ul>
-<p>But suppose I switch the <code>scalaVersion</code> from <code>2.13.5</code> to <code>3.0.0-RC2</code>.
-When I try to compile, sbt complains that <code>cats-core_3.0.0-RC2-2.1.1.jar</code> cannot be found.
-Of course it is right, yet I must be able to use <code>cats-core_2.13-2.1.1.jar</code> to compile to Scala 3.</p>
-<h3><a class="anchor" aria-hidden="true" id="31---a-scala-30-module-depending-on-a-scala-213-artifact"></a><a href="#31---a-scala-30-module-depending-on-a-scala-213-artifact" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3.1 - A Scala 3.0 module depending on a Scala 2.13 artifact</h3>
-<p>They are two ways to configure a Scala 3.0 module that depends on a Scala 2.13 artifact:</p>
-<ul>
-<li>We can precise the binary version manually:</li>
-</ul>
-<pre><code class="hljs css language-scala">libraryDependencies += <span class="hljs-string">"org.typelevel"</span> % <span class="hljs-string">"cats-core_2.13"</span> % <span class="hljs-string">"2.1.1"</span>
-</code></pre>
-<p>Note that the <code>%%</code> operator is replaced by the <code>%</code> operator.
-Otherwise sbt would try to resolve <code>cats-core_2.13_2.13-2.1.1</code> which is nonsense.</p>
-<ul>
-<li>We can use the <code>withDottyCompat</code> extension method brought by <code>sbt-dotty</code>:</li>
-</ul>
-<pre><code class="hljs css language-scala">libraryDependencies +=
-  (<span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"cats-core"</span> % <span class="hljs-string">"2.1.1"</span>).withDottyCompat(scalaVersion.value)
-</code></pre>
-<p>This method changes the behavior of the <code>%%</code> operator on Scala 3 versions only, as described in the below table:</p>
-<table>
-<thead>
-<tr><th>scalaVersion</th><th>binary version</th></tr>
-</thead>
-<tbody>
-<tr><td><code>2.12.x</code></td><td><code>_2.12</code></td></tr>
-<tr><td><code>2.13.x</code></td><td><code>_2.13</code></td></tr>
-<tr><td><code>3.0.x</code></td><td><code>_2.13</code></td></tr>
-</tbody>
-</table>
-<p>This is much useful in a repository that is cross-built on many versions.</p>
-<h3><a class="anchor" aria-hidden="true" id="32---a-scala-213-module-depending-on-a-scala-30-artifact"></a><a href="#32---a-scala-213-module-depending-on-a-scala-30-artifact" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3.2 - A Scala 2.13 module depending on a Scala 3.0 artifact</h3>
-<p>Conversely a Scala 2.13 module can depend on a Scala 3.0 artifact.</p>
-<blockquote>
-<h4><a class="anchor" aria-hidden="true" id="disclaimer"></a><a href="#disclaimer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Disclaimer</h4>
-<p>This is only be possible starting from Scala 2.13.4 and the `-Ytasty-reader compiler flag is required</p>
-</blockquote>
-<p>We can configure it so by specifying the binary version manually:</p>
-<pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"2.13.5"</span>
-scalacOptions += <span class="hljs-string">"-Ytasty-reader"</span>
-libraryDependencies += <span class="hljs-string">"org.typelevel"</span> % <span class="hljs-string">"cats-core_3.0.0-RC2"</span> % <span class="hljs-string">"2.3.0-M2"</span>
-</code></pre>
-<p>Again you can notice that the <code>%%</code> is not used.</p>
-<h3><a class="anchor" aria-hidden="true" id="33---macro-dependencies"></a><a href="#33---macro-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3.3 - Macro dependencies</h3>
-<p>Macro dependencies are still tied to a particular version of the compiler.
-In such case the <code>%%</code> operator is still very much relevant.</p>
-<p>For instance, the <code>sourcecode</code> library is a cross-published macro library and thus it can be configured this way:</p>
-<pre><code class="hljs css language-scala">libraryDependency += <span class="hljs-string">"com.lihaoyi"</span> %% <span class="hljs-string">"sourcecode"</span> % <span class="hljs-string">"0.2.4"</span>
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="34---what-about-scalajs-dependencies"></a><a href="#34---what-about-scalajs-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3.4 - What about Scala.js dependencies?</h3>
-<p>The <code>%%%</code> operator is used in Scala.js projects to automatically resolve artifacts, depending on the Scala and Scala.js versions.</p>
-<p>It can be combined with the <code>withDottyCompat</code> extension method, as in:</p>
-<pre><code class="hljs css language-scala">libraryDependencies +=
-  (<span class="hljs-string">"org.typelevel"</span> %%% <span class="hljs-string">"cats-core"</span> % <span class="hljs-string">"2.1.1"</span>).withDottyCompat(scalaVersion.value)
-</code></pre>
-<p>In a JS-only project, it would be possible to specify the Scala.js binary version manually:</p>
-<pre><code class="hljs css language-scala">libraryDependencies +=
-  <span class="hljs-string">"org.typelevel"</span> % <span class="hljs-string">"cats-core_sjs1_2.13"</span> % <span class="hljs-string">"2.1.1"</span>
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="35---summing-up"></a><a href="#35---summing-up" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3.5 - Summing up</h3>
-<p>An sbt project can use different dependency resolution strategies, based on the binary version of the targeted libraries.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
-<span class="hljs-keyword">val</span> foo = project
-  .settings(
-    crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC2"</span>)
-    libraryDependencies ++= <span class="hljs-type">Seq</span>(
-      <span class="hljs-string">"org.typelevel"</span> % <span class="hljs-string">"cats-core_2.13"</span> % <span class="hljs-string">"2.1.1"</span>,
-      <span class="hljs-string">"com.lihaoyi"</span> % <span class="hljs-string">"os-lib_3.0.0-RC2"</span> % <span class="hljs-string">"0.7.3"</span>,
-      <span class="hljs-string">"com.lihaoyi"</span> %% <span class="hljs-string">"sourcecode"</span> % <span class="hljs-string">"0.2.4"</span>
-    )
-  )
-</code></pre>
-<p>This sbt configuration is valid on both Scala <code>2.13.5</code> and Scala <code>3.0.0-RC2</code>.
-<em>(Not quite true, because <code>os-lib</code> and <code>sourcecode</code> are not yet published on <code>3.0.0-RC2</code>)</em></p>
-<p>The table below shows which artifacts are resolved depending on the Scala version:</p>
-<table>
-<thead>
-<tr><th>scalaVersion</th><th>cats-core</th><th>os-lib</th><th>sourcecode</th></tr>
-</thead>
-<tbody>
-<tr><td><code>2.13.5</code></td><td><code>_2.13</code></td><td><code>_3.0</code></td><td><code>_2.13</code></td></tr>
-<tr><td><code>3.0.0-RC2</code></td><td><code>_2.13</code></td><td><code>_3.0</code></td><td><code>_3.0</code></td></tr>
-</tbody>
-</table>
-<h2><a class="anchor" aria-hidden="true" id="4---set-up-cross-building"></a><a href="#4---set-up-cross-building" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4 - Set up cross-building</h2>
+<p>Those prerequisites are described in more details in the <a href="/scala-3-migration-guide/docs/tutorials/prerequisites.html">preceding page</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="2-choose-a-module"></a><a href="#2-choose-a-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Choose a module</h2>
+<p>Thanks to the interoperability between Scala 2.13 and Scala 3 you can start with any module.</p>
+<p>However it is probably simpler to start with a module that has fewer dependencies.</p>
+<p>If you use macro definitions or macros annotations internally you will have to port them first.</p>
+<h2><a class="anchor" aria-hidden="true" id="3-set-up-cross-building"></a><a href="#3-set-up-cross-building" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Set up cross-building</h2>
 <p>The two main challenges of the codebase migration are:</p>
 <ul>
 <li>Make the code compile</li>
 <li>Make sure that the run-time behavior is unchanged</li>
 </ul>
-<p>For doing so, we recommend the cross-building strategy, that is to make the code compile in Scala 3.0 while maintaining the compatibility with Scala 2.13.
-While this can be tricky sometime, it gives us the ability to fallback to 2.13 and run the tests at any stage of the migration.
-That way we can fix the incompatibilities one at a time and be confident that the run-time behavior is unchanged.</p>
-<p>Cross-building is easy to configure in sbt.
-In the project configuration we add:</p>
+<p>We recommend the cross-building strategy, that is to make the code compile in Scala 3 <strong>and</strong> Scala 2.13.</p>
+<p>The reason for this strategy is to be able to run the tests in Scala 2.13 after each fix and thus make sure that the runtime behavior is unchanged.
+This is crucial to avoid bugs that could happen when fixing the incompatibilities.</p>
+<p>Configuring cross-building ins sbt is as short as:</p>
 <pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>
 crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC2"</span>)
 </code></pre>
 <p>This configuration means:</p>
 <ul>
 <li>The default version is <code>3.0.0-RC2</code>.</li>
-<li>The <code>2.13.5</code>  can be loaded by <code>++2.13.5</code>.</li>
-<li>The <code>3.0.0-RC2</code> can be loaded by <code>++3.0.0-RC2</code>.</li>
+<li>2.13.5 can be loaded by the <code>++2.13.5</code> command.</li>
+<li>3.0.0-RC2 can be loaded by the <code>++3.0.0-RC2</code> command.</li>
 </ul>
-<p>Beware that <code>reload</code> will always load the default version.</p>
-<h2><a class="anchor" aria-hidden="true" id="5---configure-the-scala-30-compiler"></a><a href="#5---configure-the-scala-30-compiler" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5 - Configure the Scala 3.0 compiler</h2>
-<p>Between Scala 2.13 and Scala 3.0, the available compiler options are different:</p>
-<ul>
-<li>Some Scala 2.13 options are not supported by the Scala 3.0 compiler.</li>
-<li>New options are available to enable new features of the Scala 3.0 compiler.</li>
-</ul>
-<p>We basically need two lists of compiler options, one for Scala 2.13 and another one for Scala 3.0.</p>
-<p>Follow <a href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">this comparison table</a> in order to adapt the list of scalacOptions.</p>
-<p>The <code>isDotty</code> setting can be used to select the list of options corresponding to the current <code>scalaVersion</code>.
-Thus a typical <code>scalacOptions</code> configuration would look like this:</p>
+<p>Beware that the <code>reload</code> command will always load the default version.</p>
+<h2><a class="anchor" aria-hidden="true" id="4-prepare-the-dependencies"></a><a href="#4-prepare-the-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Prepare the dependencies</h2>
+<p>At this stage, if you run <code>compile</code>, it is likely that sbt complains about some dependencies being not found.
+That is because the declared version of the dependency is not published for Scala 3.</p>
+<p>You either need to upgrade to a newer version or to tell sbt to use the Scala 2.13 version of the library.</p>
+<p>You can find the Scala 3 versions of a library in <a href="https://index.scala-lang.org/">Scaladex</a>. To do so, the Version Matrix button can be particularly useful.</p>
+<blockquote>
+<p>When you change a library dependency, make sure to apply the same change in all modules of your project.</p>
+</blockquote>
+<ol>
+<li>If there exists a Scala 3 version of the library</li>
+</ol>
+<p>We strongly suggest to use one of the available versions.
+Make sure the one you choose does not bring any breaking change.</p>
+<ol start="2">
+<li>If no such version exists</li>
+</ol>
+<p>You can use the Scala 2.13 version of the library. The syntax is:</p>
+<pre><code class="hljs css language-scala">(<span class="hljs-string">"com.lihaoyi"</span> %% <span class="hljs-string">"os-lib"</span> % <span class="hljs-string">"0.7.3"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
+</code></pre>
+<p>Or for a Scala.js dependencies:</p>
+<pre><code class="hljs css language-scala">(<span class="hljs-string">"com.lihaoyi"</span> %%% <span class="hljs-string">"os-lib"</span> % <span class="hljs-string">"0.7.3"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
+</code></pre>
+<p>Once you have fixed all the unresolved dependencies, you can check that the tests are still passing in Scala 2.13:</p>
+<pre><code class="hljs css language-shell">sbt:example&gt; ++2.13.5
+sbt:example&gt; test
+...
+[success]
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="5-configure-the-scala-3-compiler"></a><a href="#5-configure-the-scala-3-compiler" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Configure the Scala 3 Compiler</h2>
+<p>The Scala 3 compiler options are different from the Scala 2.13 ones: some have been renamed, others are not yet supported.
+You can refer to the <a href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">Scalac Options Comparative</a> table to adapt your current list of <code>scalacOptions</code>.</p>
+<p>A typical configuration looks like this:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
 scalacOptions ++= {
-  <span class="hljs-keyword">if</span> (isDotty.value) <span class="hljs-type">Seq</span>(
+  <span class="hljs-type">Seq</span>(
     <span class="hljs-string">"-encoding"</span>,
     <span class="hljs-string">"UTF-8"</span>,
     <span class="hljs-string">"-feature"</span>,
-    <span class="hljs-string">"-unchecked"</span>,
-    <span class="hljs-string">"-language:implicitConversions"</span>
-    <span class="hljs-comment">// "-Xfatal-warnings" will be added after the migration</span>
-  ) <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>(
-    <span class="hljs-string">"-encoding"</span>,
-    <span class="hljs-string">"UTF-8"</span>,
-    <span class="hljs-string">"-feature"</span>,
-    <span class="hljs-string">"-deprecation"</span>,
     <span class="hljs-string">"-language:implicitConversions"</span>,
-    <span class="hljs-string">"-Xfatal-warnings"</span>,
-    <span class="hljs-string">"-Wunused:imports,privates,locals"</span>,
-    <span class="hljs-string">"-Wvalue-discard"</span>
-  )
+    <span class="hljs-comment">// "-Xfatal-warnings" disabled during the migration,</span>
+  ) ++ 
+    <span class="hljs-type">CrossVersion</span>.partialVersion(scalaVersion.value) <span class="hljs-keyword">match</span> {
+      <span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>((<span class="hljs-number">2</span>, <span class="hljs-number">13</span>)) =&gt; <span class="hljs-type">Seq</span>(
+        <span class="hljs-string">"-deprecation"</span>,
+        <span class="hljs-string">"-Xfatal-warnings"</span>,
+        <span class="hljs-string">"-Wunused:imports,privates,locals"</span>,
+        <span class="hljs-string">"-Wvalue-discard"</span>
+      )
+      <span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>((<span class="hljs-number">3</span>, _)) =&gt; <span class="hljs-type">Seq</span>(
+        <span class="hljs-string">"-unchecked"</span>,
+        <span class="hljs-string">"-source:3.0-migration"</span>
+      )
+    }
 }
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="51---migration-mode"></a><a href="#51---migration-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5.1 - Migration mode</h3>
-<p>The Scala 3.0 compiler has a migration mode that can assist us during the migration.
-It is described in details in the <a href="../scala-3-migration-mode.md">Scala 3.0 Migration Mode</a> page.</p>
-<p>To enable it we can add the <code>-source:3.0-migration</code> option:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
-scalacOptions ++= { 
-  <span class="hljs-keyword">if</span> (isDotty.value) <span class="hljs-type">Seq</span>(<span class="hljs-string">"-source:3.0-migration"</span>)
-  <span class="hljs-keyword">else</span> <span class="hljs-type">Seq</span>.empty
-}
-</code></pre>
+<p>Add the <code>-source:3.0-migration</code> option to turn on the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a>.</p>
 <blockquote>
-<p><code>-Xfatal-warnings</code> must be deactivated when in the migration mode</p>
+<p>Disable <code>-Xfatal-warnings</code> to take full advantage of the migration mode and the automatic rewrites.</p>
 </blockquote>
-<h2><a class="anchor" aria-hidden="true" id="6---solve-the-incompatibilities"></a><a href="#6---solve-the-incompatibilities" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6 - Solve the Incompatibilities</h2>
-<h3><a class="anchor" aria-hidden="true" id="61---compilation"></a><a href="#61---compilation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6.1 - Compilation</h3>
-<p>It is now time to try compiling in Scala 3.0:</p>
+<h2><a class="anchor" aria-hidden="true" id="6-solve-the-incompatibilities"></a><a href="#6-solve-the-incompatibilities" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6. Solve the Incompatibilities</h2>
+<p>It is now time to try compiling in Scala 3:</p>
 <pre><code class="hljs css language-shell">sbt:example&gt; ++3.0.0-RC2
 [info] Setting Scala version to 3.0.0-RC2 on 1 project.
 ...
-sbt:example&gt; &lt;module&gt; / Test / compile
+sbt:example&gt; &lt;project&gt; / compile
 ...
+sbt:example&gt; &lt;project&gt; / Test / compile
 </code></pre>
 <blockquote>
-<p>The <code>&lt;module&gt; / compile</code> task only compiles the <code>main</code> code.
+<p><code>&lt;project&gt; / compile</code> compiles the <code>main</code> sources.
 It is strictly equivalent to <code>&lt;module&gt; / Compile / compile</code>.</p>
-<p>To run the <code>main</code> and the <code>test</code> code, use the <code>&lt;module&gt; / Test / compile</code> task instead.</p>
+<p><code>&lt;project&gt; / Test / compile</code> compiles the <code>test</code> sources.</p>
 </blockquote>
-<p>The compiler produces different kind of diagnosis:</p>
+<p>The compiler produces diagnostics of two different levels:</p>
 <ul>
-<li>Error: Some valid pieces of Scala 2.13 code cannot be compiled anymore.
-There are various reasons for those errors, that are given in the <a href="../incompatibilities/table.md">Incompatibility Table</a>.</li>
-<li>Migration Warning: In migration mode, the Scala 3.0 compiler detects that a valid Scala 2.13 code is not valid anymore.
-It does however compile it, and it will even able to patch the code, when invoked with the <code>-rewrite</code> option.</li>
-<li>Warning: The Scala 3.0 compiler can emit more warnings than the Scala 2 compiler.</li>
+<li><em>Error</em>: A piece of code cannot be compiled anymore.
+There are various reasons for those errors, that are given in the <a href="/scala-3-migration-guide/docs/general/incompatibility-table.html">Incompatibility Table</a>.</li>
+<li><em>Migration Warning</em>: These warnings can be automatically patched by the compiler with the <code>-rewrite</code> option.</li>
 </ul>
-<p>For all kind of errors, except for macros, there exists a solution that cross-compiles in Scala 2.13 and Scala 3.0.
-The <a href="../incompatibilities/table.md">Incompatibility Table</a> will help you to fix them.</p>
+<p>For each error you can find the corresponding incompatibility in the <a href="/scala-3-migration-guide/docs/general/incompatibility-table.html">Incompatibility Table</a>.
+You will then find a description and a proposed solution.</p>
 <blockquote>
-<p>The macros errors can be silented by the <code>-Xignore-scala2-macros</code> option.</p>
+<p>The metaprogramming incompatibilities cannot be easily solved.
+A lot of code must be rewritten from the ground up.</p>
 </blockquote>
-<p>After fixing an incompatibility, you are advised to go back to Scala 2.13 to validate the solution against the tests.</p>
+<p>After fixing an incompatibility, you can validate the solution in Scala 2.13 by running the tests.</p>
 <pre><code class="hljs css language-shell">sbt:example&gt; ++2.13.5
 [info] Setting Scala version to 2.13.5 on 1 project.
 ...
-sbt:example&gt; &lt;module&gt; / test
+sbt:example&gt; &lt;project&gt; / test
 ...
 [success]
 </code></pre>
 <p>Consider committing your changes regularly.</p>
-<p>Once you got no more errors you can ask the compiler to patch the migration warnings.
+<p>Once you have fixed all the errors you should be able to compile succesfully.
+Only the migration warnings are remaining.
+The compiler can automatically patch them.
 Add the <code>-rewrite</code> compiler option, and compile one more time:</p>
 <pre><code class="hljs css language-shell">sbt:example&gt; ++3.0.0-RC2
 [info] Setting Scala version to 3.0.0-RC2 on 1 project.
 ...
-sbt:example&gt; set &lt;module&gt; / scalacOptions += "-rewrite"
-[info] Defining &lt;module&gt; / scalacOptions
+sbt:example&gt; set &lt;project&gt; / scalacOptions += "-rewrite"
+[info] Defining &lt;project&gt; / scalacOptions
 ...
-sbt:example&gt; &lt;module&gt; / Test / compile
+sbt:example&gt; &lt;project&gt; / compile
 ...
 [info] [patched file /example/src/main/scala/app/Main.scala]
 [warn] two warnings found
 [success]
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="62---macro-re-implementation"></a><a href="#62---macro-re-implementation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6.2 - Macro Re-implementation</h3>
-<p>Scala 2 macros must be re-implemented in Scala 3.
-You can learn about the new Scala 3 metaprogramming features in the <a href="../macros/metaprogramming.md">Metaprogramming in Scala 3</a> page.</p>
-<p>If you want to maintain the compatibility to Scala 2.13 you can follow the tutorial on <a href="/scala-3-migration-guide/docs/macros/migration-tutorial.html">Porting a Macro Library</a>.</p>
-<h3><a class="anchor" aria-hidden="true" id="63---run-time"></a><a href="#63---run-time" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6.3 - Run Time</h3>
+<p>You can remove the <code>-source:3.0-migration</code> option, also add the <code>-Xfatal-warnings</code> option again if you want to.
+Remember to reload.</p>
+<h2><a class="anchor" aria-hidden="true" id="7-validate-the-migration"></a><a href="#7-validate-the-migration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>7. Validate the migration</h2>
 <p>On rare occasions, different implicit values could possibly be resolved and alter the runtime behavior of the program.
 Good tests are the only guarantee to prevent such bugs from going unnoticed.</p>
-<h2><a class="anchor" aria-hidden="true" id="7---finalize-the-migration"></a><a href="#7---finalize-the-migration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>7 - Finalize the migration</h2>
-<p>In the <code>build.sbt</code> remove the <code>-source:3.0-migration</code> configuration.
-You can also add the <code>-Xfatal-warnings</code> if you want to.</p>
-<p>Reload sbt and try to compile and test all projects.</p>
-<pre><code class="hljs css language-shell">sbt:example&gt; reload
-...
-sbt:example&gt; test
+<p>Run the tests with Scala 3.</p>
+<pre><code class="hljs css language-shell">sbt:example&gt; &lt;project&gt; / test
 ...
 [success]
 </code></pre>
-<p>Congratulations! You have successfully ported a module to Scala 3.0.</p>
-<p>You can choose to keep the Scala 2.13 settings as a precaution, or you can remove the <code>crossScalaVersions</code> setting and the Scala 2.13 <code>scalacOptions</code>.</p>
-<p>Even if you drop the Scala 2.13 compilation in this module, others Scala 2.13 modules will still be able to depend on it by using the <code>-Ytasty-reader</code>.</p>
-<blockquote>
-<p>The Tasty reader compatible features will soon be listed in this guide.
-Stay tuned to <a href="https://github.com/scalacenter/scala-3-migration-guide/issues/77">#77</a>.</p>
-</blockquote>
-<p>Here ends our walk through the migration of a Scala module.
-The process can be repeated for each modules, until the project is fully migrated to Scala 3.0.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/tooling/scala-3-syntax-rewrites.html"><span class="arrow-prev">← </span><span>Scala 3 Syntax Rewriting</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html"><span class="function-name-prevnext">Porting the scalacOptions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#1---choose-a-module">1 - Choose a Module</a><ul class="toc-headings"><li><a href="#11---macro-dependencies">1.1 - Macro dependencies</a></li><li><a href="#12---compiler-plugins">1.2 - Compiler plugins</a></li><li><a href="#13---run-time-reflection">1.3 - Run-time reflection</a></li></ul></li><li><a href="#2---configure-sbt-for-scala-3">2 - Configure sbt for Scala 3</a></li><li><a href="#3---prepare-the-dependencies">3 - Prepare the dependencies</a><ul class="toc-headings"><li><a href="#31---a-scala-30-module-depending-on-a-scala-213-artifact">3.1 - A Scala 3.0 module depending on a Scala 2.13 artifact</a></li><li><a href="#32---a-scala-213-module-depending-on-a-scala-30-artifact">3.2 - A Scala 2.13 module depending on a Scala 3.0 artifact</a></li><li><a href="#33---macro-dependencies">3.3 - Macro dependencies</a></li><li><a href="#34---what-about-scalajs-dependencies">3.4 - What about Scala.js dependencies?</a></li><li><a href="#35---summing-up">3.5 - Summing up</a></li></ul></li><li><a href="#4---set-up-cross-building">4 - Set up cross-building</a></li><li><a href="#5---configure-the-scala-30-compiler">5 - Configure the Scala 3.0 compiler</a><ul class="toc-headings"><li><a href="#51---migration-mode">5.1 - Migration mode</a></li></ul></li><li><a href="#6---solve-the-incompatibilities">6 - Solve the Incompatibilities</a><ul class="toc-headings"><li><a href="#61---compilation">6.1 - Compilation</a></li><li><a href="#62---macro-re-implementation">6.2 - Macro Re-implementation</a></li><li><a href="#63---run-time">6.3 - Run Time</a></li></ul></li><li><a href="#7---finalize-the-migration">7 - Finalize the migration</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+<h2><a class="anchor" aria-hidden="true" id="8-finalize-the-migration"></a><a href="#8-finalize-the-migration" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>8. Finalize the migration</h2>
+<p>Congratulations! You have successfully ported a module to Scala 3.
+The same process can be repeated for each module, until the project is fully migrated to Scala 3.</p>
+<p>You can keep or drop the Scala 2.13 cross-building settings depending on whether you want to cross-publish your library or not.</p>
+<p>Here ends our walk through the migration of an sbt project.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/tutorials/prerequisites.html"><span class="arrow-prev">← </span><span>Project Prerequisites</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html"><span class="function-name-prevnext">Porting the scalacOptions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#1-check-the-project-prerequisites">1. Check the project prerequisites</a></li><li><a href="#2-choose-a-module">2. Choose a module</a></li><li><a href="#3-set-up-cross-building">3. Set up cross-building</a></li><li><a href="#4-prepare-the-dependencies">4. Prepare the dependencies</a></li><li><a href="#5-configure-the-scala-3-compiler">5. Configure the Scala 3 Compiler</a></li><li><a href="#6-solve-the-incompatibilities">6. Solve the Incompatibilities</a></li><li><a href="#7-validate-the-migration">7. Validate the migration</a></li><li><a href="#8-finalize-the-migration">8. Finalize the migration</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
                 /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
                 /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
