@@ -65,9 +65,9 @@ object Macros:
 
 ## 2. The Scala 2 implementation
 
-The Scala 3 compiler can compile a Scala 2 macro implementation if it does not contain any quasiquote or reification.
+The Scala 3 compiler can compile a Scala 2 macro implementation if it contains no quasiquote or reification.
 
-For instance this code does compile in Scala 3 and you can put it alongside the definition and Scala 3 implementation.
+For instance this piece of code does compile in Scala 3, and so you can put it alongside the Scala 3 implementation.
 ```scala
 import scala.reflect.macros.blackbox.Context
 

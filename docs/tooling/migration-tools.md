@@ -19,7 +19,7 @@ The `-Xsource:3` option is intended to encourage early migration.
 Similarly the Scala 3 compiler comes with the `-source:3.0-migration` option.
 When activated the compiler accepts some Scala 2.13 syntax and it issues warnings where changes are needed.
 
-Even more than that, it can be combined with `-rewrite` to rewrite your code automatically.
+Even more than that, it can be combined with `-rewrite` to patch your code automatically.
 
 You can learn more about it in the [Scala 3 Migration Mode](scala-3-migration-mode.md) page.
 
@@ -27,8 +27,8 @@ You can learn more about it in the [Scala 3 Migration Mode](scala-3-migration-mo
 
 ### sbt
 
-> The sbt-dotty plugin was needed in sbt 1.4 to get support for Scala 3.
-> It is deprecated in sbt 1.5.
+> The `sbt-dotty` plugin was needed in sbt 1.4 to get support for Scala 3.
+> It has been deprecated by sbt 1.5.
 
 sbt 1.5 supports Scala 3 out-of-the-box.
 All common tasks and settings are intended to work the same.
@@ -37,20 +37,22 @@ Many plugins should also work exactly the same.
 To help with the migration, sbt 1.5 introduces new Scala 3 specific cross versions:
 
 ```scala
-// build.sbt
+// Use a Scala 2.13 library in Scala 3
 libraryDependency += ("org.foo" %% "foo" % "1.0.0").cross(CrossVersion.for3Use2_13)
+
+// Use a Scala 3 library in Scala 2.13 
 libraryDependency += ("org.bar" %% "bar" % "1.0.0").cross(CrossVersion.for2_13Use3)
 ```
 
 ### Mill
 
-Mill 0.9.3 or greater supports Scala 3.
+[Mill](https://github.com/com-lihaoyi/mill) 0.9.3 or greater supports Scala 3.
 
 ## Code editors and IDEs
 
 ### Metals
 
-Metals is a Scala language server that works with VS Code, Vim, Emacs, Sublime Text and Eclipse.
+[Metals](https://scalameta.org/metals/) is a Scala language server that works with VS Code, Vim, Emacs, Sublime Text and Eclipse.
 
 Scala 3 is already very well supported by Metals.
 Some minor adjustements for the new syntax changes and new features are coming. 
@@ -66,15 +68,15 @@ Full-fledged support is being worked on by the team at JetBrains.
 
 [Scalafix](https://scalacenter.github.io/scalafix/) is a refactoring tool for Scala.
 
-The following incompatibilities can be solved with the corresponding Scalafix rules:
+Some Scala 3 incompatibilities can be solved with the following Scalafix rules:
 - Procedure Syntax: `ProcedureSyntax`
 - Value Eta-Expansion: `fix.scala213.ExplicitNullaryEtaExpansion` in [scala/scala-rewrites](https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/ExplicitNullaryEtaExpansion.scala)
 - Parentheses Around Lambda Paramter: `fix.scala213.ParensAroundLambda` in [ohze/scala-rewrites](https://github.com/ohze/scala-rewrites/blob/dotty/rewrites/src/main/scala/fix/scala213/ParensAroundLambda.scala)
 - Auto Application: `fix.scala213.ExplicitNonNullaryApply` in [scala/scala-rewrites](https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/ExplicitNonNullaryApply.scala)
 - `any2stringadd` Conversion: `fix.scala213.Any2StringAdd` in [scala/scala-rewrites](https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/Any2StringAdd.scala)
 
-You can apply some of these rules using the `sbt-scalafix` plugin.
-Or you can use the all-in-one `sbt-scala3-migrate` plugin described below.
+You can apply these rules using the `sbt-scalafix` plugin.
+Those rules can also be applied automatically by the all-in-one `sbt-scala3-migrate` plugin described below.
 
 ### Scala 3 Migrate Plugin
 

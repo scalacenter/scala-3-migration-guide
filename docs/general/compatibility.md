@@ -115,9 +115,9 @@ This is described in the [Cross-Building Macros](../tutorials/macro-cross-buildi
 An other technique, that is made possible by Scala 3, is described in the [Mixing Macros](../tutorials/macro-mixing.md) tutorial.
 It consists of mixing the Scala 2.13 and Scala 3 macro definitions in the same Scala 3 artifact.
 
-## Examples
+## Examples of Dependencies
 
-> sbt `1.5.0` is required
+> sbt 1.5.0 or higher is required
 
 ### A Scala 3 module depending on a Scala 2.13 artifact
 
