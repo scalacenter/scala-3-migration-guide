@@ -89,33 +89,33 @@ But, for the purpose of migrating from Scala 2.13 to Scala 3, only the signature
 </blockquote>
 <p>It supports all the traditional constructs as well as the following new features:</p>
 <ul>
-<li>Enumerations</li>
-<li>Intersection types</li>
-<li>Opaque type aliases</li>
-<li>Type lambdas</li>
-<li>New syntax for contextual abstractions</li>
-<li>Inheritance of open classes and super traits</li>
-<li>Exported definitions</li>
+<li><a href="http://dotty.epfl.ch/docs/reference/enums/enums.html">Enumerations</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Intersection Types</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/other-new-features/opaques.html">Opaque Type Aliases</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/new-types/type-lambdas.html">Type Lambdas</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/contextual/motivation.html">Contextual Abstractions</a> (new syntax)</li>
+<li><a href="http://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html">Open Classes</a> (and inheritance of super traits)</li>
+<li><a href="http://dotty.epfl.ch/docs/reference/other-new-features/export.html">Export Clauses</a></li>
 </ul>
 <p>We have limited support on:</p>
 <ul>
-<li>Top level definitions</li>
-<li>Extension methods</li>
+<li><a href="http://dotty.epfl.ch/docs/reference/dropped-features/package-objects.html">Top-Level Definitions</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">Extension Methods</a></li>
 </ul>
 <p>More exotic features are not supported:</p>
 <ul>
-<li>Context functions</li>
-<li>Polymorphic function types</li>
-<li>Trait parameters</li>
-<li><code>@static</code> annotation</li>
-<li><code>@alpha</code> annotation</li>
-<li>Functions and Tuples larger than 22 parameters</li>
+<li><a href="http://dotty.epfl.ch/docs/reference/contextual/context-functions.html">Context Functions</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/new-types/polymorphic-function-types.html">Polymorphic Function Types</a></li>
+<li><a href="http://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">Trait Parameters</a></li>
+<li><code>@static</code> Annotation</li>
+<li><code>@alpha</code> Annotation</li>
+<li><a href="https://dotty.epfl.ch/docs/reference/dropped-features/limit22.html">Functions and Tuples larger than 22 parameters</a></li>
 <li>Reference to <code>scala.Tuple</code> and <code>scala.*:</code></li>
-<li>Match types</li>
-<li>Union types</li>
-<li>Multiversal equality constraints unless explicit</li>
-<li>Inline functions (including Scala 3 macros)</li>
-<li>Subtype kind polymorphism (upper bound <code>scala.AnyKind</code>)</li>
+<li><a href="https://dotty.epfl.ch/docs/reference/new-types/match-types.html">Match Types</a></li>
+<li><a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">Union Types</a></li>
+<li><a href="https://dotty.epfl.ch/docs/reference/contextual/multiversal-equality.html">Multiversal Equality</a> (unless explicit)</li>
+<li><a href="https://dotty.epfl.ch/docs/reference/metaprogramming/inline.html">Inline</a> (including Scala 3 macros)</li>
+<li><a href="https://dotty.epfl.ch/docs/reference/other-new-features/kind-polymorphism.html">Kind Polymorphism</a> (the <code>scala.AnyKind</code> upper bound)</li>
 </ul>
 <p>You can have a Scala <code>2.13.5</code> module that depends on a Scala <code>3.0.0-RC2</code> module, and the latter can even depend on another Scala <code>2.13.5</code> module.</p>
 <p>In short, we have backward and forward compatibility and so <strong>migration can happen gradually</strong>.
