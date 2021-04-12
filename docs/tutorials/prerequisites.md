@@ -108,8 +108,8 @@ A subset of [the Kind Projector](https://github.com/typelevel/kind-projector) sy
 
 Additionaly, we now have the following features that make `kind-projector` not needed in many cases:
 - [Type Lambdas](http://dotty.epfl.ch/docs/reference/new-types/type-lambdas.html)
+- [Polymorphic Functions](http://dotty.epfl.ch/docs/reference/new-types/polymorphic-function-types.html)
 - [Kind Polymorphism](http://dotty.epfl.ch/docs/reference/other-new-features/kind-polymorphism.html)
-- Poly Function
 
 ### Run-time reflection
 

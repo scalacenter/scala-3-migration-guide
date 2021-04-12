@@ -49,31 +49,31 @@ The second piece of good news is that the Scala 2.13 TASTy reader, which enables
 > The TASTy reader is very new. As such it is available under the `-Ytasty-reader` flag.
 
 It supports all the traditional constructs as well as the following new features:
-- Enumerations
-- Intersection types
-- Opaque type aliases
-- Type lambdas
-- New syntax for contextual abstractions
-- Inheritance of open classes and super traits
-- Exported definitions
+- [Enumerations](http://dotty.epfl.ch/docs/reference/enums/enums.html)
+- [Intersection Types](http://dotty.epfl.ch/docs/reference/new-types/intersection-types.html)
+- [Opaque Type Aliases](http://dotty.epfl.ch/docs/reference/other-new-features/opaques.html)
+- [Type Lambdas](http://dotty.epfl.ch/docs/reference/new-types/type-lambdas.html)
+- [Contextual Abstractions](http://dotty.epfl.ch/docs/reference/contextual/motivation.html) (new syntax)
+- [Open Classes](http://dotty.epfl.ch/docs/reference/other-new-features/open-classes.html) (and inheritance of super traits)
+- [Export Clauses](http://dotty.epfl.ch/docs/reference/other-new-features/export.html)
 
 We have limited support on:
-- Top level definitions
-- Extension methods
+- [Top-Level Definitions](http://dotty.epfl.ch/docs/reference/dropped-features/package-objects.html)
+- [Extension Methods](http://dotty.epfl.ch/docs/reference/contextual/extension-methods.html)
 
 More exotic features are not supported:
-- Context functions
-- Polymorphic function types
-- Trait parameters
-- `@static` annotation
-- `@alpha` annotation
-- Functions and Tuples larger than 22 parameters
+- [Context Functions](http://dotty.epfl.ch/docs/reference/contextual/context-functions.html)
+- [Polymorphic Function Types](http://dotty.epfl.ch/docs/reference/new-types/polymorphic-function-types.html)
+- [Trait Parameters](http://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html)
+- `@static` Annotation
+- `@alpha` Annotation
+- [Functions and Tuples larger than 22 parameters](https://dotty.epfl.ch/docs/reference/dropped-features/limit22.html)
 - Reference to `scala.Tuple` and `scala.*:`
-- Match types
-- Union types
-- Multiversal equality constraints unless explicit
-- Inline functions (including Scala 3 macros)
-- Subtype kind polymorphism (upper bound `scala.AnyKind`)
+- [Match Types](https://dotty.epfl.ch/docs/reference/new-types/match-types.html)
+- [Union Types](https://dotty.epfl.ch/docs/reference/new-types/union-types.html)
+- [Multiversal Equality](https://dotty.epfl.ch/docs/reference/contextual/multiversal-equality.html) (unless explicit)
+- [Inline](https://dotty.epfl.ch/docs/reference/metaprogramming/inline.html) (including Scala 3 macros)
+- [Kind Polymorphism](https://dotty.epfl.ch/docs/reference/other-new-features/kind-polymorphism.html) (the `scala.AnyKind` upper bound)
 
 
 You can have a Scala `@scala213@` module that depends on a Scala `@scala30@` module, and the latter can even depend on another Scala `@scala213@` module.
