@@ -14,6 +14,8 @@
     "Tutorials": [
       "tutorials/prerequisites",
       "tutorials/sbt-migration",
+      "tutorials/macro-cross-building",
+      "tutorials/macro-mixing",
       "tutorials/scalacoptions-migration"
     ],
     "Incompatibilities": [
@@ -22,11 +24,8 @@
       "incompatibilities/contextual-abstractions",
       "incompatibilities/other-changed-features"
     ],
-    "Macros": [
+    "Resources": [
       "macros/macro-libraries",
-      "macros/migration-tutorial"
-    ],
-    "External Resources": [
       "external-resources/moving-from-scala-2-to-scala-3"
     ]
   }

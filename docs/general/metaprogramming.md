@@ -9,6 +9,11 @@ A macro compiled by one version of the compiler cannot be used by another versio
 Scala 3 is overcoming this limitation by introducing a new principled approach of metaprogramming.
 While this is an uncontested improvement, it also means that previous macro implementations have to be rewritten from the ground up.
 
+## State of the Macro Ecosystem
+
+Some of the most used macro libraries have already been migrated to Scala 3.
+Check the list of [Scala macro libraries](../macros/macro-libraries.md).
+
 ## Before Rewriting a Macro
 
 Before getting deep into reimplementing a macro you should check if it can be supported using Scala 3 new features.
@@ -34,9 +39,11 @@ It shows and explains how to use these features:
 ## Cross-building a Macro Library
 
 You have written a wonderful macro library and you would like it to be available for Scala 2.13 and Scala 3.
-There are two different approaches, the traditional cross-building technique and the more recent mixing definition technique.
+There are two different approaches, the traditional cross-building technique and the more recent mixing macros technique.
 
-Both approaches are described in the [Porting a Macro Library](../macros/migration-tutorial.md) tutorial.
+Both approaches are described in the tutorials section:
+- [Cross-Building a Macro Library](../tutorials/macro-cross-building.md)
+- [Mixing Scala 2.13 and Scala 3 Macros](../tutorials/macro-mixing.md)
 
 ## Additional Resources
 

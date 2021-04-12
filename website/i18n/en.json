@@ -5,9 +5,6 @@
     "previous": "Previous",
     "tagline": "An evolving guide to support the migration to Scala 3",
     "docs": {
-      "compatibility": {
-        "title": "Compatibility Reference"
-      },
       "contributing": {
         "title": "Contributing"
       },
@@ -16,9 +13,6 @@
       },
       "general/compatibility": {
         "title": "Compatibility Reference"
-      },
-      "general/table": {
-        "title": "Incompatibility Table"
       },
       "general/incompatibility-table": {
         "title": "Incompatibility Table"
@@ -41,29 +35,8 @@
       "incompatibilities/syntactic-changes": {
         "title": "Syntactic Changes"
       },
-      "incompatibilities/table": {
-        "title": "Incompatibility Table"
-      },
       "macros/macro-libraries": {
         "title": "Scala Macro Libraries"
-      },
-      "macros/metaprogramming": {
-        "title": "Metaprogramming in Scala 3"
-      },
-      "macros/migration-tutorial": {
-        "title": "Porting a Macro Library"
-      },
-      "migration-tools": {
-        "title": "Tour of the Migration Tools"
-      },
-      "scala-3-migration-mode": {
-        "title": "Scala 3.0 Migration Mode"
-      },
-      "scala-3-syntax-rewriting": {
-        "title": "Scala 3 Syntax Rewriting"
-      },
-      "scala-3-migrate-tool": {
-        "title": "Scala3-migrate"
       },
       "tooling/migration-tools": {
         "title": "Tour of the Migration Tools"
@@ -77,8 +50,17 @@
       "tooling/scala-3-syntax-rewrites": {
         "title": "Scala 3 Syntax Rewriting"
       },
+      "tutorials/macro-cross-building": {
+        "title": "Cross-Building a Macro Library"
+      },
+      "tutorials/macro-mixing": {
+        "title": "Mixing Scala 2.13 and Scala 3 Macros"
+      },
+      "tutorials/prerequisites": {
+        "title": "Project Prerequisites"
+      },
       "tutorials/sbt-migration": {
-        "title": "Porting an sbt Project"
+        "title": "sbt Migration Tutorial"
       },
       "tutorials/scalacoptions-migration": {
         "title": "Porting the scalacOptions"
@@ -94,8 +76,7 @@
       "Tooling": "Tooling",
       "Tutorials": "Tutorials",
       "Incompatibilities": "Incompatibilities",
-      "Macros": "Macros",
-      "External Resources": "External Resources"
+      "Resources": "Resources"
     }
   },
   "pages-strings": {

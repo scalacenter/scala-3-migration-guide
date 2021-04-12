@@ -6,9 +6,9 @@ title: Scala Macro Libraries
 While being experimental, the Scala community has largely adopted the Scala 2 [Def Macro](https://docs.scala-lang.org/overviews/macros/overview.html) feature in multiple of ways: code generation, optimizations, ergonomic DSLs...
 
 A large part of the ecosystem now depends on Scala 2.13 macros defined in external libraries.
-Identifying those library dependencies is key to establish that a project is ready to be migrated to Scala 3.0.
+Identifying those library dependencies is key to establish that a project is ready to be migrated to Scala 3.
 
-> The Scala 3.0 compiler cannot execute Scala 2.13 macro definitions.
+> The Scala 3 compiler cannot execute Scala 2.13 macro definitions.
 > 
 > However, the handy `-Xignore-scala2-macros` option can be used to ignore them and type check the rest of the code.
 > 
@@ -83,7 +83,7 @@ If you find any macro library that is not listed here you are invited to [open a
 
 Macro annotations are not supported in Scala 3.
 The following table contains a incomplete list of Scala 2.13 libraries that provide macro annotations.
-Scala 3.0 compatible alternatives are proposed when available.
+Scala 3 compatible alternatives are proposed when available.
 
 | Project | Alternative Solutions |
 |-|-|

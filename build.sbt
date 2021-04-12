@@ -13,7 +13,8 @@ lazy val website = project
       "scala3Migrate" -> scala3Migrate,
       "catsCore" -> "2.3.0-M2",
       "osLib" -> osLib,
-      "sourcecode" -> sourcecode
+      "sourcecode" -> sourcecode,
+      "munit" -> munit
     )
   )
   .enablePlugins(DocusaurusPlugin)

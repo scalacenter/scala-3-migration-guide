@@ -108,7 +108,3 @@ The Scala 3 compiler is not able to consume the Scala 2.13 macros.
 Under those circumstances it is necessary to re-implement the Scala 2.13 macros using the new Scala 3 metaprogramming features.
 
 You can go to the [Metaprogramming](metaprogramming.md) page to learn about the new metaprogramming features.
-To learn how to make a macro library available in Scala 3 you can follow the [Porting a Macro Library](../macros/migration-tutorial.md) tutorial.
-
-Some of the most used macro libraries have already been migrated to Scala 3.
-Check the list of [Scala macro libraries](../macros/macro-libraries.md).
