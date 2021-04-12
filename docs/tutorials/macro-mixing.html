@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Mixing Scala 2.13 and Scala 3 Macros · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This tutorial shows how to mix Scala 2.13 and Scala 3 macros in a single artifact."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Mixing Scala 2.13 and Scala 3 Macros · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="This tutorial shows how to mix Scala 2.13 and Scala 3 macros in a single artifact."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/general/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Tutorials</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/incompatibility-table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/metaprogramming.html">Metaprogramming</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tooling</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migrate-plugin.html">Scala 3 Migrate Plugin</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-syntax-rewrites.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/prerequisites.html">Project Prerequisites</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">sbt Migration Tutorial</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/macro-cross-building.html">Cross-Building a Macro Library</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/macro-mixing.html">Mixing Scala 2.13 and Scala 3 Macros</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html">Porting the scalacOptions</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/tutorials/macro-mixing.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Mixing Scala 2.13 and Scala 3 Macros</h1></header><article><div><span><p>This tutorial shows how to mix Scala 2.13 and Scala 3 macros in a single artifact.</p>
+<p>It can be used to create a new Scala 3 macro library and make it available for Scala 2.13 users.</p>
+<p>It can also be used to port an existing Scala 2.13 macro library to Scala 3, although it is probably easier to cross-build.</p>
+<h2><a class="anchor" aria-hidden="true" id="introduction"></a><a href="#introduction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introduction</h2>
+<p>The Scala 2.13 compiler can only expand Scala 2.13 macros and, conversely, the Scala 3 compiler can only expand the Scala 3 macros.</p>
+<p>The idea of mixing macros is to provide both definitions in a single artifact, and let the compiler of the consumer project expand the one it supports.</p>
+<p>To exemplify this tutorial we will consider the following Scala 3 code skeleton:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// example/src/main/scala/location/Location.scala</span>
+<span class="hljs-keyword">package</span> location
+
+<span class="hljs-keyword">import</span> scala.quoted.{<span class="hljs-type">Quotes</span>, <span class="hljs-type">Expr</span>}
+
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Location</span>(<span class="hljs-params">path: <span class="hljs-type">String</span>, line: <span class="hljs-type">Int</span></span>)</span>
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Macros</span></span>:
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = macro ???
+  inline <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = ${ ??? }
+</code></pre>
+<p>As you can see the <code>location</code> is defined twice:</p>
+<ul>
+<li><code>def location: Location = macro ???</code> is a Scala 2.13 macro definition</li>
+<li><code>inline def location: Location = ${ ??? }</code> is a Scala 3 macro definition</li>
+</ul>
+<p><code>location</code> is not a overloaded method, since both signatures are strictly identical.</p>
+<p>This is quite surprising!
+How does the compiler accept two methods with the same name and signature?</p>
+<p>The reason is that it recognizes the first definition is for Scala 2.13 only and the second is for Scala 3 only.</p>
+<h2><a class="anchor" aria-hidden="true" id="1-the-scala-3-implementation"></a><a href="#1-the-scala-3-implementation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. The Scala 3 implementation</h2>
+<p>You can put the Scala 3 macro implementation alongside the definition.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">package</span> location
+
+<span class="hljs-keyword">import</span> scala.quoted.{<span class="hljs-type">Quotes</span>, <span class="hljs-type">Expr</span>}
+
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Location</span>(<span class="hljs-params">path: <span class="hljs-type">String</span>, line: <span class="hljs-type">Int</span></span>)</span>
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Macros</span></span>:
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = macro ???
+  inline <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span></span>: <span class="hljs-type">Location</span> = ${locationImpl}
+
+  <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(using quotes: <span class="hljs-type">Quotes</span>): <span class="hljs-type">Expr</span>[<span class="hljs-type">Location</span>] =
+    <span class="hljs-keyword">import</span> quotes.reflect.<span class="hljs-type">Position</span>
+    <span class="hljs-keyword">val</span> file = <span class="hljs-type">Expr</span>(<span class="hljs-type">Position</span>.ofMacroExpansion.sourceFile.jpath.toString)
+    <span class="hljs-keyword">val</span> line = <span class="hljs-type">Expr</span>(<span class="hljs-type">Position</span>.ofMacroExpansion.startLine + <span class="hljs-number">1</span>)
+    '{<span class="hljs-keyword">new</span> <span class="hljs-type">Location</span>($file, $line)}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="2-the-scala-2-implementation"></a><a href="#2-the-scala-2-implementation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. The Scala 2 implementation</h2>
+<p>The Scala 3 compiler can compile a Scala 2 macro implementation if it does not contain any quasiquote or reification.</p>
+<p>For instance this code does compile in Scala 3 and you can put it alongside the definition and Scala 3 implementation.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> scala.reflect.macros.blackbox.<span class="hljs-type">Context</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(c: <span class="hljs-type">Context</span>): c.<span class="hljs-type">Tree</span> =  {
+  <span class="hljs-keyword">import</span> c.universe._
+  <span class="hljs-keyword">val</span> line = <span class="hljs-type">Literal</span>(<span class="hljs-type">Constant</span>(c.enclosingPosition.line))
+  <span class="hljs-keyword">val</span> path = <span class="hljs-type">Literal</span>(<span class="hljs-type">Constant</span>(c.enclosingPosition.source.path))
+  <span class="hljs-type">New</span>(c.mirror.staticClass(classOf[<span class="hljs-type">Location</span>].getName()), path, line)
+}
+</code></pre>
+<p>However, in many cases you will have to move the Scala 2.13 macro implementation in a Scala 2.13 submodule.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
+
+<span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> example = project.in(file(<span class="hljs-string">"example"</span>))
+  .settings(
+    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>
+  )
+  .dependsOn(`example-compat`)
+
+<span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> `example-compat` = project.in(file(<span class="hljs-string">"example-compat"</span>))
+  .settings(
+    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    libraryDependency += <span class="hljs-string">"org.scala-lang"</span> % <span class="hljs-string">"scala-reflect"</span> % scalaVersion.value
+  )
+</code></pre>
+<p>In such case we can use quasiquotes.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">package</span> location
+
+<span class="hljs-keyword">import</span> scala.reflect.macros.blackbox.<span class="hljs-type">Context</span>
+<span class="hljs-keyword">import</span> scala.language.experimental.macros
+
+<span class="hljs-keyword">case</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Location</span>(<span class="hljs-params">path: <span class="hljs-type">String</span>, line: <span class="hljs-type">Int</span></span>)</span>
+
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Scala2MacrosCompat</span> </span>{
+  <span class="hljs-keyword">private</span>[location] <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">locationImpl</span></span>(c: <span class="hljs-type">Context</span>): c.<span class="hljs-type">Tree</span> =  {
+    <span class="hljs-keyword">import</span> c.universe._
+    <span class="hljs-keyword">val</span> location = typeOf[<span class="hljs-type">Location</span>]
+    <span class="hljs-keyword">val</span> line = <span class="hljs-type">Literal</span>(<span class="hljs-type">Constant</span>(c.enclosingPosition.line))
+    <span class="hljs-keyword">val</span> path = <span class="hljs-type">Literal</span>(<span class="hljs-type">Constant</span>(c.enclosingPosition.source.path))
+    <span class="hljs-string">q"new <span class="hljs-subst">$location</span>(<span class="hljs-subst">$path</span>, <span class="hljs-subst">$line</span>)"</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="3-validate-the-implementations"></a><a href="#3-validate-the-implementations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Validate the implementations</h2>
+<p>Adding some tests is important to check that the macro method works the same in both Scala versions.</p>
+<p>Since we want to execute the tests in Scala 2.13 and Scala 3, we can create a cross-built module:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
+<span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> `example-test` = project.in(file(<span class="hljs-string">"example-test"</span>))
+  .settings(
+    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>,
+    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"3.0.0-RC2"</span>, <span class="hljs-string">"2.13.5"</span>),
+    scalacOptions ++= {
+      <span class="hljs-type">CrossVersion</span>.partialVersion(scalaVersion.value) <span class="hljs-keyword">match</span> {
+        <span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>((<span class="hljs-number">2</span>, <span class="hljs-number">13</span>)) =&gt; <span class="hljs-type">Seq</span>(<span class="hljs-string">"-Ytasty-reader"</span>)
+        <span class="hljs-keyword">case</span> _ =&gt; <span class="hljs-type">Seq</span>.empty
+      }
+    },
+    libraryDependencies += <span class="hljs-string">"org.scalameta"</span> %% <span class="hljs-string">"munit"</span> % <span class="hljs-string">"0.7.23"</span> % <span class="hljs-type">Test</span>
+  )
+  .dependsOn(example)
+</code></pre>
+<blockquote>
+<p><code>-Ytasty-reader</code> is needed in Scala 2.13 to consume Scala 3 artifacts</p>
+</blockquote>
+<p>For instance the test can be:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// example-test/src/test/scala/location/MacrosSpec.scala</span>
+<span class="hljs-keyword">package</span> location
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MacrosSpec</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">munit</span>.<span class="hljs-title">FunSuite</span> </span>{
+  test(<span class="hljs-string">"location"</span>) {
+    assertEquals(<span class="hljs-type">Macros</span>.location.line, <span class="hljs-number">5</span>)
+  }
+}
+</code></pre>
+<p>You should now be able to run the tests in both versions.</p>
+<pre><code class="hljs css language-shell">sbt:example&gt; ++2.13.5
+sbt:example&gt; example-test / test
+location.MacrosSpec:
+  + location
+[info] Passed: Total 1, Failed 0, Errors 0, Passed 1
+[success]
+sbt:example&gt; ++3.0.0-RC2
+sbt:example&gt; example-test / test
+location.MacrosSpec:
+  + location
+[info] Passed: Total 1, Failed 0, Errors 0, Passed 1
+[success]
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="final-overview"></a><a href="#final-overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Final Overview</h2>
+<p>You library is now composed of:</p>
+<ul>
+<li>The main Scala 3 module containing the mixed macro definitions and the Scala 3 macro implementation.</li>
+<li>The Scala 2.13 compatibility module containing the Scala 2.13 macro implementation.
+It will be used in Scala 2.13 projects during the macro expansion phase.</li>
+</ul>
+<p><img src="/scala-3-migration-guide/docs/assets/macros/mixing.svg" alt="Mixing-macros Architecture"></p>
+<p>You are now ready to publish your library.</p>
+<p>It can be used in Scala 2.13 projects with these settings:</p>
+<pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"2.13.5"</span>
+libraryDependencies += (<span class="hljs-string">"org"</span> %% <span class="hljs-string">"example"</span> % <span class="hljs-string">"x.y.z"</span>).cross(<span class="hljs-type">CrossVersion</span>.for2_13Use3)
+scalacOptions += <span class="hljs-string">"-Ytasty-reader"</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/tutorials/macro-cross-building.html"><span class="arrow-prev">← </span><span>Cross-Building a Macro Library</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/tutorials/scalacoptions-migration.html"><span class="function-name-prevnext">Porting the scalacOptions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#introduction">Introduction</a></li><li><a href="#1-the-scala-3-implementation">1. The Scala 3 implementation</a></li><li><a href="#2-the-scala-2-implementation">2. The Scala 2 implementation</a></li><li><a href="#3-validate-the-implementations">3. Validate the implementations</a></li><li><a href="#final-overview">Final Overview</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
