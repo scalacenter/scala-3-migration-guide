@@ -66,27 +66,29 @@
 <h3><a class="anchor" aria-hidden="true" id="the-scala-3-compiler"></a><a href="#the-scala-3-compiler" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Scala 3 compiler</h3>
 <p>Similarly the Scala 3 compiler comes with the <code>-source:3.0-migration</code> option.
 When activated the compiler accepts some Scala 2.13 syntax and it issues warnings where changes are needed.</p>
-<p>Even more than that, it can be combined with <code>-rewrite</code> to rewrite your code automatically.</p>
+<p>Even more than that, it can be combined with <code>-rewrite</code> to patch your code automatically.</p>
 <p>You can learn more about it in the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a> page.</p>
 <h2><a class="anchor" aria-hidden="true" id="build-tools"></a><a href="#build-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build tools</h2>
 <h3><a class="anchor" aria-hidden="true" id="sbt"></a><a href="#sbt" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>sbt</h3>
 <blockquote>
-<p>The sbt-dotty plugin was needed in sbt 1.4 to get support for Scala 3.
-It is deprecated in sbt 1.5.</p>
+<p>The <code>sbt-dotty</code> plugin was needed in sbt 1.4 to get support for Scala 3.
+It has been deprecated by sbt 1.5.</p>
 </blockquote>
 <p>sbt 1.5 supports Scala 3 out-of-the-box.
 All common tasks and settings are intended to work the same.
 Many plugins should also work exactly the same.</p>
 <p>To help with the migration, sbt 1.5 introduces new Scala 3 specific cross versions:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
+<pre><code class="hljs css language-scala"><span class="hljs-comment">// Use a Scala 2.13 library in Scala 3</span>
 libraryDependency += (<span class="hljs-string">"org.foo"</span> %% <span class="hljs-string">"foo"</span> % <span class="hljs-string">"1.0.0"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
+
+<span class="hljs-comment">// Use a Scala 3 library in Scala 2.13 </span>
 libraryDependency += (<span class="hljs-string">"org.bar"</span> %% <span class="hljs-string">"bar"</span> % <span class="hljs-string">"1.0.0"</span>).cross(<span class="hljs-type">CrossVersion</span>.for2_13Use3)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="mill"></a><a href="#mill" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mill</h3>
-<p>Mill 0.9.3 or greater supports Scala 3.</p>
+<p><a href="https://github.com/com-lihaoyi/mill">Mill</a> 0.9.3 or greater supports Scala 3.</p>
 <h2><a class="anchor" aria-hidden="true" id="code-editors-and-ides"></a><a href="#code-editors-and-ides" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code editors and IDEs</h2>
 <h3><a class="anchor" aria-hidden="true" id="metals"></a><a href="#metals" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Metals</h3>
-<p>Metals is a Scala language server that works with VS Code, Vim, Emacs, Sublime Text and Eclipse.</p>
+<p><a href="https://scalameta.org/metals/">Metals</a> is a Scala language server that works with VS Code, Vim, Emacs, Sublime Text and Eclipse.</p>
 <p>Scala 3 is already very well supported by Metals.
 Some minor adjustements for the new syntax changes and new features are coming.</p>
 <h3><a class="anchor" aria-hidden="true" id="intellij-idea"></a><a href="#intellij-idea" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>IntelliJ IDEA</h3>
@@ -95,7 +97,7 @@ Full-fledged support is being worked on by the team at JetBrains.</p>
 <h2><a class="anchor" aria-hidden="true" id="migration-tools"></a><a href="#migration-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migration Tools</h2>
 <h3><a class="anchor" aria-hidden="true" id="scalafix"></a><a href="#scalafix" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scalafix</h3>
 <p><a href="https://scalacenter.github.io/scalafix/">Scalafix</a> is a refactoring tool for Scala.</p>
-<p>The following incompatibilities can be solved with the corresponding Scalafix rules:</p>
+<p>Some Scala 3 incompatibilities can be solved with the following Scalafix rules:</p>
 <ul>
 <li>Procedure Syntax: <code>ProcedureSyntax</code></li>
 <li>Value Eta-Expansion: <code>fix.scala213.ExplicitNullaryEtaExpansion</code> in <a href="https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/ExplicitNullaryEtaExpansion.scala">scala/scala-rewrites</a></li>
@@ -103,8 +105,8 @@ Full-fledged support is being worked on by the team at JetBrains.</p>
 <li>Auto Application: <code>fix.scala213.ExplicitNonNullaryApply</code> in <a href="https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/ExplicitNonNullaryApply.scala">scala/scala-rewrites</a></li>
 <li><code>any2stringadd</code> Conversion: <code>fix.scala213.Any2StringAdd</code> in <a href="https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/Any2StringAdd.scala">scala/scala-rewrites</a></li>
 </ul>
-<p>You can apply some of these rules using the <code>sbt-scalafix</code> plugin.
-Or you can use the all-in-one <code>sbt-scala3-migrate</code> plugin described below.</p>
+<p>You can apply these rules using the <code>sbt-scalafix</code> plugin.
+Those rules can also be applied automatically by the all-in-one <code>sbt-scala3-migrate</code> plugin described below.</p>
 <h3><a class="anchor" aria-hidden="true" id="scala-3-migrate-plugin"></a><a href="#scala-3-migrate-plugin" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala 3 Migrate Plugin</h3>
 <p>Scala3 Migrate Plugin is an sbt plugin to assist you during the migration to Scala 3.</p>
 <p>It proposes an incremental approach that can be described as follows:</p>
