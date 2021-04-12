@@ -8,15 +8,7 @@ title: sbt Migration Tutorial
 
 Before jumping to Scala 3, make sure you are on the latest Scala 2.13.x and sbt 1.5.x versions.
 
-We are going to walk through the required steps to port an entire project to Scala 3.
-- [1. Check the project prerequisites](#1-check-the-project-prerequisites)
-- [2. Choose a module](#2-choose-a-module)
-- [3. Set up cross-building](#3-set-up-cross-building)
-- [4. Prepare the dependencies](#4-prepare-the-dependencies)
-- [5. Configure the Scala 3 Compiler](#5-configure-the-scala-3-compiler)
-- [6. Solve the Incompatibilities](#6-solve-the-incompatibilities)
-- [7. Validate the migration](#7-validate-the-migration)
-- [8. Finalize the migration](#8-finalize-the-migration)
+We are going to walk through the steps required to port an entire project to Scala 3.
 
 ## 1. Check the project prerequisites
 
@@ -103,27 +95,27 @@ You can refer to the [Scalac Options Comparative](scalacoptions-migration.md) ta
 
 A typical configuration looks like this:
 ```scala
-// build.sbt
 scalacOptions ++= {
   Seq(
     "-encoding",
     "UTF-8",
     "-feature",
     "-language:implicitConversions",
-    // "-Xfatal-warnings" disabled during the migration,
+    // disabled during the migration
+    // "-Xfatal-warnings"
   ) ++ 
-    CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 13)) => Seq(
+    (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((3, _)) => Seq(
+        "-unchecked",
+        "-source:3.0-migration"
+      )
+      case _ => Seq(
         "-deprecation",
         "-Xfatal-warnings",
         "-Wunused:imports,privates,locals",
         "-Wvalue-discard"
       )
-      case Some((3, _)) => Seq(
-        "-unchecked",
-        "-source:3.0-migration"
-      )
-    }
+    })
 }
 ```
 
@@ -151,16 +143,17 @@ sbt:example> <project> / Test / compile
 
 The compiler produces diagnostics of two different levels:
 - *Error*: A piece of code cannot be compiled anymore.
-There are various reasons for those errors, that are given in the [Incompatibility Table](../general/incompatibility-table.md).
+There are various reasons for those errors, that are listed in the [Incompatibility Table](../general/incompatibility-table.md).
 - *Migration Warning*: These warnings can be automatically patched by the compiler with the `-rewrite` option.
 
-For each error you can find the corresponding incompatibility in the [Incompatibility Table](../general/incompatibility-table.md).
-You will then find a description and a proposed solution.
+Each incompatibility in the [Incompatibility Table](../general/incompatibility-table.md) is linked to its description and proposed solutions.
+Try to find the most suitable solution for each Scala 3 error in your code.
+In particular, if an error affects the public interface of your library, you should pick the solution that best preserves the binary compatibility.
 
 > The metaprogramming incompatibilities cannot be easily solved.
 > A lot of code must be rewritten from the ground up.
 
-After fixing an incompatibility, you can validate the solution in Scala 2.13 by running the tests.
+After fixing an incompatibility, you can validate the solution by running the tests in Scala 2.13.
 
 ```shell
 sbt:example> ++@scala213@
@@ -173,7 +166,7 @@ sbt:example> <project> / test
 
 Consider committing your changes regularly.
 
-Once you have fixed all the errors you should be able to compile succesfully.
+Once you have fixed all the errors you should be able to compile succesfully in Scala 3.
 Only the migration warnings are remaining.
 The compiler can automatically patch them.
 Add the `-rewrite` compiler option, and compile one more time:

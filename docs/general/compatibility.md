@@ -83,8 +83,8 @@ An application can jump to Scala 3 even if its dependencies are not fully ported
 
 > Using the intercompatibility between 2.13 and 3 is useful during the transition period of an application.
 > 
-> However, it is discouraged to publish a Scala 2.13 library that depends on a Scala 3 or vice-versa.
-> The reason is to prevent library users from ending up with two conflicting version `x_2.13` and `x_3` of the same x library in their classpath.
+> However, it is discouraged to publish a Scala 2.13 library that depends on a Scala 3 library or vice-versa.
+> The reason is to prevent library users from ending up with two conflicting version `foo_2.13` and `foo_3` of the same foo library in their classpath.
 
 ## Runtime
 
@@ -109,8 +109,11 @@ In contrast, the Scala 3 macro feature is based on TASTy which is designed for s
 It will stay compatible with the future versions of the Scala 3 compiler.
 But it is not compatible with the Scala 2.13 compiler, which does not fully support TASTy.
 
-In order to publish a common macro API for both languages you must provide both implementations.
-A technique for declaring a Scala 2.13 macro in a Scala 3 artifact is exemplified down below and it is further detailed in the [Macro Migration Tutorial](../macros/migration-tutorial.md#mixing-macro-definitions) section.
+The Scala 2.13 macros must be reimplemented with the new Scala 3 metaprogramming feature.
+As a macro library author, you can use cross-building to publish for both versions of the language.
+This is described in the [Cross-Building Macros](../tutorials/macro-cross-building.md) tutorial.
+An other technique, that is made possible by Scala 3, is described in the [Mixing Macros](../tutorials/macro-mixing.md) tutorial.
+It consists of mixing the Scala 2.13 and Scala 3 macro definitions in the same Scala 3 artifact.
 
 ## Examples
 
@@ -211,5 +214,5 @@ A Scala 3 artifact can bear the declarations of a Scala 3 macro **and** its Scal
 
 ![Shared macro API in a Scala 3 artifact](../assets/compatibility/sharedMacroAPI.svg)
 
-You can learn this technique in the [Macro Migration Tutorial](../macros/migration-tutorial.md#mixing-macro-definitions).
+You can learn this technique in the [Mixing Macros](../tutorials/macro-mixing.md) tutorial.
 Another working example can be found in [this repository](https://github.com/scalacenter/mix-macros-scala-2-and-3).
