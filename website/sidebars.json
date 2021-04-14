@@ -1,8 +1,11 @@
 {
   "docs": {
-    "General": [
-      "general/compatibility",
-      "general/metaprogramming"
+    "Compatibility Reference": [
+      "compatibility/introduction",
+      "compatibility/source",
+      "compatibility/classpath",
+      "compatibility/runtime",
+      "compatibility/metaprogramming"
     ],
     "Tooling": [
       "tooling/migration-tools",

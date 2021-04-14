@@ -5,6 +5,21 @@
     "previous": "Previous",
     "tagline": "An evolving guide to support the migration to Scala 3",
     "docs": {
+      "compatibility/classpath": {
+        "title": "Classpath Level"
+      },
+      "compatibility/introduction": {
+        "title": "Introduction"
+      },
+      "compatibility/metaprogramming": {
+        "title": "Metaprogramming"
+      },
+      "compatibility/runtime": {
+        "title": "Runtime"
+      },
+      "compatibility/source": {
+        "title": "Source Level"
+      },
       "compiler-options/compiler-options-table": {
         "title": "Compiler Options Table"
       },
@@ -16,12 +31,6 @@
       },
       "external-resources/moving-from-scala-2-to-scala-3": {
         "title": "Moving from Scala 2 to Scala 3"
-      },
-      "general/compatibility": {
-        "title": "Compatibility Reference"
-      },
-      "general/metaprogramming": {
-        "title": "Metaprogramming"
       },
       "incompat-31": {
         "title": "Dotty future-migration Mode"
@@ -75,7 +84,7 @@
       "GitHub": "GitHub"
     },
     "categories": {
-      "General": "General",
+      "Compatibility Reference": "Compatibility Reference",
       "Tooling": "Tooling",
       "Tutorials": "Tutorials",
       "Incompatibilities": "Incompatibilities",
