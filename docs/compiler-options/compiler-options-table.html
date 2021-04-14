@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Compiler Options Table · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="When porting a Scala 2.13 project to Scala 3, you must adapt the list of compiler options."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Compiler Options Table · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="When porting a Scala 2.13 project to Scala 3, you must adapt the list of compiler options."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/general/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Compiler Options</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/metaprogramming.html">Metaprogramming</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tooling</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migrate-plugin.html">Scala 3 Migrate Plugin</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-syntax-rewrites.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/prerequisites.html">Project Prerequisites</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">sbt Migration Tutorial</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/macro-cross-building.html">Cross-Building a Macro Library</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/macro-mixing.html">Mixing Scala 2.13 and Scala 3 Macros</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/incompatibility-table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Compiler Options</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/compiler-options/compiler-options-table.html">Compiler Options Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compiler-options/new-compiler-options.html">New Scala 3 compiler options</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/compiler-options/compiler-options-table.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Compiler Options Table</h1></header><article><div><span><p>When porting a Scala 2.13 project to Scala 3, you must adapt the list of compiler options.
+Indeed many options have been renamed and many others are not yet available in Scala 3.</p>
+<p>The current page contains the look-up tables to help you translate a pre-existing list of Scala 2.13 options into Scala 3.
+The next page is dedicated to the new Scala 3 options.</p>
+<blockquote>
+<p>Passing a unavailable option to the Scala 3 compiler does not make it fail.
+It just prints a warning and ignores the option.</p>
+</blockquote>
+<p>The compiler options are classified and ordered according to their Scala 2.13 name. Each Scala 2.13 option is associated with its Scala 3 counterpart:</p>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><i class="fas fa-check fa-lg"></i></td><td>it is avalaible in Scala 3</td></tr>
+<tr><td><code>&lt;new-name&gt;</code></td><td>It has been renamed to <code>&lt;new-name&gt;</code></td></tr>
+<tr><td><i class="fas fa-times fa-lg"></i></td><td>It is not available in 3.0.0 but it could be added later</td></tr>
+</tbody>
+</table>
+<blockquote>
+<p>The comparison is based on Scala 2.13.4 and 3.0.0-M3.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="standard-settings"></a><a href="#standard-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Standard Settings</h2>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Dproperty=value</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-J&lt;flag&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-P:&lt;plugin&gt;:&lt;opt&gt;</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-V</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-W</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-X</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Y</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-bootclasspath</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-classpath</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-d</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-dependencyfile</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-deprecation</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-encoding</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-explaintypes</code></td><td><code>-explain-types</code></td></tr>
+<tr><td><code>-extdirs</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-feature</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-g</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-help</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-javabootclasspath</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-javaextdirs</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-language</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-no-specialization</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-nobootcp</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-nowarn</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-opt</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-opt-inline-from</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-opt-warnings</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-optimize</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-print</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-release</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-rootdir</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-sourcepath</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-target</code></td><td><code>-Xtarget</code></td></tr>
+<tr><td><code>-toolcp</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-unchecked</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-uniqid</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-usejavacp</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-usemanifestc</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-verbose</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-version</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="advanced-settings"></a><a href="#advanced-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced Settings</h2>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-X</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xcheckinit</code></td><td><code>-Ycheck-init</code></td></tr>
+<tr><td><code>-Xdev</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xdisable-assertions</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xelide-below</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xexperimental</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xfuture</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xgenerate-phase-graph</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xjline</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xlint:deprecation</code></td><td><code>-deprecation</code></td></tr>
+<tr><td><code>-Xlint:&lt;warnings&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xlog-implicit-conversion</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xlog-implicits</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xlog-reflective-calls</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xmacro-settings</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xmain-class</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xmaxerrs</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xmaxwarns</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xmigration</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xmixin-force-forwarders</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xno-forwarders</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xno-patmat-analysis</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xnojline</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xplugin</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xplugin-disable</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xplugin-list</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xplugin-require</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xpluginsdir</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xprint-args</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xprompt</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Xreporter</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xresident</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xscript</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xshow-class &lt;class&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xshow-object &lt;object&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xsource</code></td><td><code>-source</code></td></tr>
+<tr><td><code>-Xsource-reader</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Xverify</code></td><td><code>-Xverify-signatures</code></td></tr>
+<tr><td><code>-Xxml</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="private-settings"></a><a href="#private-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Private settings</h2>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Ybackend-parallelism</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ybackend-worker-queue</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ybreak-cycles</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ycache-macro-class-loader</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ycache-plugin-class-loader</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ycheck</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Ycompact-trees</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ydelambdafy</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ydump-classes</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Ygen-asmp</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yhot-statistics</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yide-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yimports</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yissue-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yjar-compression-level</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-YjarFactory</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ymacro-debug-lite</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ymacro-debug-verbose</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ymacro-annotations</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ymacro-classpath</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ymacro-expand</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ymacro-global-fresh-names</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yno-completion</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yno-flat-classpath-cache</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yno-generic-signatures</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yno-imports</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yno-predef</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yopt-inline-heuristics</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yopt-log-inline &lt;package/Class.method&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yopt-trace &lt;package/Class.method&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypatmat-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypatmat-exhaust-depth</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypos-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-any-thread</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-delay</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-locate-source-file</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-log</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-strict</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ypresentation-verbose</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yprint-trees</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yprofile-destination</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yprofile-enabled</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yprofile-trace</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yquasiquote-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yrangepos</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yrecursion</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yreify-copypaste</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yreify-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yrepl-class-based</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yrepl-outdir</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yrepl-use-magic-imports</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yresolve-term-conflict</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yscriptrunner</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yskip</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Yshow:&lt;phases&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yshow-member-pos &lt;output style&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yshow-symkinds</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yshow-symowners</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yshow-syms</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ystatistics &lt;phases&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ystop-after</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Ystop-before</code></td><td><i class="fas fa-check fa-lg"></i></td></tr>
+<tr><td><code>-Ytyper-debug</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Yvalidate-pos</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ywarn-dead-code</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ywarn-numeric-widen</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ywarn-unused:&lt;warnings&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Ywarn-value-discard</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="verbose-settings"></a><a href="#verbose-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verbose Settings</h2>
+<p>Verbose settings were introduced in 2.13.
+Most of them are not yet implemented in Scala 3.</p>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Vbrowse:&lt;phases&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vdebug-tasty</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vdoc</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vfree-terms</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vfree-types</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vhot-statistics</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vide</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vimplicit-conversions</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vimplicits</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vinline &lt;package/Class.method&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vissue</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vmacro</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vmacro-lite</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vopt &lt;package/Class.method&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vpatmat</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vpos</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vprint:&lt;phases&gt;</code></td><td><code>-Xprint:&lt;phases&gt;</code></td></tr>
+<tr><td><code>-Vphases</code></td><td><code>-Xshow-phases</code></td></tr>
+<tr><td><code>-Vclasspath</code></td><td><code>-Ylog-classpath</code></td></tr>
+<tr><td><code>-Vlog:&lt;phases&gt;</code></td><td><code>-Ylog:&lt;phases&gt;</code></td></tr>
+<tr><td><code>-Vdebug</code></td><td><code>-Ydebug</code></td></tr>
+<tr><td><code>-Vprint-args &lt;file&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vprint-pos</code></td><td><code>-Yprint-pos</code></td></tr>
+<tr><td><code>-Vprint-types</code></td><td><code>-Xprint-types</code></td></tr>
+<tr><td><code>-Vquasiquote</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vreflective-calls</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vreify</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vshow:&lt;phases&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vshow-class &lt;class&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vshow-member-pos &lt;output style&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vshow-object &lt;object&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vshow-symkinds</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vshow-symowners</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vstatistics &lt;phases&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vsymbols</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Vtyper</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="warning-settings"></a><a href="#warning-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Warning Settings</h2>
+<p>Warning settings were introduced in 2.13.
+Most of them are not yet implemented in Scala 3.</p>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Wconf</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Wdead-code</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Werror</code></td><td><code>-Xfatal-warnings</code></td></tr>
+<tr><td><code>-Wextra-implicit</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Wmacros:&lt;mode&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Wnumeric-widen</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Woctal-literal</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Wunused:&lt;warnings&gt;</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Wvalue-discard</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+<tr><td><code>-Wself-implicit</code></td><td><i class="fas fa-times fa-lg"></i></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="compiler-plugins"></a><a href="#compiler-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compiler Plugins</h2>
+<p>Some useful Scala 2.13 compiler plugins are now shipped into the compiler.
+You can enable and configure them with some new native options.</p>
+<h3><a class="anchor" aria-hidden="true" id="scalajs"></a><a href="#scalajs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scala.js</h3>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xplugin:scalajs-compiler_&lt;version&gt;.jar</code></td><td><code>-scalajs</code></td></tr>
+<tr><td><code>-P:scalajs:genStaticForwardersForNonTopLevelObjects</code></td><td><code>-scalajs-genStaticForwardersForNonTopLevelObjects</code></td></tr>
+<tr><td><code>-P:scalajs:mapSourceURI</code></td><td><code>-scalajs-mapSourceURI</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="semanticdb"></a><a href="#semanticdb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SemanticDB</h3>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xplugin:semanticdb-scalac_&lt;version&gt;.jar</code></td><td><code>-Xsemanticdb</code></td></tr>
+<tr><td><code>-P:semanticdb:targetroot:&lt;path&gt;</code></td><td><code>-semanticdb-target:&lt;path&gt;</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="kind-projector"></a><a href="#kind-projector" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Kind-Projector</h3>
+<table>
+<thead>
+<tr><th>2.13.x</th><th>3.0.x</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xplugin:kind-projector_&lt;version&gt;.jar</code></td><td><code>-Ykind-projector</code></td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html"><span class="arrow-prev">← </span><span>Other Changed Features</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/compiler-options/new-compiler-options.html"><span>New Scala 3 compiler options</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#standard-settings">Standard Settings</a></li><li><a href="#advanced-settings">Advanced Settings</a></li><li><a href="#private-settings">Private settings</a></li><li><a href="#verbose-settings">Verbose Settings</a></li><li><a href="#warning-settings">Warning Settings</a></li><li><a href="#compiler-plugins">Compiler Plugins</a><ul class="toc-headings"><li><a href="#scalajs">Scala.js</a></li><li><a href="#semanticdb">SemanticDB</a></li><li><a href="#kind-projector">Kind-Projector</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

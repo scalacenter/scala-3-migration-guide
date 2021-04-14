@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>New Scala 3 compiler options · Scala 3 Migration guide</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The current page only contains the options that were added in Scala 3."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="New Scala 3 compiler options · Scala 3 Migration guide"/><meta property="og:type" content="website"/><meta property="og:url" content="https://scalacenter.github.io//scala-3-migration-guide/index.html"/><meta property="og:description" content="The current page only contains the options that were added in Scala 3."/><meta property="og:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://scalacenter.github.io//scala-3-migration-guide/img/scalacenter2x.png"/><link rel="shortcut icon" href="/scala-3-migration-guide/img/dotty-logo.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&amp;display=swap"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Fira+Code:400,700&amp;display=fallback"/><script src="/scala-3-migration-guide/js/scrollSpy.js"></script><link rel="stylesheet" href="/scala-3-migration-guide/css/main.css"/><script src="/scala-3-migration-guide/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/scala-3-migration-guide/"><img class="logo" src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide"/><h2 class="headerTitleWithLogo">Scala 3 Migration guide</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/scala-3-migration-guide/docs/general/compatibility.html" target="_self">User Guide</a></li><li class=""><a href="/scala-3-migration-guide/docs/contributing.html" target="_self">Contribute</a></li><li class=""><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Compiler Options</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">General</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/compatibility.html">Compatibility Reference</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/general/metaprogramming.html">Metaprogramming</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tooling</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/migration-tools.html">Tour of the Migration Tools</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 Migration Mode</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-migrate-plugin.html">Scala 3 Migrate Plugin</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tooling/scala-3-syntax-rewrites.html">Scala 3 Syntax Rewriting</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/prerequisites.html">Project Prerequisites</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/sbt-migration.html">sbt Migration Tutorial</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/macro-cross-building.html">Cross-Building a Macro Library</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/tutorials/macro-mixing.html">Mixing Scala 2.13 and Scala 3 Macros</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Incompatibilities</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/incompatibility-table.html">Incompatibility Table</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html">Syntactic Changes</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html">Dropped Features</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html">Contextual Abstractions</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html">Other Changed Features</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Compiler Options</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/compiler-options/compiler-options-table.html">Compiler Options Table</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/scala-3-migration-guide/docs/compiler-options/new-compiler-options.html">New Scala 3 compiler options</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Resources</h3><ul class=""><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/macros/macro-libraries.html">Scala Macro Libraries</a></li><li class="navListItem"><a class="navItem" href="/scala-3-migration-guide/docs/external-resources/moving-from-scala-2-to-scala-3.html">Moving from Scala 2 to Scala 3</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/compiler-options/new-compiler-options.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">New Scala 3 compiler options</h1></header><article><div><span><p>The current page only contains the options that were added in Scala 3.</p>
+<h2><a class="anchor" aria-hidden="true" id="standard-settings"></a><a href="#standard-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Standard settings</h2>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-color</code></td><td>Colored output Default: always.</td></tr>
+<tr><td><code>-doc-snapshot</code></td><td>Generate a documentation snapshot for the current Dotty version</td></tr>
+<tr><td><code>-explain</code></td><td>Explain errors in more detail.</td></tr>
+<tr><td><code>-from-tasty</code></td><td>Compile classes from tasty files. The arguments are .tasty or .jar files.</td></tr>
+<tr><td><code>-indent</code></td><td>Together with -rewrite, remove {...} syntax when possible due to significant indentation.</td></tr>
+<tr><td><code>-new-syntax</code></td><td>Require <code>then</code> and <code>do</code> in control expressions.</td></tr>
+<tr><td><code>-noindent</code></td><td>Require classical {...} syntax, indentation is not significant.</td></tr>
+<tr><td><code>-old-syntax</code></td><td>Require <code>(...)</code> around conditions.</td></tr>
+<tr><td><code>-pagewidth</code></td><td>Set page width Default: 80.</td></tr>
+<tr><td><code>-print-lines</code></td><td>Show source code line numbers.</td></tr>
+<tr><td><code>-print-tasty</code></td><td>Prints the raw tasty.</td></tr>
+<tr><td><code>-project</code></td><td>The name of the project.</td></tr>
+<tr><td><code>-project-logo</code></td><td>The file that contains the project's logo (in /images).</td></tr>
+<tr><td><code>-project-url</code></td><td>The source repository of your project.</td></tr>
+<tr><td><code>-project-version</code></td><td>The current version of your project.</td></tr>
+<tr><td><code>-rewrite</code></td><td>When used in conjunction with a <code>...-migration</code> source version, rewrites sources to migrate to new version.</td></tr>
+<tr><td><code>-siteroot</code></td><td>A directory containing static files from which to generate documentation. Default: ./docs.</td></tr>
+<tr><td><code>-sourceroot</code></td><td>Specify workspace root directory. Default: ..</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="advanced-settings"></a><a href="#advanced-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced settings</h2>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Xignore-scala2-macros</code></td><td>Ignore errors when compiling code that calls Scala2 macros, these will fail at runtime.</td></tr>
+<tr><td><code>-Ximport-suggestion-timeout</code></td><td>Timeout (in ms) for searching for import suggestions when errors are reported.</td></tr>
+<tr><td><code>-Xmax-inlined-trees</code></td><td>Maximal number of inlined trees. Default: 2000000</td></tr>
+<tr><td><code>-Xmax-inlines</code></td><td>Maximal number of successive inlines. Default: 32.</td></tr>
+<tr><td><code>-Xprint-diff</code></td><td>Print changed parts of the tree since last print.</td></tr>
+<tr><td><code>-Xprint-diff-del</code></td><td>Print changed parts of the tree since last print including deleted parts.</td></tr>
+<tr><td><code>-Xprint-inline</code></td><td>Show where inlined code comes from.</td></tr>
+<tr><td><code>-Xprint-suspension</code></td><td>Show when code is suspended until macros are compiled.</td></tr>
+<tr><td><code>-Xrepl-disable-display</code></td><td>Do not display definitions in REPL.</td></tr>
+<tr><td><code>-Xwiki-syntax</code></td><td>Retains the Scala2 behavior of using Wiki Syntax in Scaladoc.</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="private-settings"></a><a href="#private-settings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Private settings</h2>
+<table>
+<thead>
+<tr><th>3.0.x</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-Ycheck-all-patmat</code></td><td>Check exhaustivity and redundancy of all pattern matching (used for testing the algorithm).</td></tr>
+<tr><td><code>-Ycheck-mods</code></td><td>Check that symbols and their defining trees have modifiers in sync.</td></tr>
+<tr><td><code>-Ycheck-reentrant</code></td><td>Check that compiled program does not contain vars that can be accessed from a global root.</td></tr>
+<tr><td><code>-Ycook-comments</code></td><td>Cook the comments (type check <code>@usecase</code>, etc.)</td></tr>
+<tr><td><code>-Ydebug-error</code></td><td>Print the stack trace when any error is caught.</td></tr>
+<tr><td><code>-Ydebug-flags</code></td><td>Print all flags of definitions.</td></tr>
+<tr><td><code>-Ydebug-missing-refs</code></td><td>Print a stacktrace when a required symbol is missing.</td></tr>
+<tr><td><code>-Ydebug-names</code></td><td>Show internal representation of names.</td></tr>
+<tr><td><code>-Ydebug-pos</code></td><td>Show full source positions including spans.</td></tr>
+<tr><td><code>-Ydebug-trace</code></td><td>Trace core operations.</td></tr>
+<tr><td><code>-Ydebug-tree-with-id</code></td><td>Print the stack trace when the tree with the given id is created. Default: -2147483648.</td></tr>
+<tr><td><code>-Ydebug-type-error</code></td><td>Print the stack trace when a TypeError is caught</td></tr>
+<tr><td><code>-Ydetailed-stats</code></td><td>Show detailed internal compiler stats (needs Stats.enabled to be set to true).</td></tr>
+<tr><td><code>-YdisableFlatCpCaching</code></td><td>Do not cache flat classpath representation of classpath elements from jars across compiler instances.</td></tr>
+<tr><td><code>-Ydrop-comments</code></td><td>Drop comments when scanning source files.</td></tr>
+<tr><td><code>-Ydump-sbt-inc</code></td><td>For every compiled foo.scala, output the API representation and dependencies used for sbt incremental compilation in foo.inc, implies -Yforce-sbt-phases.</td></tr>
+<tr><td><code>-Yerased-terms</code></td><td>Allows the use of erased terms.</td></tr>
+<tr><td><code>-Yexplain-lowlevel</code></td><td>When explaining type errors, show types at a lower level.</td></tr>
+<tr><td><code>-Yexplicit-nulls</code></td><td>Make reference types non-nullable. Nullable types can be expressed with unions: e.g. String|Null.</td></tr>
+<tr><td><code>-Yforce-sbt-phases</code></td><td>Run the phases used by sbt for incremental compilation (ExtractDependencies and ExtractAPI) even if the compiler is ran outside of sbt, for debugging.</td></tr>
+<tr><td><code>-Yfrom-tasty-ignore-list</code></td><td>List of <code>tasty</code> files in jar files that will not be loaded when using -from-tasty</td></tr>
+<tr><td><code>-Yindent-colons</code></td><td>Allow colons at ends-of-lines to start indentation blocks.</td></tr>
+<tr><td><code>-Yinstrument</code></td><td>Add instrumentation code that counts allocations and closure creations.</td></tr>
+<tr><td><code>-Yinstrument-defs</code></td><td>Add instrumentation code that counts method calls; needs -Yinstrument to be set, too.</td></tr>
+<tr><td><code>-Yno-decode-stacktraces</code></td><td>how raw StackOverflow stacktraces, instead of decoding them into triggering operations.</td></tr>
+<tr><td><code>-Yno-deep-subtypes</code></td><td>Throw an exception on deep subtyping call stacks.</td></tr>
+<tr><td><code>-Yno-double-bindings</code></td><td>Assert no namedtype is bound twice (should be enabled only if program is error-free).</td></tr>
+<tr><td><code>-Yno-kind-polymorphism</code></td><td>Disable kind polymorphism.</td></tr>
+<tr><td><code>-Yno-patmat-opt</code></td><td>Disable all pattern matching optimizations.</td></tr>
+<tr><td><code>-Yplain-printer</code></td><td>Pretty-print using a plain printer.</td></tr>
+<tr><td><code>-Yprint-debug</code></td><td>When printing trees, print some extra information useful for debugging.</td></tr>
+<tr><td><code>-Yprint-debug-owners</code></td><td>When printing trees, print owners of definitions.</td></tr>
+<tr><td><code>-Yprint-pos</code></td><td>Show tree positions.</td></tr>
+<tr><td><code>-Yprint-pos-syms</code></td><td>Show symbol definitions positions.</td></tr>
+<tr><td><code>-Yprint-syms</code></td><td>When printing trees print info in symbols instead of corresponding info in trees.</td></tr>
+<tr><td><code>-Yrequire-targetName</code></td><td>Warn if an operator is defined without a @targetName annotation</td></tr>
+<tr><td><code>-Yretain-trees</code></td><td>Retain trees for top-level classes, accessible from ClassSymbol#tree</td></tr>
+<tr><td><code>-Yscala2-unpickler</code></td><td>Control where we may get Scala 2 symbols from. This is either &quot;always&quot;, &quot;never&quot;, or a classpath. Default: always.</td></tr>
+<tr><td><code>-Yshow-print-errors</code></td><td>Don't suppress exceptions thrown during tree printing.</td></tr>
+<tr><td><code>-Yshow-suppressed-errors</code></td><td>Also show follow-on errors and warnings that are normally suppressed.</td></tr>
+<tr><td><code>-Yshow-tree-ids</code></td><td>Uniquely tag all tree nodes in debugging output.</td></tr>
+<tr><td><code>-Yshow-var-bounds</code></td><td>Print type variables with their bounds.</td></tr>
+<tr><td><code>-Ytest-pickler</code></td><td>Self-test for pickling functionality; should be used with -Ystop-after:pickler.</td></tr>
+<tr><td><code>-Yunsound-match-types</code></td><td>Use unsound match type reduction algorithm.</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/compiler-options/compiler-options-table.html"><span class="arrow-prev">← </span><span>Compiler Options Table</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/macros/macro-libraries.html"><span>Scala Macro Libraries</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#standard-settings">Standard settings</a></li><li><a href="#advanced-settings">Advanced settings</a></li><li><a href="#private-settings">Private settings</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
+                /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
+                /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'f77e0c381ea8939fc6c34dc0e17ea492',
+                indexName: 'scala-3-migration-guide',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
