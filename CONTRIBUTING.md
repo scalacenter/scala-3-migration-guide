@@ -4,28 +4,29 @@ Migration to Scala 3 will eventually concern each and every member of the Scala 
 
 Collaboration is key to make the migration a success.
 
-We encourage you to contribute to this guide in any of these ways.
+There are lots of ways to contribute to the Scala 3 migration:
+- Proof-read the migration guide
+- Fix the typos and improve the poor wording
+- Migrate your projects and share your feedback
+- Report missing incompatibilities
+- Report missing macro libraries
 
 ## Share your feedback
 
 Your experience in migrating to Scala 3, whether it is bad or pleasant, is valuable to the community.
 
-You can share it on one of the [Scala community channels](https://www.scala-lang.org/community/).
+You can share it [here](https://github.com/scalacenter/scala-3-migration-guide/discussions)!
 
-If you have identified a clear issue that someone might be able to solve but you don't know where to report, please do it in this repository.
+## Issues and Pull Requests
 
-It is also important for us to know what tools might be improved.
+If you have found a typo, a missing incompatibility or a missing macro library, please [open an issue](https://github.com/scalacenter/scala-3-migration-guide/issues).
 
-## Make this guide more user-friendly
+You are also invited to clone [the repository](https://github.com/scalacenter/scala-3-migration-guide) and to open a pull-request.
+This will greatly help us and make things move faster. 
 
-Help us to make this guide more user-friendly by reporting an issue or, even better, submitting a PR.
+## Github Discussions
 
-## Share your knowledge
+You have a question to ask, or an idea to share with us.
+You want to notify us about something, to promote your work realted to the Scala 3 migration.
 
-The knowledge about migration is distributed among a number of people and organizations.
-
-You may be in possession of some of this knowledge. Please help us to fill the gap by submitting a PR.
-
-## Implement the missing part
-
-You are convinced there is a missing part in the migration ecosystem. You are encouraged to implement it and to notify us. 
+Please do so by creating a new [Github Discussion](https://github.com/scalacenter/scala-3-migration-guide/discussions)
