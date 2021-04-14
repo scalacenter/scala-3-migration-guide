@@ -136,7 +136,7 @@ object Macros:
 ## 3. Implement the Scala 3 macro
 
 There is no magic formula to port a Scala 2 macro into Scala 3.
-One needs to learn about the available new [metaprogramming features](../general/metaprogramming.md).
+One needs to learn about the available new [metaprogramming features](../compatibility/metaprogramming.md).
 
 We eventually come up with this implementation:
 

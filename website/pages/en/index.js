@@ -83,7 +83,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
-            <Button href={docUrl("general/compatibility.html", language)}>
+            <Button href={docUrl("compatibility/introduction.html", language)}>
               Get started
             </Button>
           </PromoSection>
@@ -104,7 +104,7 @@ const Compatibility = () => (
         image: `${imgUrl('puzzle-primary.svg')}`,
         imageAlt: 'Icon made by Nikita Kozin from the Noun Project',
         imageAlign: 'left',
-        title: `[Compatibility](${docUrl('general/compatibility.html')})`,
+        title: `[Compatibility](${docUrl('compatibility/introduction.html')})`,
       },
     ]}
   </Block>
@@ -134,7 +134,7 @@ const Metaprogramming = () => (
           'Scala 3 provides a toolbox full of metaprogramming features, which are safer, more robust, and much more stable than their counterparts in Scala 2. ' +
           'Implementing macro libraries in Scala 3 is simpler and the resulting libraries are easier to maintain across future versions of Scala. ' +
           'The improvements come at a price: existing macro libraries need to be re-implemented.',
-        title: `[Metaprogramming](${docUrl('general/metaprogramming.html')})`,
+        title: `[Metaprogramming](${docUrl('compatibility/metaprogramming.html')})`,
         image: `${imgUrl('magnifying-primary.svg')}`,
         imageAlt: 'Icon made by Eucalyp from the Noun Project.',
         imageAlign: 'left',

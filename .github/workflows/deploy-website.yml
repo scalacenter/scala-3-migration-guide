@@ -2,7 +2,6 @@ name: Deploy Website
 on:
   push:
     branches: [main]
-    tags: ["*"]
 jobs:
   publish:
     runs-on: ubuntu-latest

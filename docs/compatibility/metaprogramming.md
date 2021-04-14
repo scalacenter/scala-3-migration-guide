@@ -3,33 +3,49 @@ id: metaprogramming
 title: Metaprogramming
 ---
 
-The Scala 2 macros are compiler-dependent by design.
-A macro compiled by one version of the compiler cannot be used by another version of the compiler.
+A macro is a method that is executed during compilation to produce the code of the program.
 
-Scala 3 is overcoming this limitation by introducing a new principled approach of metaprogramming.
-While this is an uncontested improvement, it also means that previous macro implementations have to be rewritten from the ground up.
+The Scala 2.13 macro API is closely tied to the Scala 2.13 compiler internals.
+Therefore it is not possible for the Scala 3 compiler to expand any Scala 2.13 macro.
 
-## State of the Macro Ecosystem
+In contrast, Scala 3 introduce a new principled approach of metaprogramming that is designed for stability.
+All Scala 3 macros will be compatible with future versions of the Scala 3 compiler.
+While this is an uncontested improvement, it also means that Scala 2.13 macro implementations have to be rewritten from the ground up.
 
-Some of the most used macro libraries have already been migrated to Scala 3.
-Check the list of [Scala macro libraries](../macros/macro-libraries.md).
+## Macro Dependencies
+
+#### A Scala 3 module cannot depend on a Scala 2.13 macro
+
+The Scala 3 compiler cannot execute a macro defined in a Scala 2.13 artifact.
+
+![Not working](assets/compatibility/3toMacro2.svg)
+
+But a Scala 3 module can depend on a Scala 2.13 artifact whose compilation has involved a Scala 2.13 macro expansion.
+
+![Transitive macro dependency](assets/compatibility/3toMacro2bis.svg)
+
+#### A Scala 2.13 module cannot depend on a Scala 3 macro
+
+The Scala 2.13 compiler cannot execute a macro defined in a Scala 3 artifact.
+
+![Not working](assets/compatibility/2toMacro3.svg)
+
+But a Scala 2.13 module can depend on a Scala 3 artifact whose compilation has involved a Scala 3 macro expansion.
+
+![Transitive macro dependency](assets/compatibility/2toMacro3bis.svg)
+
+> The macro can be defined inside the Scala 3 module that consumes it.
 
 ## Before Rewriting a Macro
 
 Before getting deep into reimplementing a macro you should check if it can be supported using Scala 3 new features.
-
 - Can I encode the logic of the macro using the new scala 3 features?
 - Can I use *match types* to reimplement the interface of my macro?
 - Can I use `inline` and the metaprogramming features in `scala.compiletime` to reimplement my logic?
 - Can I use the simpler and safer expression based macros to implement my macro?
-- Do I really need to have access to the raw AST trees?
+- Do I really need to access the Abstract Syntax Trees?
 
-## Macro Reference and Tutorial
-
-You can find the references to these new concepts in the [Scala 3 Reference](https://dotty.epfl.ch/docs/reference/metaprogramming/toc.html) website.
-
-Or you can opt for a more pratical approach by following the [Macro Tutorial](https://docs.scala-lang.org/scala3/guides/macros/).
-It shows and explains how to use these features:
+You can learn the new metaprogramming concepts by reading the [Macro Tutorial](https://docs.scala-lang.org/scala3/guides/macros/):
 - [Inline](https://docs.scala-lang.org/scala3/guides/macros/inline.html)
 - [Compile-time operations](https://docs.scala-lang.org/scala3/guides/macros/compiletime.html)
 - [Macros](https://docs.scala-lang.org/scala3/guides/macros/macros.html)
