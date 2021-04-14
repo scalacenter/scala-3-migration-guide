@@ -169,7 +169,7 @@ for Scala 3.
 **Usage:** `migrate-scalacOptions projectId` where projectId is the name of the module chosen to be migrated.
 
 First run the command `migrate-scalacOptions`.
-This command rely directly on this [section](../tutorials/scalacoptions-migration.md).
+This command is based on the [Compiler Options Table](../compiler-options/compiler-options-table.md).
 ```scala
 > migrate-scalacOptions main
 [info]
@@ -261,7 +261,7 @@ The command `migrate-syntax` fixes some incompatibilities by applying the follow
 - fix.scala213.ExplicitNonNullaryApply
 - fix.scala213.Any2StringAdd
 
-For more information on the fixed incompatibilities, please refer to the [incomatibility table](../general/incompatibility-table.md).
+For more information on the fixed incompatibilities, please refer to the [Incompatibility Table](../incompatibilities/incompatibility-table.md).
 
 Let's run the command `migrate-syntax`. If there are changes after this command, it's better if you **create a commit for those.** 
 ```shell
@@ -288,8 +288,8 @@ Let's run the command `migrate-syntax`. If there are changes after this command,
 **Usage:** `migrate projectId` where projectId is the name of the module chosen to be migrated
 
 Scala 3 uses a new type inference algorithm, therefore the Scala 3.0 compiler can infer a different
-type than the one inferred by the Scala 2.13 (for more information, read [the type inference section](../general/incompatibility-table.md#type-inference)). 
-This command goal is to find the necessary types to add in order to make you code compiles.
+type than the one inferred by the Scala 2.13. 
+This command goal is to find the necessary types in order to make your code compiles.
 
 If the libraries has not been ported correctly, running `migrage projectId` will fail reporting the problematic libraries.
 ```shell

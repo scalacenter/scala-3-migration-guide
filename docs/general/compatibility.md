@@ -14,7 +14,7 @@ Not all of it though, some constructs have been simplified, restricted or droppe
 However those decisions were made for good reasons and by taking care that a good workaround is possible.
 
 In general there is a straightforward cross-compiling solution for every incompatibility, so that the migration from Scala 2.13 to Scala 3 is easy and smooth.
-You can find a corpus of incompatibilities in the [next page](incompatibility-table.md).
+You can find a corpus of incompatibilities in the [Incompatibility Table](../incompatibilities/incompatibility-table.md).
 
 There is an exception though, which is the new metaprogramming framework that replaces the Scala 2 experimental macros.
 Further explanations are given down below.
@@ -36,17 +36,17 @@ In Scala 2 the signatures are stored in a dedicated format called the Pickle for
 In Scala 3 the story is a bit different because it relies on the TASTy format which is a lot more than a signature layout.
 But, for the purpose of migrating from Scala 2.13 to Scala 3, only the signatures are useful.
 
-### The Scala 3 Unpicklers
+### The Scala 3 Unpickler
 
-The first piece of good news is that the Scala 3 compiler is already able to read both formats (the Scala 2.13 Pickle format and the TASTy format) and thus it can type check code that depends on modules or libraries compiled by Scala 2.13 or Scala 3.
+The first piece of good news is that the Scala 3 compiler is able to read the Scala 2.13 Pickle format and thus it can type check code that depends on modules or libraries compiled by Scala 2.13.
 
-> These unpicklers have been extensively tested in the Scala 3 community build. They are safe to use.
+> This unpickler have been extensively tested in the Scala 3 community build. They are safe to use.
 
 ### The Scala 2.13 TASTy Reader
 
 The second piece of good news is that the Scala 2.13 TASTy reader, which enables consuming Scala 3 libraries in Scala 2.13 has been shipped into Scala `@scala213@`.
 
-> The TASTy reader is very new. As such it is available under the `-Ytasty-reader` flag.
+> The TASTy reader is very new. That's why it is  only available under the `-Ytasty-reader` flag.
 
 It supports all the traditional constructs as well as the following new features:
 - [Enumerations](http://dotty.epfl.ch/docs/reference/enums/enums.html)

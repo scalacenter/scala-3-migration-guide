@@ -29,55 +29,55 @@ The following table contains an incomplete list of macro libraries and their mig
 
 | Project | Status | Comments |
 |-|-|-|
-| [adamw/scala-macro-debug](https://index.scala-lang.org/adamw/scala-macro-debug) | <i class="fas fa-times fa-lg"/> | |
-| [ajozwik/quill-generic](https://index.scala-lang.org/ajozwik/quill-generic) | <i class="fas fa-times fa-lg"/> | |
-| [argonaut-io/argonaut](https://index.scala-lang.org/argonaut-io/argonaut) | <i class="fas fa-check  fa-lg"/> | Since version `6.3.2` |
-| [backuity/ansi-interpolator](https://index.scala-lang.org/backuity/ansi-interpolator) | <i class="fas fa-times fa-lg"/> | |
-| [christopherdavenport/log4cats](https://index.scala-lang.org/ChristopherDavenport/log4cats) | <i class="fas fa-times fa-lg"/> | |
-| [circe/circe](https://index.scala-lang.org/circe/circe) | <i class="fas fa-times fa-lg"/> | `circe-parser` and other modules not yet ported |
-| [dmytromitin/auxify](https://index.scala-lang.org/dmytromitin/auxify) | <i class="fas fa-times fa-lg"/> | |
+| [adamw/scala-macro-debug](https://index.scala-lang.org/adamw/scala-macro-debug) | <i class="fas fa-times fa-lg"></i> | |
+| [ajozwik/quill-generic](https://index.scala-lang.org/ajozwik/quill-generic) | <i class="fas fa-times fa-lg"></i> | |
+| [argonaut-io/argonaut](https://index.scala-lang.org/argonaut-io/argonaut) | <i class="fas fa-check  fa-lg"></i> | Since version `6.3.2` |
+| [backuity/ansi-interpolator](https://index.scala-lang.org/backuity/ansi-interpolator) | <i class="fas fa-times fa-lg"></i> | |
+| [christopherdavenport/log4cats](https://index.scala-lang.org/ChristopherDavenport/log4cats) | <i class="fas fa-times fa-lg"></i> | |
+| [circe/circe](https://index.scala-lang.org/circe/circe) | <i class="fas fa-times fa-lg"></i> | `circe-parser` and other modules not yet ported |
+| [dmytromitin/auxify](https://index.scala-lang.org/dmytromitin/auxify) | <i class="fas fa-times fa-lg"></i> | |
 | [fthomas/refined](https://index.scala-lang.org/fthomas/refined) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | refined macros not yet available |
-| [jokade/slogging](https://index.scala-lang.org/jokade/slogging) | <i class="fas fa-times fa-lg"/> | |
-| [getquill/quill](https://index.scala-lang.org/getquill/quill/) | <i class="fas fa-times fa-lg"/> | |
-| [giiita/refuel](https://index.scala-lang.org/giiita/refuel/) | <i class="fas fa-times fa-lg"/> | |
-| [lightbend/scala-logging](https://index.scala-lang.org/lightbend/scala-logging) |  <i class="fas fa-times fa-lg"/> | |
-| [lihaoyi/autowire](https://index.scala-lang.org/lihaoyi/autowire) |  <i class="fas fa-times fa-lg"/> | |
-| [lihaoyi/fastparse](https://index.scala-lang.org/lihaoyi/fastparse) |  <i class="fas fa-times fa-lg"/> | |
-| [lihaoyi/pprint](https://index.scala-lang.org/lihaoyi/pprint) | <i class="fas fa-check  fa-lg"/> | Since version `0.6.0` |
-| [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check  fa-lg"/> | Since version `0.1.8` |
-| [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check  fa-lg"/> | Since version `1.2.0` |
-| [lihaoyi/utest](https://index.scala-lang.org/lihaoyi/utest) | <i class="fas fa-check  fa-lg"/> | Since version `0.7.3` |
-| [lloydmeta/enumeratum](https://index.scala-lang.org/lloydmeta/enumeratum) | <i class="fas fa-times fa-lg"/> | |
-| [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <i class="fas fa-check  fa-lg"/> | Since version `1.10.0-M1` |
-| [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"/> | |
+| [jokade/slogging](https://index.scala-lang.org/jokade/slogging) | <i class="fas fa-times fa-lg"></i> | |
+| [getquill/quill](https://index.scala-lang.org/getquill/quill/) | <i class="fas fa-times fa-lg"></i> | |
+| [giiita/refuel](https://index.scala-lang.org/giiita/refuel/) | <i class="fas fa-times fa-lg"></i> | |
+| [lightbend/scala-logging](https://index.scala-lang.org/lightbend/scala-logging) |  <i class="fas fa-times fa-lg"></i> | |
+| [lihaoyi/autowire](https://index.scala-lang.org/lihaoyi/autowire) |  <i class="fas fa-times fa-lg"></i> | |
+| [lihaoyi/fastparse](https://index.scala-lang.org/lihaoyi/fastparse) |  <i class="fas fa-times fa-lg"></i> | |
+| [lihaoyi/pprint](https://index.scala-lang.org/lihaoyi/pprint) | <i class="fas fa-check fa-lg"></i> | Since version `0.6.0` |
+| [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check fa-lg"></i> | Since version `0.1.8` |
+| [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check fa-lg"></i> | Since version `1.2.0` |
+| [lihaoyi/utest](https://index.scala-lang.org/lihaoyi/utest) | <i class="fas fa-check fa-lg"></i> | Since version `0.7.3` |
+| [lloydmeta/enumeratum](https://index.scala-lang.org/lloydmeta/enumeratum) | <i class="fas fa-times fa-lg"></i> | |
+| [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <i class="fas fa-check fa-lg"></i> | Since version `1.10.0-M1` |
+| [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"></i> | |
 | [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Shapeless 3<br/>Milestone available ([Early Preview](https://github.com/milessabin/shapeless/tree/shapeless-3)) |
-| [monix/minitest](https://index.scala-lang.org/monix/minitest) | <i class="fas fa-check  fa-lg"/> | Since `2.9.0` |
-| [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"/> | `macros` module not available for Scala 3.0 |
-| [nevillelyh/parquet-avro-extra](https://index.scala-lang.org/nevillelyh/parquet-avro-extra) |  <i class="fas fa-times fa-lg"/> | |
-| [non/imp](https://index.scala-lang.org/non/imp) |  <i class="fas fa-times fa-lg"/> | |
-| [playframework/play-json](https://index.scala-lang.org/playframework/play-json) | <i class="fas fa-times fa-lg"/> | |
-| [plokhotnyuk/expression-evaluator](https://index.scala-lang.org/plokhotnyuk/expression-evaluator) | <i class="fas fa-times fa-lg"/> | No replacement for `Evals.eval` |
-| [plokhotnyuk/fast-string-interpolator](https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator) | <i class="fas fa-times fa-lg"/> | |
-| [plokhotnyuk/jsoniter-scala](https://index.scala-lang.org/plokhotnyuk/jsoniter-scala) | <i class="fas fa-times fa-lg"/> | No replacement for `Evals.eval` |
-| [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <i class="fas fa-times fa-lg"/> | |
-| [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-times fa-lg"/> | |
-| [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-times fa-lg"/> | |
-| [scalalandio/chimney](https://index.scala-lang.org/scalalandio/chimney) | <i class="fas fa-times fa-lg"/> | |
-| [scalameta/munit](https://index.scala-lang.org/scalameta/munit) | <i class="fas fa-check fa-lg"/> | Since `0.3.0` |
-| [scalatest/scalatest](https://index.scala-lang.org/scalatest/scalatest) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
-| [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"/> | Since version `3.1.0` |
-| [scodec/scodec-bits](https://index.scala-lang.org/scodec/scodec-bits) | <i class="fas fa-check fa-lg"/> | Since version `1.1.18` |
-| [sirthias/parboiled2](https://index.scala-lang.org/sirthias/parboiled2) | <i class="fas fa-times fa-lg"/> | |
-| [sirthias/borer](https://index.scala-lang.org/sirthias/borer) | <i class="fas fa-times fa-lg"/> | |
-| [slick/slick](https://index.scala-lang.org/slick/slick) | <i class="fas fa-times fa-lg"/> | |
-| [softwaremill/macwire](https://index.scala-lang.org/softwaremill/macwire) | <i class="fas fa-times fa-lg"/> | |
-| [thoughtworksinc/each](https://index.scala-lang.org/thoughtworsinc/each) | <i class="fas fa-times fa-lg"/> | |
-| [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"/> | |
-| [typelevel/spire](https://index.scala-lang.org/typelevel/spire) |  <i class="fas fa-times fa-lg"/> | |
-| [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"/> | |
-| [wvlet/airframe](https://index.scala-lang.org/wvlet/airframe) |  <i class="fas fa-check fa-lg"/> | Since version [`20.12.1`](https://wvlet.org/airframe/docs/release-notes#20121) |
-| [zio/izumi-reflect](https:://index.scala-lang.org/zio/izumi-reflect) | <i class="fas fa-check fa-lg"/> | Does not yet support path-dependent type  |
-| [zio/zio](https://index.scala-lang.org/zio/zio) | <i class="fas fa-check fa-lg"/> | Since version [`1.0.4`](https://github.com/zio/zio/releases/tag/v1.0.4) |
+| [monix/minitest](https://index.scala-lang.org/monix/minitest) | <i class="fas fa-check fa-lg"></i> | Since `2.9.0` |
+| [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"></i> | `macros` module not available for Scala 3.0 |
+| [nevillelyh/parquet-avro-extra](https://index.scala-lang.org/nevillelyh/parquet-avro-extra) |  <i class="fas fa-times fa-lg"></i> | |
+| [non/imp](https://index.scala-lang.org/non/imp) |  <i class="fas fa-times fa-lg"></i> | |
+| [playframework/play-json](https://index.scala-lang.org/playframework/play-json) | <i class="fas fa-times fa-lg"></i> | |
+| [plokhotnyuk/expression-evaluator](https://index.scala-lang.org/plokhotnyuk/expression-evaluator) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
+| [plokhotnyuk/fast-string-interpolator](https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator) | <i class="fas fa-times fa-lg"></i> | |
+| [plokhotnyuk/jsoniter-scala](https://index.scala-lang.org/plokhotnyuk/jsoniter-scala) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
+| [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <i class="fas fa-times fa-lg"></i> | |
+| [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-times fa-lg"></i> | |
+| [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-times fa-lg"></i> | |
+| [scalalandio/chimney](https://index.scala-lang.org/scalalandio/chimney) | <i class="fas fa-times fa-lg"></i> | |
+| [scalameta/munit](https://index.scala-lang.org/scalameta/munit) | <i class="fas fa-check fa-lg"></i> | Since `0.3.0` |
+| [scalatest/scalatest](https://index.scala-lang.org/scalatest/scalatest) | <i class="fas fa-check fa-lg"></i> | Since version `3.1.0` |
+| [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"></i> | Since version `3.1.0` |
+| [scodec/scodec-bits](https://index.scala-lang.org/scodec/scodec-bits) | <i class="fas fa-check fa-lg"></i> | Since version `1.1.18` |
+| [sirthias/parboiled2](https://index.scala-lang.org/sirthias/parboiled2) | <i class="fas fa-times fa-lg"></i> | |
+| [sirthias/borer](https://index.scala-lang.org/sirthias/borer) | <i class="fas fa-times fa-lg"></i> | |
+| [slick/slick](https://index.scala-lang.org/slick/slick) | <i class="fas fa-times fa-lg"></i> | |
+| [softwaremill/macwire](https://index.scala-lang.org/softwaremill/macwire) | <i class="fas fa-times fa-lg"></i> | |
+| [thoughtworksinc/each](https://index.scala-lang.org/thoughtworsinc/each) | <i class="fas fa-times fa-lg"></i> | |
+| [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"></i> | |
+| [typelevel/spire](https://index.scala-lang.org/typelevel/spire) |  <i class="fas fa-times fa-lg"></i> | |
+| [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"></i> | |
+| [wvlet/airframe](https://index.scala-lang.org/wvlet/airframe) |  <i class="fas fa-check fa-lg"></i> | Since version [`20.12.1`](https://wvlet.org/airframe/docs/release-notes#20121) |
+| [zio/izumi-reflect](https:://index.scala-lang.org/zio/izumi-reflect) | <i class="fas fa-check fa-lg"></i> | Does not yet support path-dependent type  |
+| [zio/zio](https://index.scala-lang.org/zio/zio) | <i class="fas fa-check fa-lg"></i> | Since version [`1.0.4`](https://github.com/zio/zio/releases/tag/v1.0.4) |
 
 If you find any macro library that is not listed here you are invited to [open an issue](https://github.com/scalacenter/scala-3-migration-guide/issues).
 
@@ -89,9 +89,9 @@ Scala 3 compatible alternatives are proposed when available.
 
 | Project | Alternative Solutions |
 |-|-|
-| [dmytromitin/auxify](https://index.scala-lang.org/dmytromitin/auxify) | <i class="fas fa-times fa-lg"/> |
-| [julianpeeters/avro-scala-macro-annotations](https://index.scala-lang.org/julianpeeters/avro-scala-macro-annotations) | <i class="fas fa-times fa-lg"/> |
-| [manatki/derevo](https://index.scala-lang.org/manatki/derevo) | <i class="fas fa-times fa-lg"/> |
+| [dmytromitin/auxify](https://index.scala-lang.org/dmytromitin/auxify) | <i class="fas fa-times fa-lg"></i> |
+| [julianpeeters/avro-scala-macro-annotations](https://index.scala-lang.org/julianpeeters/avro-scala-macro-annotations) | <i class="fas fa-times fa-lg"></i> |
+| [manatki/derevo](https://index.scala-lang.org/manatki/derevo) | <i class="fas fa-times fa-lg"></i> |
 | [typelevel/simulacrum](https://index.scala-lang.org/typelevel/simulacrum) | <i class="fas fa-check fa-lg"></i> Source generation using [simulacrum-scalafix](https://index.scala-lang.org/typelevel/simulacrum-scalafix/simulacrum-scalafix/0.5.0?target=_2.12) |
 
 [Contributors welcome!](../contributing.md)
