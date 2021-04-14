@@ -33,13 +33,13 @@ Some of the old syntax is not supported anymore.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Restricted keywords](../incompatibilities/syntactic-changes.md#restricted-keywords)||✅||The Scala 3 rule does not handle all cases|
-|[Procedure syntax](../incompatibilities/syntactic-changes.md#procedure-syntax)|Deprecation|✅|✅||
-|[Parentheses around lambda parameter](../incompatibilities/syntactic-changes.md#parentheses-around-lambda-parameter)||✅|✅||
-|[Open brace indentation for passing an argument](../incompatibilities/syntactic-changes.md#open-brace-indentation-for-passing-an-argument)||✅|||
-|[Wrong indentation](../incompatibilities/syntactic-changes.md#wrong-indentation)||||Can be handled by a code formatting tool|
-|[`_` as a type parameter](../incompatibilities/syntactic-changes.md#--as-a-type-parameter)|||||
-|[`+` and `-` as type parameters](../incompatibilities/syntactic-changes.md#-and---as-type-parameters)|||||
+|[Restricted keywords](syntactic-changes.md#restricted-keywords)||✅||The Scala 3 rule does not handle all cases|
+|[Procedure syntax](syntactic-changes.md#procedure-syntax)|Deprecation|✅|✅||
+|[Parentheses around lambda parameter](syntactic-changes.md#parentheses-around-lambda-parameter)||✅|✅||
+|[Open brace indentation for passing an argument](syntactic-changes.md#open-brace-indentation-for-passing-an-argument)||✅|||
+|[Wrong indentation](syntactic-changes.md#wrong-indentation)||||Can be handled by a code formatting tool|
+|[`_` as a type parameter](syntactic-changes.md#--as-a-type-parameter)|||||
+|[`+` and `-` as type parameters](syntactic-changes.md#-and---as-type-parameters)|||||
 
 ### Dropped Features
 
@@ -47,13 +47,13 @@ Some features are dropped to simplify the language.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Symbol literals](../incompatibilities/dropped-features.md#symbol-literals)|Deprecation|✅|||
-|[`do`-`while` construct](../incompatibilities/dropped-features.md#do-while-construct)||✅|||
-|[Auto-application](../incompatibilities/dropped-features.md#auto-application)|Deprecation|✅|✅||
-|[Value eta-expansion](../incompatibilities/dropped-features.md#value-eta-expansion)|Deprecation|✅|✅||
-|[`any2stringadd` conversion](../incompatibilities/dropped-features.md#any2stringadd-conversion)|Deprecation||✅||
-|[Early initializer](../incompatibilities/dropped-features.md#early-initializer)|Deprecation||||
-|[Existential type](../incompatibilities/dropped-features.md#existential-type)|Feature warning||||
+|[Symbol literals](dropped-features.md#symbol-literals)|Deprecation|✅|||
+|[`do`-`while` construct](dropped-features.md#do-while-construct)||✅|||
+|[Auto-application](dropped-features.md#auto-application)|Deprecation|✅|✅||
+|[Value eta-expansion](dropped-features.md#value-eta-expansion)|Deprecation|✅|✅||
+|[`any2stringadd` conversion](dropped-features.md#any2stringadd-conversion)|Deprecation||✅||
+|[Early initializer](dropped-features.md#early-initializer)|Deprecation||||
+|[Existential type](dropped-features.md#existential-type)|Feature warning||||
 
 ### Contextual Abstractions
 
@@ -61,10 +61,10 @@ The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/c
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Type of implicit def](../incompatibilities/contextual-abstractions.md#type-of-implicit-definition)|||✅||
-|[Implicit views](../incompatibilities/contextual-abstractions.md#implicit-views)||||Possible runtime incompatibility|
-|[View bounds](../incompatibilities/contextual-abstractions.md#view-bounds)|Deprecation||||
-|[Ambiguous conversion on `A` and `=> A`](../incompatibilities/contextual-abstractions.md#ambiguous-conversion-on-a-and--a)|||||
+|[Type of implicit def](contextual-abstractions.md#type-of-implicit-definition)|||✅||
+|[Implicit views](contextual-abstractions.md#implicit-views)||||Possible runtime incompatibility|
+|[View bounds](contextual-abstractions.md#view-bounds)|Deprecation||||
+|[Ambiguous conversion on `A` and `=> A`](contextual-abstractions.md#ambiguous-conversion-on-a-and--a)|||||
 
 ### Other Changed Features
 
@@ -72,16 +72,16 @@ Some features are simplified or restricted to make the language easier and safer
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Inheritance shadowing](../incompatibilities/other-changed-features.md#inheritance-shadowing)||✅|||
-|[Abstract override](../incompatibilities/other-changed-features.md#abstract-override)|||||
-|[`ExprType` as value type](../incompatibilities/other-changed-features.md#exprtype-as-value-type)|||||
-|[Explicit call to unapply](../incompatibilities/other-changed-features.md#explicit-call-to-unapply)|||||
-|[Non-private constructor in private class](../incompatibilities/other-changed-features.md#non-private-constructor-in-private-class)||warning|||
-|[Reflective call](../incompatibilities/other-changed-features.md#reflective-call)||||Type inference problem|
-|[Wildcard type argument](../incompatibilities/other-changed-features.md#wildcard-type-argument)|||||
-|[Case class companion](../incompatibilities/other-changed-features.md#case-class-companion)|||||
-|[Unsoundness fixes in variance checks](../incompatibilities/other-changed-features.md#unsoundness-fixes-in-variance-checks)|||||
-|[Unsoundness fixes in pattern matching](../incompatibilities/other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
+|[Inheritance shadowing](other-changed-features.md#inheritance-shadowing)||✅|||
+|[Abstract override](other-changed-features.md#abstract-override)|||||
+|[`ExprType` as value type](other-changed-features.md#exprtype-as-value-type)|||||
+|[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
+|[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
+|[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
+|[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
+|[Case class companion](other-changed-features.md#case-class-companion)|||||
+|[Unsoundness fixes in variance checks](other-changed-features.md#unsoundness-fixes-in-variance-checks)|||||
+|[Unsoundness fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
 
 ### Implicit Resolution
 
@@ -107,4 +107,4 @@ This fundamental change in Scala 3 leads to a few incompatibilities:
 The Scala 3 compiler is not able to consume the Scala 2.13 macros.
 Under those circumstances it is necessary to re-implement the Scala 2.13 macros using the new Scala 3 metaprogramming features.
 
-You can go to the [Metaprogramming](metaprogramming.md) page to learn about the new metaprogramming features.
+You can go back to the [Metaprogramming](../general/metaprogramming.md) page to learn about the new metaprogramming features.

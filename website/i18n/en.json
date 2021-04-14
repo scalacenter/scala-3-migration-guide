@@ -5,6 +5,12 @@
     "previous": "Previous",
     "tagline": "An evolving guide to support the migration to Scala 3",
     "docs": {
+      "compiler-options/compiler-options-table": {
+        "title": "Compiler Options Table"
+      },
+      "compiler-options/new-compiler-options": {
+        "title": "New Scala 3 compiler options"
+      },
       "contributing": {
         "title": "Contributing"
       },
@@ -13,9 +19,6 @@
       },
       "general/compatibility": {
         "title": "Compatibility Reference"
-      },
-      "general/incompatibility-table": {
-        "title": "Incompatibility Table"
       },
       "general/metaprogramming": {
         "title": "Metaprogramming"
@@ -28,6 +31,9 @@
       },
       "incompatibilities/dropped-features": {
         "title": "Dropped Features"
+      },
+      "incompatibilities/incompatibility-table": {
+        "title": "Incompatibility Table"
       },
       "incompatibilities/other-changed-features": {
         "title": "Other Changed Features"
@@ -61,9 +67,6 @@
       },
       "tutorials/sbt-migration": {
         "title": "sbt Migration Tutorial"
-      },
-      "tutorials/scalacoptions-migration": {
-        "title": "Porting the scalacOptions"
       }
     },
     "links": {
@@ -76,6 +79,7 @@
       "Tooling": "Tooling",
       "Tutorials": "Tutorials",
       "Incompatibilities": "Incompatibilities",
+      "Compiler Options": "Compiler Options",
       "Resources": "Resources"
     }
   },

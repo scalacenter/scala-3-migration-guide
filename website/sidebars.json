@@ -2,7 +2,6 @@
   "docs": {
     "General": [
       "general/compatibility",
-      "general/incompatibility-table",
       "general/metaprogramming"
     ],
     "Tooling": [
@@ -19,10 +18,15 @@
       "tutorials/scalacoptions-migration"
     ],
     "Incompatibilities": [
+      "incompatibilities/incompatibility-table",
       "incompatibilities/syntactic-changes",
       "incompatibilities/dropped-features",
       "incompatibilities/contextual-abstractions",
       "incompatibilities/other-changed-features"
+    ],
+    "Compiler Options": [
+      "compiler-options/compiler-options-table",
+      "compiler-options/new-compiler-options"
     ],
     "Resources": [
       "macros/macro-libraries",

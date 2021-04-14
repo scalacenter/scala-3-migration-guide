@@ -91,7 +91,7 @@ sbt:example> test
 ## 5. Configure the Scala 3 Compiler
 
 The Scala 3 compiler options are different from the Scala 2.13 ones: some have been renamed, others are not yet supported.
-You can refer to the [Scalac Options Comparative](scalacoptions-migration.md) table to adapt your current list of `scalacOptions`.
+You can refer to the [Compiler Options Table](../compiler-options/compiler-options-table.md) to adapt your current list of `scalacOptions`.
 
 A typical configuration looks like this:
 ```scala
@@ -143,11 +143,11 @@ sbt:example> <project> / Test / compile
 
 The compiler produces diagnostics of two different levels:
 - *Error*: A piece of code cannot be compiled anymore.
-There are various reasons for those errors, that are listed in the [Incompatibility Table](../general/incompatibility-table.md).
+There are various reasons for those errors, that are listed in the [Incompatibility Table](../incompatibilities/incompatibility-table.md).
 - *Migration Warning*: These warnings can be automatically patched by the compiler with the `-rewrite` option.
 
-Each incompatibility in the [Incompatibility Table](../general/incompatibility-table.md) is linked to its description and proposed solutions.
-Try to find the most suitable solution for each Scala 3 error in your code.
+Each incompatibility in the [Incompatibility Table](../incompatibilities/incompatibility-table.md) is linked to its description and proposed solutions.
+Try to find the most suitable solution for each error in your code.
 In particular, if an error affects the public interface of your library, you should pick the solution that best preserves the binary compatibility.
 
 > The metaprogramming incompatibilities cannot be easily solved.
