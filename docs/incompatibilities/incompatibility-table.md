@@ -80,6 +80,7 @@ Some features are simplified or restricted to make the language easier and safer
 |[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
+|[Invisible Bean Property](other-changed-features.md#invisible-bean-property)|||||
 |[Unsoundness fixes in variance checks](other-changed-features.md#unsoundness-fixes-in-variance-checks)|||||
 |[Unsoundness fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
 
