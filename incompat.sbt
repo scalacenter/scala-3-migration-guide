@@ -120,7 +120,8 @@ lazy val otherIncompats = Seq[ProjectReference](
   typeOfImplicitDef,
   viewBound,
   caseClassCompanion,
-  patternMatch
+  patternMatch,
+  `bean-property`
 )
 
 // Syntactic incompatibilities
@@ -142,6 +143,7 @@ lazy val explicitCallToUnapply = project.in(file("incompat-30/explicit-call-to-u
 lazy val reflectiveCall = project.in(file("incompat-30/reflective-call")).incompat30Settings
 lazy val caseClassCompanion = project.in(file("incompat-30/case-class-companion")).incompat30Settings
 lazy val patternMatch = project.in(file("incompat-30/pattern-match")).incompat30Settings
+lazy val `bean-property` = project.in(file("incompat-30/bean-property")).incompat30Settings
 
 // Contextual abstraction incompatibilities
 lazy val ambiguousConversion =
