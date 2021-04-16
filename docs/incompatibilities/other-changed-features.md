@@ -35,3 +35,6 @@ title: Other Changed Features
 
 ```scala mdoc:file:incompat-30/pattern-match/README.md
 ```
+
+```scala mdoc:file:incompat-30/infer-return-type/README.md
+```

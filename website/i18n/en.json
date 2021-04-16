@@ -8,9 +8,6 @@
       "compatibility/classpath": {
         "title": "Classpath Level"
       },
-      "get-started": {
-        "title": "Introduction"
-      },
       "compatibility/metaprogramming": {
         "title": "Metaprogramming"
       },
