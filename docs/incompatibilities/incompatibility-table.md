@@ -83,6 +83,7 @@ Some features are simplified or restricted to make the language easier and safer
 |[Invisible Bean Property](other-changed-features.md#invisible-bean-property)|||||
 |[Unsoundness fixes in variance checks](other-changed-features.md#unsoundness-fixes-in-variance-checks)|||||
 |[Unsoundness fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
+|[Inferred return type of an override method](other-changed-features.md#inferred-return-type-of-an-override-method)|||||
 
 ### Implicit Resolution
 
