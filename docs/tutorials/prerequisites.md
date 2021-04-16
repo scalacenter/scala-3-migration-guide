@@ -3,7 +3,7 @@ id: prerequisites
 title: Project Prerequisites
 ---
 
-The migration to Scala 3 is made easier thanks to the interoperability between Scala 2.13 and Scala 3, as described in the [Compatibility Reference](../compatibility/introduction.md) page.
+The migration to Scala 3 is made easier thanks to the interoperability between Scala 2.13 and Scala 3, as described in the [Compatibility Reference](../get-started.md) page.
 
 However, there are a few prerequisites that a Scala 2.13 project must meet before being ported to Scala 3:
 - It must not depend on a macro library that has not yet been ported to Scala 3.

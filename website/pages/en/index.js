@@ -83,7 +83,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
-            <Button href={docUrl("compatibility/introduction.html", language)}>
+            <Button href={docUrl("get-started.html", language)}>
               Get started
             </Button>
           </PromoSection>
@@ -99,12 +99,12 @@ const Compatibility = () => (
       {
         content:
           'Scala 3 has been carefully designed to improve the backward and forward compatibility of the Scala programming language.\n\n' +
-          `In the [Compatibility Reference](${docUrl('compatibility/introduction.html')}) ` +
+          `In the [Compatibility Reference](${docUrl('get-started.html')}) ` +
           'you will learn about the compatibility between Scala 2.13 and Scala 3 in the context of the migration.',
         image: `${imgUrl('puzzle-primary.svg')}`,
         imageAlt: 'Icon made by Nikita Kozin from the Noun Project',
         imageAlign: 'left',
-        title: `[Compatibility](${docUrl('compatibility/introduction.html')})`,
+        title: `[Compatibility](${docUrl('get-started.html')})`,
       },
     ]}
   </Block>
