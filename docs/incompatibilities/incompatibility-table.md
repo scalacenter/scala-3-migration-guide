@@ -34,8 +34,8 @@ Some of the old syntax is not supported anymore.
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Restricted keywords](syntactic-changes.md#restricted-keywords)||✅||The Scala 3 rule does not handle all cases|
-|[Procedure syntax](syntactic-changes.md#procedure-syntax)|Deprecation|✅|✅||
-|[Parentheses around lambda parameter](syntactic-changes.md#parentheses-around-lambda-parameter)||✅|✅||
+|[Procedure syntax](syntactic-changes.md#procedure-syntax)|Deprecation|✅|[✅](https://scalacenter.github.io/scalafix/docs/rules/ProcedureSyntax.html)||
+|[Parentheses around lambda parameter](syntactic-changes.md#parentheses-around-lambda-parameter)||✅|[✅](https://github.com/ohze/scala-rewrites/tree/dotty/#fixscala213parensaroundlambda)||
 |[Open brace indentation for passing an argument](syntactic-changes.md#open-brace-indentation-for-passing-an-argument)||✅|||
 |[Wrong indentation](syntactic-changes.md#wrong-indentation)||||Can be handled by a code formatting tool|
 |[`_` as a type parameter](syntactic-changes.md#--as-a-type-parameter)|||||
