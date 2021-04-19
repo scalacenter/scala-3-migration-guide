@@ -157,7 +157,7 @@ class MacrosSpec extends munit.FunSuite {
 
 You should now be able to run the tests in both versions.
 
-```shell
+```text
 sbt:example> ++@scala213@
 sbt:example> example-test / test
 location.MacrosSpec:

@@ -70,7 +70,7 @@ lazy val main = project
 ```
 
 First, let's run the command and see the result.
-```scala
+```text
 > migrate-libs main
 [info] Starting to migrate libDependencies for main
 [info]
@@ -87,14 +87,14 @@ First, let's run the command and see the result.
 ```
 
 ### Macro library
-```shell
+```text
 [info] com.softwaremill.scalamacrodebug:macros:0.4.1:test -> X : Contains Macros and is not yet published for 3.0.0-RC1
 ```
 Scala 2.13 macros cannot be executed by the Scala 3 compiler.
 So if you depend on a macro lib, you will need to wait until this library is published for Scala 3.
 
 ### Compiler plugins
-```shell
+```text
 [info] com.olegpy:better-monadic-for:0.3.1:plugin->default(compile) -> X : Scala 2 compiler plugins are not supported in scala 3.0.0-RC1. You need to find an alternative
 [info] org.typelevel:kind-projector:0.11.0:plugin->default(compile) -> -Ykind-projector : This compiler plugin has a scalacOption equivalent. Add it to your scalacOptions
 ```
@@ -106,7 +106,7 @@ In this case, we need to remove `better-monadic-for` and fix the code to make it
 For `kind-projector`, which is also a Scala 2.13 compiler plugin, there is an equivalent scalac option that can be added to your `scalacOptions`.
 
 ### Libraries that can be updated
-```shell
+```text
 [info] org.typelevel:cats-core:2.2.0            -> "org.typelevel" %% "cats-core" % "2.4.2"
 [info] ch.epfl.scala:scalafix-rules:0.9.26:test -> "ch.epfl.scala" % "scalafix-rules_2.13" % "0.9.26" % "test"
 ```
@@ -264,7 +264,7 @@ The command `migrate-syntax` fixes some incompatibilities by applying the follow
 For more information on the fixed incompatibilities, please refer to the [Incompatibility Table](../incompatibilities/incompatibility-table.md).
 
 Let's run the command `migrate-syntax`. If there are changes after this command, it's better if you **create a commit for those.** 
-```shell
+```text
 > migrate-syntax main
 [success] Total time: 0 s, completed 12 Mar 2021, 20:55:51
 [info] We are going to fix some syntax incompatibilities
@@ -292,7 +292,7 @@ type than the one inferred by the Scala 2.13.
 This command goal is to find the necessary types in order to make your code compiles.
 
 If the libraries has not been ported correctly, running `migrage projectId` will fail reporting the problematic libraries.
-```shell
+```text
 > migrate main
 [info] We are going to migrate your project main to scala 3
 [INFO ] migrate.ScalaMigrat.buildMigrationFiles:140 - Found 20 patch candidate(s) in 7 file(s)after 1254 milliseconds
