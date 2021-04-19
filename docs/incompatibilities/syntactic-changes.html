@@ -55,10 +55,10 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/incompatibilities/syntactic-changes.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Syntactic Changes</h1></header><article><div><span><p>Scala 3 introduces the optional-braces syntax and the new control structure syntax.
-It comes at the cost of some minimal restrictions of the preexisting syntax.
+It comes at the cost of some minimal restrictions in the preexisting syntax.
 Also the new Scala 3 features brings new restricted keywords.</p>
-<p>Other changes of the syntax tend to make it less surprising and more consistent.</p>
-<p>It is worth noting that most of the syntax changes in your code can be automatically handled by the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compiler</a> compilation.</p>
+<p>Other changes tend to make the syntax less surprising and more consistent.</p>
+<p>It is worth noting that most of the changes can be automatically handled during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <table>
 <thead>
 <tr><th></th><th>Scala 2.13</th><th>Scala 3 Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
@@ -75,7 +75,7 @@ Also the new Scala 3 features brings new restricted keywords.</p>
 </table>
 <h2><a class="anchor" aria-hidden="true" id="restricted-keywords"></a><a href="#restricted-keywords" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Restricted Keywords</h2>
 <p>The list of Scala 3 keywords can be found <a href="https://dotty.epfl.ch/docs/internals/syntax.html#keywords">here</a>.
-The <em>regular</em> keywords cannot be used as identifiers, whereas the <em>soft</em> keywords are not restricted.</p>
+<em>Regular</em> keywords cannot be used as identifiers, whereas <em>soft</em> keywords are not restricted.</p>
 <p>For the matter of migrating from Scala 2.13 to Scala 3, only the subset of new <em>regular</em> keywords are problematic.
 It is composed of:</p>
 <ul>
@@ -93,14 +93,14 @@ It is composed of:</p>
   println(enum)
 }
 </code></pre>
-<p>A straightforward and binary compatible solution is to backquote the problematic identifiers.</p>
+<p>A straightforward and binary compatible solution is to backquote the restricted identifiers.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> `<span class="hljs-title">given</span>` </span>{
   <span class="hljs-keyword">val</span> `enum` = ???
 
   println(`enum`)
 }
 </code></pre>
-<p>This rewrite can be applied automatically by the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compiler</a>.</p>
+<p>This rewrite is automatically applied during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="procedure-syntax"></a><a href="#procedure-syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Procedure Syntax</h2>
 <p>Procedure syntax has been deprecated for a while and it is dropped in Scala 3.
 The following pieces of code are now illegal:</p>
@@ -126,7 +126,7 @@ In the other case, the <code>=</code> symbol must be inserted but it is also bet
   }
 }
 </code></pre>
-<p>This rewrite can be automatically applied by the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compiler</a>.</p>
+<p>This rewrite is automatically applied during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="parentheses-around-lambda-parameter"></a><a href="#parentheses-around-lambda-parameter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parentheses Around Lambda Parameter</h2>
 <p>When followed by its type, the parameter of a lambda is now required to be enclosed in parentheses.
 The following piece of code is invalid.</p>
@@ -135,7 +135,7 @@ The following piece of code is invalid.</p>
 <p>It must be rewritten into.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> f = { (x: <span class="hljs-type">Int</span>) =&gt; x * x }
 </code></pre>
-<p>This can be automatically performed by the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compiler</a>.</p>
+<p>This is automatically performed during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="open-brace-indentation-for-passing-an-argument"></a><a href="#open-brace-indentation-for-passing-an-argument" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Open Brace Indentation For Passing An Argument</h2>
 <p>In Scala 2 it is possible to pass an argument after a new line by enclosing it into braces.
 Although valid, this style of coding is not encouraged by the <a href="https://docs.scala-lang.org/style">Scala style guide</a> and is no longer supported in Scala 3.</p>
@@ -163,7 +163,8 @@ Although valid, this style of coding is not encouraged by the <a href="https://d
 }
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="wrong-indentation"></a><a href="#wrong-indentation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wrong indentation</h2>
-<p>The Scala 3 compiler now requires correct indentation. The following pieces of code that compiled in Scala 2 does not compile anymore, because of the indentation.</p>
+<p>The Scala 3 compiler now requires correct indentation.
+The following pieces of code that compiled in Scala 2 does not compile anymore, because of the indentation.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>: (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = {
   <span class="hljs-keyword">val</span> foo = <span class="hljs-number">1.0</span>
   <span class="hljs-keyword">val</span> bar = foo
