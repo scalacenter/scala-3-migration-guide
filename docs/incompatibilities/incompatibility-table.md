@@ -66,12 +66,12 @@ The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/c
 |[View bounds](contextual-abstractions.md#view-bounds)|Deprecation||||
 |[Ambiguous conversion on `A` and `=> A`](contextual-abstractions.md#ambiguous-conversion-on-a-and--a)|||||
 
-Furthermore we changed the implicit resolution rules so that they are more usefull and less surprising.
+Furthermore we have changed the implicit resolution rules so that they are more usefull and less surprising.
 The new rules are described [here](https://dotty.epfl.ch/docs/reference/changed-features/implicit-resolution.html).
 
 Because of these changes, the Scala 3 compiler could possibly fail at resolving some implicit parameters of existing Scala 2.13 code.
-Even worse, it could resolve a different value which would silently change the behavior of the program.
-However we believe these cases are rare or inexistent.
+In practice, we discovered that those incompatibilities can often be fixed, if not always, by supplying some type parameters explicitly to help infer the type of the implicit parameter.
+You will find some examples in the [Type Inference](type-inference.md) page.
 
 ### Other Changed Features
 
@@ -90,9 +90,9 @@ Some other features are simplified or restricted to make the language easier, sa
 
 ### Type Checker
 
-The Scala 2.13 type checker is unsound in some special cases.
+The Scala 2.13 type checker is unsound in some specific cases.
 This can lead to surprising runtime errors in places we would not expect.
-Scala 3 is based on stronger theoretical foundations, which helped us discover and fix these bugs.
+Scala 3 being based on stronger theoretical foundations, these unsoundess bugs in the type checker are now fixed.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
@@ -101,20 +101,24 @@ Scala 3 is based on stronger theoretical foundations, which helped us discover a
 
 ### Type Inference
 
-We changed some specific type inference rules.
-Also we entirely redesigned the type inference algorithm so that it is better in many cases.
-
-This fundamental change leads to a few incompatibilities:
-- A different type can be inferred
-- A new type-checking error can appear
-
-> It is good practice to write the result types of all public values and methods explicitly.
-> It prevents the plublic API of your library from changing with the Scala version, because of different inferred types.
+Some specific type inference rules have changed between Scala 2.13 and Scala 3.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Return type of an override method](type-inference.md#inferred-return-type-of-an-override-method)|||||
 |[Reflective call](type-inference.md#inferred-reflective-type)|||||
+
+Also we have improved the type inference algorithm by redesigning it entirely.
+This fundamental change leads to a few incompatibilities:
+- A different type can be inferred
+- A new type-checking error can appear
+
+An unclassified corpus of known cases can be found in the [Type Inference](type-inference.md) page.
+
+> It always is good practice to write the result types of all public values and methods explicitly.
+> It prevents the plublic API of your library from changing with the Scala version, because of different inferred types.
+> 
+> This can be done prior to the Scala 3 migration by using the [ExplicitResultTypes](https://scalacenter.github.io/scalafix/docs/rules/ExplicitResultTypes.html) rule in Scalafix.
 
 ### Macros
 
