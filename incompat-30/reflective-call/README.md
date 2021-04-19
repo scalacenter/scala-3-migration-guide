@@ -1,4 +1,4 @@
-## Reflective Call
+## Inferred Reflective Type
 
 Scala 2 reflective calls are dropped and replaced by the broader [programmatic structural types](https://dotty.epfl.ch/docs/reference/changed-features/structural-types.html).
 

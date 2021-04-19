@@ -1,4 +1,4 @@
-## Inferred return type of an override method
+## Inferred Return Type of an Override Method
 
 In Scala 2.13 the return type of an override method can be inferred from the left hand side, whereas in Scala 3 it would be inherited from the base method.
 

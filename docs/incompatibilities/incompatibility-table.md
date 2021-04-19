@@ -57,18 +57,25 @@ Some features are dropped to simplify the language.
 
 ### Contextual Abstractions
 
-The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) brings some incompatibilities.
+The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) brings some well defined incompatibilities.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Type of implicit def](contextual-abstractions.md#type-of-implicit-definition)|||[✅](https://github.com/ohze/scala-rewrites#fixexplicittypesexplicitimplicittypes)||
-|[Implicit views](contextual-abstractions.md#implicit-views)||||Possible runtime incompatibility|
+|[Implicit views](contextual-abstractions.md#implicit-views)||||**Possible runtime incompatibility**|
 |[View bounds](contextual-abstractions.md#view-bounds)|Deprecation||||
 |[Ambiguous conversion on `A` and `=> A`](contextual-abstractions.md#ambiguous-conversion-on-a-and--a)|||||
 
+Furthermore we changed the implicit resolution rules so that they are more usefull and less surprising.
+The new rules are described [here](https://dotty.epfl.ch/docs/reference/changed-features/implicit-resolution.html).
+
+Because of these changes, the Scala 3 compiler could possibly fail at resolving some implicit parameters of existing Scala 2.13 code.
+Even worse, it could resolve a different value which would silently change the behavior of the program.
+However we believe these cases are rare or inexistent.
+
 ### Other Changed Features
 
-Some features are simplified or restricted to make the language easier and safer to use.
+Some other features are simplified or restricted to make the language easier, safer or more consistent.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
@@ -77,36 +84,41 @@ Some features are simplified or restricted to make the language easier and safer
 |[`ExprType` as value type](other-changed-features.md#exprtype-as-value-type)|||||
 |[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
 |[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
-|[Reflective call](other-changed-features.md#reflective-call)||||Type inference problem|
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
-|[Invisible Bean Property](other-changed-features.md#invisible-bean-property)|||||
-|[Unsoundness fixes in variance checks](other-changed-features.md#unsoundness-fixes-in-variance-checks)|||||
-|[Unsoundness fixes in pattern matching](other-changed-features.md#unsoundness-fixes-in-pattern-matching)|||||
-|[Inferred return type of an override method](other-changed-features.md#inferred-return-type-of-an-override-method)|||||
+|[Invisible bean property](other-changed-features.md#invisible-bean-property)|||||
 
-### Implicit Resolution
+### Type Checker
 
-We changed the implicit resolution rules to make them more useful and less surprising. The new rules are described [here](https://dotty.epfl.ch/docs/reference/changed-features/implicit-resolution.html).
+The Scala 2.13 type checker is unsound in some special cases.
+This can lead to surprising runtime errors in places we would not expect.
+Scala 3 is based on stronger theoretical foundations, which helped us discover and fix these bugs.
 
-Because of these changes, the Scala 3 compiler could possibly fail at resolving some implicit parameters of existing Scala 2.13 code.
-Even worse, it could resolve a different value which would silently change the behavior of the program.
-However we believe these cases are rare or inexistent.
+||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
+|--- |--- |--- |--- |--- |
+|[Variance checks](type-checker.md#unsoundness-fixes-in-variance-checks)|||||
+|[Pattern matching](type-checker.md#unsoundness-fixes-in-pattern-matching)|||||
 
 ### Type Inference
 
-The Scala 3 compiler uses a new type inference algorithm that is better than the Scala 2.13 one.
+We changed some specific type inference rules.
+Also we entirely redesigned the type inference algorithm so that it is better in many cases.
 
-This fundamental change in Scala 3 leads to a few incompatibilities:
+This fundamental change leads to a few incompatibilities:
 - A different type can be inferred
 - A new type-checking error can appear
 
 > It is good practice to write the result types of all public values and methods explicitly.
 > It prevents the plublic API of your library from changing with the Scala version, because of different inferred types.
 
+||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
+|--- |--- |--- |--- |--- |
+|[Return type of an override method](type-inference.md#inferred-return-type-of-an-override-method)|||||
+|[Reflective call](type-inference.md#inferred-reflective-type)|||||
+
 ### Macros
 
-The Scala 3 compiler is not able to consume the Scala 2.13 macros.
-Under those circumstances it is necessary to re-implement the Scala 2.13 macros using the new Scala 3 metaprogramming features.
+The Scala 3 compiler is not able to expand Scala 2.13 macros.
+Under such circumstances it is necessary to re-implement the Scala 2.13 macros using the new Scala 3 metaprogramming features.
 
 You can go back to the [Metaprogramming](../compatibility/metaprogramming.md) page to learn about the new metaprogramming features.

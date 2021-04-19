@@ -25,7 +25,9 @@
       "incompatibilities/syntactic-changes",
       "incompatibilities/dropped-features",
       "incompatibilities/contextual-abstractions",
-      "incompatibilities/other-changed-features"
+      "incompatibilities/other-changed-features",
+      "incompatibilities/type-checker",
+      "incompatibilities/type-inference"
     ],
     "Compiler Options": [
       "compiler-options/compiler-options-table",
