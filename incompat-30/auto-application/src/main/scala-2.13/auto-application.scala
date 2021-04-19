@@ -1,4 +1,7 @@
-trait Chunk {
-  def bytes(): Seq[Byte]
-  def toSeq: Seq[Byte] = bytes
+object Test {
+  object Hello {
+    def message(): String = "Hello"
+  }
+
+  println(Hello.message)
 }

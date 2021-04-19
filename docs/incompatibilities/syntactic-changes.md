@@ -4,12 +4,12 @@ title: Syntactic Changes
 ---
 
 Scala 3 introduces the optional-braces syntax and the new control structure syntax.
-It comes at the cost of some minimal restrictions of the preexisting syntax.
+It comes at the cost of some minimal restrictions in the preexisting syntax.
 Also the new Scala 3 features brings new restricted keywords.
 
-Other changes of the syntax tend to make it less surprising and more consistent.
+Other changes tend to make the syntax less surprising and more consistent.
 
-It is worth noting that most of the syntax changes in your code can be automatically handled by the [Scala 3 migration compiler](../tooling/scala-3-migration-mode.md) compilation.
+It is worth noting that most of the changes can be automatically handled during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 
 
@@ -26,7 +26,7 @@ It is worth noting that most of the syntax changes in your code can be automatic
 ## Restricted Keywords
 
 The list of Scala 3 keywords can be found [here](https://dotty.epfl.ch/docs/internals/syntax.html#keywords).
-The _regular_ keywords cannot be used as identifiers, whereas the _soft_ keywords are not restricted.
+_Regular_ keywords cannot be used as identifiers, whereas _soft_ keywords are not restricted.
 
 For the matter of migrating from Scala 2.13 to Scala 3, only the subset of new _regular_ keywords are problematic.
 It is composed of:
@@ -47,7 +47,7 @@ object given {
 }
 ```
 
-A straightforward and binary compatible solution is to backquote the problematic identifiers.
+A straightforward and binary compatible solution is to backquote the restricted identifiers.
 
 ```scala
 object `given` {
@@ -57,7 +57,7 @@ object `given` {
 }
 ```
 
-This rewrite can be applied automatically by the [Scala 3 migration compiler](../tooling/scala-3-migration-mode.md).
+This rewrite is automatically applied during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 ## Procedure Syntax
 
@@ -95,7 +95,7 @@ object Bar {
 }
 ```
 
-This rewrite can be automatically applied by the [Scala 3 migration compiler](../tooling/scala-3-migration-mode.md).
+This rewrite is automatically applied during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 ## Parentheses Around Lambda Parameter
 
@@ -112,7 +112,7 @@ It must be rewritten into.
 val f = { (x: Int) => x * x }
 ```
 
-This can be automatically performed by the [Scala 3 migration compiler](../tooling/scala-3-migration-mode.md).
+This is automatically performed during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 ## Open Brace Indentation For Passing An Argument
 
@@ -155,7 +155,8 @@ type Bar = Foo
 
 ## Wrong indentation
 
-The Scala 3 compiler now requires correct indentation. The following pieces of code that compiled in Scala 2 does not compile anymore, because of the indentation.
+The Scala 3 compiler now requires correct indentation.
+The following pieces of code that compiled in Scala 2 does not compile anymore, because of the indentation.
 
 ```scala
 def bar: (Int, Int) = {
@@ -184,7 +185,7 @@ It is used in the API of [fastparse](https://index.scala-lang.org/lihaoyi/fastpa
 def foo[_: Foo]: Unit = ???
 ```
 
-Here, the method `foo` takes a type paramater `_` and an implicit parameter of type `Foo[_]` where `_` refers to the type parameter, not the wildcard symbol.  
+Here, the method `foo` takes a type paramater `_` and an implicit parameter of type `Foo[_]` where `_` refers to the type parameter, not the wildcard symbol.
 
 Martin Odersky described this pattern as a "clever exploit of a scalac compiler bug" ([source](https://www.reddit.com/r/scala/comments/fczcvo/mysterious_context_bounds_in_fastparse_2/fjecokn/)).
 

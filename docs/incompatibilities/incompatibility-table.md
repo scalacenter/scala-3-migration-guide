@@ -49,9 +49,9 @@ Some features are dropped to simplify the language.
 |--- |--- |--- |--- |--- |
 |[Symbol literals](dropped-features.md#symbol-literals)|Deprecation|✅|||
 |[`do`-`while` construct](dropped-features.md#do-while-construct)||✅|||
-|[Auto-application](dropped-features.md#auto-application)|Deprecation|✅|✅||
-|[Value eta-expansion](dropped-features.md#value-eta-expansion)|Deprecation|✅|✅||
-|[`any2stringadd` conversion](dropped-features.md#any2stringadd-conversion)|Deprecation||✅||
+|[Auto-application](dropped-features.md#auto-application)|Deprecation|✅|[✅](https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/ExplicitNonNullaryApply.scala)||
+|[Value eta-expansion](dropped-features.md#value-eta-expansion)|Deprecation|✅|[✅](https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/ExplicitNullaryEtaExpansion.scala)||
+|[`any2stringadd` conversion](dropped-features.md#any2stringadd-conversion)|Deprecation||[✅](https://github.com/scala/scala-rewrites/blob/main/rewrites/src/main/scala/fix/scala213/Any2StringAdd.scala)||
 |[Early initializer](dropped-features.md#early-initializer)|Deprecation||||
 |[Existential type](dropped-features.md#existential-type)|Feature warning||||
 
