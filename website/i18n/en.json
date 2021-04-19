@@ -29,6 +29,9 @@
       "external-resources/moving-from-scala-2-to-scala-3": {
         "title": "Moving from Scala 2 to Scala 3"
       },
+      "get-started": {
+        "title": "Introduction"
+      },
       "incompat-31": {
         "title": "Dotty future-migration Mode"
       },
@@ -46,6 +49,12 @@
       },
       "incompatibilities/syntactic-changes": {
         "title": "Syntactic Changes"
+      },
+      "incompatibilities/type-checker": {
+        "title": "Type Checker"
+      },
+      "incompatibilities/type-inference": {
+        "title": "Type Inference"
       },
       "macros/macro-libraries": {
         "title": "Scala Macro Libraries"

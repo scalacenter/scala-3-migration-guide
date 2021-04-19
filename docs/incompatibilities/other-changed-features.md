@@ -15,9 +15,6 @@ title: Other Changed Features
 ```scala mdoc:file:incompat-30/explicit-call-to-unapply/README.md
 ```
 
-```scala mdoc:file:incompat-30/reflective-call/README.md
-```
-
 ```scala mdoc:file:incompat-30/access-modifier/README.md
 ```
 
@@ -28,13 +25,4 @@ title: Other Changed Features
 ```
 
 ```scala mdoc:file:incompat-30/bean-property/README.md
-```
-
-```scala mdoc:file:incompat-30/variance/README.md
-```
-
-```scala mdoc:file:incompat-30/pattern-match/README.md
-```
-
-```scala mdoc:file:incompat-30/infer-return-type/README.md
 ```
