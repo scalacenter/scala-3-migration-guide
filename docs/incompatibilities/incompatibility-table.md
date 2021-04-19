@@ -80,13 +80,13 @@ Some other features are simplified or restricted to make the language easier, sa
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Inheritance shadowing](other-changed-features.md#inheritance-shadowing)||✅|||
+|[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||Migration Warning|||
 |[Abstract override](other-changed-features.md#abstract-override)|||||
-|[`ExprType` as value type](other-changed-features.md#exprtype-as-value-type)|||||
-|[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
-|[Non-private constructor in private class](other-changed-features.md#non-private-constructor-in-private-class)||warning|||
-|[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
+|[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
 |[Invisible bean property](other-changed-features.md#invisible-bean-property)|||||
+|[`=>T` as type argument](#-t-as-type-argument)|||||
+|[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 
 ### Type Checker
 
