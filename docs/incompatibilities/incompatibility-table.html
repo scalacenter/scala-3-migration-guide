@@ -129,11 +129,11 @@ However Scalafix has its own advantages:</p>
 <tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#ambiguous-conversion-on-a-and--a">Ambiguous conversion on <code>A</code> and <code>=&gt; A</code></a></td><td></td><td></td><td></td><td></td></tr>
 </tbody>
 </table>
-<p>Furthermore we changed the implicit resolution rules so that they are more usefull and less surprising.
+<p>Furthermore we have changed the implicit resolution rules so that they are more usefull and less surprising.
 The new rules are described <a href="https://dotty.epfl.ch/docs/reference/changed-features/implicit-resolution.html">here</a>.</p>
 <p>Because of these changes, the Scala 3 compiler could possibly fail at resolving some implicit parameters of existing Scala 2.13 code.
-Even worse, it could resolve a different value which would silently change the behavior of the program.
-However we believe these cases are rare or inexistent.</p>
+In practice, we discovered that those incompatibilities can often be fixed, if not always, by supplying some type parameters explicitly to help infer the type of the implicit parameter.
+You will find some examples in the <a href="/scala-3-migration-guide/docs/incompatibilities/type-inference.html">Type Inference</a> page.</p>
 <h3><a class="anchor" aria-hidden="true" id="other-changed-features"></a><a href="#other-changed-features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other Changed Features</h3>
 <p>Some other features are simplified or restricted to make the language easier, safer or more consistent.</p>
 <table>
@@ -152,9 +152,9 @@ However we believe these cases are rare or inexistent.</p>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="type-checker"></a><a href="#type-checker" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Checker</h3>
-<p>The Scala 2.13 type checker is unsound in some special cases.
+<p>The Scala 2.13 type checker is unsound in some specific cases.
 This can lead to surprising runtime errors in places we would not expect.
-Scala 3 is based on stronger theoretical foundations, which helped us discover and fix these bugs.</p>
+Scala 3 being based on stronger theoretical foundations, these unsoundess bugs in the type checker are now fixed.</p>
 <table>
 <thead>
 <tr><th></th><th>Scala 2.13</th><th>Scala 3 Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
@@ -165,17 +165,7 @@ Scala 3 is based on stronger theoretical foundations, which helped us discover a
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="type-inference"></a><a href="#type-inference" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Inference</h3>
-<p>We changed some specific type inference rules.
-Also we entirely redesigned the type inference algorithm so that it is better in many cases.</p>
-<p>This fundamental change leads to a few incompatibilities:</p>
-<ul>
-<li>A different type can be inferred</li>
-<li>A new type-checking error can appear</li>
-</ul>
-<blockquote>
-<p>It is good practice to write the result types of all public values and methods explicitly.
-It prevents the plublic API of your library from changing with the Scala version, because of different inferred types.</p>
-</blockquote>
+<p>Some specific type inference rules have changed between Scala 2.13 and Scala 3.</p>
 <table>
 <thead>
 <tr><th></th><th>Scala 2.13</th><th>Scala 3 Migration Rewrite</th><th>Scalafix Rule</th><th>Comments</th></tr>
@@ -185,6 +175,18 @@ It prevents the plublic API of your library from changing with the Scala version
 <tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/type-inference.html#inferred-reflective-type">Reflective call</a></td><td></td><td></td><td></td><td></td></tr>
 </tbody>
 </table>
+<p>Also we have improved the type inference algorithm by redesigning it entirely.
+This fundamental change leads to a few incompatibilities:</p>
+<ul>
+<li>A different type can be inferred</li>
+<li>A new type-checking error can appear</li>
+</ul>
+<p>An unclassified corpus of known cases can be found in the <a href="/scala-3-migration-guide/docs/incompatibilities/type-inference.html">Type Inference</a> page.</p>
+<blockquote>
+<p>It always is good practice to write the result types of all public values and methods explicitly.
+It prevents the plublic API of your library from changing with the Scala version, because of different inferred types.</p>
+<p>This can be done prior to the Scala 3 migration by using the <a href="https://scalacenter.github.io/scalafix/docs/rules/ExplicitResultTypes.html">ExplicitResultTypes</a> rule in Scalafix.</p>
+</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="macros"></a><a href="#macros" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Macros</h3>
 <p>The Scala 3 compiler is not able to expand Scala 2.13 macros.
 Under such circumstances it is necessary to re-implement the Scala 2.13 macros using the new Scala 3 metaprogramming features.</p>
