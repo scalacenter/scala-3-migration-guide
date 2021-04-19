@@ -103,7 +103,6 @@ lazy val typeInfer10 = project.in(file("incompat-30/type-infer-10")).incompat30S
 lazy val otherIncompats = Seq[ProjectReference](
   anonymousTypeParam,
   indentation1,
-  indentation2,
   restrictedOperator,
   typeParamIdentifier,
   abstractOverride,
@@ -128,7 +127,6 @@ lazy val otherIncompats = Seq[ProjectReference](
 // Syntactic incompatibilities
 lazy val anonymousTypeParam = project.in(file("incompat-30/anonymous-type-param")).incompat30Settings
 lazy val indentation1 = project.in(file("incompat-30/indentation/indentation-1")).incompat30Settings
-lazy val indentation2 = project.in(file("incompat-30/indentation/indentation-2")).incompat30Settings
 lazy val restrictedOperator = project.in(file("incompat-30/restricted-operator")).incompat30Settings
 lazy val typeParamIdentifier = project.in(file("incompat-30/type-param-identifier")).incompat30Settings
 

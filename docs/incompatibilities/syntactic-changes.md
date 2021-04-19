@@ -11,8 +11,6 @@ Other changes tend to make the syntax less surprising and more consistent.
 
 It is worth noting that most of the changes can be automatically handled during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
-
-
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
 |[Restricted keywords](#restricted-keywords)||✅||The Scala 3 rule does not handle all cases|
@@ -40,24 +38,26 @@ It is composed of:
 For instance, the following piece of code compiles in Scala 2.13 but not in Scala 3.
 
 ```scala
-object given {
-  val enum = ???
+object given { // Error: given is now a keyword, write `given` instead of given to keep it as an identifier
+  val enum = ??? // Error: enum is now a keyword, write `enum` instead of given to keep it as an identifier
 
-  println(enum)
+  println(enum) // Error: enum is now a keyword, write `enum` instead of given to keep it as an identifier
 }
 ```
 
-A straightforward and binary compatible solution is to backquote the restricted identifiers.
+The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) rewrites the code into:
 
-```scala
-object `given` {
-  val `enum` = ???
+```diff
+-object given {
+-  val enum = ???
 
-  println(`enum`)
+-  println(enum)
++object `given` {
++  val `enum` = ???
+
++  println(`enum`)
 }
 ```
-
-This rewrite is automatically applied during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 ## Procedure Syntax
 
@@ -65,37 +65,23 @@ Procedure syntax has been deprecated for a while and it is dropped in Scala 3.
 The following pieces of code are now illegal:
 
 ```scala
-trait Foo {
-  def print()
-}
-```
-
-```scala
 object Bar {
-  def print() {
+  def print() { // Error: Procedure syntax no longer supported; `: Unit =` should be inserted here
     println("bar")
   }
 }
 ```
 
-In the first case, the result of procedure `print` must be declared explicitly.
-In the other case, the `=` symbol must be inserted but it is also better to declare the result type explicitly.
+The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) rewrites the code into.
 
-```scala
-trait Foo {
-  def print(): Unit
-}
-```
-
-```scala
+```diff
 object Bar {
-  def print(): Unit = {
+-  def print() {
++  def print(): Unit = {
     println("bar")
   }
 }
 ```
-
-This rewrite is automatically applied during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 ## Parentheses Around Lambda Parameter
 
@@ -103,16 +89,15 @@ When followed by its type, the parameter of a lambda is now required to be enclo
 The following piece of code is invalid.
 
 ```scala
-val f = { x: Int => x * x }
+val f = { x: Int => x * x } // Error: parentheses are required around the parameter of a lambda
 ```
 
-It must be rewritten into.
+The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) rewrites the code into:
 
-```scala
-val f = { (x: Int) => x * x }
+```diff
+-val f = { x: Int => x * x }
++val f = { (x: Int) => x * x }
 ```
-
-This is automatically performed during the [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md).
 
 ## Open Brace Indentation For Passing An Argument
 
@@ -122,34 +107,38 @@ Although valid, this style of coding is not encouraged by the [Scala style guide
 This syntax is now invalid:
 ```scala
 test("my test")
-{
+{ // Error: This opening brace will start a new statement in Scala 3.
   assert(1 == 1)
 }
 ```
 
-The preferable solution is to write:
+The [Scala 3 migration compiler](../tooling/scala-3-migration-mode.md) indents the first line of the block.
 
-``` scala
-test("my test") {
-  assert(1 == 1)
-}
-```
-
-The [Scala 3 migration compiler](../tooling/scala-3-migration-mode.md) prefers to indent the first line of the block.
-
-```scala
+```diff
 test("my test")
-  {
+-{
++  {
   assert(1 == 1)
 }
 ```
 
 This migration rule applies to other patterns as well, such as refining a type after a new line.
 
-```scala
+```diff
 type Bar = Foo
-  {
+- {
++   {
   def bar(): Int
+}
+```
+
+A preferable solution is to write:
+
+``` diff
+-test("my test")
+-{
++test("my test") {
+  assert(1 == 1)
 }
 ```
 
@@ -161,16 +150,20 @@ The following pieces of code that compiled in Scala 2 does not compile anymore, 
 ```scala
 def bar: (Int, Int) = {
   val foo = 1.0
-  val bar = foo
+  val bar = foo // [E050] Type Error: value foo does not take parameters
     (1, 1)
-}
+} // [E007] Type Mismatch Error: Found Unit, Required (Int, Int)
 ```
 
-```scala
-val foo =
-  Vector(1) ++
-Vector(2) ++
-  Vector(3)
+The indentation must be fixed.
+
+```diff
+def bar: (Int, Int) = {
+  val foo = 1.0
+  val bar = foo
+-    (1, 1)
++  (1, 1)
+}
 ```
 
 These errors can be prevented by using a Scala formatting tool such as [scalafmt](https://scalameta.org/scalafmt/) or the [IntelliJ Scala formatter](https://www.jetbrains.com/help/idea/reformat-and-rearrange-code.html).
@@ -191,7 +184,7 @@ Martin Odersky described this pattern as a "clever exploit of a scalac compiler 
 
 The Scala 3 compiler does not permit this pattern anymore: 
 
-```
+```text
 -- [E040] Syntax Error: src/main/scala/anonymous-type-param.scala:4:10
 4 |  def foo[_: Foo]: Unit = ()
   |          ^
@@ -200,6 +193,11 @@ The Scala 3 compiler does not permit this pattern anymore:
 
 The solution is to give the parameter a valid identifier name, for instance `T`.
 This will not break the binary compatibility.
+
+```diff
+-def foo[_: Foo]: Unit = ???
++def foo[T: Foo]: Unit = ???
+```
 
 ## `+` And `-` As Type Parameters
 

@@ -31,7 +31,7 @@ trait Pretty {
 }
 
 def pretty[A](a: A)(implicit ev: A => Pretty): String =
-  a.print
+  a.print // Error: value print is not a member of A
 ```
 
 The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) can warn you about those cases, but it does not try to fix it.
@@ -48,9 +48,8 @@ trait Pretty {
 
 implicit def anyPretty(any: Any): Pretty = new Pretty { val print = "any" }
 
-def pretty[A](a: A)(implicit ev: A => Pretty): String = {
-  a.print
-}
+def pretty[A](a: A)(implicit ev: A => Pretty): String =
+  a.print // always print "any"
 ```
 
 The resolved conversion depends on the compiler mode:
@@ -59,8 +58,10 @@ The resolved conversion depends on the compiler mode:
 
 One simple fix is to supply the right conversion explicitly:
 
-```scala
-ev(a).print
+```diff
+def pretty[A](a: A)(implicit ev: A => Pretty): String =
+-  a.print
++  ev(a).print
 ```
 ## View Bounds
 
@@ -71,7 +72,7 @@ They do not compile in Scala 3 anymore.
 def foo[A <% Long](a: A): Long = a
 ```
 
-In Scala 2.13 we get:
+In this example we get:
 
 ```text
 -- Error: src/main/scala/view-bound.scala:2:12 
@@ -86,8 +87,9 @@ To do so the implicit conversion must be declared and called explicitly.
 
 Be careful not to fall in the runtime incompatibility described above, in [Implicit Views](#implicit-views).
 
-```scala
-def foo[A](a: A)(implicit ev: A => Long): Long = ev(a)
+```diff
+-def foo[A <% Long](a: A): Long = a
++def foo[A](a: A)(implicit ev: A => Long): Long = ev(a)
 ```
 
 ## Ambiguous Conversion On `A` And `=> A`
@@ -98,17 +100,13 @@ It is not the case in Scala 3 anymore, and leads to an ambiguous conversion.
 For instance, in this example:
 
 ```scala
-trait Foo {
-  def foo(): Unit 
-}
-
 implicit def boolFoo(bool: Boolean): Foo = ???
 implicit def lazyBoolFoo(lazyBool:  => Boolean): Foo = ???
 
 true.foo()
 ```
 
-The Scala 2.13 compiler chooses the `boolFoo` conversion but the Scala 3 compiler does not choose any.
+The Scala 2.13 compiler chooses the `boolFoo` conversion but the Scala 3 compiler fails to compile.
 
 ```text
 -- Error: src/main/scala/ambiguous-conversion.scala:4:19
@@ -122,6 +120,10 @@ The Scala 2.13 compiler chooses the `boolFoo` conversion but the Scala 3 compile
 
 A temporary solution is to write the conversion explicitly.
 
-```scala
-boolFoo(true).foo()
+```diff
+implicit def boolFoo(bool: Boolean): Foo = ???
+implicit def lazyBoolFoo(lazyBool:  => Boolean): Foo = ???
+
+-true.foo()
++boolFoo(true).foo()
 ```

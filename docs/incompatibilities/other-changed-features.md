@@ -13,7 +13,7 @@ Some other features are simplified or restricted to make the language easier, sa
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
 |[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
 |[Invisible bean property](other-changed-features.md#invisible-bean-property)|||||
-|[`=>T` as type argument](#-t-as-type-argument)|||||
+|[`=>T` as type argument](other-changed-features.md#-t-as-type-argument)|||||
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 
 ## Inheritance Shadowing
@@ -52,7 +52,7 @@ object B {
 }
 ```
 
-```
+```text
 -- [E049] Reference Error: src/main/scala/inheritance-shadowing.scala:9:14 
 9 |      println(x)
   |              ^
@@ -77,11 +77,11 @@ private class Bar private[foo] () {}
 
 The error message is:
 ```
-[error] -- Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/access-modifier/src/main/scala-2.13/access-modifier.scala:4:19 
-[error] 4 |  private class Bar private[foo] ()
-[error]   |                   ^
-[error]   |      non-private constructor Bar in class Bar refers to private class Bar
-[error]   |      in its type signature (): foo.Foo.Bar
+-- Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/access-modifier/src/main/scala-2.13/access-modifier.scala:4:19 
+4 |  private class Bar private[foo] ()
+  |                   ^
+  |      non-private constructor Bar in class Bar refers to private class Bar
+  |      in its type signature (): foo.Foo.Bar
 ```
 
 The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) warns about this but no automatic rewrite is provided.
@@ -103,14 +103,7 @@ trait B extends A {
   def bar(x: Int): Int
 }
 
-class C extends B
-```
-
-```
-[error] -- Error: src/main/scala/abstract-override.scala:11:6
-[error] 11 |class C extends B
-[error]    |      ^
-[error]    |class C needs to be abstract, since def bar(x: Int): Int is not defined
+class C extends B // Error: class C needs to be abstract, since def bar(x: Int): Int is not defined
 ```
 
 This behavior was decided in [Dotty issue #4770](https://github.com/lampepfl/dotty/issues/4770).
@@ -133,9 +126,12 @@ Foo.tupled((2, false))
 
 A cross-compiling solution is to explicitly eta-expand the method `Foo.apply`.
 
-```scala
-(Foo.apply _).curried(1)(true)
-(Foo.apply _).tupled((2, false))
+```diff
+-Foo.curried(1)(true)
++(Foo.apply _).curried(1)(true)
+
+-Foo.tupled((2, false))
++(Foo.apply _).tupled((2, false))
 ```
 
 Or, for performance reason, you can introduce an intermediate function value.
@@ -157,13 +153,13 @@ Note that this problem does not affect user-defined extractors, whose signature 
 
 Given the following case class definition:
 
-``` scala
+```scala
 case class Location(lat: Double, long: Double)
 ```
 
 The Scala 2.13 compiler generates the following `unapply` method:
 
-``` scala
+```scala
 object Location {
   def unapply(location: Location): Option[(Double, Double)] = Some((location.lat, location.long))
 }
@@ -171,7 +167,7 @@ object Location {
 
 Whereas the Scala 3 compiler generates:
 
-``` scala
+```scala
 object Location {
   def unapply(location: Location): Location = location
 }
@@ -179,18 +175,19 @@ object Location {
 
 Consequently the following code does not compile anymore.
 
-``` scala
+```scala
 def tuple(location: Location): (Int, Int) = {
-  Location.unapply(location).get
+  Location.unapply(location).get // [E008] Not Found Error: value get is not a member of Location
 }
 ```
 
 A possible solution is to use pattern binding:
 
-``` scala
+```diff
 def tuple(location: Location): (Int, Int) = {
-  val Location(lat, lon) = location
-  (lat, lon)
+-  Location.unapply(location).get
++  val Location(lat, lon) = location
++  (lat, lon)
 }
 ```
 
@@ -207,23 +204,21 @@ class Pojo() {
 
 val pojo = new Pojo()
 
-pojo.setFooBar("hello")
+pojo.setFooBar("hello") // [E008] Not Found Error: value setFooBar is not a member of Pojo
 
-println(pojo.getFooBar())
+println(pojo.getFooBar()) // [E008] Not Found Error: value getFooBar is not a member of Pojo
 ```
-
-`pojo.setFooBar("hello")` and `pojo.getFooBar()` are not valid in Scala 3.
 
 The solution is to call the more idiomatic `pojo.fooBar` getter and setter.
 
 ```diff
 val pojo = new Pojo()
 
-- pojo.setFooBar("hello")
-+ pojo.fooBar = "hello"
+-pojo.setFooBar("hello")
++pojo.fooBar = "hello"
 
-- println(pojo.getFooBar())
-+ println(pojo.fooBar)
+-println(pojo.getFooBar())
++println(pojo.fooBar)
 ```
 
 ## `=> T` as Type Argument
@@ -255,30 +250,22 @@ The solution depends on the situation. In the given example, you can either:
 
 Scala 3 cannot reduce the application of a higher-kinded abstract type member to the wildcard argument.
 
-For instance, the example:
+For instance, the following example does not compile.
+For instance, the following example does not compile.
 
 ```scala
 trait Example {
   type Foo[A]
 
-  def f(foo: Foo[_]): Unit
+  def f(foo: Foo[_]): Unit // [E043] Type Error: unreducible application of higher-kinded type Example.this.Foo to wildcard arguments 
 }
-```
-
-Produces the following error when compiled with Scala 3:
-
-```text
--- [E043] Type Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat-30/wildcard-argument/target/src-managed/main/scala/wildcard-argument.scala:4:13 
-4 |  def f(foo: Foo[_]): Unit / compileIncremental 0s
-  |             ^^^^^^
-  |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
 ```
 
 We can fix this by using a type parameter:
 
 ```diff
-- def f(foo: Foo[_]): Unit
-+ def f[A](foo: Foo[A]): Unit
+-def f(foo: Foo[_]): Unit
++def f[A](foo: Foo[A]): Unit
 ```
 
 But this simple solution does not work when `Foo` is itself used as type argument.
@@ -290,8 +277,8 @@ def g(foos: Seq[Foo[_]]): Unit`
 In such case, we can use a wrapper class around `Foo`:
 
 ```diff
-+ class FooWrapper[A](foo: Foo[A])
++class FooWrapper[A](foo: Foo[A])
 
-- def g(foos: Seq[Foo[_]]): Unit`
-+ def g(foos: Seq[FooWrapper[_]]): Unit
+-def g(foos: Seq[Foo[_]]): Unit`
++def g(foos: Seq[FooWrapper[_]]): Unit
 ```
