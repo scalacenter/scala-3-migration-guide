@@ -57,11 +57,11 @@ Some features are dropped to simplify the language.
 
 ### Contextual Abstractions
 
-The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) introduces the following incompatibilities:
+The redesign of [contextual abstractions](https://dotty.epfl.ch/docs/reference/contextual/motivation.html) brings some incompatibilities.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Type of implicit def](contextual-abstractions.md#type-of-implicit-definition)|||✅||
+|[Type of implicit def](contextual-abstractions.md#type-of-implicit-definition)|||[✅](https://github.com/ohze/scala-rewrites#fixexplicittypesexplicitimplicittypes)||
 |[Implicit views](contextual-abstractions.md#implicit-views)||||Possible runtime incompatibility|
 |[View bounds](contextual-abstractions.md#view-bounds)|Deprecation||||
 |[Ambiguous conversion on `A` and `=> A`](contextual-abstractions.md#ambiguous-conversion-on-a-and--a)|||||
