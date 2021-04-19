@@ -176,14 +176,14 @@ How does the compiler accept two methods with the same name and signature?</p>
 }
 </code></pre>
 <p>You should now be able to run the tests in both versions.</p>
-<pre><code class="hljs css language-shell">sbt:example&gt; ++2.13.5
-sbt:example&gt; example-test / test
+<pre><code class="hljs css language-text">sbt:example> ++2.13.5
+sbt:example> example-test / test
 location.MacrosSpec:
   + location
 [info] Passed: Total 1, Failed 0, Errors 0, Passed 1
 [success]
-sbt:example&gt; ++3.0.0-RC2
-sbt:example&gt; example-test / test
+sbt:example> ++3.0.0-RC2
+sbt:example> example-test / test
 location.MacrosSpec:
   + location
 [info] Passed: Total 1, Failed 0, Errors 0, Passed 1

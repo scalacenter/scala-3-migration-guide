@@ -305,8 +305,8 @@ One of the following options might work for you:</p>
 }
 </code></pre>
 <p>The error message is:</p>
-<pre><code class="hljs css language-shell">[error] -- [E007] Type Mismatch Error: src/main/scala/pattern-match.scala:9:59 
-[error] 9 |      case (x @ Fetch(_), y @ Fetch(_)) =&gt; combineFetch(x, y)
+<pre><code class="hljs css language-text">[error] -- [E007] Type Mismatch Error: src/main/scala/pattern-match.scala:9:59 
+[error] 9 |      case (x @ Fetch(_), y @ Fetch(_)) => combineFetch(x, y)
 [error]   |                                                           ^
 [error]   |                                                Found:    (y : Fetch[A$2])
 [error]   |                                                Required: Fetch[A$1]

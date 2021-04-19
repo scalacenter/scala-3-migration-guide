@@ -98,7 +98,7 @@ addCompilerPlugin(<span class="hljs-string">"org.typelevel"</span> %% <span clas
 </code></pre>
 <p>Some compiler plugins may also be automatically added by an sbt plugin.</p>
 <p>You can find all configured compiler plugins by looking at the compiler options of your project.</p>
-<pre><code class="hljs css language-shell">sbt:example&gt; show example / Compile / scalacOptions
+<pre><code class="hljs css language-text">sbt:example> show example / Compile / scalacOptions
 [info] * -Xplugin:target/compiler_plugins/wartremover_2.13.5-2.4.12.jar
 [info] * -Xplugin:target/compiler_plugins/semanticdb-scalac_2.13.5-4.3.20.jar
 [info] * -Yrangepos

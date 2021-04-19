@@ -115,36 +115,36 @@ Make sure the module you choose is not an aggregate of projects.</p>
   )
 </code></pre>
 <p>First, let's run the command and see the result.</p>
-<pre><code class="hljs css language-scala">&gt; migrate-libs main
-[info] <span class="hljs-type">Starting</span> to migrate libDependencies <span class="hljs-keyword">for</span> main
+<pre><code class="hljs css language-text">> migrate-libs main
+[info] Starting to migrate libDependencies for main
 [info]
-[info] <span class="hljs-type">X</span>             : <span class="hljs-type">Cannot</span> be updated to scala <span class="hljs-number">3</span>
-[info] <span class="hljs-type">Valid</span>         : <span class="hljs-type">Already</span> a valid version <span class="hljs-keyword">for</span> <span class="hljs-type">Scala</span> <span class="hljs-number">3</span>
-[info] <span class="hljs-type">To</span> be updated : <span class="hljs-type">Need</span> to be updated to the following version
+[info] X             : Cannot be updated to scala 3
+[info] Valid         : Already a valid version for Scala 3
+[info] To be updated : Need to be updated to the following version
 [info]
-[info] com.softwaremill.scalamacrodebug:macros:<span class="hljs-number">0.4</span><span class="hljs-number">.1</span>:test           -&gt; <span class="hljs-type">X</span> : <span class="hljs-type">Contains</span> <span class="hljs-type">Macros</span> and is not yet published <span class="hljs-keyword">for</span> <span class="hljs-number">3.0</span><span class="hljs-number">.0</span>-<span class="hljs-type">RC1</span>
-[info] com.olegpy:better-monadic-<span class="hljs-keyword">for</span>:<span class="hljs-number">0.3</span><span class="hljs-number">.1</span>:plugin-&gt;<span class="hljs-keyword">default</span>(compile) -&gt; <span class="hljs-type">X</span> : <span class="hljs-type">Scala</span> <span class="hljs-number">2</span> compiler plugins are not supported in scala <span class="hljs-number">3.0</span><span class="hljs-number">.0</span>-<span class="hljs-type">RC1</span>. <span class="hljs-type">You</span> need to find an alternative
-[info] ch.epfl.scala:scalafix-interfaces:<span class="hljs-number">0.9</span><span class="hljs-number">.26</span>                     -&gt; <span class="hljs-type">Valid</span>
-[info] org.typelevel:cats-core:<span class="hljs-number">2.2</span><span class="hljs-number">.0</span>                                -&gt; <span class="hljs-string">"org.typelevel"</span> %% <span class="hljs-string">"cats-core"</span> % <span class="hljs-string">"2.4.2"</span>
-[info] ch.epfl.scala:scalafix-rules:<span class="hljs-number">0.9</span><span class="hljs-number">.26</span>:test                     -&gt; <span class="hljs-string">"ch.epfl.scala"</span> % <span class="hljs-string">"scalafix-rules_2.13"</span> % <span class="hljs-string">"0.9.26"</span> % <span class="hljs-string">"test"</span>
-[info] org.typelevel:kind-projector:<span class="hljs-number">0.11</span><span class="hljs-number">.0</span>:plugin-&gt;<span class="hljs-keyword">default</span>(compile) -&gt; -<span class="hljs-type">Ykind</span>-projector : <span class="hljs-type">This</span> compiler plugin has a scalacOption equivalent. <span class="hljs-type">Add</span> it to your scalacOptions
+[info] com.softwaremill.scalamacrodebug:macros:0.4.1:test           -> X : Contains Macros and is not yet published for 3.0.0-RC1
+[info] com.olegpy:better-monadic-for:0.3.1:plugin->default(compile) -> X : Scala 2 compiler plugins are not supported in scala 3.0.0-RC1. You need to find an alternative
+[info] ch.epfl.scala:scalafix-interfaces:0.9.26                     -> Valid
+[info] org.typelevel:cats-core:2.2.0                                -> "org.typelevel" %% "cats-core" % "2.4.2"
+[info] ch.epfl.scala:scalafix-rules:0.9.26:test                     -> "ch.epfl.scala" % "scalafix-rules_2.13" % "0.9.26" % "test"
+[info] org.typelevel:kind-projector:0.11.0:plugin->default(compile) -> -Ykind-projector : This compiler plugin has a scalacOption equivalent. Add it to your scalacOptions
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="macro-library"></a><a href="#macro-library" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Macro library</h3>
-<pre><code class="hljs css language-shell">[info] com.softwaremill.scalamacrodebug:macros:0.4.1:test -&gt; X : Contains Macros and is not yet published for 3.0.0-RC1
+<pre><code class="hljs css language-text">[info] com.softwaremill.scalamacrodebug:macros:0.4.1:test -> X : Contains Macros and is not yet published for 3.0.0-RC1
 </code></pre>
 <p>Scala 2.13 macros cannot be executed by the Scala 3 compiler.
 So if you depend on a macro lib, you will need to wait until this library is published for Scala 3.</p>
 <h3><a class="anchor" aria-hidden="true" id="compiler-plugins"></a><a href="#compiler-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compiler plugins</h3>
-<pre><code class="hljs css language-shell">[info] com.olegpy:better-monadic-for:0.3.1:plugin-&gt;default(compile) -&gt; X : Scala 2 compiler plugins are not supported in scala 3.0.0-RC1. You need to find an alternative
-[info] org.typelevel:kind-projector:0.11.0:plugin-&gt;default(compile) -&gt; -Ykind-projector : This compiler plugin has a scalacOption equivalent. Add it to your scalacOptions
+<pre><code class="hljs css language-text">[info] com.olegpy:better-monadic-for:0.3.1:plugin->default(compile) -> X : Scala 2 compiler plugins are not supported in scala 3.0.0-RC1. You need to find an alternative
+[info] org.typelevel:kind-projector:0.11.0:plugin->default(compile) -> -Ykind-projector : This compiler plugin has a scalacOption equivalent. Add it to your scalacOptions
 </code></pre>
 <p><code>better-monadic-for</code> is a Scala 2.13 compiler plugin.
 As explained <a href="/scala-3-migration-guide/docs/tutorials/prerequisites.html#compiler-plugins">here</a>, Scala 2.13 compiler plugins are not supported in Scala 3.
 In this case, we need to remove <code>better-monadic-for</code> and fix the code to make it compile without the compiler plugin.</p>
 <p>For <code>kind-projector</code>, which is also a Scala 2.13 compiler plugin, there is an equivalent scalac option that can be added to your <code>scalacOptions</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="libraries-that-can-be-updated"></a><a href="#libraries-that-can-be-updated" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Libraries that can be updated</h3>
-<pre><code class="hljs css language-shell">[info] org.typelevel:cats-core:2.2.0            -&gt; "org.typelevel" %% "cats-core" % "2.4.2"
-[info] ch.epfl.scala:scalafix-rules:0.9.26:test -&gt; "ch.epfl.scala" % "scalafix-rules_2.13" % "0.9.26" % "test"
+<pre><code class="hljs css language-text">[info] org.typelevel:cats-core:2.2.0            -> "org.typelevel" %% "cats-core" % "2.4.2"
+[info] ch.epfl.scala:scalafix-rules:0.9.26:test -> "ch.epfl.scala" % "scalafix-rules_2.13" % "0.9.26" % "test"
 </code></pre>
 <ul>
 <li><p>For <code>cats-core</code> there is an available version that has been published for <code>3.0.0-RC1</code>
@@ -280,7 +280,7 @@ Scala3-migrate doesn't enable SemanticDB in Scala 3 unless it's configured in th
 </ul>
 <p>For more information on the fixed incompatibilities, please refer to the <a href="/scala-3-migration-guide/docs/incompatibilities/incompatibility-table.html">Incompatibility Table</a>.</p>
 <p>Let's run the command <code>migrate-syntax</code>. If there are changes after this command, it's better if you <strong>create a commit for those.</strong></p>
-<pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> migrate-syntax main</span>
+<pre><code class="hljs css language-text">> migrate-syntax main
 [success] Total time: 0 s, completed 12 Mar 2021, 20:55:51
 [info] We are going to fix some syntax incompatibilities
 [INFO ] migrate.Scala3Migrate.previewSyntaxMigration:80 - Successfully run fixSyntaxForScala3  in 8839 milliseconds
@@ -304,7 +304,7 @@ Scala3-migrate doesn't enable SemanticDB in Scala 3 unless it's configured in th
 type than the one inferred by the Scala 2.13.
 This command goal is to find the necessary types in order to make your code compiles.</p>
 <p>If the libraries has not been ported correctly, running <code>migrage projectId</code> will fail reporting the problematic libraries.</p>
-<pre><code class="hljs css language-shell"><span class="hljs-meta">&gt;</span><span class="bash"> migrate main</span>
+<pre><code class="hljs css language-text">> migrate main
 [info] We are going to migrate your project main to scala 3
 [INFO ] migrate.ScalaMigrat.buildMigrationFiles:140 - Found 20 patch candidate(s) in 7 file(s)after 1254 milliseconds
 [INFO ] migrate.ScalaMigrat.compileInScala3:115 - Successfully compiled with scala 3 in 5997 milliseconds
