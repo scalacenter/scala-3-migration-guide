@@ -85,7 +85,7 @@ Some other features are simplified or restricted to make the language easier, sa
 |[Case class companion](other-changed-features.md#case-class-companion)|||||
 |[Explicit call to unapply](other-changed-features.md#explicit-call-to-unapply)|||||
 |[Invisible bean property](other-changed-features.md#invisible-bean-property)|||||
-|[`=>T` as type argument](#-t-as-type-argument)|||||
+|[`=>T` as type argument](other-changed-features.md#-t-as-type-argument)|||||
 |[Wildcard type argument](other-changed-features.md#wildcard-type-argument)|||||
 
 ### Type Checker
@@ -105,8 +105,8 @@ Some specific type inference rules have changed between Scala 2.13 and Scala 3.
 
 ||Scala 2.13|Scala 3 Migration Rewrite|Scalafix Rule|Comments|
 |--- |--- |--- |--- |--- |
-|[Return type of an override method](type-inference.md#inferred-return-type-of-an-override-method)|||||
-|[Reflective call](type-inference.md#inferred-reflective-type)|||||
+|[Return type of override method](type-inference.md#inferred-return-type-of-an-override-method)|||||
+|[Reflective type](type-inference.md#inferred-reflective-type)|||||
 
 Also we have improved the type inference algorithm by redesigning it entirely.
 This fundamental change leads to a few incompatibilities:

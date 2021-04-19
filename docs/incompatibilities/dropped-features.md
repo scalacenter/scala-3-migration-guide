@@ -27,15 +27,16 @@ This piece of code does not compile in Scala 3:
 ```scala
 val values: Map[Symbol, Int] = Map('abc -> 1)
 
-val abc = values('abc)
+val abc = values('abc) // Migration Warning: symbol literal 'abc is no longer supported
 ```
 
 The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) rewrites the code into:
 
-```scala
+```diff
 val values: Map[Symbol, Int] = Map(Symbol("abc") -> 1)
 
-val abc = values(Symbol("abc"))
+-val abc = values('abc)
++val abc = values(Symbol("abc"))
 ```
 
 Although the `Symbol` class is useful during the transition, beware that it is deprecated and will be removed from the `scala-library` in a future version.
@@ -51,7 +52,7 @@ It is recommended to use the equivalent `while ({ <body>; <cond> }) ()` that cro
 The following piece of code does not compile in Scala 3.
 
 ```scala
-do {
+do { // Migration Warning: `do <body> while <cond>` is no longer supported
   i += 1
 } while (f(i) == 0)
 ```
@@ -69,56 +70,47 @@ while ({ {
 Auto-application is the syntax of calling an empty-paren method such as `def toInt(): Int` without passing an empty argument list.
 It is deprecated in Scala 2.13 and dropped in Scala 3.
 
-The following code is now invalid:
+The following code is invalid in Scala 3:
 
 ```scala
 object Hello {
   def message(): String = "Hello"
 }
 
-println(Hello.message)
-```
-
-In Scala 2.13 it produces a deprecation warning of the form:
-
-```
-src/main/scala/auto-application.scala:6:17: Auto-application to `()` is deprecated. Supply the empty argument list `()` explicitly to invoke method message,
-[warn] or remove the empty argument list from its definition (Java-defined methods are exempt).
-[warn] In Scala 3, an unapplied method like this will be eta-expanded into a function.
-[warn]   println(Hello.message)
-[warn]                 ^
+println(Hello.message) // Migration Warning: method message must be called with () argument
 ```
 
 The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) rewrites it into:
 
-```scala
+```diff
 object Hello {
   def message(): String = "Hello"
 }
 
-println(Hello.message())
+-println(Hello.message)
++println(Hello.message())
 ```
 
 Auto-application is covered in detail in [this page](https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html) of the Scala 3 reference documentation.
 
-
 ## Value eta-expansion
 
-Scala 3 introduces [automatic eta-expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html) which will deprecate the method to value syntax `m _`.
+Scala 3 introduces [Automatic Eta-Expansion](https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html) which will deprecate the method to value syntax `m _`.
 Furthermore Scala 3 does not allow eta-expansion of values to nullary functions anymore.
 
-Thus this piece of code is now invalid:
+Thus, this piece of code is invalid in Scala 3:
 
 ```scala
 val x = 1
-val f: () => Int = x _
+val f: () => Int = x _ // Migration Warning: The syntax `<function> _` is no longer supported;
 ```
 
 The [Scala 3 migration compilation](../tooling/scala-3-migration-mode.md) rewrites it into:
 
-```scala
+```diff
 val x = 1
-val f: () => Int = (() => x)
+-val f: () => Int = x _
++val f: () => Int = (() => x)
 ```
 
 ## `any2stringadd` conversion
@@ -128,13 +120,14 @@ The implicit `Predef.any2stringadd` conversion is deprecated in Scala 2.13 and d
 This piece of code does not compile anymore.
 
 ```scala
-val str = new AnyRef + "foo"
+val str = new AnyRef + "foo" // Error: value + is not a member of Object
 ```
 
 The conversion to `String` must be applied explicitly, for instance with `String.valueOf`.
 
-```scala
-val str = String.valueOf(new AnyRef) + "foo"
+```diff
+-val str = new AnyRef + "foo"
++val str = String.valueOf(new AnyRef) + "foo"
 ```
 
 This rewrite can be applied by the `fix.scala213.Any2StringAdd` Scalafix rule in [`scala/scala-rewrites`](https://index.scala-lang.org/scala/scala-rewrites/scala-rewrites/0.1.2?target=_2.13).
@@ -159,21 +152,21 @@ object Foo extends {
 
 The Scala 3 compiler produces two error messages:
 
-```
+```text
 -- Error: src/main/scala/early-initializer.scala:6:19 
 6 |object Foo extends {
   |                   ^
   |                   `extends` must be followed by at least one parent
 ```
 
-```
+```text
 -- [E009] Syntax Error: src/main/scala/early-initializer.scala:8:2 
 8 |} with Bar
   |  ^^^^
   |  Early definitions are not supported; use trait parameters instead
 ```
 
-It suggests to use trait parameters which gives us:
+It suggests to use trait parameters which would give us:
 
 ```scala
 trait Bar(name: String) {
@@ -205,7 +198,7 @@ class Fizz private (val name: String) extends Bar {
 Existential type is a [dropped feature](https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html), which makes the following code invalid.
 
 ```scala
-def foo: List[Class[T]] forSome { type T }
+def foo: List[Class[T]] forSome { type T } // Error: Existential types are no longer supported
 ```
 
 > Existential type is an experimental feature in Scala 2.13 that must be enabled explicitly eather by importing `import scala.language.existentials` or by setting the `-language:existentials` compiler flag.
@@ -222,5 +215,4 @@ def foo: Bar
 ```
 
 Note that using a wildcard argument, `_` or `?`, is often simpler but is not always possible.
-
-For instance you can replace `List[T] forSome { type  T }` by `List[?]`.
+For instance you could replace `List[T] forSome { type  T }` by `List[?]`.
