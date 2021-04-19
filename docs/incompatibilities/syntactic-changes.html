@@ -87,79 +87,77 @@ It is composed of:</p>
 <li><code>?=&gt;</code></li>
 </ul>
 <p>For instance, the following piece of code compiles in Scala 2.13 but not in Scala 3.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">given</span> </span>{
-  <span class="hljs-keyword">val</span> enum = ???
+<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">given</span> </span>{ <span class="hljs-comment">// Error: given is now a keyword, write `given` instead of given to keep it as an identifier</span>
+  <span class="hljs-keyword">val</span> enum = ??? <span class="hljs-comment">// Error: enum is now a keyword, write `enum` instead of given to keep it as an identifier</span>
 
-  println(enum)
+  println(enum) <span class="hljs-comment">// Error: enum is now a keyword, write `enum` instead of given to keep it as an identifier</span>
 }
 </code></pre>
-<p>A straightforward and binary compatible solution is to backquote the restricted identifiers.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> `<span class="hljs-title">given</span>` </span>{
-  <span class="hljs-keyword">val</span> `enum` = ???
+<p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into:</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-object given {</span>
+<span class="hljs-deletion">-  val enum = ???</span>
 
-  println(`enum`)
+<span class="hljs-deletion">-  println(enum)</span>
+<span class="hljs-addition">+object `given` {</span>
+<span class="hljs-addition">+  val `enum` = ???</span>
+
+<span class="hljs-addition">+  println(`enum`)</span>
 }
 </code></pre>
-<p>This rewrite is automatically applied during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="procedure-syntax"></a><a href="#procedure-syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Procedure Syntax</h2>
 <p>Procedure syntax has been deprecated for a while and it is dropped in Scala 3.
 The following pieces of code are now illegal:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print</span></span>()
-}
-</code></pre>
 <pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Bar</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print</span></span>() {
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print</span></span>() { <span class="hljs-comment">// Error: Procedure syntax no longer supported; `: Unit =` should be inserted here</span>
     println(<span class="hljs-string">"bar"</span>)
   }
 }
 </code></pre>
-<p>In the first case, the result of procedure <code>print</code> must be declared explicitly.
-In the other case, the <code>=</code> symbol must be inserted but it is also better to declare the result type explicitly.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print</span></span>(): <span class="hljs-type">Unit</span>
-}
-</code></pre>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Bar</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print</span></span>(): <span class="hljs-type">Unit</span> = {
-    println(<span class="hljs-string">"bar"</span>)
+<p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into.</p>
+<pre><code class="hljs css language-diff">object Bar {
+<span class="hljs-deletion">-  def print() {</span>
+<span class="hljs-addition">+  def print(): Unit = {</span>
+    println("bar")
   }
 }
 </code></pre>
-<p>This rewrite is automatically applied during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="parentheses-around-lambda-parameter"></a><a href="#parentheses-around-lambda-parameter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parentheses Around Lambda Parameter</h2>
 <p>When followed by its type, the parameter of a lambda is now required to be enclosed in parentheses.
 The following piece of code is invalid.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> f = { x: <span class="hljs-type">Int</span> =&gt; x * x }
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> f = { x: <span class="hljs-type">Int</span> =&gt; x * x } <span class="hljs-comment">// Error: parentheses are required around the parameter of a lambda</span>
 </code></pre>
-<p>It must be rewritten into.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> f = { (x: <span class="hljs-type">Int</span>) =&gt; x * x }
+<p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into:</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-val f = { x: Int =&gt; x * x }</span>
+<span class="hljs-addition">+val f = { (x: Int) =&gt; x * x }</span>
 </code></pre>
-<p>This is automatically performed during the <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="open-brace-indentation-for-passing-an-argument"></a><a href="#open-brace-indentation-for-passing-an-argument" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Open Brace Indentation For Passing An Argument</h2>
 <p>In Scala 2 it is possible to pass an argument after a new line by enclosing it into braces.
 Although valid, this style of coding is not encouraged by the <a href="https://docs.scala-lang.org/style">Scala style guide</a> and is no longer supported in Scala 3.</p>
 <p>This syntax is now invalid:</p>
 <pre><code class="hljs css language-scala">test(<span class="hljs-string">"my test"</span>)
-{
+{ <span class="hljs-comment">// Error: This opening brace will start a new statement in Scala 3.</span>
   assert(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
 }
 </code></pre>
-<p>The preferable solution is to write:</p>
-<pre><code class="hljs css language-scala">test(<span class="hljs-string">"my test"</span>) {
-  assert(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
-}
-</code></pre>
-<p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compiler</a> prefers to indent the first line of the block.</p>
-<pre><code class="hljs css language-scala">test(<span class="hljs-string">"my test"</span>)
-  {
-  assert(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
+<p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compiler</a> indents the first line of the block.</p>
+<pre><code class="hljs css language-diff">test("my test")
+<span class="hljs-deletion">-{</span>
+<span class="hljs-addition">+  {</span>
+  assert(1 == 1)
 }
 </code></pre>
 <p>This migration rule applies to other patterns as well, such as refining a type after a new line.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Bar</span> </span>= <span class="hljs-type">Foo</span>
-  {
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>(): <span class="hljs-type">Int</span>
+<pre><code class="hljs css language-diff">type Bar = Foo
+<span class="hljs-deletion">- {</span>
+<span class="hljs-addition">+   {</span>
+  def bar(): Int
+}
+</code></pre>
+<p>A preferable solution is to write:</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-test("my test")</span>
+<span class="hljs-deletion">-{</span>
+<span class="hljs-addition">+test("my test") {</span>
+  assert(1 == 1)
 }
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="wrong-indentation"></a><a href="#wrong-indentation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wrong indentation</h2>
@@ -167,14 +165,17 @@ Although valid, this style of coding is not encouraged by the <a href="https://d
 The following pieces of code that compiled in Scala 2 does not compile anymore, because of the indentation.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>: (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = {
   <span class="hljs-keyword">val</span> foo = <span class="hljs-number">1.0</span>
-  <span class="hljs-keyword">val</span> bar = foo
+  <span class="hljs-keyword">val</span> bar = foo <span class="hljs-comment">// [E050] Type Error: value foo does not take parameters</span>
     (<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
-}
+} <span class="hljs-comment">// [E007] Type Mismatch Error: Found Unit, Required (Int, Int)</span>
 </code></pre>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> foo =
-  <span class="hljs-type">Vector</span>(<span class="hljs-number">1</span>) ++
-<span class="hljs-type">Vector</span>(<span class="hljs-number">2</span>) ++
-  <span class="hljs-type">Vector</span>(<span class="hljs-number">3</span>)
+<p>The indentation must be fixed.</p>
+<pre><code class="hljs css language-diff">def bar: (Int, Int) = {
+  val foo = 1.0
+  val bar = foo
+<span class="hljs-deletion">-    (1, 1)</span>
+<span class="hljs-addition">+  (1, 1)</span>
+}
 </code></pre>
 <p>These errors can be prevented by using a Scala formatting tool such as <a href="https://scalameta.org/scalafmt/">scalafmt</a> or the <a href="https://www.jetbrains.com/help/idea/reformat-and-rearrange-code.html">IntelliJ Scala formatter</a>.
 Beware that these tools may change the entire code style of your project.</p>
@@ -186,13 +187,16 @@ It is used in the API of <a href="https://index.scala-lang.org/lihaoyi/fastparse
 <p>Here, the method <code>foo</code> takes a type paramater <code>_</code> and an implicit parameter of type <code>Foo[_]</code> where <code>_</code> refers to the type parameter, not the wildcard symbol.</p>
 <p>Martin Odersky described this pattern as a &quot;clever exploit of a scalac compiler bug&quot; (<a href="https://www.reddit.com/r/scala/comments/fczcvo/mysterious_context_bounds_in_fastparse_2/fjecokn/">source</a>).</p>
 <p>The Scala 3 compiler does not permit this pattern anymore:</p>
-<pre><code class="hljs">-- [E040] Syntax <span class="hljs-string">Error:</span> src<span class="hljs-regexp">/main/</span>scala/anonymous-type-param.<span class="hljs-string">scala:</span><span class="hljs-number">4</span>:<span class="hljs-number">10</span>
-<span class="hljs-number">4</span> |  <span class="hljs-keyword">def</span> foo[<span class="hljs-string">_:</span> Foo]: Unit = ()
+<pre><code class="hljs css language-text">-- [E040] Syntax Error: src/main/scala/anonymous-type-param.scala:4:10
+4 |  def foo[_: Foo]: Unit = ()
   |          ^
-  |          an identifier expected, but <span class="hljs-string">'_'</span> found
+  |          an identifier expected, but '_' found
 </code></pre>
 <p>The solution is to give the parameter a valid identifier name, for instance <code>T</code>.
 This will not break the binary compatibility.</p>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-def foo[_: Foo]: Unit = ???</span>
+<span class="hljs-addition">+def foo[T: Foo]: Unit = ???</span>
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="-and---as-type-parameters"></a><a href="#-and---as-type-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>+</code> And <code>-</code> As Type Parameters</h2>
 <p><code>+</code> and <code>-</code> are not valid identifiers for type parameters in Scala 3, since they are reserved for variance annotation.</p>
 <p>You cannot write <code>def foo[+]</code> or <code>def foo[-]</code> anymore.</p>

@@ -78,7 +78,7 @@ They cannot be inferred anymore.</p>
 }
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pretty</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Pretty</span>): <span class="hljs-type">String</span> =
-  a.print
+  a.print <span class="hljs-comment">// Error: value print is not a member of A</span>
 </code></pre>
 <p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> can warn you about those cases, but it does not try to fix it.</p>
 <p>Be aware that this incompatibility can produce a runtime incompatibility and break your program.
@@ -90,9 +90,8 @@ Indeed the compiler can find another implicit conversion from a broader scope, w
 
 <span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">anyPretty</span></span>(any: <span class="hljs-type">Any</span>): <span class="hljs-type">Pretty</span> = <span class="hljs-keyword">new</span> <span class="hljs-type">Pretty</span> { <span class="hljs-keyword">val</span> print = <span class="hljs-string">"any"</span> }
 
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pretty</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Pretty</span>): <span class="hljs-type">String</span> = {
-  a.print
-}
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pretty</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Pretty</span>): <span class="hljs-type">String</span> =
+  a.print <span class="hljs-comment">// always print "any"</span>
 </code></pre>
 <p>The resolved conversion depends on the compiler mode:</p>
 <ul>
@@ -100,14 +99,16 @@ Indeed the compiler can find another implicit conversion from a broader scope, w
 <li><code>-source:3.0</code>: the compiler cannot perform the <code>ev</code> conversion but it can perform the <code>anyPretty</code>, which is undesired</li>
 </ul>
 <p>One simple fix is to supply the right conversion explicitly:</p>
-<pre><code class="hljs css language-scala">ev(a).print
+<pre><code class="hljs css language-diff">def pretty[A](a: A)(implicit ev: A =&gt; Pretty): String =
+<span class="hljs-deletion">-  a.print</span>
+<span class="hljs-addition">+  ev(a).print</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="view-bounds"></a><a href="#view-bounds" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>View Bounds</h2>
 <p>View bounds have been deprecated for a long time but they are still supported in Scala 2.13.
 They do not compile in Scala 3 anymore.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>[<span class="hljs-type">A</span> &lt;% <span class="hljs-type">Long</span>](a: <span class="hljs-type">A</span>): <span class="hljs-type">Long</span> = a
 </code></pre>
-<p>In Scala 2.13 we get:</p>
+<p>In this example we get:</p>
 <pre><code class="hljs css language-text">-- Error: src/main/scala/view-bound.scala:2:12 
 2 |  def foo[A <% Long](a: A): Long = a
   |            ^
@@ -117,22 +118,19 @@ They do not compile in Scala 3 anymore.</p>
 It is probably easier and safer to preserve the binary compatibility.
 To do so the implicit conversion must be declared and called explicitly.</p>
 <p>Be careful not to fall in the runtime incompatibility described above, in <a href="#implicit-views">Implicit Views</a>.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>[<span class="hljs-type">A</span>](a: <span class="hljs-type">A</span>)(<span class="hljs-keyword">implicit</span> ev: <span class="hljs-type">A</span> =&gt; <span class="hljs-type">Long</span>): <span class="hljs-type">Long</span> = ev(a)
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-def foo[A &lt;% Long](a: A): Long = a</span>
+<span class="hljs-addition">+def foo[A](a: A)(implicit ev: A =&gt; Long): Long = ev(a)</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="ambiguous-conversion-on-a-and--a"></a><a href="#ambiguous-conversion-on-a-and--a" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ambiguous Conversion On <code>A</code> And <code>=&gt; A</code></h2>
 <p>In Scala 2.13 the implicit conversion on <code>A</code> wins over the implicit conversion on <code>=&gt; A</code>.
 It is not the case in Scala 3 anymore, and leads to an ambiguous conversion.</p>
 <p>For instance, in this example:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Foo</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>(): <span class="hljs-type">Unit</span> 
-}
-
-<span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">boolFoo</span></span>(bool: <span class="hljs-type">Boolean</span>): <span class="hljs-type">Foo</span> = ???
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">boolFoo</span></span>(bool: <span class="hljs-type">Boolean</span>): <span class="hljs-type">Foo</span> = ???
 <span class="hljs-keyword">implicit</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lazyBoolFoo</span></span>(lazyBool:  =&gt; <span class="hljs-type">Boolean</span>): <span class="hljs-type">Foo</span> = ???
 
 <span class="hljs-literal">true</span>.foo()
 </code></pre>
-<p>The Scala 2.13 compiler chooses the <code>boolFoo</code> conversion but the Scala 3 compiler does not choose any.</p>
+<p>The Scala 2.13 compiler chooses the <code>boolFoo</code> conversion but the Scala 3 compiler fails to compile.</p>
 <pre><code class="hljs css language-text">-- Error: src/main/scala/ambiguous-conversion.scala:4:19
 9 |  true.foo()
   |  ^^^^
@@ -142,7 +140,11 @@ It is not the case in Scala 3 anymore, and leads to an ambiguous conversion.</p>
   |both method boolFoo in object Foo and method lazyBoolFoo in object Foo provide an extension method `foo` on (true : Boolean)
 </code></pre>
 <p>A temporary solution is to write the conversion explicitly.</p>
-<pre><code class="hljs css language-scala">boolFoo(<span class="hljs-literal">true</span>).foo()
+<pre><code class="hljs css language-diff">implicit def boolFoo(bool: Boolean): Foo = ???
+implicit def lazyBoolFoo(lazyBool:  =&gt; Boolean): Foo = ???
+
+<span class="hljs-deletion">-true.foo()</span>
+<span class="hljs-addition">+boolFoo(true).foo()</span>
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/dropped-features.html"><span class="arrow-prev">← </span><span>Dropped Features</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html"><span>Other Changed Features</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#type-of-implicit-definition">Type Of Implicit Definition</a></li><li><a href="#implicit-views">Implicit Views</a></li><li><a href="#view-bounds">View Bounds</a></li><li><a href="#ambiguous-conversion-on-a-and--a">Ambiguous Conversion On <code>A</code> And <code>=&gt; A</code></a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
                 /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="

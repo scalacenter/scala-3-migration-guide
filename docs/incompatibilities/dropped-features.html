@@ -76,12 +76,13 @@ But the <code>scala.Symbol</code> class still exists so that each string literal
 <p>This piece of code does not compile in Scala 3:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> values: <span class="hljs-type">Map</span>[<span class="hljs-type">Symbol</span>, <span class="hljs-type">Int</span>] = <span class="hljs-type">Map</span>(<span class="hljs-symbol">'abc</span> -&gt; <span class="hljs-number">1</span>)
 
-<span class="hljs-keyword">val</span> abc = values(<span class="hljs-symbol">'abc</span>)
+<span class="hljs-keyword">val</span> abc = values(<span class="hljs-symbol">'abc</span>) <span class="hljs-comment">// Migration Warning: symbol literal 'abc is no longer supported</span>
 </code></pre>
 <p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> rewrites the code into:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> values: <span class="hljs-type">Map</span>[<span class="hljs-type">Symbol</span>, <span class="hljs-type">Int</span>] = <span class="hljs-type">Map</span>(<span class="hljs-type">Symbol</span>(<span class="hljs-string">"abc"</span>) -&gt; <span class="hljs-number">1</span>)
+<pre><code class="hljs css language-diff">val values: Map[Symbol, Int] = Map(Symbol("abc") -&gt; 1)
 
-<span class="hljs-keyword">val</span> abc = values(<span class="hljs-type">Symbol</span>(<span class="hljs-string">"abc"</span>))
+<span class="hljs-deletion">-val abc = values('abc)</span>
+<span class="hljs-addition">+val abc = values(Symbol("abc"))</span>
 </code></pre>
 <p>Although the <code>Symbol</code> class is useful during the transition, beware that it is deprecated and will be removed from the <code>scala-library</code> in a future version.
 You are recommended, as a second step, to replace every use of <code>Symbol</code> with a plain string literals <code>&quot;xwy&quot;</code> or a custom dedicated class.</p>
@@ -90,7 +91,7 @@ You are recommended, as a second step, to replace every use of <code>Symbol</cod
 <p>To avoid confusion, the traditional <code>do &lt;body&gt; while (&lt;cond&gt;)</code> construct is dropped.
 It is recommended to use the equivalent <code>while ({ &lt;body&gt;; &lt;cond&gt; }) ()</code> that cross-compiles, or the new Scala 3 syntax <code>while { &lt;body&gt;; &lt;cond&gt; } do ()</code>.</p>
 <p>The following piece of code does not compile in Scala 3.</p>
-<pre><code class="hljs css language-scala">do {
+<pre><code class="hljs css language-scala">do { <span class="hljs-comment">// Migration Warning: `do &lt;body&gt; while &lt;cond&gt;` is no longer supported</span>
   i += <span class="hljs-number">1</span>
 } <span class="hljs-keyword">while</span> (f(i) == <span class="hljs-number">0</span>)
 </code></pre>
@@ -102,46 +103,42 @@ It is recommended to use the equivalent <code>while ({ &lt;body&gt;; &lt;cond&gt
 <h2><a class="anchor" aria-hidden="true" id="auto-application"></a><a href="#auto-application" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Auto-application</h2>
 <p>Auto-application is the syntax of calling an empty-paren method such as <code>def toInt(): Int</code> without passing an empty argument list.
 It is deprecated in Scala 2.13 and dropped in Scala 3.</p>
-<p>The following code is now invalid:</p>
+<p>The following code is invalid in Scala 3:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Hello</span> </span>{
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">message</span></span>(): <span class="hljs-type">String</span> = <span class="hljs-string">"Hello"</span>
 }
 
-println(<span class="hljs-type">Hello</span>.message)
+println(<span class="hljs-type">Hello</span>.message) <span class="hljs-comment">// Migration Warning: method message must be called with () argument</span>
 </code></pre>
-<p>In Scala 2.13 it produces a deprecation warning of the form:</p>
-<pre><code class="hljs">src/main/scala/auto-application.scala:<span class="hljs-number">6</span>:<span class="hljs-number">17</span>: Auto-application <span class="hljs-keyword">to</span> `()` <span class="hljs-keyword">is</span> <span class="hljs-keyword">deprecated</span>. Supply the <span class="hljs-keyword">empty</span> argument list `()` explicitly <span class="hljs-keyword">to</span> invoke <span class="hljs-function"><span class="hljs-keyword">method</span> <span class="hljs-title">message</span>,
-[<span class="hljs-title">warn</span>] <span class="hljs-title">or</span> <span class="hljs-title">remove</span> <span class="hljs-title">the</span> <span class="hljs-title">empty</span> <span class="hljs-title">argument</span> <span class="hljs-title">list</span> <span class="hljs-title">from</span> <span class="hljs-title">its</span> <span class="hljs-title">definition</span> <span class="hljs-params">(Java-defined methods are exempt)</span>.
-[<span class="hljs-title">warn</span>] <span class="hljs-title">In</span> <span class="hljs-title">Scala</span> 3, <span class="hljs-title">an</span> <span class="hljs-title">unapplied</span> <span class="hljs-title">method</span> <span class="hljs-title">like</span> <span class="hljs-title">this</span> <span class="hljs-title">will</span> <span class="hljs-title">be</span> <span class="hljs-title">eta</span>-<span class="hljs-title">expanded</span> <span class="hljs-title">into</span> <span class="hljs-title">a</span> <span class="hljs-title">function</span>.
-[<span class="hljs-title">warn</span>]   <span class="hljs-title">println</span><span class="hljs-params">(Hello.message)</span>
-[<span class="hljs-title">warn</span>]                 ^
-</span></code></pre>
 <p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> rewrites it into:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Hello</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">message</span></span>(): <span class="hljs-type">String</span> = <span class="hljs-string">"Hello"</span>
+<pre><code class="hljs css language-diff">object Hello {
+  def message(): String = "Hello"
 }
 
-println(<span class="hljs-type">Hello</span>.message())
+<span class="hljs-deletion">-println(Hello.message)</span>
+<span class="hljs-addition">+println(Hello.message())</span>
 </code></pre>
 <p>Auto-application is covered in detail in <a href="https://dotty.epfl.ch/docs/reference/dropped-features/auto-apply.html">this page</a> of the Scala 3 reference documentation.</p>
 <h2><a class="anchor" aria-hidden="true" id="value-eta-expansion"></a><a href="#value-eta-expansion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Value eta-expansion</h2>
-<p>Scala 3 introduces <a href="https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html">automatic eta-expansion</a> which will deprecate the method to value syntax <code>m _</code>.
+<p>Scala 3 introduces <a href="https://dotty.epfl.ch/docs/reference/changed-features/eta-expansion-spec.html">Automatic Eta-Expansion</a> which will deprecate the method to value syntax <code>m _</code>.
 Furthermore Scala 3 does not allow eta-expansion of values to nullary functions anymore.</p>
-<p>Thus this piece of code is now invalid:</p>
+<p>Thus, this piece of code is invalid in Scala 3:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> x = <span class="hljs-number">1</span>
-<span class="hljs-keyword">val</span> f: () =&gt; <span class="hljs-type">Int</span> = x _
+<span class="hljs-keyword">val</span> f: () =&gt; <span class="hljs-type">Int</span> = x _ <span class="hljs-comment">// Migration Warning: The syntax `&lt;function&gt; _` is no longer supported;</span>
 </code></pre>
 <p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> rewrites it into:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> x = <span class="hljs-number">1</span>
-<span class="hljs-keyword">val</span> f: () =&gt; <span class="hljs-type">Int</span> = (() =&gt; x)
+<pre><code class="hljs css language-diff">val x = 1
+<span class="hljs-deletion">-val f: () =&gt; Int = x _</span>
+<span class="hljs-addition">+val f: () =&gt; Int = (() =&gt; x)</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="any2stringadd-conversion"></a><a href="#any2stringadd-conversion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>any2stringadd</code> conversion</h2>
 <p>The implicit <code>Predef.any2stringadd</code> conversion is deprecated in Scala 2.13 and dropped in Scala 3.</p>
 <p>This piece of code does not compile anymore.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> str = <span class="hljs-keyword">new</span> <span class="hljs-type">AnyRef</span> + <span class="hljs-string">"foo"</span>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> str = <span class="hljs-keyword">new</span> <span class="hljs-type">AnyRef</span> + <span class="hljs-string">"foo"</span> <span class="hljs-comment">// Error: value + is not a member of Object</span>
 </code></pre>
 <p>The conversion to <code>String</code> must be applied explicitly, for instance with <code>String.valueOf</code>.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> str = <span class="hljs-type">String</span>.valueOf(<span class="hljs-keyword">new</span> <span class="hljs-type">AnyRef</span>) + <span class="hljs-string">"foo"</span>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-val str = new AnyRef + "foo"</span>
+<span class="hljs-addition">+val str = String.valueOf(new AnyRef) + "foo"</span>
 </code></pre>
 <p>This rewrite can be applied by the <code>fix.scala213.Any2StringAdd</code> Scalafix rule in <a href="https://index.scala-lang.org/scala/scala-rewrites/scala-rewrites/0.1.2?target=_2.13"><code>scala/scala-rewrites</code></a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="early-initializer"></a><a href="#early-initializer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Early Initializer</h2>
@@ -158,17 +155,17 @@ They were rarely used, and mostly to compensate for the lack of <a href="https:/
 } <span class="hljs-keyword">with</span> <span class="hljs-type">Bar</span>
 </code></pre>
 <p>The Scala 3 compiler produces two error messages:</p>
-<pre><code class="hljs">-- <span class="hljs-type">Error</span>: src/main/scala/early-initializer.scala:<span class="hljs-number">6</span>:<span class="hljs-number">19</span> 
-<span class="hljs-number">6</span> |<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> </span>{
+<pre><code class="hljs css language-text">-- Error: src/main/scala/early-initializer.scala:6:19 
+6 |object Foo extends {
   |                   ^
-  |                   `<span class="hljs-keyword">extends</span>` must be followed by at least one parent
+  |                   `extends` must be followed by at least one parent
 </code></pre>
-<pre><code class="hljs">-- [E009] <span class="hljs-keyword">Syntax</span> <span class="hljs-keyword">Error</span>: src/main/<span class="hljs-keyword">scala</span>/early-initializer.<span class="hljs-keyword">scala</span>:8:2 
+<pre><code class="hljs css language-text">-- [E009] Syntax Error: src/main/scala/early-initializer.scala:8:2 
 8 |} with Bar
   |  ^^^^
-  |  Early definitions are not supported; <span class="hljs-keyword">use</span> trait parameters instead
+  |  Early definitions are not supported; use trait parameters instead
 </code></pre>
-<p>It suggests to use trait parameters which gives us:</p>
+<p>It suggests to use trait parameters which would give us:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Bar</span>(<span class="hljs-params">name: <span class="hljs-type">String</span></span>) </span>{
   <span class="hljs-keyword">val</span> size: <span class="hljs-type">Int</span> = name.size
 }
@@ -188,7 +185,7 @@ If you need a cross-compiling solution you can use an intermediate class that ca
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="existential-type"></a><a href="#existential-type" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Existential Type</h2>
 <p>Existential type is a <a href="https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html">dropped feature</a>, which makes the following code invalid.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>: <span class="hljs-type">List</span>[<span class="hljs-type">Class</span>[<span class="hljs-type">T</span>]] <span class="hljs-keyword">forSome</span> { <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">T</span> }</span>
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>: <span class="hljs-type">List</span>[<span class="hljs-type">Class</span>[<span class="hljs-type">T</span>]] <span class="hljs-keyword">forSome</span> { <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">T</span> } <span class="hljs-title">//</span> <span class="hljs-title">Error</span></span>: <span class="hljs-type">Existential</span> types are no longer supported
 </code></pre>
 <blockquote>
 <p>Existential type is an experimental feature in Scala 2.13 that must be enabled explicitly eather by importing <code>import scala.language.existentials</code> or by setting the <code>-language:existentials</code> compiler flag.</p>
@@ -201,8 +198,8 @@ If you need a cross-compiling solution you can use an intermediate class that ca
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">foo</span></span>: <span class="hljs-type">Bar</span>
 </code></pre>
-<p>Note that using a wildcard argument, <code>_</code> or <code>?</code>, is often simpler but is not always possible.</p>
-<p>For instance you can replace <code>List[T] forSome { type T }</code> by <code>List[?]</code>.</p>
+<p>Note that using a wildcard argument, <code>_</code> or <code>?</code>, is often simpler but is not always possible.
+For instance you could replace <code>List[T] forSome { type T }</code> by <code>List[?]</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html"><span class="arrow-prev">← </span><span>Syntactic Changes</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html"><span>Contextual Abstractions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#symbol-literals">Symbol literals</a></li><li><a href="#do-while-construct"><code>do</code>-<code>while</code> construct</a></li><li><a href="#auto-application">Auto-application</a></li><li><a href="#value-eta-expansion">Value eta-expansion</a></li><li><a href="#any2stringadd-conversion"><code>any2stringadd</code> conversion</a></li><li><a href="#early-initializer">Early Initializer</a></li><li><a href="#existential-type">Existential Type</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
                 /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
                 /scala-3-migration-guide/docs/contributing.html">Contribute</a></div><div><h5>Community</h5><a href="https://gitter.im/scala/center" target="_blank">Chat on Gitter</a><a href="https://users.scala-lang.org/" target="_blank">Discuss on Scala Users</a></div><div><h5>More</h5><a href="https://github.com/scalacenter/scala-3-migration-guide" target="_blank">GitHub</a></div></section><section class="copyright">Copyright © 2021 Scala Center</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>

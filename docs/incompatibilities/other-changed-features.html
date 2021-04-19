@@ -66,7 +66,7 @@
 <tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#case-class-companion">Case class companion</a></td><td></td><td></td><td></td><td></td></tr>
 <tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#explicit-call-to-unapply">Explicit call to unapply</a></td><td></td><td></td><td></td><td></td></tr>
 <tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#invisible-bean-property">Invisible bean property</a></td><td></td><td></td><td></td><td></td></tr>
-<tr><td><a href="#-t-as-type-argument"><code>=&gt;T</code> as type argument</a></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#-t-as-type-argument"><code>=&gt;T</code> as type argument</a></td><td></td><td></td><td></td><td></td></tr>
 <tr><td><a href="/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#wildcard-type-argument">Wildcard type argument</a></td><td></td><td></td><td></td><td></td></tr>
 </tbody>
 </table>
@@ -96,12 +96,12 @@ You cannot know until you go to the definition of <code>A</code>.</p>
   }
 }
 </code></pre>
-<pre><code class="hljs">-- [E049] Reference Error: src/main/scala/inheritance-shadowing.scala:<span class="hljs-number">9</span>:<span class="hljs-number">14</span> 
-<span class="hljs-number">9</span> |      println(x)
+<pre><code class="hljs css language-text">-- [E049] Reference Error: src/main/scala/inheritance-shadowing.scala:9:14 
+9 |      println(x)
   |              ^
-  |              Reference to x <span class="hljs-keyword">is</span> ambiguous,
-  |              it <span class="hljs-keyword">is</span> both defined <span class="hljs-keyword">in</span> object B
-  |              <span class="hljs-keyword">and</span> inherited subsequently <span class="hljs-keyword">in</span> <span class="hljs-keyword">class</span> <span class="hljs-symbol">C</span>
+  |              Reference to x is ambiguous,
+  |              it is both defined in object B
+  |              and inherited subsequently in class C
 </code></pre>
 <p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> can automatically disambiguate the code by replacing <code>println(x)</code> with <code>println(this.x)</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="non-private-constructor-in-private-class"></a><a href="#non-private-constructor-in-private-class" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-private Constructor In Private Class</h2>
@@ -112,11 +112,11 @@ You cannot know until you go to the definition of <code>A</code>.</p>
 <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span> <span class="hljs-title">private</span>[foo] (<span class="hljs-params"></span>) </span>{}
 </code></pre>
 <p>The error message is:</p>
-<pre><code class="hljs">[<span class="hljs-builtin-name">error</span>] -- Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat/access-modifier/src/main/scala-2.13/access-modifier.scala:4:19 
-[<span class="hljs-builtin-name">error</span>] 4 |  private class Bar private[foo] ()
-[<span class="hljs-builtin-name">error</span>]   |                   ^
-[<span class="hljs-builtin-name">error</span>]   |      non-private constructor Bar <span class="hljs-keyword">in</span> class Bar refers <span class="hljs-keyword">to</span> private class Bar
-[<span class="hljs-builtin-name">error</span>]   |      <span class="hljs-keyword">in</span> its<span class="hljs-built_in"> type </span>signature (): foo.Foo.Bar
+<pre><code class="hljs">-- Error: /home/piquerez/scalacenter/scala-<span class="hljs-number">3</span>-migration-guide/incompat/access-modifier/src/main/scala-<span class="hljs-number">2.13</span>/access-modifier.scala:<span class="hljs-number">4</span>:<span class="hljs-number">19</span> 
+<span class="hljs-number">4</span> |  <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> Bar <span class="hljs-keyword">private</span>[foo] ()
+  |                   ^
+  |      non-<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">constructor</span> <span class="hljs-title">Bar</span> <span class="hljs-title">in</span> <span class="hljs-title">class</span> <span class="hljs-title">Bar</span> <span class="hljs-title">refers</span> <span class="hljs-title">to</span> <span class="hljs-title">private</span> <span class="hljs-title">class</span> <span class="hljs-title">Bar</span>
+  |      <span class="hljs-title">in</span> <span class="hljs-title">its</span> <span class="hljs-title">type</span> <span class="hljs-title">signature</span> <span class="hljs-params">()</span>:</span> foo.Foo.Bar
 </code></pre>
 <p>The <a href="/scala-3-migration-guide/docs/tooling/scala-3-migration-mode.html">Scala 3 migration compilation</a> warns about this but no automatic rewrite is provided.</p>
 <p>The solution is to make the constructor private, since the class is private.</p>
@@ -131,12 +131,7 @@ You cannot know until you go to the definition of <code>A</code>.</p>
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bar</span></span>(x: <span class="hljs-type">Int</span>): <span class="hljs-type">Int</span>
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span></span>
-</code></pre>
-<pre><code class="hljs">[error] -- Error: src/main/scala/<span class="hljs-keyword">abstract</span>-<span class="hljs-keyword">override</span>.scala:<span class="hljs-number">11</span>:<span class="hljs-number">6</span>
-[error] <span class="hljs-number">11</span> |<span class="hljs-keyword">class</span> <span class="hljs-symbol">C</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">B</span>
-[<span class="hljs-symbol">error</span>]    |      ^
-[<span class="hljs-symbol">error</span>]    |<span class="hljs-symbol">class</span> <span class="hljs-symbol">C</span> <span class="hljs-symbol">needs</span> <span class="hljs-symbol">to</span> <span class="hljs-symbol">be</span> <span class="hljs-symbol">abstract, <span class="hljs-symbol">since</span></span> <span class="hljs-symbol">def</span> <span class="hljs-symbol">bar</span>(<span class="hljs-symbol">x: <span class="hljs-symbol">Int</span></span>): <span class="hljs-symbol">Int</span> <span class="hljs-symbol">is</span> <span class="hljs-symbol">not</span> <span class="hljs-symbol">defined</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span> <span class="hljs-title">//</span> <span class="hljs-title">Error</span></span>: <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-title">needs</span> <span class="hljs-title">to</span> <span class="hljs-title">be</span> <span class="hljs-title">abstract</span>, <span class="hljs-title">since</span> <span class="hljs-title">def</span> <span class="hljs-title">bar</span>(<span class="hljs-params">x: <span class="hljs-type">Int</span></span>)</span>: <span class="hljs-type">Int</span> is not defined
 </code></pre>
 <p>This behavior was decided in <a href="https://github.com/lampepfl/dotty/issues/4770">Dotty issue #4770</a>.</p>
 <p>An easy fix is simply to remove the abstract def, since in practice it had no effect in Scala 2.</p>
@@ -150,8 +145,11 @@ In particular, it does not inherit their methods: <code>tupled</code>, <code>cur
 <span class="hljs-type">Foo</span>.tupled((<span class="hljs-number">2</span>, <span class="hljs-literal">false</span>))
 </code></pre>
 <p>A cross-compiling solution is to explicitly eta-expand the method <code>Foo.apply</code>.</p>
-<pre><code class="hljs css language-scala">(<span class="hljs-type">Foo</span>.apply _).curried(<span class="hljs-number">1</span>)(<span class="hljs-literal">true</span>)
-(<span class="hljs-type">Foo</span>.apply _).tupled((<span class="hljs-number">2</span>, <span class="hljs-literal">false</span>))
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-Foo.curried(1)(true)</span>
+<span class="hljs-addition">+(Foo.apply _).curried(1)(true)</span>
+
+<span class="hljs-deletion">-Foo.tupled((2, false))</span>
+<span class="hljs-addition">+(Foo.apply _).tupled((2, false))</span>
 </code></pre>
 <p>Or, for performance reason, you can introduce an intermediate function value.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">val</span> fooCtr: (<span class="hljs-type">Int</span>, <span class="hljs-type">Boolean</span>) =&gt; <span class="hljs-type">Foo</span> = (x, b) =&gt; <span class="hljs-type">Foo</span>(x, b)
@@ -179,13 +177,14 @@ Its signature has changed between Scala 2.13 and Scala 3.</p>
 </code></pre>
 <p>Consequently the following code does not compile anymore.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tuple</span></span>(location: <span class="hljs-type">Location</span>): (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = {
-  <span class="hljs-type">Location</span>.unapply(location).get
+  <span class="hljs-type">Location</span>.unapply(location).get <span class="hljs-comment">// [E008] Not Found Error: value get is not a member of Location</span>
 }
 </code></pre>
 <p>A possible solution is to use pattern binding:</p>
-<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">tuple</span></span>(location: <span class="hljs-type">Location</span>): (<span class="hljs-type">Int</span>, <span class="hljs-type">Int</span>) = {
-  <span class="hljs-keyword">val</span> <span class="hljs-type">Location</span>(lat, lon) = location
-  (lat, lon)
+<pre><code class="hljs css language-diff">def tuple(location: Location): (Int, Int) = {
+<span class="hljs-deletion">-  Location.unapply(location).get</span>
+<span class="hljs-addition">+  val Location(lat, lon) = location</span>
+<span class="hljs-addition">+  (lat, lon)</span>
 }
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="invisible-bean-property"></a><a href="#invisible-bean-property" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Invisible Bean Property</h2>
@@ -197,19 +196,18 @@ Its signature has changed between Scala 2.13 and Scala 3.</p>
 
 <span class="hljs-keyword">val</span> pojo = <span class="hljs-keyword">new</span> <span class="hljs-type">Pojo</span>()
 
-pojo.setFooBar(<span class="hljs-string">"hello"</span>)
+pojo.setFooBar(<span class="hljs-string">"hello"</span>) <span class="hljs-comment">// [E008] Not Found Error: value setFooBar is not a member of Pojo</span>
 
-println(pojo.getFooBar())
+println(pojo.getFooBar()) <span class="hljs-comment">// [E008] Not Found Error: value getFooBar is not a member of Pojo</span>
 </code></pre>
-<p><code>pojo.setFooBar(&quot;hello&quot;)</code> and <code>pojo.getFooBar()</code> are not valid in Scala 3.</p>
 <p>The solution is to call the more idiomatic <code>pojo.fooBar</code> getter and setter.</p>
 <pre><code class="hljs css language-diff">val pojo = new Pojo()
 
-<span class="hljs-deletion">- pojo.setFooBar("hello")</span>
-<span class="hljs-addition">+ pojo.fooBar = "hello"</span>
+<span class="hljs-deletion">-pojo.setFooBar("hello")</span>
+<span class="hljs-addition">+pojo.fooBar = "hello"</span>
 
-<span class="hljs-deletion">- println(pojo.getFooBar())</span>
-<span class="hljs-addition">+ println(pojo.fooBar)</span>
+<span class="hljs-deletion">-println(pojo.getFooBar())</span>
+<span class="hljs-addition">+println(pojo.fooBar)</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="-t-as-type-argument"></a><a href="#-t-as-type-argument" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>=&gt; T</code> as Type Argument</h2>
 <p>A type of the form <code>=&gt; T</code> cannot be used as argument to a type paramter anymore.</p>
@@ -233,31 +231,26 @@ println(pojo.getFooBar())
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="wildcard-type-argument"></a><a href="#wildcard-type-argument" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wildcard Type Argument</h2>
 <p>Scala 3 cannot reduce the application of a higher-kinded abstract type member to the wildcard argument.</p>
-<p>For instance, the example:</p>
+<p>For instance, the following example does not compile.
+For instance, the following example does not compile.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Example</span> </span>{
   <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Foo</span>[<span class="hljs-type">A</span>]</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span></span>(foo: <span class="hljs-type">Foo</span>[_]): <span class="hljs-type">Unit</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span></span>(foo: <span class="hljs-type">Foo</span>[_]): <span class="hljs-type">Unit</span> <span class="hljs-comment">// [E043] Type Error: unreducible application of higher-kinded type Example.this.Foo to wildcard arguments </span>
 }
 </code></pre>
-<p>Produces the following error when compiled with Scala 3:</p>
-<pre><code class="hljs css language-text">-- [E043] Type Error: /home/piquerez/scalacenter/scala-3-migration-guide/incompat-30/wildcard-argument/target/src-managed/main/scala/wildcard-argument.scala:4:13 
-4 |  def f(foo: Foo[_]): Unit / compileIncremental 0s
-  |             ^^^^^^
-  |unreducible application of higher-kinded type Example.this.Foo to wildcard arguments
-</code></pre>
 <p>We can fix this by using a type parameter:</p>
-<pre><code class="hljs css language-diff"><span class="hljs-deletion">- def f(foo: Foo[_]): Unit</span>
-<span class="hljs-addition">+ def f[A](foo: Foo[A]): Unit</span>
+<pre><code class="hljs css language-diff"><span class="hljs-deletion">-def f(foo: Foo[_]): Unit</span>
+<span class="hljs-addition">+def f[A](foo: Foo[A]): Unit</span>
 </code></pre>
 <p>But this simple solution does not work when <code>Foo</code> is itself used as type argument.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">g</span></span>(foos: <span class="hljs-type">Seq</span>[<span class="hljs-type">Foo</span>[_]]): <span class="hljs-type">Unit</span>`
 </code></pre>
 <p>In such case, we can use a wrapper class around <code>Foo</code>:</p>
-<pre><code class="hljs css language-diff"><span class="hljs-addition">+ class FooWrapper[A](foo: Foo[A])</span>
+<pre><code class="hljs css language-diff"><span class="hljs-addition">+class FooWrapper[A](foo: Foo[A])</span>
 
-<span class="hljs-deletion">- def g(foos: Seq[Foo[_]]): Unit`</span>
-<span class="hljs-addition">+ def g(foos: Seq[FooWrapper[_]]): Unit</span>
+<span class="hljs-deletion">-def g(foos: Seq[Foo[_]]): Unit`</span>
+<span class="hljs-addition">+def g(foos: Seq[FooWrapper[_]]): Unit</span>
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html"><span class="arrow-prev">← </span><span>Contextual Abstractions</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/type-checker.html"><span>Type Checker</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#inheritance-shadowing">Inheritance Shadowing</a></li><li><a href="#non-private-constructor-in-private-class">Non-private Constructor In Private Class</a></li><li><a href="#abstract-override">Abstract Override</a></li><li><a href="#case-class-companion">Case Class Companion</a></li><li><a href="#explicit-call-to-unapply">Explicit Call to <code>unapply</code></a></li><li><a href="#invisible-bean-property">Invisible Bean Property</a></li><li><a href="#-t-as-type-argument"><code>=&gt; T</code> as Type Argument</a></li><li><a href="#wildcard-type-argument">Wildcard Type Argument</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
                 /scala-3-migration-guide/docs/compatibility.html">User Guide</a><a href="
