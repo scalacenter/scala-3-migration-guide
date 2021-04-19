@@ -21,7 +21,7 @@ object Request {
 
 The error message is:
 
-```shell
+```text
 [error] -- [E007] Type Mismatch Error: src/main/scala/pattern-match.scala:9:59 
 [error] 9 |      case (x @ Fetch(_), y @ Fetch(_)) => combineFetch(x, y)
 [error]   |                                                           ^

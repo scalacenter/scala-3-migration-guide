@@ -63,7 +63,7 @@ Some compiler plugins may also be automatically added by an sbt plugin.
 
 You can find all configured compiler plugins by looking at the compiler options of your project.
 
-```shell
+```text
 sbt:example> show example / Compile / scalacOptions
 [info] * -Xplugin:target/compiler_plugins/wartremover_@scala213@-2.4.12.jar
 [info] * -Xplugin:target/compiler_plugins/semanticdb-scalac_@scala213@-4.3.20.jar

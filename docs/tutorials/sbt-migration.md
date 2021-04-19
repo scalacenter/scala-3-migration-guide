@@ -82,7 +82,7 @@ Or for a Scala.js dependencies:
 ```
 
 Once you have fixed all the unresolved dependencies, you can check that the tests are still passing in Scala 2.13:
-```shell
+```text
 sbt:example> ++@scala213@
 sbt:example> test
 ...
@@ -127,7 +127,7 @@ Add the `-source:3.0-migration` option to turn on the [Scala 3 Migration Mode](.
 
 It is now time to try compiling in Scala 3:
 
-```shell
+```text
 sbt:example> ++@scala30@
 [info] Setting Scala version to @scala30@ on 1 project.
 ...
@@ -155,7 +155,7 @@ In particular, if an error affects the public interface of your library, you sho
 
 After fixing an incompatibility, you can validate the solution by running the tests in Scala 2.13.
 
-```shell
+```text
 sbt:example> ++@scala213@
 [info] Setting Scala version to @scala213@ on 1 project.
 ...
@@ -171,7 +171,7 @@ Only the migration warnings are remaining.
 The compiler can automatically patch them.
 Add the `-rewrite` compiler option, and compile one more time:
 
-```shell
+```text
 sbt:example> ++@scala30@
 [info] Setting Scala version to @scala30@ on 1 project.
 ...
@@ -195,7 +195,7 @@ Good tests are the only guarantee to prevent such bugs from going unnoticed.
 
 Run the tests with Scala 3.
 
-```shell
+```text
 sbt:example> <project> / test
 ...
 [success]
