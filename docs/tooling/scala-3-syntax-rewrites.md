@@ -95,6 +95,7 @@ case class State(n: Int, minValue: Int, maxValue: Int) {
       j <- 0 to n
     } println(i + j)
   }
+}
 ```
 
 Assume that we want to convert this piece of code to _SIB_ syntax & the new control syntax.
