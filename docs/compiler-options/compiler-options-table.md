@@ -272,3 +272,4 @@ You can enable and configure them with some new native options.
 | 2.13.x | 3.0.x |
 |-|-|
 | `-Xplugin:kind-projector_<version>.jar` | `-Ykind-projector` |
+| `-P:kind-projector:underscore-placeholders` | `-Ykind-projector:underscores` |
