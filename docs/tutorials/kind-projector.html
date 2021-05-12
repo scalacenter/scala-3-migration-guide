@@ -56,7 +56,7 @@
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/scalacenter/scala-3-migration-guide/edit/main/docs/tutorials/kind-projector.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">kind-projector Migration Tutorial</h1></header><article><div><span><p>In the future, Scala 3 will use the <code>_</code> underscore symbol for placeholders in type lambdas — just as the underscore is currently used for placeholders in ordinary lambdas.</p>
 <p>The new type lambda syntax is not enabled by default, to enable it, use a compiler flag <code>-Ykind-projector:underscores</code>. Note that enabling underscore type lambdas will disable usage of <code>_</code> as a wildcard, you will only be able to write wildcards using the <code>?</code> symbol.</p>
-<p>If you wish to cross-compile a project for Scala 2 &amp; Scala 3 while using Underscore Type Lambdas for both, you may do so starting with <a href="https://github.com/typelevel/kind-projector">kind-projector</a> version <code>0.13.0</code> and up and Scala 2 versions <code>2.13.5</code> and <code>2.12.14</code>.
+<p>If you wish to cross-compile a project for Scala 2 &amp; Scala 3 while using Underscore Type Lambdas for both, you may do so starting with <a href="https://github.com/typelevel/kind-projector">kind-projector</a> version <code>0.13.0</code> and up and Scala 2 versions <code>2.13.6</code> and <code>2.12.14</code>.
 To enable it, add the compiler flags <code>-Xsource:3 -P:kind-projector:underscore-placeholders</code> to your build.
 As in Scala 3, this will disable usage of <code>_</code> as a wildcard, however, the flag <code>-Xsource:3</code> will allow you to replace it with the <code>?</code> symbol.</p>
 <p>The following <code>sbt</code> configuration will set up the correct flags to cross-compile with new syntax:</p>
@@ -117,7 +117,8 @@ As in Scala 3, this will disable usage of <code>_</code> as a wildcard, however,
 <pre><code class="hljs css language-scala"><span class="hljs-type">Lambda</span>[(`+<span class="hljs-type">E</span>`, `+<span class="hljs-type">A</span>`) =&gt; <span class="hljs-type">Either</span>[<span class="hljs-type">E</span>, <span class="hljs-type">A</span>]]
 </code></pre>
 <p>To the following to cross-compile:</p>
-<p>λ[(<code>+E</code>, <code>+A</code>) =&gt; Either[E, A]]</p>
+<pre><code class="hljs css language-scala">λ[(`+<span class="hljs-type">E</span>`, `+<span class="hljs-type">A</span>`) =&gt; <span class="hljs-type">Either</span>[<span class="hljs-type">E</span>, <span class="hljs-type">A</span>]]
+</code></pre>
 <p>Or alternatively to Scala 3 Type Lambdas:</p>
 <pre><code class="hljs css language-scala">[<span class="hljs-type">E</span>, <span class="hljs-type">A</span>] =&gt;&gt; <span class="hljs-type">Either</span>[<span class="hljs-type">E</span>, <span class="hljs-type">A</span>]
 </code></pre>
