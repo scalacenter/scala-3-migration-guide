@@ -231,8 +231,7 @@ println(pojo.getFooBar()) <span class="hljs-comment">// [E008] Not Found Error: 
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="wildcard-type-argument"></a><a href="#wildcard-type-argument" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wildcard Type Argument</h2>
 <p>Scala 3 cannot reduce the application of a higher-kinded abstract type member to the wildcard argument.</p>
-<p>For instance, the following example does not compile.
-For instance, the following example does not compile.</p>
+<p>For instance, the following example does not compile.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-class"><span class="hljs-keyword">trait</span> <span class="hljs-title">Example</span> </span>{
   <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Foo</span>[<span class="hljs-type">A</span>]</span>
 
@@ -244,12 +243,12 @@ For instance, the following example does not compile.</p>
 <span class="hljs-addition">+def f[A](foo: Foo[A]): Unit</span>
 </code></pre>
 <p>But this simple solution does not work when <code>Foo</code> is itself used as type argument.</p>
-<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">g</span></span>(foos: <span class="hljs-type">Seq</span>[<span class="hljs-type">Foo</span>[_]]): <span class="hljs-type">Unit</span>`
+<pre><code class="hljs css language-scala"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">g</span></span>(foos: <span class="hljs-type">Seq</span>[<span class="hljs-type">Foo</span>[_]]): <span class="hljs-type">Unit</span>
 </code></pre>
 <p>In such case, we can use a wrapper class around <code>Foo</code>:</p>
 <pre><code class="hljs css language-diff"><span class="hljs-addition">+class FooWrapper[A](foo: Foo[A])</span>
 
-<span class="hljs-deletion">-def g(foos: Seq[Foo[_]]): Unit`</span>
+<span class="hljs-deletion">-def g(foos: Seq[Foo[_]]): Unit</span>
 <span class="hljs-addition">+def g(foos: Seq[FooWrapper[_]]): Unit</span>
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html"><span class="arrow-prev">← </span><span>Contextual Abstractions</span></a><a class="docs-next button" href="/scala-3-migration-guide/docs/incompatibilities/type-checker.html"><span>Type Checker</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#inheritance-shadowing">Inheritance Shadowing</a></li><li><a href="#non-private-constructor-in-private-class">Non-private Constructor In Private Class</a></li><li><a href="#abstract-override">Abstract Override</a></li><li><a href="#case-class-companion">Case Class Companion</a></li><li><a href="#explicit-call-to-unapply">Explicit Call to <code>unapply</code></a></li><li><a href="#invisible-bean-property">Invisible Bean Property</a></li><li><a href="#-t-as-type-argument"><code>=&gt; T</code> as Type Argument</a></li><li><a href="#wildcard-type-argument">Wildcard Type Argument</a></li></ul></nav></div><footer class="nav-footer" id="footer" style="background-color:#224951"><section class="sitemap"><a href="/scala-3-migration-guide/" class="nav-home"><img src="/scala-3-migration-guide/img/dotty-logo-white.svg" alt="Scala 3 Migration guide" width="66" height="58"/></a><div><h5>Docs</h5><a href="
