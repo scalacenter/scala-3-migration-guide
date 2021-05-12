@@ -7,7 +7,7 @@ In the future, Scala 3 will use the `_` underscore symbol for placeholders in ty
 
 The new type lambda syntax is not enabled by default, to enable it, use a compiler flag `-Ykind-projector:underscores`. Note that enabling underscore type lambdas will disable usage of `_` as a wildcard, you will only be able to write wildcards using the `?` symbol. 
 
-If you wish to cross-compile a project for Scala 2 & Scala 3 while using Underscore Type Lambdas for both, you may do so starting with [kind-projector](https://github.com/typelevel/kind-projector) version `0.13.0` and up and Scala 2 versions `2.13.5` and `2.12.14`.
+If you wish to cross-compile a project for Scala 2 & Scala 3 while using Underscore Type Lambdas for both, you may do so starting with [kind-projector](https://github.com/typelevel/kind-projector) version `0.13.0` and up and Scala 2 versions `2.13.6` and `2.12.14`.
 To enable it, add the compiler flags `-Xsource:3 -P:kind-projector:underscore-placeholders` to your build.
 As in Scala 3, this will disable usage of `_` as a wildcard, however, the flag `-Xsource:3` will allow you to replace it with the `?` symbol. 
 
@@ -106,7 +106,9 @@ Lambda[(`+E`, `+A`) => Either[E, A]]
 
 To the following to cross-compile:
 
+```scala
 λ[(`+E`, `+A`) => Either[E, A]]
+```
 
 Or alternatively to Scala 3 Type Lambdas:
 
