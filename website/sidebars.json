@@ -16,9 +16,9 @@
     "Tutorials": [
       "tutorials/prerequisites",
       "tutorials/sbt-migration",
+      "tutorials/kind-projector",
       "tutorials/macro-cross-building",
-      "tutorials/macro-mixing",
-      "tutorials/scalacoptions-migration"
+      "tutorials/macro-mixing"
     ],
     "Incompatibilities": [
       "incompatibilities/incompatibility-table",
