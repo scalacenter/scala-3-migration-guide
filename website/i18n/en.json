@@ -71,6 +71,9 @@
       "tooling/scala-3-syntax-rewrites": {
         "title": "Scala 3 Syntax Rewriting"
       },
+      "tutorials/kind-projector": {
+        "title": "kind-projector Migration Tutorial"
+      },
       "tutorials/macro-cross-building": {
         "title": "Cross-Building a Macro Library"
       },
