@@ -1,6 +1,6 @@
 object Versions {
-  val scala213 = "2.13.5"
-  val scala30 = "3.0.0-RC2"
+  val scala213 = "2.13.6"
+  val scala30 = "3.0.0"
   val scala30Compat = "3.0.0-RC1"
   val sbtDotty = "0.5.3"
   val osLib = "0.7.3"
