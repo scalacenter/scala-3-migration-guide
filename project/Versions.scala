@@ -5,6 +5,6 @@ object Versions {
   val sbtDotty = "0.5.3"
   val osLib = "0.7.3"
   val sourcecode = "0.2.4"
-  val scala3Migrate = "0.4.0"
+  val scala3Migrate = "0.4.2"
   val munit = "0.7.23"
 }
