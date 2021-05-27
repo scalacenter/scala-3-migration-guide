@@ -1,5 +1,7 @@
 # Scala 3 migration guide
 
+> The content of the Scala 3 migration guide has moved to [docs.scala-lang.org](https://docs.scala-lang.org/scala3/guides/migration/compatibility-intro.html)
+
 This repository is a continuously evolving guide to support the migration to Scala 3.
 As a member of the community you are encouraged to participate the effort by sharing your migrating experience.
 
@@ -18,12 +20,13 @@ If not you may want to [contribute](docs/contributing.md).
 This repository contains:
  - [`incompat-30/`](incompat-30/): A corpus of incompatibilities between Scala 2.13 and Scala 3.0 with proposed solution. It also contains the tests of the Scala 3.0 migration rewrites for 3.0.
  - [`incompat-31/`](incompat-31/): The tests of the Dotty migration rewrites that are already implemented for 3.1.
- - [`docs/`](docs/): The documentation that is published to the [website](https://scalacenter.github.io/scala-3-migration-guide/)
+ - [`docs/`](docs/): The documentation that is still published to the [deprecated website](https://scalacenter.github.io/scala-3-migration-guide/)
  - [`website/`](website/): The website skeleton powered by [Docusaurus](https://docusaurus.io/en/).
 
 ## Additional Resources
 
-- [The Scala 3 website](https://dotty.epfl.ch/)
-- [The Scala 3 example projects](https://github.com/lampepfl/dotty-example-project#getting-your-project-to-compile-with-dotty)
+- [The Scala website](https://scala-lang.org/)
+- [The Dotty website](https://dotty.epfl.ch/)
+- [The Scala 3 example project](https://github.com/lampepfl/scala3-example-project)
 - [The Scala 3 community projects](https://github.com/lampepfl/dotty/tree/master/community-build/community-projects)
 - [The Scala 3 Migration Plugin](https://github.com/scalacenter/scala3-migrate) for sbt

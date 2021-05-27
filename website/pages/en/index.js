@@ -83,8 +83,8 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
-            <Button href={docUrl("get-started.html", language)}>
-              Get started
+            <Button href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-intro.html">
+              Go to docs.scala-lang.org
             </Button>
           </PromoSection>
         </div>
@@ -93,55 +93,17 @@ class HomeSplash extends React.Component {
   }
 }
 
-const Compatibility = () => (
+const Deprecation = () => (
   <Block background="light">
     {[
       {
         content:
-          'Scala 3 has been carefully designed to improve the backward and forward compatibility of the Scala programming language.\n\n' +
-          `In the [Compatibility Reference](${docUrl('get-started.html')}) ` +
-          'you will learn about the compatibility between Scala 2.13 and Scala 3 in the context of the migration.',
-        image: `${imgUrl('puzzle-primary.svg')}`,
-        imageAlt: 'Icon made by Nikita Kozin from the Noun Project',
-        imageAlign: 'left',
-        title: `[Compatibility](${docUrl('get-started.html')})`,
-      },
+          'The Scala 3 migration guide has moved to [docs.scala-lang.org](https://docs.scala-lang.org/scala3/guides/migration/compatibility-intro.html). This website is deprecated.',
+        title: 'Deprecation'
+      }
     ]}
   </Block>
-);
-
-const MigrationMode = () => (
-  <Block>
-    {[
-      {
-        content:
-          'The Scala 3 compiler is, in itself, a powerfull migration tool that can assist you during the transition from Scala 2.13 to Scala 3.\n\n ' +
-          `Learn about the migration features of the tooling ecosystem in the [Migration Tools](${docUrl('tooling/migration-tools.html')}) section`,
-        title: `[Migration Tools](${docUrl('tooling/migration-tools.html')})`,
-        image: `${imgUrl('tools-primary.svg')}`,
-        imageAlt: 'Icon made by Maxime Kulikov from the Noun Project.',
-        imageAlign: 'right',
-      },
-    ]}
-  </Block>
-);
-
-const Metaprogramming = () => (
-  <Block background="light">
-    {[
-      {
-        content:
-          'Scala 3 provides a toolbox full of metaprogramming features, which are safer, more robust, and much more stable than their counterparts in Scala 2. ' +
-          'Implementing macro libraries in Scala 3 is simpler and the resulting libraries are easier to maintain across future versions of Scala. ' +
-          'The improvements come at a price: existing macro libraries need to be re-implemented.',
-        title: `[Metaprogramming](${docUrl('compatibility/metaprogramming.html')})`,
-        image: `${imgUrl('magnifying-primary.svg')}`,
-        imageAlt: 'Icon made by Eucalyp from the Noun Project.',
-        imageAlign: 'left',
-      },
-    ]}
-  </Block>
-);
+)
 
 const Block = props => (
   <Container
@@ -159,10 +121,8 @@ class Index extends React.Component {
     return (
       <div>
         <HomeSplash language={language} />
-        <div className="mainContainer">
-          <Compatibility />
-          <MigrationMode />
-          <Metaprogramming />
+        <div className = "mainContainer">
+          <Deprecation />
         </div>
       </div>
     );
