@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#procedure-syntax).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-syntactic.html#procedure-syntax).

@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/syntactic-changes.html#-and---as-type-parameters).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-syntactic.html#-and---as-type-parameters).

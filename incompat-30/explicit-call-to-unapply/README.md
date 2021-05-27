@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#explicit-call-to-unapply).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-other-changes.html#explicit-call-to-unapply).

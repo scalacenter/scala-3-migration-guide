@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/other-changed-features.html#inheritance-shadowing).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-other-changes.html#inheritance-shadowing).

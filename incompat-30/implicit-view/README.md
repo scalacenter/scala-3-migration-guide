@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#implicit-views).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-contextual-abstractions.html#implicit-views).

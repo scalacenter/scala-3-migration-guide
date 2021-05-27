@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/dropped-features.html#symbol-literals).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-dropped-features.html#symbol-literals).

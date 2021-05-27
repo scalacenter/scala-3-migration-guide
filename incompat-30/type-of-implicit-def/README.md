@@ -1,1 +1,1 @@
-Description [here](http://localhost:3000/scala-3-migration-guide/docs/incompatibilities/contextual-abstractions.html#type-of-implicit-definition).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-contextual-abstractions.html#type-of-implicit-definition).
