@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/type-inference.html#inferred-return-type-of-an-override-method).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-type-inference.html#return-type-of-an-override-method).

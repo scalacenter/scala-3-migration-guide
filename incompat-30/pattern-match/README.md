@@ -1,1 +1,1 @@
-Description [here](https://scalacenter.github.io/scala-3-migration-guide/docs/incompatibilities/type-checker.html#unsoundness-fixes-in-pattern-matching).
+Description [here](https://docs.scala-lang.org/scala3/guides/migration/incompat-type-checker.html#unsoundness-fixes-in-pattern-matching).
