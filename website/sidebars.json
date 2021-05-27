@@ -1,37 +1,10 @@
 {
   "docs": {
     "Compatibility Reference": [
-      "get-started",
-      "compatibility/source",
-      "compatibility/classpath",
-      "compatibility/runtime",
-      "compatibility/metaprogramming"
+      "get-started"
     ],
     "Tooling": [
-      "tooling/migration-tools",
-      "tooling/scala-3-migration-mode",
-      "tooling/scala-3-migrate-plugin",
-      "tooling/scala-3-syntax-rewrites"
-    ],
-    "Tutorials": [
-      "tutorials/prerequisites",
-      "tutorials/sbt-migration",
-      "tutorials/kind-projector",
-      "tutorials/macro-cross-building",
-      "tutorials/macro-mixing"
-    ],
-    "Incompatibilities": [
-      "incompatibilities/incompatibility-table",
-      "incompatibilities/syntactic-changes",
-      "incompatibilities/dropped-features",
-      "incompatibilities/contextual-abstractions",
-      "incompatibilities/other-changed-features",
-      "incompatibilities/type-checker",
-      "incompatibilities/type-inference"
-    ],
-    "Compiler Options": [
-      "compiler-options/compiler-options-table",
-      "compiler-options/new-compiler-options"
+      "tooling/scala-3-migrate-plugin"
     ],
     "Resources": [
       "macros/macro-libraries",
