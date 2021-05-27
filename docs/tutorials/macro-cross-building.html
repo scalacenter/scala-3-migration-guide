@@ -65,7 +65,7 @@ You are encourage to read both solutions to choose the technique that is best su
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> example = project
   .in(file(<span class="hljs-string">"example"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.6"</span>,
     libraryDependencies ++= <span class="hljs-type">Seq</span>(
       <span class="hljs-string">"org.scala-lang"</span> % <span class="hljs-string">"scala-reflect"</span> % scalaVersion.value
     )
@@ -102,7 +102,7 @@ one or more macro methods, in our case the <code>location</code> method, are imp
 <p><img src="/scala-3-migration-guide/docs/assets/macros/cross-building.svg" alt="Cross-building Architecture"></p>
 <h2><a class="anchor" aria-hidden="true" id="1-set-up-cross-building"></a><a href="#1-set-up-cross-building" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Set up Cross Building</h2>
 <p>You can add Scala 3 to the list of <code>crossScalaVersions</code> of your project:</p>
-<pre><code class="hljs css language-scala">crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC2"</span>)
+<pre><code class="hljs css language-scala">crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.6"</span>, <span class="hljs-string">"3.0.0"</span>)
 </code></pre>
 <p>The <code>scala-reflect</code> dependency is not useful in Scala 3.
 Remove it conditionally with:</p>
@@ -116,8 +116,8 @@ libraryDependencies ++= {
   }
 }
 </code></pre>
-<p>After reloading sbt, you can switch from the Scala 2.13 context to the Scala 3 context by running <code>++3.0.0-RC2</code>.
-At any point you can go back to the Scala 2.13 context by running <code>++2.13.5</code>.</p>
+<p>After reloading sbt, you can switch from the Scala 2.13 context to the Scala 3 context by running <code>++3.0.0</code>.
+At any point you can go back to the Scala 2.13 context by running <code>++2.13.6</code>.</p>
 <h2><a class="anchor" aria-hidden="true" id="2-rearrange-the-code-in-version-specific-source-files"></a><a href="#2-rearrange-the-code-in-version-specific-source-files" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Rearrange the code in version-specific source files</h2>
 <p>At this stage you should be able to switch to the Scala 3 context and see that the Scala 3 compiler cannot compile your macro.</p>
 <p>You can now rearrange your code in version-specific source directories.
@@ -186,13 +186,13 @@ One needs to learn about the available new <a href="/scala-3-migration-guide/doc
 }
 </code></pre>
 <p>You should now be able to run the tests in both versions.</p>
-<pre><code class="hljs css language-text">sbt:example> ++2.13.5
+<pre><code class="hljs css language-text">sbt:example> ++2.13.6
 sbt:example> example / test
 location.MacrosSpec:
   + location
 [info] Passed: Total 1, Failed 0, Errors 0, Passed 1
 [success]
-sbt:example> ++3.0.0-RC2
+sbt:example> ++3.0.0
 sbt:example> example / test
 location.MacrosSpec:
   + location

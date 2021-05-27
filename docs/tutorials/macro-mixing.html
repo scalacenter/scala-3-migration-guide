@@ -116,13 +116,13 @@ How does the compiler accept two methods with the same name and signature?</p>
 
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> example = project.in(file(<span class="hljs-string">"example"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>
+    scalaVersion := <span class="hljs-string">"3.0.0"</span>
   )
   .dependsOn(`example-compat`)
 
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> `example-compat` = project.in(file(<span class="hljs-string">"example-compat"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.6"</span>,
     libraryDependency += <span class="hljs-string">"org.scala-lang"</span> % <span class="hljs-string">"scala-reflect"</span> % scalaVersion.value
   )
 </code></pre>
@@ -150,15 +150,15 @@ How does the compiler accept two methods with the same name and signature?</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// build.sbt</span>
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> `example-test` = project.in(file(<span class="hljs-string">"example-test"</span>))
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>,
-    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"3.0.0-RC2"</span>, <span class="hljs-string">"2.13.5"</span>),
+    scalaVersion := <span class="hljs-string">"3.0.0"</span>,
+    crossScalaVersions := <span class="hljs-type">Seq</span>(<span class="hljs-string">"3.0.0"</span>, <span class="hljs-string">"2.13.6"</span>),
     scalacOptions ++= {
       <span class="hljs-type">CrossVersion</span>.partialVersion(scalaVersion.value) <span class="hljs-keyword">match</span> {
         <span class="hljs-keyword">case</span> <span class="hljs-type">Some</span>((<span class="hljs-number">2</span>, <span class="hljs-number">13</span>)) =&gt; <span class="hljs-type">Seq</span>(<span class="hljs-string">"-Ytasty-reader"</span>)
         <span class="hljs-keyword">case</span> _ =&gt; <span class="hljs-type">Seq</span>.empty
       }
     },
-    libraryDependencies += <span class="hljs-string">"org.scalameta"</span> %% <span class="hljs-string">"munit"</span> % <span class="hljs-string">"0.7.23"</span> % <span class="hljs-type">Test</span>
+    libraryDependencies += <span class="hljs-string">"org.scalameta"</span> %% <span class="hljs-string">"munit"</span> % <span class="hljs-string">"0.7.26"</span> % <span class="hljs-type">Test</span>
   )
   .dependsOn(example)
 </code></pre>
@@ -176,13 +176,13 @@ How does the compiler accept two methods with the same name and signature?</p>
 }
 </code></pre>
 <p>You should now be able to run the tests in both versions.</p>
-<pre><code class="hljs css language-text">sbt:example> ++2.13.5
+<pre><code class="hljs css language-text">sbt:example> ++2.13.6
 sbt:example> example-test / test
 location.MacrosSpec:
   + location
 [info] Passed: Total 1, Failed 0, Errors 0, Passed 1
 [success]
-sbt:example> ++3.0.0-RC2
+sbt:example> ++3.0.0
 sbt:example> example-test / test
 location.MacrosSpec:
   + location
@@ -199,7 +199,7 @@ It will be used in Scala 2.13 projects during the macro expansion phase.</li>
 <p><img src="/scala-3-migration-guide/docs/assets/macros/mixing.svg" alt="Mixing-macros Architecture"></p>
 <p>You are now ready to publish your library.</p>
 <p>It can be used in Scala 2.13 projects with these settings:</p>
-<pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"2.13.5"</span>
+<pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"2.13.6"</span>
 libraryDependencies += (<span class="hljs-string">"org"</span> %% <span class="hljs-string">"example"</span> % <span class="hljs-string">"x.y.z"</span>).cross(<span class="hljs-type">CrossVersion</span>.for2_13Use3)
 scalacOptions += <span class="hljs-string">"-Ytasty-reader"</span>
 </code></pre>

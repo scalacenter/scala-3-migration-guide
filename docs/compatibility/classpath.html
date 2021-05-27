@@ -68,11 +68,11 @@ It is safe to use.</p>
 <p><img src="/scala-3-migration-guide/docs/assets/compatibility/3to2.svg" alt="Scala 3 module depending on a Scala 2.13 artifact"></p>
 <p>As an sbt build it can be reprensented by:</p>
 <pre><code class="hljs css language-scala">lazy val foo = project.in.file("foo")
-  .settings(scalaVersion := "3.0.0-RC2")
+  .settings(scalaVersion := "3.0.0")
   .dependsOn(bar)
 
 lazy val bar = project.in(file("bar"))
-  .settings(scalaVersion := "2.13.5)
+  .settings(scalaVersion := "2.13.6)
 </code></pre>
 <blockquote>
 <p>sbt 1.5.0 or higher is required</p>
@@ -80,7 +80,7 @@ lazy val bar = project.in(file("bar"))
 <p>Or, in case <code>bar</code> is a published Scala 2.13 library, we can have:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> foo = project.in.file(<span class="hljs-string">"foo"</span>)
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>,
+    scalaVersion := <span class="hljs-string">"3.0.0"</span>,
     libraryDependencies += (<span class="hljs-string">"org.bar"</span> %% <span class="hljs-string">"bar"</span> % <span class="hljs-string">"1.0.0"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
   )
 </code></pre>
@@ -90,7 +90,7 @@ lazy val bar = project.in(file("bar"))
 It is indeed not needed to recompile the Scala library since a Scala 3 project can depend on a Scala 2.13 artifact.</p>
 <p><img src="/scala-3-migration-guide/docs/assets/compatibility/standardlib.svg" alt="Scala 3 library dependency"></p>
 <h2><a class="anchor" aria-hidden="true" id="the-scala-213-tasty-reader"></a><a href="#the-scala-213-tasty-reader" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Scala 2.13 TASTy Reader</h2>
-<p>The second piece of good news is that the Scala 2.13 TASTy reader, which enables consuming Scala 3 libraries in Scala 2.13 has been shipped into Scala <code>2.13.5</code>.</p>
+<p>The second piece of good news is that the Scala 2.13 TASTy reader, which enables consuming Scala 3 libraries in Scala 2.13 has been shipped into Scala <code>2.13.6</code>.</p>
 <blockquote>
 <p>The TASTy reader is very new. That's why it is  only available under the <code>-Ytasty-reader</code> flag.</p>
 </blockquote>
@@ -125,29 +125,29 @@ It is indeed not needed to recompile the Scala library since a Scala 3 project c
 <li><a href="https://dotty.epfl.ch/docs/reference/other-new-features/kind-polymorphism.html">Kind Polymorphism</a> (the <code>scala.AnyKind</code> upper bound)</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="using-a-scala-3-module-in-a-scala-3"></a><a href="#using-a-scala-3-module-in-a-scala-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using a Scala 3 module in a Scala 3</h3>
-<p>As of <code>2.13.5</code> a Scala 2.13 module can depend on a Scala 3 library by enabling the Tasty reader with <code>-Ytasty-reader</code>.
+<p>As of <code>2.13.6</code> a Scala 2.13 module can depend on a Scala 3 library by enabling the Tasty reader with <code>-Ytasty-reader</code>.
 <img src="/scala-3-migration-guide/docs/assets/compatibility/2to3.svg" alt="Scala 2 module depending on a Scala 3 artifact"></p>
 <p>As an sbt build it can be reprensented by:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> foo = project.in.file(<span class="hljs-string">"foo"</span>)
   .settings(
-    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.6"</span>,
     scalacOptions += <span class="hljs-string">"-Ytasty-reader"</span>
   )
   .dependsOn(bar)
 
 <span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> bar = project.in(file(<span class="hljs-string">"bar"</span>))
-  .settings(scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>)
+  .settings(scalaVersion := <span class="hljs-string">"3.0.0"</span>)
 </code></pre>
 <p>Or, in case <code>bar</code> is a published Scala 3 library:</p>
 <pre><code class="hljs css language-scala"><span class="hljs-keyword">lazy</span> <span class="hljs-keyword">val</span> foo = project.in.file(<span class="hljs-string">"foo"</span>)
   .settings(
-    scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>,
+    scalaVersion := <span class="hljs-string">"3.0.0"</span>,
     scalacOptions += <span class="hljs-string">"-Ytasty-reader"</span>,
     libraryDependencies += (<span class="hljs-string">"org.bar"</span> %% <span class="hljs-string">"bar"</span> % <span class="hljs-string">"1.0.0"</span>).cross(<span class="hljs-type">CrossVersion</span>.for2_13Use3)
   )
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="intercompatibility-overview"></a><a href="#intercompatibility-overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Intercompatibility Overview</h2>
-<p>You can have a Scala <code>2.13.5</code> module that depends on a Scala <code>3.0.0-RC2</code> module, and the latter can even depend on another Scala <code>2.13.5</code> module.</p>
+<p>You can have a Scala <code>2.13.6</code> module that depends on a Scala <code>3.0.0</code> module, and the latter can even depend on another Scala <code>2.13.6</code> module.</p>
 <p>In short, we have backward and forward compatibility and so <strong>migration can happen gradually</strong>.
 An application can jump to Scala 3 even if its dependencies are not fully ported to Scala 3.</p>
 <blockquote>

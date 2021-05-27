@@ -82,14 +82,14 @@ Yet the approach is very similar for any other build tool, as long as it support
 <p>The reason for this strategy is to be able to run the tests in Scala 2.13 after each fix and thus make sure that the runtime behavior is unchanged.
 This is crucial to avoid bugs that could happen when fixing the incompatibilities.</p>
 <p>Configuring cross-building ins sbt is as short as:</p>
-<pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"3.0.0-RC2"</span>
-crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.5"</span>, <span class="hljs-string">"3.0.0-RC2"</span>)
+<pre><code class="hljs css language-scala">scalaVersion := <span class="hljs-string">"3.0.0"</span>
+crossScalaVersions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"2.13.6"</span>, <span class="hljs-string">"3.0.0"</span>)
 </code></pre>
 <p>This configuration means:</p>
 <ul>
-<li>The default version is <code>3.0.0-RC2</code>.</li>
-<li>2.13.5 can be loaded by the <code>++2.13.5</code> command.</li>
-<li>3.0.0-RC2 can be loaded by the <code>++3.0.0-RC2</code> command.</li>
+<li>The default version is <code>3.0.0</code>.</li>
+<li>2.13.6 can be loaded by the <code>++2.13.6</code> command.</li>
+<li>3.0.0 can be loaded by the <code>++3.0.0</code> command.</li>
 </ul>
 <p>Beware that the <code>reload</code> command will always load the default version.</p>
 <h2><a class="anchor" aria-hidden="true" id="4-prepare-the-dependencies"></a><a href="#4-prepare-the-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Prepare the dependencies</h2>
@@ -109,13 +109,13 @@ Make sure the one you choose does not bring any breaking change.</p>
 <li>If no such version exists</li>
 </ol>
 <p>You can use the Scala 2.13 version of the library. The syntax is:</p>
-<pre><code class="hljs css language-scala">(<span class="hljs-string">"com.lihaoyi"</span> %% <span class="hljs-string">"os-lib"</span> % <span class="hljs-string">"0.7.3"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
+<pre><code class="hljs css language-scala">(<span class="hljs-string">"com.lihaoyi"</span> %% <span class="hljs-string">"os-lib"</span> % <span class="hljs-string">"0.7.7"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
 </code></pre>
 <p>Or for a Scala.js dependencies:</p>
-<pre><code class="hljs css language-scala">(<span class="hljs-string">"com.lihaoyi"</span> %%% <span class="hljs-string">"os-lib"</span> % <span class="hljs-string">"0.7.3"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
+<pre><code class="hljs css language-scala">(<span class="hljs-string">"com.lihaoyi"</span> %%% <span class="hljs-string">"os-lib"</span> % <span class="hljs-string">"0.7.7"</span>).cross(<span class="hljs-type">CrossVersion</span>.for3Use2_13)
 </code></pre>
 <p>Once you have fixed all the unresolved dependencies, you can check that the tests are still passing in Scala 2.13:</p>
-<pre><code class="hljs css language-text">sbt:example> ++2.13.5
+<pre><code class="hljs css language-text">sbt:example> ++2.13.6
 sbt:example> test
 ...
 [success]
@@ -153,8 +153,8 @@ You can refer to the <a href="/scala-3-migration-guide/docs/compiler-options/com
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="6-solve-the-incompatibilities"></a><a href="#6-solve-the-incompatibilities" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6. Solve the Incompatibilities</h2>
 <p>It is now time to try compiling in Scala 3:</p>
-<pre><code class="hljs css language-text">sbt:example> ++3.0.0-RC2
-[info] Setting Scala version to 3.0.0-RC2 on 1 project.
+<pre><code class="hljs css language-text">sbt:example> ++3.0.0
+[info] Setting Scala version to 3.0.0 on 1 project.
 ...
 sbt:example> <project> / compile
 ...
@@ -179,8 +179,8 @@ In particular, if an error affects the public interface of your library, you sho
 A lot of code must be rewritten from the ground up.</p>
 </blockquote>
 <p>After fixing an incompatibility, you can validate the solution by running the tests in Scala 2.13.</p>
-<pre><code class="hljs css language-text">sbt:example> ++2.13.5
-[info] Setting Scala version to 2.13.5 on 1 project.
+<pre><code class="hljs css language-text">sbt:example> ++2.13.6
+[info] Setting Scala version to 2.13.6 on 1 project.
 ...
 sbt:example> <project> / test
 ...
@@ -191,8 +191,8 @@ sbt:example> <project> / test
 Only the migration warnings are remaining.
 The compiler can automatically patch them.
 Add the <code>-rewrite</code> compiler option, and compile one more time:</p>
-<pre><code class="hljs css language-text">sbt:example> ++3.0.0-RC2
-[info] Setting Scala version to 3.0.0-RC2 on 1 project.
+<pre><code class="hljs css language-text">sbt:example> ++3.0.0
+[info] Setting Scala version to 3.0.0 on 1 project.
 ...
 sbt:example> set <project> / scalacOptions += "-rewrite"
 [info] Defining <project> / scalacOptions
