@@ -54,7 +54,7 @@ class IncompatSettings(project: Project) {
       },
 
       // scalafix configuration
-      semanticdbVersion := "4.4.10",
+      semanticdbVersion := "4.4.18",
       semanticdbEnabled := !isScala3.value && scalafixRewrite.value,
       CompileBackward / scalafixConfig := Some(baseDirectory.value / ".scalafix.conf"),
       CompileBackward / scalafixOnCompile := !isScala3.value && scalafixRewrite.value,
