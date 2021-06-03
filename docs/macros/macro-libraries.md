@@ -50,7 +50,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [lloydmeta/enumeratum](https://index.scala-lang.org/lloydmeta/enumeratum) | <i class="fas fa-times fa-lg"></i> | |
 | [log4s/log4s](https://index.scala-lang.org/log4s/log4s) | <i class="fas fa-check fa-lg"></i> | Since version `1.10.0-M1` |
 | [macro-peg/macro_peg](https://index.scala-lang.org/kmizu/macro_peg) | <i class="fas fa-times fa-lg"></i> | |
-| [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Shapeless 3<br/>Milestone available ([Early Preview](https://github.com/milessabin/shapeless/tree/shapeless-3)) |
+| [milessabin/shapeless](https://index.scala-lang.org/milessabin/shapeless) | <i class="fas fa-check  fa-lg"></i> | Being rewritten into Shapeless 3<br/> Since version `3.0.0` ([typelevel/shapeless-3](https://github.com/typelevel/shapeless-3)) |
 | [monix/minitest](https://index.scala-lang.org/monix/minitest) | <i class="fas fa-check fa-lg"></i> | Since `2.9.0` |
 | [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"></i> | `macros` module not available for Scala 3.0 |
 | [nevillelyh/parquet-avro-extra](https://index.scala-lang.org/nevillelyh/parquet-avro-extra) |  <i class="fas fa-times fa-lg"></i> | |
@@ -59,7 +59,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [plokhotnyuk/expression-evaluator](https://index.scala-lang.org/plokhotnyuk/expression-evaluator) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
 | [plokhotnyuk/fast-string-interpolator](https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator) | <i class="fas fa-times fa-lg"></i> | |
 | [plokhotnyuk/jsoniter-scala](https://index.scala-lang.org/plokhotnyuk/jsoniter-scala) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
-| [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <i class="fas fa-times fa-lg"></i> | |
+| [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Magnolia 2<br/> Milestone versions available ([softwaremill/magnolia](https://github.com/softwaremill/magnolia)) |
 | [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-times fa-lg"></i> | |
 | [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-times fa-lg"></i> | |
 | [scalalandio/chimney](https://index.scala-lang.org/scalalandio/chimney) | <i class="fas fa-times fa-lg"></i> | |
