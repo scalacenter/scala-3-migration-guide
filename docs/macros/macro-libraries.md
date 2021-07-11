@@ -71,7 +71,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [sirthias/borer](https://index.scala-lang.org/sirthias/borer) | <i class="fas fa-times fa-lg"></i> | |
 | [slick/slick](https://index.scala-lang.org/slick/slick) | <i class="fas fa-times fa-lg"></i> | |
 | [softwaremill/macwire](https://index.scala-lang.org/softwaremill/macwire) | <i class="fas fa-times fa-lg"></i> | |
-| [thoughtworksinc/each](https://index.scala-lang.org/thoughtworsinc/each) | <i class="fas fa-times fa-lg"></i> | |
+| [thoughtworksinc/each](https://index.scala-lang.org/thoughtworksinc/each) | <i class="fas fa-times fa-lg"></i> | |
 | [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"></i> | |
 | [typelevel/spire](https://index.scala-lang.org/typelevel/spire) |  <i class="fas fa-times fa-lg"></i> | |
 | [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"></i> | |
