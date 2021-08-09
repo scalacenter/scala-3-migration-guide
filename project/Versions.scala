@@ -5,5 +5,5 @@ object Versions {
   val osLib = "0.7.7"
   val sourcecode = "0.2.7"
   val scala3Migrate = "0.4.2"
-  val munit = "0.7.26"
+  val munit = "0.7.28"
 }
