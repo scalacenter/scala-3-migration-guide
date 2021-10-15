@@ -43,6 +43,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [lightbend/scala-logging](https://index.scala-lang.org/lightbend/scala-logging) |  <i class="fas fa-times fa-lg"></i> | |
 | [lihaoyi/autowire](https://index.scala-lang.org/lihaoyi/autowire) |  <i class="fas fa-times fa-lg"></i> | |
 | [lihaoyi/fastparse](https://index.scala-lang.org/lihaoyi/fastparse) |  <i class="fas fa-times fa-lg"></i> | |
+| [lihaoyi/mill](https://index.scala-lang.org/lihaoyi/mill) |   <i class="fas fa-times fa-lg"></i> | |
 | [lihaoyi/pprint](https://index.scala-lang.org/lihaoyi/pprint) | <i class="fas fa-check fa-lg"></i> | Since version `0.6.0` |
 | [lihaoyi/sourcecode](https://index.scala-lang.org/lihaoyi/sourcecode) | <i class="fas fa-check fa-lg"></i> | Since version `0.1.8` |
 | [lihaoyi/upickle](https://github.com/lihaoyi/upickle) | <i class="fas fa-check fa-lg"></i> | Since version `1.2.0` |
