@@ -59,8 +59,8 @@ The following table contains an incomplete list of macro libraries and their mig
 | [payalabs/scalajs-react-bridge](https://index.scala-lang.org/payalabs/scalajs-react-bridge) | <i class="fas fa-times fa-lg"></i>  | |
 | [playframework/play-json](https://index.scala-lang.org/playframework/play-json) | <i class="fas fa-times fa-lg"></i> | |
 | [plokhotnyuk/expression-evaluator](https://index.scala-lang.org/plokhotnyuk/expression-evaluator) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
-| [plokhotnyuk/fast-string-interpolator](https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator) | <i class="fas fa-times fa-lg"></i> | |
-| [plokhotnyuk/jsoniter-scala](https://index.scala-lang.org/plokhotnyuk/jsoniter-scala) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
+| [plokhotnyuk/fast-string-interpolator](https://index.scala-lang.org/plokhotnyuk/fast-string-interpolator) | <i class="fas fa-check fa-lg"></i> | Since version `0.6.2` |
+| [plokhotnyuk/jsoniter-scala](https://index.scala-lang.org/plokhotnyuk/jsoniter-scala) | <i class="fas fa-check fa-lg"></i> | Since version `2.12.1` |
 | [propensive/magnolia](https://index.scala-lang.org/propensive/magnolia) | <img src="/scala-3-migration-guide/img/tilde.svg"/> | Being rewritten into Magnolia 2<br/> Milestone versions available ([softwaremill/magnolia](https://github.com/softwaremill/magnolia)) |
 | [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-times fa-lg"></i> | |
 | [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-times fa-lg"></i> | |
