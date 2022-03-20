@@ -68,6 +68,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [scalameta/munit](https://index.scala-lang.org/scalameta/munit) | <i class="fas fa-check fa-lg"></i> | Since `0.3.0` |
 | [scalatest/scalatest](https://index.scala-lang.org/scalatest/scalatest) | <i class="fas fa-check fa-lg"></i> | Since version `3.1.0` |
 | [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"></i> | Since version `3.1.0` |
+| [scalikejdbc/scalikejdbc](https://index.scala-lang.org/scalikejdbc/scalikejdbc) | <i class="fas fa-check fa-lg"></i> | Since `4.0.0` |
 | [scodec/scodec-bits](https://index.scala-lang.org/scodec/scodec-bits) | <i class="fas fa-check fa-lg"></i> | Since version `1.1.18` |
 | [sirthias/parboiled2](https://index.scala-lang.org/sirthias/parboiled2) | <i class="fas fa-times fa-lg"></i> | |
 | [sirthias/borer](https://index.scala-lang.org/sirthias/borer) | <i class="fas fa-times fa-lg"></i> | |
