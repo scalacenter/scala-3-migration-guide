@@ -56,6 +56,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [mpollmeier/gremlin-scala](https://index.scala-lang.org/mpollmeier/gremlin-scala) |  <i class="fas fa-times fa-lg"></i> | `macros` module not available for Scala 3.0 |
 | [nevillelyh/parquet-avro-extra](https://index.scala-lang.org/nevillelyh/parquet-avro-extra) |  <i class="fas fa-times fa-lg"></i> | |
 | [non/imp](https://index.scala-lang.org/non/imp) |  <i class="fas fa-times fa-lg"></i> | |
+| [optics-dev/Monocle](https://index.scala-lang.org/optics-dev/Monocle) |  <i class="fas fa-check fa-lg"></i> | Since `3.0.0` |
 | [payalabs/scalajs-react-bridge](https://index.scala-lang.org/payalabs/scalajs-react-bridge) | <i class="fas fa-times fa-lg"></i>  | |
 | [playframework/play-json](https://index.scala-lang.org/playframework/play-json) | <i class="fas fa-times fa-lg"></i> | |
 | [plokhotnyuk/expression-evaluator](https://index.scala-lang.org/plokhotnyuk/expression-evaluator) | <i class="fas fa-times fa-lg"></i> | No replacement for `Evals.eval` |
