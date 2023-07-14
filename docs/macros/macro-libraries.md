@@ -77,9 +77,9 @@ The following table contains an incomplete list of macro libraries and their mig
 | [softwaremill/macwire](https://index.scala-lang.org/softwaremill/macwire) | <i class="fas fa-check fa-lg"></i> | Since version `2.4.0` |
 | [thoughtworksinc/each](https://index.scala-lang.org/thoughtworksinc/each) | <i class="fas fa-times fa-lg"></i> | |
 | [tersesystems/blindsight](https://index.scala-lang.org/tersesystems/blindsight) | <i class="fas fa-check fa-lg"></i> | Since version [`1.5.2`](https://github.com/tersesystems/blindsight/releases/tag/v1.5.2) |
-| [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"></i> | |
+| [typelevel/claimant](https://index.scala-lang.org/typelevel/claimant) | <i class="fas fa-times fa-lg"></i> | No longer maintained |
 | [typelevel/spire](https://index.scala-lang.org/typelevel/spire) |  <i class="fas fa-check fa-lg"></i> | Since version 0.18.0 |
-| [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"></i> | |
+| [wix/accord](https://index.scala-lang.org/wix/accord) |  <i class="fas fa-times fa-lg"></i> | No longer maintained |
 | [wvlet/airframe](https://index.scala-lang.org/wvlet/airframe) |  <i class="fas fa-check fa-lg"></i> | Since version [`20.12.1`](https://wvlet.org/airframe/docs/release-notes#20121) |
 | [zio/izumi-reflect](https://index.scala-lang.org/zio/izumi-reflect) | <i class="fas fa-check fa-lg"></i> | Does not yet support path-dependent type  |
 | [zio/zio](https://index.scala-lang.org/zio/zio) | <i class="fas fa-check fa-lg"></i> | Since version [`1.0.4`](https://github.com/zio/zio/releases/tag/v1.0.4) |
