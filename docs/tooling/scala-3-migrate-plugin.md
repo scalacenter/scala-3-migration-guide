@@ -17,7 +17,7 @@ The solution consists of 3 independent steps that are packaged in an sbt plugin:
 Each of this step is an sbt command that will be described in details in the following sections.
 
 > #### Requirements
-> - Scala 2.13, preferred 2.13.5
+> - Scala 2.13, preferred 2.13.11
 > - sbt 1.4 or higher
 > - **Disclaimer:** This tool cannot migrate libraries containing macros.
 > - **Not implemented yet:**
@@ -55,7 +55,7 @@ lazy val main = project
   .in(file("."))
   .settings(
     name := "main",
-    scalaVersion := "2.13.5",
+    scalaVersion := "2.13.11",
     semanticdbEnabled := true,
     scalacOptions ++= Seq("-explaintypes", "-Wunused"),
     libraryDependencies ++= Seq(
@@ -341,7 +341,7 @@ Then the tool compiles one last time in Scala 3  with `-rewrite` scalacOption.
 
 ## What to do next ? 
 You can start again with another module `MODULE2`. If `MODULE2` depends on the last module migrated, you need
-either to add `-Ytasty-reader` to `MODULE2` scalacOptions, or `reload` or `set MODULE-MIGRATED/scalaVersion := "2.13.5"` 
+either to add `-Ytasty-reader` to `MODULE2` scalacOptions, or `reload` or `set MODULE-MIGRATED/scalaVersion := "2.13.11"` 
 
 Once you're done, you can remove `scala3-migrate` from your plugins. 
 
