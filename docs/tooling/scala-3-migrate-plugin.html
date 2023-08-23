@@ -68,7 +68,7 @@ The solution consists of 3 independent steps that are packaged in an sbt plugin:
 <blockquote>
 <h4><a class="anchor" aria-hidden="true" id="requirements"></a><a href="#requirements" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Requirements</h4>
 <ul>
-<li>Scala 2.13, preferred 2.13.5</li>
+<li>Scala 2.13, preferred 2.13.11</li>
 <li>sbt 1.4 or higher</li>
 <li><strong>Disclaimer:</strong> This tool cannot migrate libraries containing macros.</li>
 <li><strong>Not implemented yet:</strong>
@@ -79,7 +79,7 @@ Other configurations like <code>Test</code> still need to be supported</li>
 <h2><a class="anchor" aria-hidden="true" id="installation"></a><a href="#installation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Installation</h2>
 <p>Currently, you can use scala3-migrate via an sbt plugin. You can add it as follows to your build.</p>
 <pre><code class="hljs css language-scala"><span class="hljs-comment">// project/plugins.sbt</span>
-addSbtPlugin(<span class="hljs-string">"ch.epfl.scala"</span> % <span class="hljs-string">"sbt-scala3-migrate"</span> % <span class="hljs-string">"0.4.2"</span>)
+addSbtPlugin(<span class="hljs-string">"ch.epfl.scala"</span> % <span class="hljs-string">"sbt-scala3-migrate"</span> % <span class="hljs-string">"0.5.1"</span>)
 <span class="hljs-comment">// sbt-dotty is not required since sbt 1.5.0-M1</span>
 addSbtPlugin(<span class="hljs-string">"ch.epfl.lamp"</span> % <span class="hljs-string">"sbt-dotty"</span> % <span class="hljs-string">"0.5.3"</span>)
 </code></pre>
@@ -101,7 +101,7 @@ Make sure the module you choose is not an aggregate of projects.</p>
   .in(file(<span class="hljs-string">"."</span>))
   .settings(
     name := <span class="hljs-string">"main"</span>,
-    scalaVersion := <span class="hljs-string">"2.13.5"</span>,
+    scalaVersion := <span class="hljs-string">"2.13.11"</span>,
     semanticdbEnabled := <span class="hljs-literal">true</span>,
     scalacOptions ++= <span class="hljs-type">Seq</span>(<span class="hljs-string">"-explaintypes"</span>, <span class="hljs-string">"-Wunused"</span>),
     libraryDependencies ++= <span class="hljs-type">Seq</span>(
@@ -351,7 +351,7 @@ This command goal is to find the necessary types in order to make your code comp
 Then the tool compiles one last time in Scala 3  with <code>-rewrite</code> scalacOption.</p>
 <h2><a class="anchor" aria-hidden="true" id="what-to-do-next-"></a><a href="#what-to-do-next-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What to do next ?</h2>
 <p>You can start again with another module <code>MODULE2</code>. If <code>MODULE2</code> depends on the last module migrated, you need
-either to add <code>-Ytasty-reader</code> to <code>MODULE2</code> scalacOptions, or <code>reload</code> or <code>set MODULE-MIGRATED/scalaVersion := &quot;2.13.5&quot;</code></p>
+either to add <code>-Ytasty-reader</code> to <code>MODULE2</code> scalacOptions, or <code>reload</code> or <code>set MODULE-MIGRATED/scalaVersion := &quot;2.13.11&quot;</code></p>
 <p>Once you're done, you can remove <code>scala3-migrate</code> from your plugins.</p>
 <h2><a class="anchor" aria-hidden="true" id="contributions-and-feedbacks-are-welcome"></a><a href="#contributions-and-feedbacks-are-welcome" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contributions and feedbacks are welcome</h2>
 <p>The tool is still under development, and <strong>we would love to hear from you.</strong>
