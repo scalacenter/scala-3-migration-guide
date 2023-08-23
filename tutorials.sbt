@@ -3,8 +3,8 @@ import Versions._
 lazy val `sbt-migration-tutorial` = project
   .in(file("tutorials/sbt-migration"))
   .settings(
-    scalaVersion := scala30,
-    crossScalaVersions := Seq(scala213, scala30),
+    scalaVersion := scala3,
+    crossScalaVersions := Seq(scala213, scala3),
     libraryDependencies ++= Seq(
       "org.typelevel" % "cats-core_2.13" % "2.1.1",
       "com.lihaoyi" %% "os-lib" % osLib,
@@ -36,8 +36,8 @@ lazy val `sbt-migration-tutorial` = project
 lazy val `macro-cross-building-example` = project
   .in(file("tutorials/macro-cross-building/example"))
   .settings(
-    scalaVersion := scala30,
-    crossScalaVersions := Seq(scala213, scala30),
+    scalaVersion := scala3,
+    crossScalaVersions := Seq(scala213, scala3),
     libraryDependencies ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, 13)) => Seq(
@@ -54,7 +54,7 @@ lazy val `macro-cross-building-example` = project
 lazy val `macro-mixing-example` = project
   .in(file("tutorials/macro-mixing/example"))
   .settings(
-    scalaVersion := scala30
+    scalaVersion := scala3
   )
   .dependsOn(`macro-mixing-example-compat`)
 
@@ -70,8 +70,8 @@ lazy val `macro-mixing-example-compat` = project
 lazy val `macro-mixing-example-test` = project
   .in(file("tutorials/macro-mixing/example-test"))
   .settings(
-    scalaVersion := scala30,
-    crossScalaVersions := Seq(scala30, scala213),
+    scalaVersion := scala3,
+    crossScalaVersions := Seq(scala3, scala213),
     scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, 13)) => Seq("-Ytasty-reader")

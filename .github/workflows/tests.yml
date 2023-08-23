@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
-      - name: Test Incompatibilities 3.0
-        run: sbt '++3.0.0; incompat-30 / test; ++2.13.6; incompat-30 / test'
-      - name: Test Incompatibilities 3.1
-        run: sbt 'incompat-31 / test'
+      - name: Test Incompatibilities
+        run: sbt '++3.3.0; incompat-3 / test; ++2.13.11; incompat-3 / test'
+      - name: Test Future Incompatibilities
+        run: sbt 'incompat-3-future / test'
   tutorials:
     name: Check Tutorials
     runs-on: ubuntu-latest
@@ -26,8 +26,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: olafurpg/setup-scala@v10
       - name: Sbt Migration Tutorial
-        run: sbt '++3.0.0; sbt-migration-tutorial / run; ++2.13.6; sbt-migration-tutorial / run'
+        run: sbt '++3.3.0; sbt-migration-tutorial / run; ++2.13.11; sbt-migration-tutorial / run'
       - name: Macro Cross-Building
-        run: sbt '++3.0.0; macro-cross-building-example / test; ++2.13.6; macro-cross-building-example / test'
+        run: sbt '++3.3.0; macro-cross-building-example / test; ++2.13.11; macro-cross-building-example / test'
       - name: Macro Mixing
-        run: sbt '++3.0.0; macro-mixing-example-test / test; ++2.13.6; macro-mixing-example-test / test'
+        run: sbt '++3.3.0; macro-mixing-example-test / test; ++2.13.11; macro-mixing-example-test / test'

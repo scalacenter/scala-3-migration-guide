@@ -6,8 +6,8 @@ lazy val website = project
     publish / skip := true,
     mdoc := (Compile / run).evaluated,
     mdocVariables := Map(
-      "scala30" -> scala30,
-      "scala30Binary" -> scala30,
+      "scala3" -> scala3,
+      "scala3Binary" -> scala3,
       "scala213" -> scala213,
       "sbtDotty" -> sbtDotty,
       "scala3Migrate" -> scala3Migrate,
