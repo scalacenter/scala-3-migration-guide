@@ -65,7 +65,7 @@ The following table contains an incomplete list of macro libraries and their mig
 | [softwaremill/magnolia](https://index.scala-lang.org/softwaremill/magnolia) | <i class="fas fa-check fa-lg"></i> | Since version `1.0.0` |
 | [pureconfig/pureconfig](https://index.scala-lang.org/pureconfig/pureconfig) | <i class="fas fa-check fa-lg"></i> | Since version `0.17.2` |
 | [sangria-graphql/sangria](https://index.scala-lang.org/sangria-graphql/sangria) | <i class="fas fa-check fa-lg"></i> | Since version `3.3.0` |
-| [scalalandio/chimney](https://index.scala-lang.org/scalalandio/chimney) | <i class="fas fa-times fa-lg"></i> | |
+| [scalalandio/chimney](https://index.scala-lang.org/scalalandio/chimney) | <i class="fas fa-check fa-lg"></i> | Since version `0.8.0` |
 | [scalameta/munit](https://index.scala-lang.org/scalameta/munit) | <i class="fas fa-check fa-lg"></i> | Since `0.3.0` |
 | [scalatest/scalatest](https://index.scala-lang.org/scalatest/scalatest) | <i class="fas fa-check fa-lg"></i> | Since version `3.1.0` |
 | [scalatest/scalatestplus-junit](https://index.scala-lang.org/scalatest/scalatestplus-junit) | <i class="fas fa-check fa-lg"></i> | Since version `3.1.0` |
